@@ -1,0 +1,9 @@
+<h1>All Events</h1>
+<% @events.each do |event| %>
+<%= event.name %>
+<%= event.start_time %>
+<%= event.end_time %>
+<%= event.venue %>
+<%= event.summary %>
+<%= image_tag(event.image_url) %>
+<% end %>
