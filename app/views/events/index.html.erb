@@ -1,9 +1,15 @@
 <h1>All Events</h1>
+
 <% @events.each do |event| %>
-<%= event.name %>
-<%= event.start_time %>
-<%= event.end_time %>
-<%= event.venue %>
-<%= event.summary %>
-<%= image_tag(event.image_url) %>
+<ul>
+  <li><%= event.name %></li>
+  <li><%= event.start_time %></li>
+  <li><%= event.end_time %></li>
+  <li><%= event.venue %></li>
+  <li><%= event.summary %></li>
+  <li><%= image_tag(event.image_url) %></li>
+  <li><%= link_to "Check out Event Page", event_path(event) %></li>
+</ul>
 <% end %>
+
+<h3><%= link_to "Add a new event", new_event_path %></h3>

@@ -1,7 +1,67 @@
 class EventsController < ApplicationController
-  include JSONAPI::ActsAsResourceController
-  # def show
-  #   event = Event.find(1)
-  #   JSONAPI::ResourceSerializer.new(EventResource).serialize_to_hash(EventResource.new(event))
-  # end
+
+  def index
+    @events = Event.all
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        event: @events
+        }
+       }
+    end
+  end
+
+  def show
+    @event = find_event
+    @users = @event.users
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        event: @event,
+        users: @users
+        }
+       }
+    end
+  end
+
+  def new
+    @event = Event.new
+  end
+
+  def create
+    @event = Event.new(event_params)
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @event = find_event
+  end
+
+  def update
+    @event = find.event
+    if @event.update_attributes(event_params)
+      redirect_to event_path(@event)
+    else
+      render 'new'
+    end
+  end
+
+  def destroy
+    @event = find_event
+    @event.destroy
+    redirect_to events_path
+  end
+
+
+  private
+  def find_event
+    Event.find(params[:id])
+  end
+  def event_params
+    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url)
+  end
 end
