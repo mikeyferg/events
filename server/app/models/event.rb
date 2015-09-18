@@ -16,13 +16,13 @@
 #
 
 class Event < ActiveRecord::Base
-validates :name, presence: true
-validates :start_time, presence: true
-#validates :end_time, presence: true
-#validates :venue, presence: true
-validates :address, presence: true
-validates :summary, presence: true
-validates :image_url, presence: true
+# validates :name, presence: true
+# validates :start_time, presence: true
+# #validates :end_time, presence: true
+# #validates :venue, presence: true
+# validates :address, presence: true
+# validates :summary, presence: true
+# validates :image_url, presence: true
 
 
 

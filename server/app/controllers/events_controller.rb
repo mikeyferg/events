@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-
+skip_before_filter :verify_authenticity_token
   def index
     @events = Event.all
     respond_to do |format|
@@ -26,6 +26,13 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        event: @event
+        }
+       }
+    end
   end
 
   def create
