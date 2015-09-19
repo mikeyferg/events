@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+ class UsersController < ApplicationController
 skip_before_filter :verify_authenticity_token
 
   def index
@@ -13,6 +13,13 @@ skip_before_filter :verify_authenticity_token
   end
   def show
     @user = find_user
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        users: @user
+        }
+       }
+    end
   end
   def new
     @user = User.new
@@ -47,7 +54,7 @@ skip_before_filter :verify_authenticity_token
     User.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:name, :pic_url)
+    params.require(:user).permit(:name, :image, :provider, :uid, :oauth_token, :oauth_expires_at)
   end
 
 end
