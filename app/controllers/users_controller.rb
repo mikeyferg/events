@@ -11,12 +11,15 @@ skip_before_filter :verify_authenticity_token
        }
     end
   end
+
   def show
     @user = find_user
+    @events = @user.events
     respond_to do |format|
       format.html
       format.json { render json: {
-        users: @user
+        user: @user,
+        events: @events
         }
        }
     end
@@ -34,6 +37,15 @@ skip_before_filter :verify_authenticity_token
   end
   def edit
     @user = find_user
+    @events = @user.events
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        user: @user,
+        events: @events
+        }
+       }
+    end
   end
   def update
     @user = find_user
