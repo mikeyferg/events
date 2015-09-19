@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root 'events#index'
+  root 'events#index'#, defaults: {format: :json}
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+
   #resources :events
-  resources :events
-  resources :users
+  #defaults format: 'json' {resources :events; resources :users}
+  resources :events, defaults: {format: :json}
+  resources :users, defaults: {format: :json}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

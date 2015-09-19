@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+ class UsersController < ApplicationController
 skip_before_filter :verify_authenticity_token
 
   def index
@@ -47,7 +47,7 @@ skip_before_filter :verify_authenticity_token
     User.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:name, :pic_url)
+    params.require(:user).permit(:name, :image, :provider, :uid, :oauth_token, :oauth_expires_at)
   end
 
 end
