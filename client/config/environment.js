@@ -2,10 +2,11 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'client',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    modulePrefix: 'client',
+    podModulePrefix: 'client/pods',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -20,11 +21,18 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.apiHostname = 'http://localhost:3000',
+    ENV.contentSecurityPolicy = {
+      'default-src': "none",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com",
+      'font-src': "'self' https://*.gstatic.com",
+      'connect-src': "'self' ws://0.0.0.0:49152 ws://localhost:49152 http://localhost:3000",
+      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com",
+      'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
+      'media-src': "'self'",
+      'frame-src': "none"
+    };
   }
 
   if (environment === 'test') {
