@@ -13,6 +13,13 @@ skip_before_filter :verify_authenticity_token
   end
   def show
     @user = find_user
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        users: @user
+        }
+       }
+    end
   end
   def new
     @user = User.new
