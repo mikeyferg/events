@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917233152) do
+ActiveRecord::Schema.define(version: 20150918233719) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -36,9 +36,14 @@ ActiveRecord::Schema.define(version: 20150917233152) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "pic_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "image"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.string   "email"
   end
 
 end

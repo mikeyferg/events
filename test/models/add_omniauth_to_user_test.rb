@@ -1,22 +1,19 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: add_omniauth_to_users
 #
 #  id               :integer          not null, primary key
-#  name             :string
-#  image            :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
 #  provider         :string
 #  uid              :string
 #  oauth_token      :string
 #  oauth_expires_at :datetime
-#  email            :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class AddOmniauthToUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
