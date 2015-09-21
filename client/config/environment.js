@@ -28,7 +28,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com",
       'font-src': "'self' https://*.gstatic.com",
       'connect-src': "'self' ws://0.0.0.0:49152 ws://localhost:49152 http://localhost:3000",
-      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com",
+      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com http://static.spin.com http://squaredancemagazine.com",
       'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
       'media-src': "'self'",
       'frame-src': "none"
