@@ -1,7 +1,7 @@
 <h1>Event Coyote</h1>
 
 {{#each model as |event|}}
-  {{event.name}}<br/>
+  {{link-to event.name 'event' event}}
   <img src={{event.image_url}} alt="" width="100" /><br />
   <hr>
 {{/each}}
