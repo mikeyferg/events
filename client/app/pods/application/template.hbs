@@ -1,19 +1,12 @@
 <div class="outer-containers">
-  <div class="MainMenu">
-    {{main-menu}}
-  </div>
-  <div class="MainMenu__item">
+    {{main-menu toggleMenu='toggleMenu'}}
+    {{#if session.isAuthenticated }}
+      <p>Welcome {{session.currentUser.name}}
+        <a href="#" {{action 'logout'}}>Logout</a>
+      </p>
+    {{else}}
+      <a href="#" {{action 'signInViaFacebook'}}>Login via Facebook</a>
+    {{/if}}
     {{outlet}}
-  </div>
-  <div class="MainMenu__item">
-    {{main-footer}}
-  </div>
 </div>
-
-{{#if session.isAuthenticated }}
-  <p>Welcome {{session.currentUser.name}}
-    <a href="#" {{action 'logout'}}>Logout</a>
-  </p>
-{{else}}
-  <a href="#" {{action 'signInViaFacebook'}}>Login via Facebook</a>
-{{/if}}
+{{main-footer}}

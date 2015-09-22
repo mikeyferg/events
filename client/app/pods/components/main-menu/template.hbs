@@ -1,17 +1,28 @@
-<div class="MainMenu">
-  <div class="MainMenu__items">
-
-    <div class="MainMenu__logo">
-      <span>Best Day</span>
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="javascript:void(0)" class="logo">
+      {{!-- <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image"> --}}
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu" {{action 'toggleMenu'}}>MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu">
+        <li class="nav-link">{{link-to 'Events' 'events'}}</li>
+        <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
+        <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="navigation-tools">
+      <ul id="js-navigation-menu" class="navigation-menu">
+        <li class="nav-link"><a href="javascript:void(0)">Login</a></li>
+      </ul>
+      {{!-- <div class="search-bar">
+        <form role="search">
+          <input type="search" placeholder="Enter Search" />
+          <button type="submit">
+            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+          </button>
+        </form>
+      </div> --}}
     </div>
-
-    <div class="MainMenu__item">
-      {{link-to 'events' 'events'}}
-    </div>
-
-    <div class="MainMenu__item">
-      {{!-- {{link-to 'Add New Day' 'days.new'}} --}}
-    </div>
-
   </div>
-</div>
+</header>
