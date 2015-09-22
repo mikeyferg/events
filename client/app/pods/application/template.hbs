@@ -1,5 +1,6 @@
 <div class="outer-containers">
     {{main-menu toggleMenu='toggleMenu'}}
+    {{main-poster}}
     {{#if session.isAuthenticated }}
       <p>Welcome {{session.currentUser.name}}
         <a href="#" {{action 'logout'}}>Logout</a>
