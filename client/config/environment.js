@@ -25,13 +25,13 @@ module.exports = function(environment) {
     ENV.apiHostname = 'http://localhost:3000',
     ENV.contentSecurityPolicy = {
       'default-src': "none",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com",
       'font-src': "'self' https://*.gstatic.com",
-      'connect-src': "'self' ws://0.0.0.0:49152 ws://localhost:49152 http://localhost:3000",
-      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com http://static.spin.com http://squaredancemagazine.com",
+      'connect-src': "'self' ws://0.0.0.0:49152 ws://localhost:49152 http://localhost:3000 https://facebook.com www.facebook.com connect.facebook.net",
+      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com http://static.spin.com http://squaredancemagazine.com www.facebook.com",
       'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
       'media-src': "'self'",
-      'frame-src': "none"
+      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
   }
 
@@ -49,6 +49,19 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
 
+  }
+
+  ENV.torii = {
+    sessionServiceName: 'session',
+    providers: {
+      'facebook-connect': {
+        appId: '1035793029772432',
+        version: 'v2.4',
+        locale: 'en_US',
+        scope: 'email',
+        returnScopes: true
+      }
+    }
   }
 
   return ENV;
