@@ -13,7 +13,11 @@
     </nav>
     <div class="navigation-tools">
       <ul id="js-navigation-menu" class="navigation-menu">
-        <li class="nav-link"><a href="javascript:void(0)">Login</a></li>
+        {{#if session.isAuthenticated }}
+            <li class="nav-link">Welcome {{session.currentUser.name}} <a href="#" {{action 'logout'}}>Logout</a></li>
+        {{else}}
+          <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Login via Facebook</a></li>
+        {{/if}}
       </ul>
       {{!-- <div class="search-bar">
         <form role="search">

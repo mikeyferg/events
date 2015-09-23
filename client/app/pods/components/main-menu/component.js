@@ -8,12 +8,12 @@ export default Ember.Component.extend({
       this.sendAction('logout');
     },
 
-    toggleMenu: function() {
-      this.sendAction('toggleMenu');
+    signInViaFacebook: function() {
+      this.sendAction('signInViaFacebook');
     },
 
-    disableMenu: function() {
-      this.sendAction('disableMenu');
+    toggleMenu: function() {
+      this.sendAction('toggleMenu');
     }
   }
 });

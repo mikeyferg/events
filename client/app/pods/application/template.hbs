@@ -1,13 +1,3 @@
-<div class="outer-containers">
-    {{main-menu toggleMenu='toggleMenu'}}
-    {{main-poster}}
-    {{#if session.isAuthenticated }}
-      <p>Welcome {{session.currentUser.name}}
-        <a href="#" {{action 'logout'}}>Logout</a>
-      </p>
-    {{else}}
-      <a href="#" {{action 'signInViaFacebook'}}>Login via Facebook</a>
-    {{/if}}
-    {{outlet}}
-</div>
+{{main-menu toggleMenu='toggleMenu' signInViaFacebook="signInViaFacebook" logout="logout" session=session}}
+{{outlet}}
 {{main-footer}}

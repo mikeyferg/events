@@ -1,7 +1,7 @@
-<h1>Event Coyote</h1>
+{{main-poster}}
 
-{{#each model as |event|}}
-  {{link-to event.name 'event' event}}
-  <img src={{event.image_url}} alt="" width="100" /><br />
-  <hr>
-{{/each}}
+<div class="grid-items">
+  {{#each model as |event|}}
+    {{event-card event=event}}
+  {{/each}}
+</div>
