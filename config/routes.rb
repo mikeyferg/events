@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   #resources :events
   #defaults format: 'json' {resources :events; resources :users}
-  resources :events#, defaults: {format: :json}
+  resources :events, defaults: {format: :json}
   resources :users, defaults: {format: :json}
 
 end
