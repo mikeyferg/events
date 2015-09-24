@@ -12,6 +12,9 @@
 <% @users.each do |user| %>
 <ul>
   <li><%= user.name %></li>
-  <li><%= image_tag(user.pic_url) %></li>
+  <li><%= image_tag(user.image) %></li>
 </ul>
+<% end %>
+<% @users_id_array.each do |user_id| %>
+  <li><%= user_id %></li>
 <% end %>
