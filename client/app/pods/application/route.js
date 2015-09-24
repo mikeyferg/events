@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ConnectWithFacebook from './connect-with-facebook';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ConnectWithFacebook, {
   beforeModel() {
     return this.get('session').fetch().then(function() {
       console.log('session fetched');
@@ -10,15 +11,6 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    signInViaFacebook() {
-      var route = this;
-      this.get('session').open('facebook-connect').then(function(auth) {
-        Ember.Logger.debug("auth", auth);
-        route.transitionTo('/');
-      }, function() {
-        Ember.Logger.debug('auth failed');
-      });
-    },
     logout() {
       this.get('session').close();
     },

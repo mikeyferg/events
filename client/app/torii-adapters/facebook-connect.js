@@ -4,16 +4,23 @@ const Promise = Ember.RSVP.Promise;
 
 export default Ember.Object.extend({
 
-  close() {
-    return new Promise((resolve) => {
+  close: function() {
+    return new Ember.RSVP.Promise((resolve) => {
+      localStorage.removeItem("token");
       resolve();
     });
   },
 
+  fetch: function() {
+    console.log("Fetch");
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      const accessToken = localStorage.token;
 
-  fetch() {
-    return new Promise((resolve, reject) => {
-      reject();
+      if (accessToken) {
+        resolve({ accessToken: accessToken });
+      } else {
+        reject();
+      }
     });
   },
 
@@ -27,11 +34,13 @@ export default Ember.Object.extend({
 
       window.FB.api('/me', 'GET', { fields: [ 'email', 'name', 'picture' ] }, (response) => {
         if (Ember.isPresent(response)) {
-          const email = response.email,
+          console.log("id", response);
+          const uid = response.id,
+                email = response.email,
                 name = response.name,
                 picture = response.picture.data.url;
 
-          resolve({ accessToken, email, name, picture });
+          resolve({ accessToken, uid, email, name, picture });
         } else {
           reject({ error: 'Facebook reject our authorization request.' });
         }
