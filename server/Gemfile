@@ -19,6 +19,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'omniauth-facebook'
+gem 'rest-client', '~> 1.8.0'
 
 #Debugging & Test Suite
 group :development, :test do
@@ -30,4 +31,9 @@ group :development, :test do
   gem 'better_errors'
   gem 'annotate'
 
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
