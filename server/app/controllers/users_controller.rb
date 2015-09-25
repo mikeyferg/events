@@ -2,7 +2,11 @@
 skip_before_filter :verify_authenticity_token
 
   def index
-    @users = User.all
+    if params[:filter]
+      @users = User.find_by(oauth_token: params[:filter][:oauth_token])
+    else
+      @users = User.all
+    end
     respond_to do |format|
       format.html
       format.json { render json: {
