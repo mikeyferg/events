@@ -7,14 +7,13 @@
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu">
         <li class="nav-link">{{link-to 'Events' 'events'}}</li>
-        <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
       </ul>
     </nav>
     <div class="navigation-tools">
       <ul id="js-navigation-menu" class="navigation-menu">
         {{#if session.isAuthenticated }}
-            <li class="nav-link">Welcome {{session.currentUser.name}} <a href="#" {{action 'logout'}}>Logout</a></li>
+            <li class="nav-link">{{link-to 'User' 'user'}}</li>
+            <li class="nav-link"><a href="#" {{action 'logout'}}>Logout</a></li>
         {{else}}
           <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Login via Facebook</a></li>
         {{/if}}
