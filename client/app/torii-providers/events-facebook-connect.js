@@ -3,7 +3,7 @@ import Provider from 'torii/providers/base';
 import config from './../config/environment';
 
 export default Provider.extend({
-  path: 'http://localhost:3000/users',
+  path: `${config.apiHostname}/users`,
 
   open(credentials) {
     console.log("credentials", credentials);
@@ -18,12 +18,12 @@ export default Provider.extend({
             }
           };
 
-    return $.ajax(path,{
+    return Ember.$.ajax(path,{
       'data': JSON.stringify(userData),
       'type': 'POST',
       'contentType': 'application/json'
     }).then((result) => {
-      return { accessToken: result.user.oauth_token }
+      return { user: result.user };
     });
   }
 });

@@ -1,6 +1,15 @@
  class UsersController < ApplicationController
 skip_before_filter :verify_authenticity_token
 
+  def me
+    if request.headers.include?('HTTP_AUTHORIZATION')
+      @user = User.find_by(oauth_token: request.headers['HTTP_AUTHORIZATION'])
+      render json: {user: @user}
+    else
+      render json: {error: "Not found"}
+    end
+  end
+
   def index
     if params[:filter]
       @users = User.find_by(oauth_token: params[:filter][:oauth_token])

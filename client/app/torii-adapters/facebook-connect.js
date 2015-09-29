@@ -31,7 +31,7 @@ export default Ember.Object.extend({
       if ( Ember.isPresent(accessToken) ) {
         localStorage.token = accessToken;
       }
-
+      console.log("This seession", this.get('session'));
       window.FB.api('/me', 'GET', { fields: [ 'email', 'name', 'picture' ] }, (response) => {
         if (Ember.isPresent(response)) {
           console.log("id", response);

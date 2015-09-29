@@ -26,7 +26,7 @@ export default Ember.Object.extend({
     console.log("open", authorization);
     return new Ember.RSVP.Promise((resolve, reject) => {
       console.log("open", authorization);
-      const accessToken = authorization.accessToken;
+      const accessToken = authorization.user.oauth_token;
 
       if (accessToken) {
         localStorage.token = accessToken;
@@ -34,6 +34,8 @@ export default Ember.Object.extend({
       } else {
         reject({ error: 'No access token recieved' });
       }
-    });
+    }).then(function(user) {
+      return { currentUser: authorization.user }
+    })
   }
 });

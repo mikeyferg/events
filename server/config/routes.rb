@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   #resources :events
   #defaults format: 'json' {resources :events; resources :users}
   resources :events, defaults: {format: :json}
+  match 'users/me', to: 'users#me', via: :get
   resources :users, defaults: {format: :json}
-
 end
