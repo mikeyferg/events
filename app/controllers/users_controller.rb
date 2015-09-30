@@ -1,8 +1,21 @@
  class UsersController < ApplicationController
 skip_before_filter :verify_authenticity_token
 
+  def me
+    if request.headers.include?('HTTP_AUTHORIZATION')
+      @user = User.find_by(oauth_token: request.headers['HTTP_AUTHORIZATION'])
+      render json: {user: @user}
+    else
+      render json: {error: "Not found"}
+    end
+  end
+
   def index
-    @users = User.all
+    if params[:filter]
+      @users = User.find_by(oauth_token: params[:filter][:oauth_token])
+    else
+      @users = User.all
+    end
     respond_to do |format|
       format.html
       format.json { render json: {
@@ -27,14 +40,21 @@ skip_before_filter :verify_authenticity_token
   def new
     @user = User.new
   end
+
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to events_path
+    @user = User.find_by(uid: user_params[:uid])
+    if @user
+      render json: {user: @user}
     else
-      render 'new'
+      @user = User.new(user_params)
+       if @user.save
+         render json: {user: @user}
+       else
+         render json: { error: "Can't create a user" }
+       end
     end
   end
+
   def edit
     @user = find_user
     @events = @user.events
@@ -66,7 +86,7 @@ skip_before_filter :verify_authenticity_token
     User.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:name, :image, :provider, :uid, :oauth_token, :oauth_expires_at)
+    params.require(:user).permit(:name, :email, :image, :oauth_token, :uid)
   end
 
 end
