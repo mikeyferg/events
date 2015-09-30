@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :users, defaults: {format: :json}
   resources :kimonos_webhooks
 
+  match 'users/me', to: 'users#me', via: :get
+
 end

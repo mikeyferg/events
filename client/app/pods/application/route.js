@@ -1,31 +1,35 @@
 import Ember from 'ember';
+import config from '../../config/environment';
+import ConnectWithFacebook from './connect-with-facebook';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ConnectWithFacebook, {
   beforeModel() {
+    let that = this;
+    const path = `${config.apiHostname}/users/me`;
     return this.get('session').fetch().then(function() {
       console.log('session fetched');
+      Ember.$.ajax({
+        url: path,
+        'headers': {'Authorization': that.get('session.accessToken')},
+        'type': 'GET',
+        'contentType': 'application/json'
+      }).then((result) => {
+        that.get('session').currentUser = result.user;
+      });
     }, function() {
-      console.log('no session to fetch');
+      console.log('No session to fetch');
     });
   },
 
   actions: {
-    signInViaFacebook() {
-      var route = this;
-      this.get('session').open('facebook-connect').then(function(auth) {
-        Ember.Logger.debug("auth", auth);
-        route.transitionTo('/');
-      }, function() {
-        Ember.Logger.debug('auth failed');
-      });
-    },
     logout() {
       this.get('session').close();
+      this.transitionTo('/');
     },
     toggleMenu() {
-      $('#js-navigation-menu').slideToggle(function(){
-        if($('#js-navigation-menu').is(':hidden')) {
-          $('#js-navigation-menu').removeAttr('style');
+      Ember.$('#js-navigation-menu').slideToggle(function(){
+        if(Ember.$('#js-navigation-menu').is(':hidden')) {
+          Ember.$('#js-navigation-menu').removeAttr('style');
         }
       });
     }

@@ -1,6 +1,15 @@
 {{#link-to "event" event}}
 <div class="grid-item grid-item-image" style={{backgroundStyle}}>
-  <h1>{{event.name}}</h1>
-  <p>{{event.description}}</p>
+  <h3>{{event.name}}</h3>
+  {{#if event.cost}}
+    <p>{{format-currency event.cost}}</p>
+  {{/if}}
+  <p>{{event.venue}}</p>
+  {{#if event.start_time}}
+    <p>{{moment-format event.start_time 'ddd MMM DD, h:mma'}}</p>
+  {{/if}}
+  <div class="slideover">
+    <p>{{event.shortSummary}}</p>
+  </div>
 </div>
 {{/link-to}}
