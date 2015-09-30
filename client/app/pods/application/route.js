@@ -26,6 +26,7 @@ export default Ember.Route.extend(ConnectWithFacebook, {
       this.get('session').close();
       this.transitionTo('/');
     },
+
     toggleMenu() {
       Ember.$('#js-navigation-menu').slideToggle(function(){
         if(Ember.$('#js-navigation-menu').is(':hidden')) {
