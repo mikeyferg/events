@@ -10,9 +10,7 @@ module Kimono
   def self.create_events
     response = JSON.parse(Kimono.get_events)
     events = response['results']['collection1']
-
     events.each do |event|
-      #binding.pry
       get_event_details(event)
     end
   end
