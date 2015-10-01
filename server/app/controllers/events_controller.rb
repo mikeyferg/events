@@ -3,9 +3,6 @@ skip_before_filter :verify_authenticity_token
 require 'kimono.rb'
   def index
     @events = Event.all
-    #@events_kimono = JSON.parse(Kimono.get_events)
-  #  @event_test = Kimono.get_event_details(@events_kimono['results']['collection1'][1])
-    @event_script = Kimono.create_events
     respond_to do |format|
       format.html
       format.json { render json: {
