@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 #Core Libraries
 gem 'rails', '4.2.4'
-gem 'sqlite3'
+gem 'pg'
 
 #Front End Tools
 gem 'sass-rails', '~> 5.0'
@@ -34,6 +34,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'rails_12factor'
 end
