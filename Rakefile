@@ -28,6 +28,17 @@ task :test do
   ]
 end
 
+task :check do
+  STDOUT.puts "Are you sure? (y/n)"
+  input = STDIN.gets.strip
+  if input == 'y'
+    Rake::Task["action"].reenable
+    Rake::Task["action"].invoke
+  else
+    STDOUT.puts "So sorry for the confusion"
+  end
+end
+
 task :deploy_client_staging do
   # sh 'git checkout rsh-production'
   # sh 'git merge origin/rails-served-html -m "Merging master for deployment"'
