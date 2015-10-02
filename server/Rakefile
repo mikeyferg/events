@@ -1,46 +1,6 @@
-require 'rake'
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-task :run do
-  pids = [
-    spawn("cd server && EMBER_PORT=4900 rails s -p 3900"),
-    spawn("cd client && ./node_modules/.bin/ember server --port=4900 --proxy=http://0.0.0.0:3900"),
-  ]
+require File.expand_path('../config/application', __FILE__)
 
-  trap "INT" do
-    Process.kill "INT", *pids
-    exit 1
-  end
-
-  loop do
-    sleep 1
-  end
-end
-
-task :test do
-  pids = [
-    spawn("cd server && EMBER_PORT=4900 rails s -p 3900 -e test"),
-    spawn("cd client && ./node_modules/.bin/ember test --server"),
-  ]
-end
-
-task :deploy do
-  
-
-  unless `git status` =~ /nothing to commit, working directory clean/
-    sh 'git add -A'
-    sh 'git commit -m "Asset compilation for deployment"'
-  end
-
-  sh 'git subtree push -P server heroku master'
-
-  release_output = `heroku releases -a afternoon-ocean-1868`.split "\n"
-  latest_release = release_output[1].match(/v\d+/).to_s
-
-  tags = `git tag`
-
-  unless tags.include? latest_release
-    sh "git tag #{latest_release}"
-  end
-
-  sh 'git checkout -'
-end
+Rails.application.load_tasks
