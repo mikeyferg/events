@@ -127,11 +127,11 @@ define('client/controllers/object', ['exports', 'ember'], function (exports, Emb
 	exports['default'] = Ember['default'].Controller;
 
 });
-define('client/helpers/format-currency', ['exports'], function (exports) {
+define('client/helpers/format-currency', ['exports', 'ember'], function (exports, Ember) {
 
     'use strict';
 
-    exports['default'] = Ember.Helper.helper(function (params) {
+    exports['default'] = Ember['default'].Helper.helper(function (params) {
         var value = params[0],
             dollars = Math.floor(value / 100),
             cents = value % 100,
@@ -141,7 +141,7 @@ define('client/helpers/format-currency', ['exports'], function (exports) {
             cents = '0' + cents;
         }
 
-        if (parseInt(value) == 0) {
+        if (parseInt(value) === 0) {
             return "Free";
         } else {
             return '' + sign + dollars + '.' + cents;
@@ -2591,7 +2591,7 @@ define('client/tests/helpers/format-currency.jshint', function () {
 
   QUnit.module('JSHint - helpers');
   QUnit.test('helpers/format-currency.js should pass jshint', function(assert) { 
-    assert.ok(false, 'helpers/format-currency.js should pass jshint.\nhelpers/format-currency.js: line 9, col 25, Expected \'===\' and instead saw \'==\'.\nhelpers/format-currency.js: line 1, col 16, \'Ember\' is not defined.\n\n2 errors'); 
+    assert.ok(true, 'helpers/format-currency.js should pass jshint.'); 
   });
 
 });
@@ -3056,7 +3056,7 @@ catch(err) {
 if (runningTests) {
   require("client/tests/test-helper");
 } else {
-  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"0.0.0+7b131ed2"});
+  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v15"});
 }
 
 /* jshint ignore:end */

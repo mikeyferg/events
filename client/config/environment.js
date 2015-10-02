@@ -22,7 +22,7 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.APP.LOG_TRANSITIONS = true;
-    ENV.apiHostname = 'http://afternoon-ocean-1868.herokuapp.com',
+    ENV.apiHostname = '//localhost:4900',
     ENV.contentSecurityPolicy = {
       'default-src': "none",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com",
@@ -48,7 +48,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.apiHostname = 'http://afternoon-ocean-1868.herokuapp.com',
+    ENV.apiHostname = '//afternoon-ocean-1868.herokuapp.com',
     ENV.contentSecurityPolicy = {
       'default-src': "none",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com",

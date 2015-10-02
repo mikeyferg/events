@@ -23,7 +23,7 @@ task :test do
   ]
 end
 
-task :deploy do
+task :deploy_staging do
   sh 'git checkout rsh-production'
   # sh 'git merge origin/rails-served-html -m "Merging master for deployment"'
   sh 'rm -rf server/public'
