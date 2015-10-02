@@ -24,13 +24,7 @@ task :test do
 end
 
 task :deploy do
-  # sh 'git checkout rsh-production'
-  # sh 'git merge rails-served-html -m "Merging master for deployment"'
-  #sh 'rm -rf server/public'
-  #sh 'cd client && ember build'
-  #sh 'cp -a dist/. ../server/public/dist'
-  #sh ' && cd ..'
-  #sh 'cd server && rake assets:precompile && cd ..'
+  
 
   unless `git status` =~ /nothing to commit, working directory clean/
     sh 'git add -A'

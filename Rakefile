@@ -25,7 +25,7 @@ end
 
 task :deploy do
   sh 'git checkout rsh-production'
-  sh 'git merge rails-served-html -m "Merging master for deployment"'
+  sh 'git merge origin/rails-served-html -m "Merging master for deployment"'
   #sh 'rm -rf server/public'
   #sh 'cd client && ember build'
   #sh 'cp -a dist/. ../server/public/dist'
