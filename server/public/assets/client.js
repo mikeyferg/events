@@ -3056,7 +3056,7 @@ catch(err) {
 if (runningTests) {
   require("client/tests/test-helper");
 } else {
-  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v8"});
+  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v9"});
 }
 
 /* jshint ignore:end */
