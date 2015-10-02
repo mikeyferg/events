@@ -48,7 +48,17 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.apiHostname = 'http://afternoon-ocean-1868.herokuapp.com/',
+    ENV.contentSecurityPolicy = {
+      'default-src': "none",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com",
+      'font-src': "'self' https://*.gstatic.com",
+      'connect-src': "'self' ws://0.0.0.0:49152 ws://localhost:49152 http://localhost:3000 https://facebook.com www.facebook.com connect.facebook.net",
+      'img-src': "'self' https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net",
+      'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
+      'media-src': "'self'",
+      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+    };
   }
 
   ENV.torii = {
