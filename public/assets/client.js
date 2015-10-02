@@ -425,7 +425,7 @@ define('client/pods/application/template', ['exports'], function (exports) {
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -502,7 +502,7 @@ define('client/pods/components/event-card/template', ['exports'], function (expo
       var child0 = (function() {
         return {
           meta: {
-            "revision": "Ember@2.0.2",
+            "revision": "Ember@2.0.1",
             "loc": {
               "source": null,
               "start": {
@@ -546,7 +546,7 @@ define('client/pods/components/event-card/template', ['exports'], function (expo
       var child1 = (function() {
         return {
           meta: {
-            "revision": "Ember@2.0.2",
+            "revision": "Ember@2.0.1",
             "loc": {
               "source": null,
               "start": {
@@ -589,7 +589,7 @@ define('client/pods/components/event-card/template', ['exports'], function (expo
       }());
       return {
         meta: {
-          "revision": "Ember@2.0.2",
+          "revision": "Ember@2.0.1",
           "loc": {
             "source": null,
             "start": {
@@ -675,7 +675,7 @@ define('client/pods/components/event-card/template', ['exports'], function (expo
     }());
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -721,7 +721,7 @@ define('client/pods/components/main-footer/template', ['exports'], function (exp
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -920,7 +920,7 @@ define('client/pods/components/main-menu/template', ['exports'], function (expor
     var child0 = (function() {
       return {
         meta: {
-          "revision": "Ember@2.0.2",
+          "revision": "Ember@2.0.1",
           "loc": {
             "source": null,
             "start": {
@@ -994,7 +994,7 @@ define('client/pods/components/main-menu/template', ['exports'], function (expor
     var child1 = (function() {
       return {
         meta: {
-          "revision": "Ember@2.0.2",
+          "revision": "Ember@2.0.1",
           "loc": {
             "source": null,
             "start": {
@@ -1042,7 +1042,7 @@ define('client/pods/components/main-menu/template', ['exports'], function (expor
     }());
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1167,7 +1167,7 @@ define('client/pods/components/main-poster/template', ['exports'], function (exp
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1292,7 +1292,7 @@ define('client/pods/event/template', ['exports'], function (exports) {
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1369,7 +1369,7 @@ define('client/pods/events/index/template', ['exports'], function (exports) {
     var child0 = (function() {
       return {
         meta: {
-          "revision": "Ember@2.0.2",
+          "revision": "Ember@2.0.1",
           "loc": {
             "source": null,
             "start": {
@@ -1410,7 +1410,7 @@ define('client/pods/events/index/template', ['exports'], function (exports) {
     }());
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1499,7 +1499,7 @@ define('client/pods/user/template', ['exports'], function (exports) {
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1588,7 +1588,7 @@ define('client/templates/components/refills-accordion-item', ['exports'], functi
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1643,7 +1643,7 @@ define('client/templates/components/refills-accordion-tabs-item', ['exports'], f
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1705,7 +1705,7 @@ define('client/templates/components/refills-accordion-tabs', ['exports'], functi
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1760,7 +1760,7 @@ define('client/templates/components/refills-accordion', ['exports'], function (e
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1813,7 +1813,7 @@ define('client/templates/components/refills-centered-navigation', ['exports'], f
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1900,7 +1900,7 @@ define('client/templates/components/refills-dropdown-item', ['exports'], functio
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -1947,7 +1947,7 @@ define('client/templates/components/refills-dropdown', ['exports'], function (ex
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -2033,7 +2033,7 @@ define('client/templates/components/refills-expandable', ['exports'], function (
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -2100,7 +2100,7 @@ define('client/templates/components/refills-navigation', ['exports'], function (
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -2378,7 +2378,7 @@ define('client/templates/components/refills-sliding-menu', ['exports'], function
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -2450,7 +2450,7 @@ define('client/templates/components/refills-vertical-tabs-item', ['exports'], fu
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -2517,7 +2517,7 @@ define('client/templates/components/refills-vertical-tabs', ['exports'], functio
   exports['default'] = Ember.HTMLBars.template((function() {
     return {
       meta: {
-        "revision": "Ember@2.0.2",
+        "revision": "Ember@2.0.1",
         "loc": {
           "source": null,
           "start": {
@@ -3056,7 +3056,7 @@ catch(err) {
 if (runningTests) {
   require("client/tests/test-helper");
 } else {
-  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"0.0.0+0cbf962e"});
+  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v8"});
 }
 
 /* jshint ignore:end */
