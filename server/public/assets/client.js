@@ -2795,7 +2795,7 @@ define('client/tests/torii-adapters/application.jshint', function () {
 
   QUnit.module('JSHint - torii-adapters');
   QUnit.test('torii-adapters/application.js should pass jshint', function(assert) { 
-    assert.ok(false, 'torii-adapters/application.js should pass jshint.\ntorii-adapters/application.js: line 38, col 49, Missing semicolon.\ntorii-adapters/application.js: line 39, col 7, Missing semicolon.\ntorii-adapters/application.js: line 37, col 22, \'user\' is defined but never used.\n\n3 errors'); 
+    assert.ok(true, 'torii-adapters/application.js should pass jshint.'); 
   });
 
 });
@@ -2819,19 +2819,26 @@ define('client/tests/torii-providers/events-facebook-connect.jshint', function (
   });
 
 });
-define('client/tests/unit/pods/event/model-test', ['ember-qunit'], function (ember_qunit) {
+define('client/tests/unit/pods/event/model-test', ['ember-qunit', 'ember'], function (ember_qunit, Ember) {
 
   'use strict';
 
   ember_qunit.moduleForModel('event', 'Unit | Model | event', {
     // Specify the other units that are required for this test.
-    needs: []
+    needs: ['model:user']
   });
 
-  ember_qunit.test('it exists', function (assert) {
+  ember_qunit.test('Event model exist', function (assert) {
     var model = this.subject();
     // var store = this.store();
     assert.ok(!!model);
+  });
+
+  ember_qunit.test('event relationship', function (assert) {
+    var Event = this.store().modelFor('event');
+    var relationship = Ember['default'].get(Event, 'relationshipsByName').get('users');
+    assert.equal(relationship.key, 'users', 'Relationship key is "users"');
+    assert.equal(relationship.kind, 'hasMany', "Relationship kind is hasMany");
   });
 
 });
@@ -2870,19 +2877,26 @@ define('client/tests/unit/pods/event/route-test.jshint', function () {
   });
 
 });
-define('client/tests/unit/pods/user/model-test', ['ember-qunit'], function (ember_qunit) {
+define('client/tests/unit/pods/user/model-test', ['ember-qunit', 'ember'], function (ember_qunit, Ember) {
 
   'use strict';
 
   ember_qunit.moduleForModel('user', 'Unit | Model | user', {
     // Specify the other units that are required for this test.
-    needs: []
+    needs: ['model:event']
   });
 
-  ember_qunit.test('it exists', function (assert) {
+  ember_qunit.test('user model exists', function (assert) {
     var model = this.subject();
     // var store = this.store();
     assert.ok(!!model);
+  });
+
+  ember_qunit.test('user relationship', function (assert) {
+    var User = this.store().modelFor('user');
+    var relationship = Ember['default'].get(User, 'relationshipsByName').get('events');
+    assert.equal(relationship.key, 'events', 'Relationship key is "events"');
+    assert.equal(relationship.kind, 'hasMany', "Relationship kind is hasMany");
   });
 
 });
@@ -2923,7 +2937,6 @@ define('client/torii-adapters/application', ['exports', 'ember'], function (expo
     },
 
     open: function open(authorization) {
-      console.log("open", authorization);
       return new Ember['default'].RSVP.Promise(function (resolve, reject) {
         console.log("open", authorization);
         var accessToken = authorization.user.oauth_token;
@@ -2934,7 +2947,7 @@ define('client/torii-adapters/application', ['exports', 'ember'], function (expo
         } else {
           reject({ error: 'No access token recieved' });
         }
-      }).then(function (user) {
+      }).then(function () {
         return { currentUser: authorization.user };
       });
     }
@@ -3056,7 +3069,7 @@ catch(err) {
 if (runningTests) {
   require("client/tests/test-helper");
 } else {
-  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v16"});
+  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v17"});
 }
 
 /* jshint ignore:end */
