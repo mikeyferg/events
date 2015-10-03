@@ -6,7 +6,7 @@ skip_before_filter :verify_authenticity_token
       @user = User.find_by(oauth_token: request.headers['HTTP_AUTHORIZATION'])
       render json: {user: @user}
     else
-      render json: {error: "Not found"}
+      render json: {error: "Not found user"}
     end
   end
 
