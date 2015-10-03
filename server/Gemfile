@@ -20,6 +20,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'omniauth-facebook'
 gem 'rest-client', '~> 1.8.0'
+gem 'aws-sdk', '< 2.0'
+gem "paperclip", "~> 4.3"
+
 
 #Debugging & Test Suite
 group :development, :test do
