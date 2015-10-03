@@ -21,34 +21,40 @@ task :run do
   end
 end
 
-task :test do
-  pids = [
-    spawn("cd server && EMBER_PORT=4900 rails s -p 3900 -e test"),
-    spawn("cd client && ./node_modules/.bin/ember test --server"),
-  ]
-end
-
-task :check do
+task :deploy do
   puts 'Choose option to deploy:'
-  puts '1 - Client Staging'
-  puts '2 - Server Staging'
+  puts '[1] - Client Staging'
+  puts '[2] - Server Staging'
+  puts '[3] - Client Live'
+  puts '[4] - Server Live'
+  print '-> '
   input = STDIN.gets.strip
   case input
   when '1'
+    puts 'Deploying Client Staging...'
     Rake::Task["deploy_client_staging"].execute
   when '2'
     puts 'Deploying Server Staging...'
+    Rake::Task["deploy_server_staging"].execute
+  when '3'
+    puts "Are you sure about deploying to live server? (y/n)"
+    input = STDIN.gets.strip
+    if input == 'y'
+      puts 'Sorry, not ready yet!'
+    else
+      puts "So sorry for the confusion"
+    end
+  when '4'
+    puts "Are you sure about deploying to live server? (y/n)"
+    input = STDIN.gets.strip
+    if input == 'y'
+      puts 'Sorry, not ready yet!'
+    else
+      puts "So sorry for the confusion"
+    end
   else
     puts "Sorry, didn't understand your option!"
   end
-  # STDOUT.puts "Are you sure? (y/n)"
-  # input = STDIN.gets.strip
-  # if input == 'y'
-  #   Rake::Task["action"].reenable
-  #   Rake::Task["action"].invoke
-  # else
-  #   STDOUT.puts "So sorry for the confusion"
-  # end
 end
 
 task :deploy_client_staging do
