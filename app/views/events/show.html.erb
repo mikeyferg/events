@@ -5,7 +5,7 @@
   <li><%= @event.venue %></li>
   <li><%= @event.summary %></li>
   <li><%= image_tag(@event.image_url) %></li>
-  <li><%= image_tag @event.image.url(:medium) %></li>
+  <li><%= image_tag @event.image.url(:med) %></li>
   <li><%= link_to "Back to Events List", events_path %></li>
 </ul>
 <h2>User's who have RSVP'd to the event.</h2>
