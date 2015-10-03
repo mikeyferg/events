@@ -29,14 +29,26 @@ task :test do
 end
 
 task :check do
-  STDOUT.puts "Are you sure? (y/n)"
+  puts 'Choose option to deploy:'
+  puts '1 - Client Staging'
+  puts '2 - Server Staging'
   input = STDIN.gets.strip
-  if input == 'y'
-    Rake::Task["action"].reenable
-    Rake::Task["action"].invoke
+  case input
+  when '1'
+    Rake::Task["deploy_client_staging"].execute
+  when '2'
+    puts 'Deploying Server Staging...'
   else
-    STDOUT.puts "So sorry for the confusion"
+    puts "Sorry, didn't understand your option!"
   end
+  # STDOUT.puts "Are you sure? (y/n)"
+  # input = STDIN.gets.strip
+  # if input == 'y'
+  #   Rake::Task["action"].reenable
+  #   Rake::Task["action"].invoke
+  # else
+  #   STDOUT.puts "So sorry for the confusion"
+  # end
 end
 
 task :deploy_client_staging do

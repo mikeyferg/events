@@ -1209,7 +1209,7 @@ define('client/pods/components/main-poster/template', ['exports'], function (exp
         var el4 = dom.createTextNode("\n			");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("h1");
-        var el5 = dom.createTextNode("Event Coyote");
+        var el5 = dom.createTextNode("Event Coyotes");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n			");
@@ -3069,7 +3069,7 @@ catch(err) {
 if (runningTests) {
   require("client/tests/test-helper");
 } else {
-  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"v17"});
+  require("client/app")["default"].create({"LOG_TRANSITIONS":true,"name":"client","version":"0.0.0+626e93a2"});
 }
 
 /* jshint ignore:end */
