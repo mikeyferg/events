@@ -40,7 +40,7 @@ task :deploy do
     puts "Are you sure about deploying to live server? (y/n)"
     input = STDIN.gets.strip
     if input == 'y'
-      puts 'Sorry, not ready yet!'
+      Rake::Task["deploy_client_live"].execute
     else
       puts "So sorry for the confusion"
     end
@@ -48,7 +48,7 @@ task :deploy do
     puts "Are you sure about deploying to live server? (y/n)"
     input = STDIN.gets.strip
     if input == 'y'
-      puts 'Sorry, not ready yet!'
+      Rake::Task["deploy_server_live"].execute
     else
       puts "So sorry for the confusion"
     end
@@ -81,7 +81,7 @@ task :deploy_server_staging do
     sh 'git commit -m "Asset compilation for deployment"'
   end
 
-  sh 'git subtree push -P server heroku-server-staging master'
+  sh 'git subtree push -P server heroku-api-staging master'
 
   sh 'git checkout -'
 end
@@ -95,8 +95,22 @@ task :deploy_client_live do
     sh 'git commit -m "Asset compilation for deployment"'
   end
 
-  sh 'heroku repo:purge_cache -a coyote-client-staging'
+  sh 'heroku repo:purge_cache -a event-coyote'
   sh 'git subtree push -P client heroku-client-staging master'
+
+  sh 'git checkout -'
+end
+
+task :deploy_server_live do
+  sh 'git checkout rsh-production'
+  # sh 'git merge origin/rails-served-html -m "Merging master for deployment"'
+
+  unless `git status` =~ /nothing to commit, working directory clean/
+    sh 'git add -A'
+    sh 'git commit -m "Asset compilation for deployment"'
+  end
+
+  sh 'git subtree push -P server heroku-api-live master'
 
   sh 'git checkout -'
 end
