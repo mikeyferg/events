@@ -95,7 +95,7 @@ task :deploy_client_live do
     sh 'git commit -m "Asset compilation for deployment"'
   end
 
-  sh 'heroku repo:purge_cache -a event-coyote'
+  # sh 'heroku repo:purge_cache -a event-coyote'
   sh 'git subtree push -P client heroku-client-staging master'
 
   sh 'git checkout -'
