@@ -96,7 +96,7 @@ task :deploy_client_live do
   end
 
   # sh 'heroku repo:purge_cache -a event-coyote'
-  sh 'git subtree push -P client heroku-client-staging master'
+  sh 'git subtree push -P client heroku-client-live master'
 
   sh 'git checkout -'
 end
