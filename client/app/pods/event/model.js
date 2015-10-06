@@ -25,5 +25,17 @@ export default DS.Model.extend({
     } else {
       return '';
     }
-  }.property('summary')
+  }.property('summary'),
+
+  urlFriendlyName : function(){
+		let ret = this.get("name").replace(/ /g,"-");
+		ret = ret.replace(/&/g,"and");
+    ret = ret.replace(/([:'()|])/,"");
+    // ret = ret.replace(/'/g,"");
+    // ret = ret.replace(/\(/g,"");
+    // ret = ret.replace(/\)/g,"");
+    // ret = ret.replace(/\//g,"");
+    // ret = ret.replace(/|/g,"");
+		return encodeURIComponent(ret);
+	}.property("name"),
 });

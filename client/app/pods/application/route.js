@@ -2,6 +2,11 @@ import Ember from 'ember';
 import config from '../../config/environment';
 import ConnectWithFacebook from './connect-with-facebook';
 
+Ember.RSVP.configure('onerror', function(e) {
+  console.log(e.message);
+  console.log(e.stack);
+});
+
 export default Ember.Route.extend(ConnectWithFacebook, {
   beforeModel() {
     let that = this;
@@ -26,6 +31,7 @@ export default Ember.Route.extend(ConnectWithFacebook, {
       this.get('session').close();
       this.transitionTo('/');
     },
+
     toggleMenu() {
       Ember.$('#js-navigation-menu').slideToggle(function(){
         if(Ember.$('#js-navigation-menu').is(':hidden')) {

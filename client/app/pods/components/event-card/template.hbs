@@ -8,8 +8,10 @@
   {{#if event.start_time}}
     <p>{{moment-format event.start_time 'ddd MMM DD, h:mma'}}</p>
   {{/if}}
+  {{#if event.shortSummary}}
   <div class="slideover">
     <p>{{event.shortSummary}}</p>
   </div>
+  {{/if}}
 </div>
 {{/link-to}}

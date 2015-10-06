@@ -10,7 +10,7 @@ Router.map(function() {
     this.route('new');
   });
 
-  this.route('event', {path: '/events/:event_id'});
+  this.route('event', {path: '/events/:event_id/:event_slug'});
 
   this.route('user');
 });
