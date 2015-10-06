@@ -32,10 +32,8 @@ module Kimono
 
   def self.create_update_event(event, name, generic_time, venue, image_url, summary, address, cost, source_url, start_date)
     current_event = Event.find_by(name: name)
-    puts "current_event: #{current_event}"
     if current_event.nil?
       event = Event.create(name: name, generic_time: generic_time, venue:venue, image_url: image_url, summary: summary, address: address, cost:cost, source_url: source_url, start_date: start_date)
-      puts "Created new event #{event}"
     else
       current_event.update(name: name, generic_time: generic_time, venue:venue, image_url: image_url, summary: summary, address: address, cost:cost, source_url: source_url, start_date: start_date)
       current_event
@@ -43,11 +41,9 @@ module Kimono
   end
 
   def self.update_image(event)
-    puts "update_image #{event}"
     if !event['image_url'].nil?
       url = event['image_url']
       new_image = URI.parse(url)
-      puts "new_image #{new_image}"
       event.update_attribute(:image, new_image)
     end
   end
