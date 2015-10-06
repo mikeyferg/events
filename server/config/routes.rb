@@ -4,10 +4,9 @@ Rails.application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 
-  resources :events, defaults: {format: :json}
+  resources :events#, defaults: {format: :json}
+  match 'users/me', to: 'users#me', via: :get
   resources :users, defaults: {format: :json}
   resources :kimonos_webhooks
-
-  match 'users/me', to: 'users#me', via: :get
 
 end
