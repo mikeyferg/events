@@ -21,3 +21,7 @@
 # development:
 #   facebook_app_id: "1043041375714264"
 #   facebook_secret: "57450fa152ea885b6458d478d24be5b6"
+
+S3_BUCKET_NAME: "event-images.eventcoyote"
+AWS_ACCESS_KEY_ID: "AKIAJUMN5GQU3IMNOZYA"
+AWS_SECRET_ACCESS_KEY: "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"

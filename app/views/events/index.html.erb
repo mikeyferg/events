@@ -9,7 +9,7 @@
   <li><%= event.end_time %></li>
   <li><%= event.venue %></li>
   <li><%= event.summary %></li>
-  <li><%= image_tag(event.image_url) %></li>
+  <li><%= image_tag(event.image.url(:med)) %></li>
   <li><%= link_to "Check out Event Page", event_path(event) %></li>
 </ul>
 <% end %>
