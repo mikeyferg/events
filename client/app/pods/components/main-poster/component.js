@@ -8,6 +8,7 @@ export default Ember.Component.extend({
     }.property(),
 
   didInsertElement(el) {
+    // set height of element to windows height
     this.$(this.element).css('height', window.innerHeight);
   }
 });
