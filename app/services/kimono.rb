@@ -1,5 +1,6 @@
 require 'rest_client'
 require 'paperclip.rb'
+require 'standardizer.rb'
 
 module Kimono
   def self.get_events
@@ -23,7 +24,8 @@ module Kimono
     address = event['address'] if event.has_key?('address')
     cost = event['cost'] if event.has_key?('cost')
     source_url = event['source_url']['href'] if event.has_key?('source_url')  && event['source_url'].has_key?('href')
-    start_date = event['start_date'] if event.has_key?('start_date')
+    #start_date = event['start_date'] if event.has_key?('start_date')
+    start_date = Standardizer.date_splitter(event['start_date'])
     generic_time = event['start_time'] if event.has_key?('start_time')
     city_id = 1
 
@@ -46,7 +48,6 @@ module Kimono
       url = event['image_url']
       new_image = URI.parse(url)
       event.update_attribute(:image, new_image)
-
     end
   end
 
