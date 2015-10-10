@@ -1,16 +1,10 @@
 class EventsController < ApplicationController
 skip_before_filter :verify_authenticity_token
 require 'kimono.rb'
-#require 'paperclip.rb'
-#include Paperclip
   def index
-    @events = Event.all
-    # @events.each do |event|
-    #   update_image(event)
-    # end
-    #@events_kimono = JSON.parse(Kimono.get_events)
-  #  @event_test = Kimono.get_event_details(@events_kimono['results']['collection1'][1])
-  #  @event_script = Kimono.create_events
+  # @events = Event.all
+    @city = City.find_by_nickname(params[:city_nickname])
+    @events = @city.events
     respond_to do |format|
       format.html
       format.json { render json: {
@@ -77,15 +71,6 @@ require 'kimono.rb'
     redirect_to events_path
   end
 
-  # def add_image(event)
-  #   #binding.pry
-  #   if event.image.blank?
-  #     event.image = URI.parse('http://www.wired.com/wp-content/uploads/2015/02/Dog-3-600x450.jpg')
-  #   else
-  #     update_image(event)
-  #   end
-  # end
-
   def update_image(event)
     #event.image.destroy
     new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
@@ -93,7 +78,7 @@ require 'kimono.rb'
   end
   private
   def find_event
-    Event.find(params[:id])
+    Event.friendly.find(params[:id])
   end
   def event_params
     params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :start_date, :generic_time)
