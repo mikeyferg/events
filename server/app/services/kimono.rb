@@ -25,8 +25,9 @@ module Kimono
     cost = event['cost'] if event.has_key?('cost')
     source_url = event['source_url']['href'] if event.has_key?('source_url')  && event['source_url'].has_key?('href')
     #start_date = event['start_date'] if event.has_key?('start_date')
-    start_date = Standardizer.date_splitter(event['start_date'])
-    generic_time = event['start_time'] if event.has_key?('start_time')
+    start_date = Standardizer.date_splitter(event['start_date']) if event.has_key?('start_date')
+    #generic_time = event['start_time'] if event.has_key?('start_time')
+    generic_time = Standardizer.start_time_regex(event['start_time']) if event.has_key?('start_time')
     city_id = 1
 
     event = create_update_event(event, name, generic_time, venue, image_url, summary, address, cost, source_url, start_date, city_id)

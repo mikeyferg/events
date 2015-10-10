@@ -68,6 +68,15 @@ require 'date'
     DateTime.strptime(date_array[2] + date_array[1], '%d %b')
   end
 
-  puts date_splitter("Thu Oct 29")
+  def self.start_time_regex(time)
+    time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+  end
 
+  # input = "7:30 pm -9 pm Lorem Ipsum is simply dummy text. 9pm-10pm Lorem Ipsum is simply dummy text"
+  # puts input[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
 end
+
+
+
+# time = "7:30 pm -9 pm Lorem Ipsum is simply dummy text. 9pm-10pm Lorem Ipsum is simply dummy text"
+# start_time_regex(time)
