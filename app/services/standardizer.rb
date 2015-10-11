@@ -1,4 +1,8 @@
 module Standardizer
+
+  require 'date'
+  require 'time'
+  require 'active_support/time'
 # def date_split(date)
 #   date.split
 # end
@@ -25,58 +29,61 @@ module Standardizer
 #
 #
 # month_abbrev = date_array[1]
-# month = case month_abbrev
-# when "Jan"
-#   "January"
-# when "Feb"
-#   "February"
-# when "Mar"
-#   "March"
-# when "Apr"
-#   "April"
-# when "May"
-#   "May"
-# when "Jun"
-#   "June"
-# when "Jul"
-#   "July"
-# when "Aug"
-#   "August"
-# when "Sep"
-#   "September"
-# when "Oct"
-#   "October"
-# when "Sep"
-#   "September"
-# when "Oct"
-#   "October"
-# when "Nov"
-#   "November"
-# when "Dec"
-#   "December"
-# else
-#   ""
-# end
+def self.month_conversion(month)
+  case month
+  when "Jan"
+    1
+  when "Feb"
+    2
+  when "Mar"
+    3
+  when "Apr"
+    4
+  when "May"
+    5
+  when "Jun"
+    6
+  when "Jul"
+    7
+  when "Aug"
+    8
+  when "Sep"
+    9
+  when "Oct"
+    10
+  when "Nov"
+    11
+  when "Dec"
+    12
+  else
+    ""
+  end
+end
 #
 # day = date_array[2]
 #
 # puts day_of_week, month, day
-require 'date'
+
 
   def self.date_splitter(date)
     date_array = date.split
-    DateTime.strptime(date_array[2] + date_array[1], '%d %b')
+    # DateTime.strptime(date_array[2] + date_array[1], '%d %b')
+    #binding.pry
+    Date.new(Time.now.year, month_conversion(date_array[1]), date_array[2].to_i)
   end
 
   def self.start_time_regex(time)
-    time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+    time_regex = time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+    if time_regex.nil?
+      time = "12:00am"
+    else
+      time = time_regex
+    end
+    Time.parse(time)
   end
 
-  # input = "7:30 pm -9 pm Lorem Ipsum is simply dummy text. 9pm-10pm Lorem Ipsum is simply dummy text"
-  # puts input[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+  def self.date_time(date, time)
+    DateTime.new(date.year, date.month, date.day, time.hour, time.min)
+  end
+
 end
-
-
-
-# time = "7:30 pm -9 pm Lorem Ipsum is simply dummy text. 9pm-10pm Lorem Ipsum is simply dummy text"
-# start_time_regex(time)
