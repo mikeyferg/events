@@ -5,6 +5,7 @@ require 'kimono.rb'
   # @events = Event.all
     @city = City.find_by_nickname(params[:city_nickname])
     @events = @city.events
+  
     respond_to do |format|
       format.html
       format.json { render json: {
