@@ -1,9 +1,12 @@
 <h1>Events in {{model.name}}</h1>
 
 <div class="grid-items">
-  <div {{action 'filterAll'}}>All</div>
-  <div {{action 'filterToday'}}>Today</div>
-  <div {{action 'filterTomorrow'}}>TOmorrow </div>
+  <div {{action 'filterEvents' 'all'}}>All</div>
+  <div {{action 'filterEvents' 'isToday'}}>Today</div>
+  <div {{action 'filterEvents' 'isTomorrow'}}>TOmorrow </div>
+  <div {{action 'filterEvents' 'isWeekend'}}>Weekend </div>
+  <div {{action 'filterEvents' 'featured'}}>Featured </div>
+  <div {{action 'filterEvents' 'isFree'}}>Free </div>
 
 </div>
 

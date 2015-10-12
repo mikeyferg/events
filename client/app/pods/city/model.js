@@ -6,5 +6,5 @@ export default DS.Model.extend({
   name: attr('string'),
   nickname: attr('string'),
 
-  events: DS.hasMany('event', { async: true }),
+  events: DS.hasMany('event'),
 });

@@ -4,13 +4,12 @@ import moment from 'moment';
 
 export function eventDate(start_time) {
   const [time] = start_time;
-  
   if (isToday(time)) {
     return `Today @ ${moment(time).format('h:mma')}`;
   } else if (isTomorrow(time)) {
     return `Tomorrow @ ${moment(time).format('h:mma')}`;
   } else {
-    return moment(time).format('MMM d, h:mma');
+    return moment(time).format('ddd MMM DD, h:mma');
   }
 }
 

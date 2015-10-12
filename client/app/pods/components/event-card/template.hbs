@@ -2,6 +2,9 @@
 <div class="grid-item">
   <img src={{imageUrl}} alt="" />
   <div class="gradient-overlay"></div>
+  {{#if event.featured}}
+    <div class="featured">Featured</div>
+  {{/if}}
   <div class="bottom-info">
     {{#if event.start_time}}
       <div class="time">

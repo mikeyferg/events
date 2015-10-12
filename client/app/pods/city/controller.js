@@ -13,16 +13,9 @@ export default Ember.Controller.extend({
   }).property('model.events', 'model.events.@each.isToday', 'model.events.@each.isTomorrow', 'filter'),
 
   actions: {
-    filterAll() {
-      this.set('filter', 'all');
-    },
-
-    filterToday() {
-      this.set('filter', 'isToday');
-    },
-
-    filterTomorrow() {
-      this.set('filter', 'isTomorrow');
+    filterEvents(filterBy) {
+      console.log(filterBy);
+      this.set('filter', filterBy);
     }
   }
 });
