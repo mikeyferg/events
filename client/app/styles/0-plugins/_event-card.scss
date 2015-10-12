@@ -64,6 +64,15 @@
     @include background-image(linear-gradient(transparent 20%, #000 100%));
   }
 
+  .grid-item .featured{
+    position: absolute;
+    top: 1em;
+    right: 0;
+    padding: 0.5em 1em;
+    background: red;
+    color: #fff;
+  }
+
   .grid-item > .bottom-info {
     position: absolute;
     width: 100%;
