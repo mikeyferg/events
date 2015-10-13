@@ -15,10 +15,12 @@ class CitiesController < ApplicationController
   end
   def show
     @city = find_city
+    @events = @city.events
     respond_to do |format|
       format.html
       format.json { render json: {
-        city: @city
+        city: @city,
+        events: @events
         }
        }
      end
