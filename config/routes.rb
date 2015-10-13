@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # root 'events#index', city_id: 1, defaults: {format: :json}
-  root :to => redirect('/sf/events')
+  root :to => redirect('/cities/1')
   match 'auth/:provider/callback', to: 'kimonos_webhooks#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
@@ -9,8 +11,6 @@ Rails.application.routes.draw do
   match 'users/me', to: 'users#me', via: :get
   resources :users, defaults: {format: :json}
   resources :kimonos_webhooks
-  resources :cities, defaults: {format: :json}, param: :nickname, path: '' do
-    resources :events, defaults: {format: :json}
-  end
-
+  resources :cities, defaults: {format: :json}
+  resources :events, defaults: {format: :json}
 end

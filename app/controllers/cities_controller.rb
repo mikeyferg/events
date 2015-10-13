@@ -1,6 +1,10 @@
 class CitiesController < ApplicationController
   def index
     @cities = City.all
+    # @city_events = []
+    # @cities.each do |city|
+    #   @city_events << city.city_events
+    # end
     respond_to do |format|
       format.html
       format.json { render json: {
@@ -11,12 +15,12 @@ class CitiesController < ApplicationController
   end
   def show
     @city = find_city
-    @city_events = @city.events
+    @events = @city.events
     respond_to do |format|
       format.html
       format.json { render json: {
         city: @city,
-        city_events: @city_events
+        events: @events
         }
        }
      end
