@@ -2,15 +2,19 @@ import Ember from 'ember';
 import dateFilter from '../../utils/date-filter';
 
 export default Ember.Controller.extend({
-  filteredEvents: Ember.computed.filter('model.events', function(event, index, array) {
-    return event;
-  }).property('model.events', 'model.events.@each.isToday'),
+  filter: 'isToday',
+
+  filteredEvents: Ember.computed.filter('model.events', function(event) {
+    return event.get(this.get('filter')) === true;
+  }).property('model.events', 'model.events.@each.isToday', 'model.events.@each.isTomorrow', 'filter'),
 
   actions: {
     filterToday() {
-      filteredEvents: Ember.computed.filter('model.events', function(event, index, array) {
-        return event.get('isToday');
-      }).property('model.events', 'model.events.@each.isToday')
+      this.set('filter', 'isToday');
+    },
+
+    filterTomorrow() {
+      this.set('filter', 'isTomorrow');
     }
   }
 });
