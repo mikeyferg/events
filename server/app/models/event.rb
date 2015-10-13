@@ -38,15 +38,6 @@ class Event < ActiveRecord::Base
     [:name, :id]
   ]
   end
-#   def remake_slug
-#   self.update_attribute(:slug, nil)
-#   self.save!
-# end
-#
-# #You don't necessarily need this bit, but I have it in there anyways
-# def should_generate_new_friendly_id?
-#   new_record? || self.slug.nil?
-# end
 
   attr_accessor :image
 

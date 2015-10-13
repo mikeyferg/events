@@ -19,11 +19,10 @@ header.navigation {
   $navigation-submenu-width: 12em;
   $horizontal-bar-mode: $large-screen;
 
-  background-color: $navigation-background;
-  border-bottom: 1px solid darken($navigation-background, 10);
   min-height: $navigation-height;
   width: 100%;
-  z-index: 999;
+  position: absolute;
+  top: 0;
 
   .navigation-wrapper {
     @include clearfix;

@@ -24,7 +24,8 @@ gem 'rest-client', '~> 1.8.0'
 gem 'aws-sdk', '< 2.0'
 gem "paperclip", "~> 4.3"
 gem 'friendly_id', '~> 5.1.0'
-
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
 
 #Debugging & Test Suite
 group :development, :test do
