@@ -2,15 +2,14 @@ class EventsController < ApplicationController
 skip_before_filter :verify_authenticity_token
 require 'kimono.rb'
   def index
-  # @events = Event.all
-    @city = City.find_by_nickname(params[:city_nickname])
-    @events = @city.events
-  
+    @events = Event.all
+    # @city = City.find_by_nickname(params[:city_nickname])
+    # @events = @city.events
+
     respond_to do |format|
       format.html
       format.json { render json: {
-        event: @events,
-        events_kimono: @events_kimono
+        event: @events
         }
        }
     end

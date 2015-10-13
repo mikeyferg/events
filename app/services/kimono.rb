@@ -32,6 +32,11 @@ module Kimono
     city_id = 1
     event = create_update_event(event, name, generic_time, start_time, venue, image_url, summary, address, cost, source_url, start_date, city_id)
     update_image(event)
+    city = City.find(city_id)
+    city.city_events_will_change!
+    city.city_events << event['id']
+    city.save
+
   end
 
   def self.create_update_event(event, name, generic_time, start_time, venue, image_url, summary, address, cost, source_url, start_date, city_id)
