@@ -26,6 +26,7 @@
   @include clearfix;
 
   .grid-item {
+    @include background-image(linear-gradient(white 0, yellow 50%, transparent 50%));
     background: $grid-item-background;
     background-size: cover;
     border-bottom: $grid-item-border-size solid $grid-items-background;

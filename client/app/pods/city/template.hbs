@@ -1,0 +1,9 @@
+<h1>Events in {{model.name}}</h1>
+
+<div class="grid-items">
+  {{#each model.events as |event|}}
+    {{event-card city=model event=event}}
+  {{/each}}
+</div>
+
+{{outlet}}

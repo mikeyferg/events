@@ -11,6 +11,7 @@ export default DS.Model.extend({
   generic_time: attr('string'),
   name: attr('string'),
   image_url: attr('string'),
+  slug: attr ('string'),
   start_time: attr('date'),
   start_date: attr('string'),
   summary: attr('string'),
@@ -25,17 +26,5 @@ export default DS.Model.extend({
     } else {
       return '';
     }
-  }.property('summary'),
-
-  urlFriendlyName : function(){
-		let ret = this.get("name").replace(/ /g,"-");
-		ret = ret.replace(/&/g,"and");
-    ret = ret.replace(/([:'()|])/,"");
-    // ret = ret.replace(/'/g,"");
-    // ret = ret.replace(/\(/g,"");
-    // ret = ret.replace(/\)/g,"");
-    // ret = ret.replace(/\//g,"");
-    // ret = ret.replace(/|/g,"");
-		return encodeURIComponent(ret);
-	}.property("name"),
+  }.property('summary')
 });
