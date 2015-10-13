@@ -3,13 +3,10 @@
   <img src={{imageUrl}} alt="" />
   <div class="gradient-overlay"></div>
   <div class="bottom-info">
+    {{event.isToday}}
     {{#if event.start_time}}
       <div class="time">
-        {{#if isToday}}
-          Today
-        {{else}}
-          {{moment-format event.start_time 'ddd MMM DD, h:mma'}}
-        {{/if}}
+        {{event-date event.start_time}}
       </div>
     {{/if}}
     {{#if event.cost}}

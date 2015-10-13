@@ -4,21 +4,14 @@ export default Ember.Component.extend({
   classNames: 'map-canvas',
 
   insertMap: function() {
-    const container = this.element;
+    const mapContainer = this.element;
     const venue = this.get('venue');
-    const venueContainer = Ember.$('#asdf');
 
-
-    // var geocoder = new google.maps.Geocoder();
-    // geocoder.geocode( { 'address': address}, function(results, status) {
-    //   console.log(results, status);
-    // });
-
-    var map = new window.google.maps.Map(container);
-
-    var service = new google.maps.places.PlacesService(map);
-
-    var marker = new google.maps.Marker({map: map});
+    const map = new window.google.maps.Map(mapContainer, {
+      disableDefaultUI: true
+    });
+    const service = new google.maps.places.PlacesService(map);
+    const marker = new google.maps.Marker({map: map});
 
     service.textSearch({
       query: venue
