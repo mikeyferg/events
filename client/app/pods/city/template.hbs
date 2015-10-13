@@ -2,15 +2,13 @@
 
 <div class="grid-items">
   <div {{action 'filterToday'}}>Today</div>
-  <div {{action 'filter-today'}}>TOmorrow </div>
-  <div {{action 'filter-today'}}>THis week </div>
-  <div {{action 'filter-today'}}>Weekend </div>
+  <div {{action 'filterTomorrow'}}>TOmorrow </div>
 
 </div>
 
 
 <div class="grid-items">
-  {{#each model.events as |event|}}
+  {{#each filteredEvents as |event|}}
     {{event-card city=model event=event}}
   {{/each}}
 </div>

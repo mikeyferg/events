@@ -1,4 +1,7 @@
 import DS from 'ember-data';
+import moment from 'moment';
+import Ember from 'ember';
+import { isToday, isTomorrow } from '../../utils/date-filter';
 
 const attr = DS.attr;
 
@@ -19,12 +22,19 @@ export default DS.Model.extend({
 
   users: DS.hasMany('user', { async: true }),
 
-  shortSummary: function() {
-    const summary = this.get('summary');
-    if ( summary && summary.length > 0 ) {
-      return this.get('summary').split(' ').slice(0,40).join(' ');
+  shortSummary: Ember.computed('summary', function() {
+    if ( this.get('summary') && this.get('summary').length > 0 ) {
+      return this.get('summary').split(' ').slice(0,30).join(' ');
     } else {
       return '';
     }
-  }.property('summary')
+  }),
+
+  isToday: Ember.computed('start_time', function() {
+    console.log("Model", isToday(this.get('start_time')));
+    return isToday(this.get('start_time'));
+  }),
+  isTomorrow: Ember.computed('start_time', function() {
+    return isTomorrow(this.get('start_time'));
+  }),
 });
