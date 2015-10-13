@@ -65,6 +65,7 @@ Event.create!([
   city = City.first
   city.city_events_will_change!
   city.city_events << Event.first['id']
+  city.city_events << Event.find(2)['id']
   city.save
   #City.delete_all
 
