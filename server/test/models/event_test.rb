@@ -15,8 +15,8 @@
 #  cost               :string
 #  source_url         :string
 #  end_date           :string
-#  start_date         :string
-#  generic_time       :text
+#  date_only          :string
+#  time_only          :text
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer

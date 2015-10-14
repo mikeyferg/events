@@ -25,6 +25,11 @@ gem 'aws-sdk', '< 2.0'
 gem "paperclip", "~> 4.3"
 gem 'friendly_id', '~> 5.1.0'
 
+#for admin pages
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
+gem "jquery-ui-rails"
+gem "just-datetime-picker"
 
 #Debugging & Test Suite
 group :development, :test do
@@ -35,6 +40,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'annotate'
+
 
 end
 

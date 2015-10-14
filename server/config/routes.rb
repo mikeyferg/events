@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # root 'events#index', city_id: 1, defaults: {format: :json}
   root :to => redirect('/cities/1')
   match 'auth/:provider/callback', to: 'kimonos_webhooks#create', via: [:get, :post]

@@ -28,6 +28,6 @@ class CitiesController < ApplicationController
 
   private
   def find_city
-    City.find(params[:id])
+    City.friendly.find(params[:id])
   end
 end
