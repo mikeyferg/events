@@ -28,14 +28,9 @@ module Kimono
     time_only = Standardizer.start_time_regex(event['time_only']) if event.has_key?('time_only')
     start_time = Standardizer.date_time(date_only, time_only) if event.has_key?('time_only') && event.has_key?('date_only')
     city_id = 1
-<<<<<<< HEAD
     event = create_update_event(event, name, generic_time, start_time, venue, image_url, summary, address, cost, source_url, start_date, city_id)
     update_image(event)
     city = City.find(city_id)
-=======
-    event = create_update_event(event, name, time_only, start_time, venue, image_url, summary, address, cost, source_url, date_only, city_id)
-    city = City.find(1)
->>>>>>> master
     city.city_events_will_change!
     city.city_events << event['id']
     city.save
