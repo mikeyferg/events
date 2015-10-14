@@ -3,73 +3,46 @@ module Standardizer
   require 'date'
   require 'time'
   require 'active_support/time'
-# def date_split(date)
-#   date.split
-# end
-#
-# date_array = date_split("Thu Oct 29")
-#
-# day_abbrev = date_array[0]
-# day_of_week = case day_abbrev
-# when "Mon"
-#   "Monday"
-# when "Tue"
-#   "Tuesday"
-# when "Wed"
-#   "Wednesday"
-# when "Thu"
-#   "Thursday"
-# when "Fri"
-#   "Friday"
-# else
-#   ""
-# end
-#
-#
-#
-#
-# month_abbrev = date_array[1]
-def self.month_conversion(month)
-  case month
-  when "Jan"
-    1
-  when "Feb"
-    2
-  when "Mar"
-    3
-  when "Apr"
-    4
-  when "May"
-    5
-  when "Jun"
-    6
-  when "Jul"
-    7
-  when "Aug"
-    8
-  when "Sep"
-    9
-  when "Oct"
-    10
-  when "Nov"
-    11
-  when "Dec"
-    12
-  else
-    ""
-  end
-end
-#
-# day = date_array[2]
-#
-# puts day_of_week, month, day
 
+  def self.month_conversion(month)
+    case month
+    when "Jan"
+      1
+    when "Feb"
+      2
+    when "Mar"
+      3
+    when "Apr"
+      4
+    when "May"
+      5
+    when "Jun"
+      6
+    when "Jul"
+      7
+    when "Aug"
+      8
+    when "Sep"
+      9
+    when "Oct"
+      10
+    when "Nov"
+      11
+    when "Dec"
+      12
+    else
+      ""
+    end
+  end
 
   def self.date_splitter(date)
+    if date.include? "passed"
+      date = "Tue Sep 1"
+    end
     date_array = date.split
-    # DateTime.strptime(date_array[2] + date_array[1], '%d %b')
-    #binding.pry
-    Date.new(Time.now.year, month_conversion(date_array[1]), date_array[2].to_i)
+    month = month_conversion(date_array[1])
+    day = date_array[2].to_i
+    Date.new(Time.now.year, month, day)
   end
 
   def self.start_time_regex(time)

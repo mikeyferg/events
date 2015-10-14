@@ -15,7 +15,7 @@ ActiveAdmin.register Event do
 
   index do
     column :name
-    column :start_time
+    column :start_time 
     column :end_time
     column :venue
     column :summary
