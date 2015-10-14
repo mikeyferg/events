@@ -10,6 +10,8 @@ Router.map(function() {
 
   this.route('city', {path: '/:city_slug'});
   this.route('event', {path: '/:city_slug/events/:event_slug'});
+
+  this.route('user');
 });
 
 export default Router;

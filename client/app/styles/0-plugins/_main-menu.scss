@@ -1,3 +1,9 @@
+.cities header.navigation {
+  position: absolute;
+  top: 0;
+  background: transparent;
+}
+
 header.navigation {
   $base-border-color: gainsboro !default;
   $base-border-radius: 3px !default;
@@ -20,9 +26,8 @@ header.navigation {
   $horizontal-bar-mode: $large-screen;
 
   min-height: $navigation-height;
+  background: $navigation-background;
   width: 100%;
-  position: absolute;
-  top: 0;
 
   .navigation-wrapper {
     @include clearfix;

@@ -2,6 +2,22 @@ import Ember from 'ember';
 import config from '../../config/environment';
 import ConnectWithFacebook from './connect-with-facebook';
 
+// Add css class to body
+Ember.Route.reopen({
+  activate: function() {
+    var cssClass = this.toCssClass();
+    if (cssClass != 'application') {
+      Ember.$('body').addClass(cssClass);
+    }
+  },
+  deactivate: function() {
+    Ember.$('body').removeClass(this.toCssClass());
+  },
+  toCssClass: function() {
+    return this.routeName.replace(/\./g, '-').dasherize();
+  }
+});
+
 Ember.RSVP.configure('onerror', function(e) {
   console.log(e.message);
   console.log(e.stack);
@@ -9,6 +25,7 @@ Ember.RSVP.configure('onerror', function(e) {
 
 export default Ember.Route.extend(ConnectWithFacebook, {
   beforeModel() {
+    this._super(...arguments);
     let that = this;
     const path = `${config.apiHostname}/users/me`;
     return this.get('session').fetch().then(function() {

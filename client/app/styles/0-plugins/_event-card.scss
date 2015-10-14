@@ -22,11 +22,14 @@
   $grid-item-big-columns: 8;
   $grid-item-color: white;
   $grid-item-height: 14em;
-
+  @include outer-container;
   @include clearfix;
 
+  a {
+    display: block;
+  }
+
   .grid-item {
-    @include background-image(linear-gradient(white 0, yellow 50%, transparent 50%));
     background: $grid-item-background;
     background-size: cover;
     border-bottom: $grid-item-border-size solid $grid-items-background;
@@ -43,6 +46,7 @@
     text-align: center;
     text-decoration: none;
     width: 100%;
+    text-shadow: 0 0 40px #000,0 0 20px #000,0 0 10px #000,0 0 10px #000;
 
     &:hover .slideover {
       @include transform(translateY(0));
