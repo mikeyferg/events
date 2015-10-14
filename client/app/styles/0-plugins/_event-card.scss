@@ -41,12 +41,11 @@
     height: $grid-item-height;
     overflow: hidden;
     outline: none;
-    padding: 2em 0;
+    padding: 0;
     position: relative;
     text-align: center;
     text-decoration: none;
     width: 100%;
-    text-shadow: 0 0 40px #000,0 0 20px #000,0 0 10px #000,0 0 10px #000;
 
     &:hover .slideover {
       @include transform(translateY(0));
@@ -55,6 +54,22 @@
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
     }
+  }
+
+  .grid-item > .gradient-overlay {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    @include background-image(linear-gradient(transparent 20%, #000 100%));
+  }
+
+  .grid-item > .info {
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    @include background-image(linear-gradient(transparent 20%, #000 100%));
   }
 
   .grid-item > .slideover {
@@ -71,7 +86,8 @@
 
   .grid-item img {
     display: block;
-    height: 3em;
+    min-width: 100%;
+    min-height: 100%;
     margin: 0 auto 1em;
   }
 

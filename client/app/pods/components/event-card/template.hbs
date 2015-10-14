@@ -1,17 +1,22 @@
 {{#link-to "event" city.nickname event.slug}}
-<div class="grid-item grid-item-image" style={{backgroundStyle}}>
-  <h3>{{event.name}}</h3>
-  {{#if event.cost}}
+<div class="grid-item grid-item-image">
+  <img src={{imageUrl}} alt="" />
+  <div class="gradient-overlay"></div>
+  <div class="info">
+    <h3>{{event.name}}</h3>
+    {{#if event.cost}}
     <p>{{format-currency event.cost}}</p>
-  {{/if}}
-  <p>{{event.venue}}</p>
-  {{#if event.start_time}}
+    {{/if}}
+    <p>{{event.venue}}</p>
+    {{#if event.start_time}}
     <p>{{moment-format event.start_time 'ddd MMM DD, h:mma'}}</p>
-  {{/if}}
-  {{#if event.shortSummary}}
-  <div class="slideover">
-    <p>{{event.shortSummary}}</p>
+    {{/if}}
   </div>
+
+  {{#if event.shortSummary}}
+    <div class="slideover">
+      <p>{{event.shortSummary}}</p>
+    </div>
   {{/if}}
 </div>
 {{/link-to}}
