@@ -64,12 +64,28 @@
     @include background-image(linear-gradient(transparent 20%, #000 100%));
   }
 
-  .grid-item > .info {
+  .grid-item > .bottom-info {
     position: absolute;
     width: 100%;
-    height: 80%;
     bottom: 0;
-    @include background-image(linear-gradient(transparent 20%, #000 100%));
+    z-index: 1;
+    right: 0;
+    padding: 0.5em;
+    color: $grid-item-color;
+    font-weight: bold;
+      .time {
+        float: left;
+      }
+      .cost {
+        float: right;
+      }
+  }
+
+  .grid-item > .info {
+    position: absolute;
+    padding: 0 1em;
+    width: 100%;
+    bottom: 2em;
   }
 
   .grid-item > .slideover {
@@ -117,13 +133,5 @@
         max-width: 60%;
       }
     }
-  }
-
-  .grid-item-image {
-    background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png");
-    background-color: $grid-item-background;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
   }
 }
