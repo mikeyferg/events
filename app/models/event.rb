@@ -15,8 +15,8 @@
 #  cost               :string
 #  source_url         :string
 #  end_date           :string
-#  start_date         :string
-#  generic_time       :text
+#  date_only          :string
+#  time_only          :text
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
@@ -29,12 +29,13 @@ require 'open-uri'
 class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
+  after_create :update_image, only: :image_rul
   # after_create :remake_slug
   def slug_candidates
   [
     :name,
     [:name, :venue],
-    [:name, :venue, :start_date],
+    [:name, :venue, :date_only],
     [:name, :id]
   ]
   end
@@ -54,7 +55,14 @@ class Event < ActiveRecord::Base
   has_many :user_events
   has_many :users, through: :user_events
 
-
+  def update_image
+    # binding.pry
+    if !self['image_url'].nil?
+      url = self['image_url']
+      new_image = URI.parse(url)
+      self.update_attribute(:image, new_image)
+    end
+  end
 
 
 end

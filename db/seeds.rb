@@ -1,4 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
+"
+"# This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
@@ -31,8 +32,8 @@ Event.create!([
       cost: "$70",
       source_url: "http://www.sfstation.com/app/redir.php?eventId=2287050&res=ed67e185ce55cd6a07d4273dde3aed63",
       end_date: "",
-      start_date: "2015-10-12",
-      generic_time: "2015-10-12 19:30:00 -0700",
+      date_only: "2015-10-12",
+      time_only: "2015-10-12 19:30:00 -0700",
       image_file_name: "2287050a_tn220x220.jpg",
       image_content_type: "image/jpeg",
       image_file_size: 50051,
@@ -52,8 +53,8 @@ Event.create!([
       cost: "Free",
       source_url: "http://www.sfstation.com/app/redir.php?eventId=2287799&res=e9189b7a00b90ee84f803b721bcf85a1",
       end_date: '',
-      start_date: "2015-10-12",
-      generic_time: "2015-10-12 22:00:00 -0700",
+      date_only: "2015-10-12",
+      time_only: "2015-10-12 22:00:00 -0700",
       image_file_name: "2287799a_tn220x220.jpg",
       image_content_type: "image/jpeg",
       image_file_size: 21950,
