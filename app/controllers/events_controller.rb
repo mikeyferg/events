@@ -17,8 +17,6 @@ require 'kimono.rb'
 
   def show
     @event = find_event
-    #update_image(@event)
-
     @users = @event.users
     @users_id_array = @users.collect(&:id)
     respond_to do |format|
@@ -79,8 +77,9 @@ require 'kimono.rb'
   private
   def find_event
     Event.friendly.find(params[:id])
+    #Event.find(params[:id])
   end
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :start_date, :generic_time)
+    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :date_only, :time_only)
   end
 end
