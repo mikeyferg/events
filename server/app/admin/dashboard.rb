@@ -37,5 +37,12 @@ ActiveAdmin.register_page "Dashboard" do
 
   ActiveAdmin.register Event do
     permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only
+    form do |f|
+      f.input :date_only, as: :datepicker
+      f.input :time_only, as: :time_picker
+      f.input :name
+      f.submit :submit
+    end
   end
+
 end

@@ -16,21 +16,21 @@
 #  source_url         :string
 #  end_date           :string
 #  date_only          :string
-#  time_only          :text
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  city_id            :integer
 #  slug               :string
+#  time_only          :time
 #
 
 require 'open-uri'
 class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-  after_create :update_image, only: :image_rul
-  # after_create :remake_slug
+  after_create :update_image, only: :image_url
+
   def slug_candidates
   [
     :name,
