@@ -16,13 +16,13 @@
 #  source_url         :string
 #  end_date           :string
 #  date_only          :string
-#  time_only          :text
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  city_id            :integer
 #  slug               :string
+#  time_only          :time
 #
 
 require 'test_helper'

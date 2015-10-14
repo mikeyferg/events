@@ -10,7 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema.define(version: 20151013201842) do
+
+ActiveRecord::Schema.define(version: 20151014041646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,13 +74,13 @@ ActiveRecord::Schema.define(version: 20151013201842) do
     t.string   "source_url"
     t.string   "end_date"
     t.string   "date_only"
-    t.text     "time_only"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "city_id"
     t.string   "slug"
+    t.time     "time_only"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
