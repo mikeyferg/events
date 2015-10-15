@@ -13,7 +13,6 @@ ActiveAdmin.register_page "Dashboard" do
       config.comments = false
     end
 
-
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
@@ -36,11 +35,18 @@ ActiveAdmin.register_page "Dashboard" do
   end # content
 
   ActiveAdmin.register Event do
-    permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only
+    permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only, :featured
     form do |f|
+      f.input :name
       f.input :date_only, as: :datepicker
       f.input :time_only, as: :time_picker
-      f.input :name
+      f.input :venue
+      f.input :summary
+      f.input :image_url
+      f.input :address
+      f.input :cost
+      f.input :source_url
+      f.input :featured
       f.submit :submit
     end
   end

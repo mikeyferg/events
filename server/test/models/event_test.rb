@@ -23,6 +23,7 @@
 #  city_id            :integer
 #  slug               :string
 #  time_only          :time
+#  featured           :boolean
 #
 
 require 'test_helper'

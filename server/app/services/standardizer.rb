@@ -36,27 +36,42 @@ module Standardizer
   end
 
   def self.date_splitter(date)
+    #binding.pry
     if date.include? "passed"
-      date = "Tue Sep 1"
+      "No Date"
+    else
+      date_array = date.split
+      month = month_conversion(date_array[1])
+      day = date_array[2].to_i
+      Date.new(Time.now.year, month, day)
     end
-    date_array = date.split
-    month = month_conversion(date_array[1])
-    day = date_array[2].to_i
-    Date.new(Time.now.year, month, day)
   end
+
+  # def self.start_time_regex(time)
+  #   time_regex = time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+  #   if time_regex.nil?
+  #     time = "12:00am"
+  #   else
+  #     time = time_regex
+  #   end
+  #   Time.parse(time)
+  # end
 
   def self.start_time_regex(time)
-    time_regex = time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
-    if time_regex.nil?
+  #  binding.pry
+
+    if time.nil?
       time = "12:00am"
     else
-      time = time_regex
+      time_regex = time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
+      time = time_regex unless time_regex.nil?
     end
-    Time.parse(time)
+    Time.parse(time) rescue nil
+
   end
 
-  def self.date_time(date, time)
-    DateTime.new(date.year, date.month, date.day, time.hour, time.min)
-  end
+  # def self.date_time(date, time)
+  #   DateTime.new(date.year, date.month, date.day, time.hour, time.min)
+  # end
 
 end

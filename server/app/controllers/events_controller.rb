@@ -80,6 +80,6 @@ require 'kimono.rb'
     #Event.find(params[:id])
   end
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :date_only, :time_only)
+    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :date_only, :time_only, :featured)
   end
 end
