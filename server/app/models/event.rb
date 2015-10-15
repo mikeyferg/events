@@ -23,6 +23,7 @@
 #  city_id            :integer
 #  slug               :string
 #  time_only          :time
+#  featured           :boolean
 #
 
 require 'open-uri'
@@ -54,6 +55,8 @@ class Event < ActiveRecord::Base
   belongs_to :city
   has_many :user_events
   has_many :users, through: :user_events
+  has_many :event_tags
+  has_many :tags, through: :event_tags
 
   def update_image
     # binding.pry

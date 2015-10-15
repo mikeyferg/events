@@ -23,6 +23,7 @@
 #  city_id            :integer
 #  slug               :string
 #  time_only          :time
+#  featured           :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
