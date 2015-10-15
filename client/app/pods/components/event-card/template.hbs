@@ -6,7 +6,7 @@
     {{#if event.start_time}}
       <div class="time">
         {{#if isToday}}
-          Today
+          Today @ {{moment-format event.start_time 'h:mma'}}
         {{else}}
           {{moment-format event.start_time 'ddd MMM DD, h:mma'}}
         {{/if}}
