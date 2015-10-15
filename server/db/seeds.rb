@@ -8,6 +8,7 @@ City.create!([
   nickname: "nyc"}
   ])
 
+
 Event.create!([
     {
       name: "Segway Time Travel Halloween Night Tour - Explore San Francisco's Dark Past",
