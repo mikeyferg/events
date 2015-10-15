@@ -5,7 +5,11 @@
   <div class="bottom-info">
     {{#if event.start_time}}
       <div class="time">
-        {{moment-format event.start_time 'ddd MMM DD, h:mma'}}
+        {{#if isToday}}
+          Today
+        {{else}}
+          {{moment-format event.start_time 'ddd MMM DD, h:mma'}}
+        {{/if}}
       </div>
     {{/if}}
     {{#if event.cost}}
