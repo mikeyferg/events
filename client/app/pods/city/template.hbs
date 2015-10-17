@@ -15,13 +15,11 @@
 
 
 <div class="grid-items">
-  {{#liquid-with filteredEvents as |currentModel|}}
-    {{#each currentModel as |event|}}
+    {{#each filteredEvents as |event|}}
       {{event-card city=model event=event}}
     {{else}}
       <center>There are no events for this date</center>
     {{/each}}
-  {{/liquid-with}}
 </div>
 
 {{outlet}}
