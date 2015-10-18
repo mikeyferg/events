@@ -1,15 +1,18 @@
-// export default function() {
-//  this.transition(
-//     this.childOf('.grid-items'),
-//     this.use('explode', {
-//       matchBy: 'id',
-//       use: ['flyTo', { duration: 100, easing: [250, 15] } ]
-//     })
-//  );
-// }
-
 export default function(){
   let duration = 500;
+
+  this.transition(
+    this.toRoute('cities'),
+    this.use('toDown')
+  );
+
+  this.transition(
+    this.fromRoute('cities'),
+    this.toRoute('city'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
   this.transition(
     this.fromRoute('city'),
     this.toRoute('event'),
