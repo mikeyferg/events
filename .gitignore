@@ -19,4 +19,6 @@ ngrok
 !/server/log/.keep
 /server/tmp
 /server/.DS_Store
+
+# Ignore application configuration -- DO NOT REMOVE
 /server/config/application.yml
