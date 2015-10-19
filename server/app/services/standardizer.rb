@@ -39,6 +39,8 @@ module Standardizer
     #binding.pry
     if date.include? "passed"
       "No Date"
+    elsif date.include? "No Date"
+      "No Date"
     else
       date_array = date.split
       month = month_conversion(date_array[1])

@@ -24,6 +24,7 @@
 #  slug               :string
 #  time_only          :time
 #  featured           :boolean
+#  page_url           :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

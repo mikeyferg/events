@@ -35,7 +35,7 @@ ActiveAdmin.register_page "Dashboard" do
   end # content
 
   ActiveAdmin.register Event do
-    permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only, :featured
+    permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :page_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only, :featured
     form do |f|
       f.input :name
       f.input :date_only, as: :datepicker
@@ -43,6 +43,7 @@ ActiveAdmin.register_page "Dashboard" do
       f.input :venue
       f.input :summary
       f.input :image_url
+      f.input :page_url
       f.input :address
       f.input :cost
       f.input :source_url

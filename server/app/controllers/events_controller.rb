@@ -19,12 +19,16 @@ require 'kimono.rb'
     @event = find_event
     @users = @event.users
     @users_id_array = @users.collect(&:id)
+    @tags = @event.tags
+    @tags_id_array = @tags.collect(&:id)
     respond_to do |format|
       format.html
       format.json { render json: {
         event: @event,
         users: @users,
-        users_id_array: @users_id_array
+        users_id_array: @users_id_array,
+        tags: @tags,
+        tags_id_array: @tags_id_array
         }
        }
     end
@@ -80,6 +84,6 @@ require 'kimono.rb'
     #Event.find(params[:id])
   end
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :end_date, :date_only, :time_only, :featured)
+    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured)
   end
 end
