@@ -7,7 +7,10 @@ City.create!([
   {name: "New York",
   nickname: "nyc"}
   ])
-
+Tag.create!([
+  {name: "Live Music"},
+  {name: "Club"}
+  ])
 
 Event.create!([
     {
@@ -59,18 +62,10 @@ Event.create!([
   city.city_events << Event.first['id']
   city.city_events << Event.find(2)['id']
   city.save
-  #City.delete_all
+
+  tag = Tag.first
+  tag.events << Event.first
+  tag.events << Event.find(2)
 
 
-  #User.delete_all
-
-  # User.create!([
-  #   {name: "mike",
-  #     pic_url: "https://pbs.twimg.com/profile_images/1575699133/me__4__400x400.jpg"
-  #   },
-  #   {
-  #     name: "sasha",
-  #     pic_url: "https://pbs.twimg.com/profile_images/378800000367201581/5fdde49e2b1d0793499a92ac8a2401f8.jpeg"
-  #   }
-  # ])
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+ AdminUser.create!(email: ENV['ACTIVEADMIN_NAME'], password: ENV['ACTIVEADMIN_PASSWORD'], password_confirmation: ENV['ACTIVEADMIN_PASSWORD'])

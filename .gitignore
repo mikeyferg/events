@@ -19,3 +19,4 @@ ngrok
 !/server/log/.keep
 /server/tmp
 /server/.DS_Store
+/server/config/application.yml
