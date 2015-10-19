@@ -11,11 +11,6 @@ export default Ember.Route.extend({
     }
   },
 
-  setupController(controller) {
-    this._super(...arguments);
-    controller.set('filter', 'all');
-  },
-
   actions: {
     filterToday() {
       this.set('sortProperties', 'venue');

@@ -1,6 +1,6 @@
 {{#link-to "event" city.nickname event.slug}}
 <div class="grid-item">
-  <img src={{imageUrl}} alt="" />
+  <img src={{imageUrl}} alt=event.name data-photo-id={{event.slug}} />
   <div class="gradient-overlay"></div>
   {{#if event.featured}}
     <div class="featured">Featured</div>
