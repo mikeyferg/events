@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import moment from 'moment';
 import Ember from 'ember';
 import { isToday, isTomorrow, isWeekend } from '../../utils/date-filter';
 

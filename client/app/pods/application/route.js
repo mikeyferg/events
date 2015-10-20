@@ -6,7 +6,7 @@ import ConnectWithFacebook from './connect-with-facebook';
 Ember.Route.reopen({
   activate: function() {
     var cssClass = this.toCssClass();
-    if (cssClass != 'application') {
+    if (cssClass !== 'application') {
       Ember.$('body').addClass(cssClass);
     }
   },
