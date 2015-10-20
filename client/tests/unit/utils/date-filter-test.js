@@ -1,4 +1,4 @@
-import { isToday, isTomorrow, isWeekend, isSameDay } from '../../../utils/date-filter';
+import { isToday, isTomorrow, isSameDay } from '../../../utils/date-filter';
 import { module, test } from 'qunit';
 import moment from 'moment';
 

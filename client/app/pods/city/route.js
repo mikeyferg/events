@@ -8,6 +8,6 @@ export default Ember.Route.extend({
   serialize(city) {
     return {
       city_slug: city.get('nickname')
-    }
+    };
   }
 });

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import dateFilter from '../../utils/date-filter';
 
 export default Ember.Controller.extend({
   filter: 'all',
@@ -14,7 +13,6 @@ export default Ember.Controller.extend({
 
   actions: {
     filterEvents(filterBy) {
-      console.log(filterBy);
       this.set('filter', filterBy);
     }
   }

@@ -6,12 +6,12 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       city: this.store.find('city', params.city_slug),
       event: this.store.find('event', params.event_slug),
-    })
+    });
   },
 
   serialize(event) {
     return {
       event_slug: event.get('slug')
-    }
+    };
   }
 });
