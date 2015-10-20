@@ -1,31 +1,29 @@
 {{#link-to "event" city.nickname event.slug}}
-<div class="grid-item">
-  <img src={{imageUrl}} alt=event.name data-photo-id={{event.slug}} />
-  <div class="gradient-overlay"></div>
-  {{#if event.featured}}
-    <div class="featured">Featured</div>
-  {{/if}}
-  <div class="bottom-info">
-    {{#if event.start_time}}
-      <div class="time">
-        {{event-date event.start_time}}
-      </div>
+  <div class="grid-item">
+    <img src={{imageUrl}} alt={{event.name}} data-photo-id={{event.slug}} />
+    <div class="gradient-overlay"></div>
+    {{#if event.featured}}
+      <div class="featured">Featured</div>
     {{/if}}
-    {{#if event.cost}}
-      <div class="cost">
-        {{event.cost}}
-      </div>
-    {{/if}}
-  </div>
-  <div class="info">
-    <h3>{{event.name}}</h3>
-    <p>@ {{event.venue}}</p>
-  </div>
 
-  {{#if event.shortSummary}}
-    <div class="slideover">
-      <p>{{event.shortSummary}}</p>
+    <div class="bottom-info">
+      {{#if event.date_only}}
+        <div class="time">{{event-date event.time_only event.date_only}}</div>
+      {{/if}}
+      {{#if event.cost}}
+        <div class="cost">{{event.cost}}</div>
+      {{/if}}
     </div>
-  {{/if}}
-</div>
+
+    <div class="info">
+      <h3>{{event.name}}</h3>
+      <p>@ {{event.venue}}</p>
+    </div>
+
+    {{#if event.shortSummary}}
+      <div class="slideover">
+        <p>{{event.shortSummary}}</p>
+      </div>
+    {{/if}}
+  </div>
 {{/link-to}}

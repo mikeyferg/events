@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     } else {
       return event.get(this.get('filter')) === true;
     }
-  }).property('model.events', 'model.events.@each.isToday', 'model.events.@each.isTomorrow', 'filter'),
+  }).property('model.events', 'filter'),
 
   actions: {
     filterEvents(filterBy) {

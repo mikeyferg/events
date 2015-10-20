@@ -9,6 +9,7 @@ export default DS.Model.extend({
   address: attr('string'),
   cost: attr('string'),
   created_at: attr('date'),
+  date_only: attr('date'),
   end_date: attr('string'),
   end_time: attr('date'),
   generic_time: attr('string'),
@@ -18,9 +19,11 @@ export default DS.Model.extend({
   start_time: attr('date'),
   start_date: attr('string'),
   summary: attr('string'),
+  time_only: attr('date'),
   venue: attr('string'),
   featured: attr('boolean'),
 
+  city: DS.belongsTo('city'),
   // users: DS.hasMany('user', { async: true }),
 
   shortSummary: Ember.computed('summary', function() {
@@ -37,13 +40,13 @@ export default DS.Model.extend({
       return this.get('cost').toLowerCase() === 'free' || this.get('cost').toLowerCase() === '0';
     }
   }),
-  isToday: Ember.computed('start_time', function() {
-    return isToday(this.get('start_time'));
+  isToday: Ember.computed('date_only', function() {
+    return isToday(this.get('date_only'));
   }),
-  isTomorrow: Ember.computed('start_time', function() {
-    return isTomorrow(this.get('start_time'));
+  isTomorrow: Ember.computed('date_only', function() {
+    return isTomorrow(this.get('date_only'));
   }),
-  isWeekend: Ember.computed('start_time', function() {
-    return isWeekend(this.get('start_time'));
+  isWeekend: Ember.computed('date_only', function() {
+    return isWeekend(this.get('date_only'));
   }),
 });

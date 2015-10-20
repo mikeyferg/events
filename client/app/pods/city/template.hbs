@@ -9,17 +9,14 @@
   <div {{action 'filterEvents' 'isFree'}}>Free </div>
 </div>
 
-<div id="liquid-bind-demo">
-  {{liquid-bind hours}}:{{liquid-bind minutes}}:{{liquid-bind seconds}}
-</div>
-
-
-<div class="grid-items">
-    {{#each filteredEvents as |event|}}
+<div class="grid-items" id="event-cards">
+  {{#liquid-bind filteredEvents as |events|}}
+    {{#each events as |event|}}
       {{event-card city=model event=event}}
     {{else}}
       <center>There are no events for this date</center>
     {{/each}}
+  {{/liquid-bind}}
 </div>
 
 {{outlet}}

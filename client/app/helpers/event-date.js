@@ -2,14 +2,15 @@ import Ember from 'ember';
 import { isToday, isTomorrow } from '../utils/date-filter';
 import moment from 'moment';
 
-export function eventDate(start_time) {
-  const [time] = start_time;
-  if (isToday(time)) {
+export function eventDate(params) {
+  if (!params) return '';
+  const [time, date] = params;
+  if (isToday(date)) {
     return `Today @ ${moment(time).format('h:mma')}`;
-  } else if (isTomorrow(time)) {
+  } else if (isTomorrow(date)) {
     return `Tomorrow @ ${moment(time).format('h:mma')}`;
   } else {
-    return moment(time).format('ddd MMM DD, h:mma');
+    return `${moment(date).format('ddd MMM DD')} ${moment(time).format('h:mma')}`;
   }
 }
 
