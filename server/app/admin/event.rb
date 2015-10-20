@@ -25,6 +25,7 @@ end
       column :venue
       column :summary
       column :image_url
+      column :page_url
       column :address
       column :cost
       column :source_url
@@ -45,7 +46,6 @@ end
     end
     date_only = Standardizer.date_splitter(hash[:date_only])
     time_only = Standardizer.start_time_regex(hash[:time_only])
-  #  binding.pry
     unless hash[:venue].nil?
       venue = hash[:venue].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     else
@@ -57,6 +57,7 @@ end
       summary = nil
     end
     image_url = hash[:image_url]
+    page_url = hash[:page_url]
     unless hash[:address].nil?
       address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     else
@@ -65,7 +66,8 @@ end
     cost = hash[:cost]#.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     source_url = nil
     city_id = 1
-    event = Kimono.create_update_event(hash, name, time_only, venue, image_url, summary, address, cost, source_url, date_only, city_id)
+    #binding.pry
+    event = Kimono.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id)
     city = City.find(city_id)
     city.city_events_will_change!
     city.city_events << event['id']

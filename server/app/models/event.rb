@@ -24,6 +24,7 @@
 #  slug               :string
 #  time_only          :time
 #  featured           :boolean
+#  page_url           :string
 #
 
 require 'open-uri'
