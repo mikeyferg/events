@@ -9,12 +9,5 @@ export default Ember.Route.extend({
     return {
       city_slug: city.get('nickname')
     }
-  },
-
-  actions: {
-    filterToday() {
-      this.set('sortProperties', 'venue');
-      this.set('sortAscending', !this.get('sortAscending'));
-    }
   }
 });

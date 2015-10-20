@@ -29,6 +29,10 @@
     display: block;
   }
 
+  .liquid-child > div {
+    background: black;
+  }
+
   .grid-item {
     background: $grid-item-background;
     background-size: cover;

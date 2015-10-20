@@ -23,4 +23,15 @@ export default function(){
       use: 'fade'
     })
   );
+
+  this.transition(
+    this.includingInitialRender(),
+    this.childOf('#event-cards'),
+    this.use('explode', {
+      matchBy: 'data-photo-id',
+      use: ['fly-to', {duration, easing: 'easeInSine'}]
+    }, {
+      use: 'fade'
+    })
+  );
 }

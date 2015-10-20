@@ -6,21 +6,11 @@ moduleForComponent('input-autocomplete', 'Integration | Component | input autoco
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{input-autocomplete}}`);
-
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#input-autocomplete}}
-      template block text
-    {{/input-autocomplete}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

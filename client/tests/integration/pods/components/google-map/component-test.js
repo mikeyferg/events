@@ -6,21 +6,11 @@ moduleForComponent('google-map', 'Integration | Component | google map', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{google-map}}`);
-
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#google-map}}
-      template block text
-    {{/google-map}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
