@@ -4,12 +4,12 @@
   <p>{{model.event.summary}}</p>
   <ul>
     <li>Time: {{moment-format model.event.start_time 'ddd MMM DD, h:mma'}}</li>
-    <li>Location: <div id="asdf">{{model.event.venue}}</div></li>
+    <li>Location: {{model.event.venue}}</li>
     <li>Cost: {{model.event.cost}}</li>
     <li></li>
   </ul>
 
-  {{#if model.event.venue}}
+  {{!-- {{#if model.event.venue}}
     {{google-map venue=model.event.venue}}
-  {{/if}}
+  {{/if}} --}}
 </div>

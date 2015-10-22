@@ -6,7 +6,9 @@ module.exports = function(defaults) {
     // Add options here
   });
 
-  app.import('vendor/gmaps.js');
+  // app.import('vendor/gmaps.js');
+  app.import('bower_components/masonry/dist/masonry.pkgd.min.js');
+  app.import('bower_components/imagesloaded/imagesloaded.pkgd.min.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
