@@ -1,151 +1,82 @@
+$grid-item-background: $base-background-color;
+$grid-item-columns: 4;
+$grid-item-big-columns: 6;
+$grid-item-padding: 0;
+$grid-item-margin: 0.3em;
+
 @mixin grid-item-columns($columns) {
-  width: (100% / 12) * $columns;
+  width: (100% / 12) * $columns - 2;
 }
 
 .grid-items {
-  $action-color: #477DCA !default;
-  $base-background-color: white !default;
-  $medium-screen: em(640) !default;
-  $large-screen: em(860) !default;
-  $grid-items-background: $base-background-color;
-  $grid-item-background: desaturate($action-color, 30%);
-  $grid-item-colors:
-    desaturate($action-color, 30%),
-    #3581A5,
-    #5FBEBE,
-    #98C79A,
-    #A7A891,
-    #BDCC97,
-    #979EA0;
-  $grid-item-border-size: 9px;
-  $grid-item-columns: 4;
-  $grid-item-big-columns: 8;
-  $grid-item-color: white;
-  $grid-item-height: 14em;
   @include outer-container;
   @include clearfix;
+}
 
-  a {
-    display: block;
+.event-card {
+  background: $grid-item-background;
+  border-top: 0;
+  cursor: pointer;
+  float: left;
+  overflow: hidden;
+  outline: none;
+  padding: $grid-item-padding;
+  margin: 1em $grid-item-margin;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+
+  @include border-top-radius($base-border-radius);
+  @include border-right-radius($base-border-radius);
+  @include border-bottom-radius($base-border-radius);
+  @include border-left-radius($base-border-radius);
+
+  @include media($medium-screen) {
+    @include grid-item-columns($grid-item-big-columns);
   }
 
-  .liquid-child > div {
-    background: black;
+  @include media($large-screen) {
+    @include grid-item-columns($grid-item-columns);
   }
+}
 
-  .grid-item {
-    background: $grid-item-background;
-    background-size: cover;
-    border-bottom: $grid-item-border-size solid $grid-items-background;
-    border-left: ($grid-item-border-size / 2) solid $grid-items-background;
-    border-right: ($grid-item-border-size / 2) solid $grid-items-background;
-    border-top: 0;
-    cursor: pointer;
-    float: left;
-    height: $grid-item-height;
-    overflow: hidden;
-    outline: none;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
+.event-card__poster {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0 auto 1em;
+}
 
-    &:hover .slideover {
-      @include transform(translateY(0));
-    }
+.event-card__featured {
+  position: absolute;
+  top: 1em;
+  right: 0;
+  padding: 0.5em 1em;
+  background: red;
+  color: #fff;
+}
 
-    @include media($large-screen) {
-      @include grid-item-columns($grid-item-columns);
-    }
-  }
+.event-card__info {
+  width: 100%;
+  padding: 1em;
+  color: $base-font-color;
+}
 
-  .grid-item > .gradient-overlay {
-    position: absolute;
-    width: 100%;
-    height: 80%;
-    bottom: 0;
-    @include background-image(linear-gradient(transparent 20%, #000 100%));
-  }
+.event-card__header {
+  font-size: $base-font-size;
+  text-align: left;
+}
 
-  .grid-item .featured{
-    position: absolute;
-    top: 1em;
-    right: 0;
-    padding: 0.5em 1em;
-    background: red;
-    color: #fff;
-  }
+.event-card__info-item {
+  font-size: $f-small;
+  text-align: left;
+}
 
-  .grid-item > .bottom-info {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    z-index: 1;
-    right: 0;
-    padding: 0.5em;
-    color: $grid-item-color;
-    font-weight: bold;
-      .time {
-        float: left;
-      }
-      .cost {
-        float: right;
-      }
-  }
+.event-card__info-item--right {
+  text-align: right;
+}
 
-  .grid-item > .info {
-    position: absolute;
-    padding: 0 1em;
-    width: 100%;
-    bottom: 2em;
-  }
-
-  .grid-item > .slideover {
-    @include transition(all 0.3s ease-in-out);
-    @include transform(translateY(100%));
-    background-color: rgba(0,0,0,0.8);
-    height: 100%;
-    padding: 1em;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .grid-item img {
-    display: block;
-    min-width: 100%;
-    min-height: 100%;
-    margin: 0 auto 1em;
-    @include filter(blur(0.5px));
-  }
-
-  .grid-item h3 {
-    color: $grid-item-color;
-    font-size: 1.3em;
-    margin-bottom: 0.4em;
-  }
-
-  .grid-item p {
-    color: #fff;
-    line-height: 1.5em;
-    margin: auto;
-
-    @include media($medium-screen) {
-      max-width: 70%;
-    }
-  }
-
-  .grid-item-big {
-    @include media($large-screen) {
-      @include grid-item-columns($grid-item-big-columns);
-    }
-
-    p {
-      @include media($medium-screen) {
-        max-width: 60%;
-      }
-    }
-  }
+.event-card__info-item--bold {
+  font-weight: bold;
 }

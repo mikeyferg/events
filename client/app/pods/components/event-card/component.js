@@ -1,8 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  attributeBindings:["card-id"],
-  'card-id': Ember.computed.oneWay('event.id'),
+  classNames: 'event-card',
 
   imageUrl: Ember.computed('event.image_url', function() {
     const image_url = this.get('event.image_url');
