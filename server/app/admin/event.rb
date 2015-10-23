@@ -1,17 +1,6 @@
 ActiveAdmin.register Event do
+require 'tag.rb'
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
 controller do
   def find_resource
     scoped_collection.where(slug: params[:id]).first!
@@ -32,20 +21,24 @@ end
       column :slug
       column :featured
       column :city
+      column :tags
+      column :schedule
       actions
   end
 
   active_admin_importable do |model, hash|
-    # hash[:date_only] = Standardizer.date_splitter(hash[:date_only])
-    # hash[:time_only] = Standardizer.start_time_regex(hash[:time_only])
-    # hash[:summary] = hash[:summary].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     unless hash[:name].nil?
       name = hash[:name].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     else
       name = nil
     end
-    date_only = Standardizer.date_splitter(hash[:date_only])
-    time_only = Standardizer.start_time_regex(hash[:time_only])
+    unless hash[:address].nil?
+      address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+    else
+      address = nil
+    end
+    date_only = Event.date_splitter(hash[:date_only])
+    time_only = Event.start_time_regex(hash[:time_only])
     unless hash[:venue].nil?
       venue = hash[:venue].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
     else
@@ -63,16 +56,31 @@ end
     else
       address = nil
     end
-    cost = hash[:cost]#.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+    cost = hash[:cost]#.encode(Encoding.find('UTF-8'), {invalidexit!: :replace, undef: :replace, replace: ''})
     source_url = nil
     city_id = 1
-    #binding.pry
-    event = Kimono.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id)
-    city = City.find(city_id)
-    city.city_events_will_change!
-    city.city_events << event['id']
-    city.save
-    #model.create!(hash)
+
+      tags = hash[:tags].split(" ")
+
+    unless hash[:schedule].nil?
+      schedule = hash[:schedule].split(");")
+    else
+      schedule = []
+    end
+    event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule)
+    # tags = hash[:tags].split(" ")
+    if schedule.length > 0 && schedule[0] != "Event has passed"
+      schedule.each do |date|
+        # binding.pry
+        if !date.include? "Feb 29"
+          date_only = Event.date_splitter(date)
+        else
+          date_only = "Feb 28"
+        end
+        event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule)
+      end
+    end
+
   end
 
 

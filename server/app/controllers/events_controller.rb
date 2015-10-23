@@ -2,14 +2,15 @@ class EventsController < ApplicationController
 skip_before_filter :verify_authenticity_token
 require 'kimono.rb'
   def index
-    @events = Event.all
+    # @events = Event.all
+    @events = Event.paginate(:page => params[:page], :per_page => 5)
     # @city = City.find_by_nickname(params[:city_nickname])
     # @events = @city.events
 
     respond_to do |format|
       format.html
       format.json { render json: {
-        event: @events
+        events: @events
         }
        }
     end
@@ -73,17 +74,17 @@ require 'kimono.rb'
     redirect_to events_path
   end
 
-  def update_image(event)
-    #event.image.destroy
-    new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
-    event.update_attribute(:image, new_image)
-  end
+  # def update_image(event)
+  #   #event.image.destroy
+  #   new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
+  #   event.update_attribute(:image, new_image)
+  # end
   private
   def find_event
     Event.friendly.find(params[:id])
     #Event.find(params[:id])
   end
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :venue, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured)
+    params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :tag_id, :schedule)
   end
 end

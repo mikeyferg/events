@@ -1,30 +1,25 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: venues
 #
 #  id                 :integer          not null, primary key
 #  name               :string
+#  address            :string
 #  image_url          :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  provider           :string
-#  uid                :string
-#  oauth_token        :string
-#  oauth_expires_at   :datetime
-#  email              :string
 #  slug               :string
+#  city_id            :string
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'test_helper'
 
-one:
-  name: MyString
-  pic_url: MyString
-
-two:
-  name: MyString
-  pic_url: MyString
+class VenueTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

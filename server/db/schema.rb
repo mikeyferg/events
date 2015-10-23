@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015194031) do
+ActiveRecord::Schema.define(version: 20151022235154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,9 +52,8 @@ ActiveRecord::Schema.define(version: 20151015194031) do
   create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.string   "nickname"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.text     "city_events", default: [],              array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "slug"
   end
 
@@ -71,7 +70,6 @@ ActiveRecord::Schema.define(version: 20151015194031) do
     t.string   "name"
     t.string   "start_time"
     t.string   "end_time"
-    t.string   "venue"
     t.text     "summary"
     t.string   "image_url"
     t.datetime "created_at",         null: false
@@ -90,6 +88,8 @@ ActiveRecord::Schema.define(version: 20151015194031) do
     t.time     "time_only"
     t.boolean  "featured"
     t.string   "page_url"
+    t.integer  "venue_id"
+    t.text     "schedule"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -111,7 +111,10 @@ ActiveRecord::Schema.define(version: 20151015194031) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
   end
+
+  add_index "tags", ["slug"], name: "index_tags_on_slug", unique: true, using: :btree
 
   create_table "user_events", force: :cascade do |t|
     t.integer  "user_id"
@@ -123,14 +126,37 @@ ActiveRecord::Schema.define(version: 20151015194031) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "image"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "image_url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "email"
+    t.string   "slug"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
+
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "image_url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "slug"
+    t.string   "city_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "venues", ["slug"], name: "index_venues_on_slug", unique: true, using: :btree
 
 end

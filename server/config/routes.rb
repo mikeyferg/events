@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :kimonos_webhooks
   resources :cities, defaults: {format: :json}
   resources :events, defaults: {format: :json}
+  resources :venues, defaults: {format: :json}
 end

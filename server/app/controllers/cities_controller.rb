@@ -1,10 +1,6 @@
 class CitiesController < ApplicationController
   def index
     @cities = City.all
-    # @city_events = []
-    # @cities.each do |city|
-    #   @city_events << city.city_events
-    # end
     respond_to do |format|
       format.html
       format.json { render json: {
@@ -13,21 +9,26 @@ class CitiesController < ApplicationController
        }
     end
   end
+
   def show
     @city = find_city
-    #@events = @city.events
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        city: @city#,
-        #events: @events
-        }
-       }
-     end
+    @events = @city.events
+    # respond_to do |format|
+    #   format.html
+    #   format.jbuilder {
+    #     city: @city,
+    #     include: @city.events
+    #
+    #    }
+    #  end
   end
+
 
   private
   def find_city
     City.friendly.find(params[:id])
+  end
+  def city_params
+    params.require(:city).permit(:name, :nickname)
   end
 end

@@ -13,34 +13,15 @@ ActiveAdmin.register_page "Dashboard" do
       config.comments = false
     end
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
   end # content
 
   ActiveAdmin.register Event do
-    permit_params :name, :city_id, :end_time, :venue, :summary, :image_url, :page_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only, :featured
+    permit_params :name, :address, :city_id, :end_time, :summary, :image_url, :page_url, :address, :cost, :sources_url, :end_date, :date_only, :time_only, :featured, :schedule
     form do |f|
       f.input :name
+      f.input :address
       f.input :date_only, as: :datepicker
       f.input :time_only, as: :time_picker
-      f.input :venue
       f.input :summary
       f.input :image_url
       f.input :page_url
@@ -48,6 +29,19 @@ ActiveAdmin.register_page "Dashboard" do
       f.input :cost
       f.input :source_url
       f.input :featured
+      f.input :city_id
+      f.input :venue_id
+      f.submit :submit
+    end
+  end
+
+  ActiveAdmin.register Venue do
+    permit_params :name, :address, :image_url
+    form do |f|
+      f.input :name
+      f.input :address
+      f.input :image_url
+
       f.submit :submit
     end
   end

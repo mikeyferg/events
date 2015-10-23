@@ -1,18 +1,15 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: venues
 #
 #  id                 :integer          not null, primary key
 #  name               :string
+#  address            :string
 #  image_url          :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  provider           :string
-#  uid                :string
-#  oauth_token        :string
-#  oauth_expires_at   :datetime
-#  email              :string
 #  slug               :string
+#  city_id            :string
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
@@ -20,32 +17,24 @@
 #
 
 require 'paperclip.rb'
-class User < ActiveRecord::Base
+class Venue < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   after_create :update_image, only: :image_url
+  #after_save :update_image, only: :image_url
 
   def slug_candidates
   [
     :name,
+    [:name, :address],
     [:name, :id]
   ]
   end
-  has_many :user_events
-  has_many :events, through: :user_events
+  has_many :events
+  belongs_to :city
 
-  def self.from_omniauth(auth)
-    #binding.pry
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid      = auth.uid
-      user.name     = auth.info.name
-      user.image    = auth.info.image
-      user.email    = auth.info.email
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save
-    end
+  def self.find_or_create_venue(venue, address)
+    Venue.where(name: venue).first_or_create
   end
 
   attr_accessor :image
@@ -61,7 +50,7 @@ class User < ActiveRecord::Base
 
   def update_image
     if self['image_url'].nil?
-      self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/user.jpg"
+      self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/venue.jpg"
     end
       url = self['image_url']
       new_image = URI.parse(url)

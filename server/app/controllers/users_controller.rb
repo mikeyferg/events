@@ -27,12 +27,12 @@ skip_before_filter :verify_authenticity_token
 
   def show
     @user = find_user
-    @events = @user.events
+  #  @events = @user.events
     respond_to do |format|
       format.html
       format.json { render json: {
-        user: @user,
-        events: @events
+        user: @user#,
+        #events: @events
         }
        }
     end
@@ -83,7 +83,7 @@ skip_before_filter :verify_authenticity_token
 
   private
   def find_user
-    User.find(params[:id])
+    User.friendly.find(params[:id])
   end
   def user_params
     params.require(:user).permit(:name, :email, :image, :oauth_token, :uid)

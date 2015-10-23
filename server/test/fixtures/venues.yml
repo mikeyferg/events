@@ -1,18 +1,15 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: venues
 #
 #  id                 :integer          not null, primary key
 #  name               :string
+#  address            :string
 #  image_url          :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  provider           :string
-#  uid                :string
-#  oauth_token        :string
-#  oauth_expires_at   :datetime
-#  email              :string
 #  slug               :string
+#  city_id            :string
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
@@ -21,10 +18,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  pic_url: MyString
-
-two:
-  name: MyString
-  pic_url: MyString
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value
