@@ -67,7 +67,7 @@ task :deploy_client_staging do
   end
 
   sh 'heroku repo:purge_cache -a coyote-client-staging'
-  sh 'git subtree push -P client heroku-client-staging master'
+  sh ' git push heroku-client-staging `git subtree split --prefix=client rsh-production`:master --force'
 
   sh 'git checkout -'
 end
@@ -96,7 +96,7 @@ task :deploy_client_live do
   end
 
   sh 'heroku repo:purge_cache -a event-coyote'
-  sh 'git subtree push -P client heroku-client-live master'
+  sh ' git push heroku-client-live `git subtree split --prefix=client rsh-production`:master --force'
 
   sh 'git checkout -'
 end
