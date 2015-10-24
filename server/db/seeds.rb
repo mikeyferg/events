@@ -17,14 +17,28 @@ Venue.create!([
   {
     name: "Bill Graham",
     address: "99 Grove St., San Francisco, CA, 94102",
-    image_url: "http://i2.wp.com/www.dailycal.org/assets/uploads/2013/09/Bill-Graham-Civic-Auditorium.jpg"
+    image_url: "http://i2.wp.com/www.dailycal.org/assets/uploads/2013/09/Bill-Graham-Civic-Auditorium.jpg",
+    city_id: 1
   },
   {
     name: "Harlot",
     address: "46 Minna St, San Francisco, CA 94105",
-    image_url: "http://cdn.vfolder.net/original/Cr3rAqnr6CP/HARLOT.jpg"
+    image_url: "http://cdn.vfolder.net/original/Cr3rAqnr6CP/HARLOT.jpg",
+    city_id: 1
   }
   ])
+
+  User.create!([
+    {
+      name: "User1",
+      email: "test@ttest.com"
+    },
+    {
+      name: "User2",
+      email: "testemail@test2.com"
+    }
+  ])
+
 
 Event.create!([
     {
@@ -65,11 +79,9 @@ Event.create!([
   tag.events << Event.first
   tag.events << Event.find(2)
 
-
-User.create!([
-  {name: "User1"},
-  {name: "User2"}
-])
+  user = User.first
+  user.events << Event.first
+  user.events << Event.find(2)
 
 
 

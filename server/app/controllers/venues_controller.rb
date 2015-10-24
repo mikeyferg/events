@@ -12,13 +12,13 @@ class VenuesController < ApplicationController
   end
   def show
     @venue = find_venue
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        venue: @venue
-        }
-       }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: {
+    #     venue: @venue
+    #     }
+    #    }
+    # end
   end
     def new
       @venue = Venue.new
