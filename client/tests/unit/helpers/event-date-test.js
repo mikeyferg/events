@@ -10,7 +10,7 @@ test('inputs', function(assert) {
   let today = moment();
   assert.equal(eventDate([today, today]).indexOf('Today'), 0, 'Today word present');
 
-  let tomorrow = today.add('days', 1);
+  let tomorrow = today.add(1, 'days');
   assert.equal(eventDate([tomorrow, tomorrow]).indexOf('Tomorrow'), 0, 'Tomorrow word present');
 
   let time = '2015-10-17T13:00:00+00:00';

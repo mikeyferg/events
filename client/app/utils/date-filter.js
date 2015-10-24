@@ -8,7 +8,7 @@ export function isToday(eventDate) {
 }
 
 export function isTomorrow(eventDate) {
-  const tomorrow = moment().add('days', 1);
+  const tomorrow = moment().add(1, 'days');
   const event_date = moment(eventDate);
 
   return isSameDay(tomorrow, event_date);

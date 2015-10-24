@@ -9,7 +9,7 @@ test('isToday function', function(assert) {
   let today = moment();
   assert.equal(isToday(today), true, 'isToday returns true for today');
 
-  let tomorrow = today.add('days', 1);
+  let tomorrow = today.add(1, 'days');
   assert.equal(isTomorrow(tomorrow), true, 'isTomorrow returns true for tomorrow');
 
   let dateToCheck = moment('2015-10-17T19:30:00+00:00');
