@@ -1,18 +1,25 @@
+require 'date'
 class CitiesController < ApplicationController
   def index
     @cities = City.all
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        cities: @cities
-        }
-       }
-    end
+
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: {
+    #     cities: @cities
+    #     }
+    #    }
+    # end
   end
 
   def show
     @city = find_city
-    @events = @city.events
+    # @city = find_city.page(params[:page])
+
+    # start_date = Date.today
+    # end_date = 6.months.from_now
+    # dates = (start_date..end_date)
+    @events = @city.events.where({ date_only: Date.today..6.months.from_now })
     # respond_to do |format|
     #   format.html
     #   format.jbuilder {

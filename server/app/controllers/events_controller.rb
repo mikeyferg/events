@@ -2,8 +2,8 @@ class EventsController < ApplicationController
 skip_before_filter :verify_authenticity_token
 require 'kimono.rb'
   def index
-    # @events = Event.all
-    @events = Event.paginate(:page => params[:page], :per_page => 5)
+     @events = Event.all
+    # @events = Event.paginate(:page => params[:page], :per_page => 5)
     # @city = City.find_by_nickname(params[:city_nickname])
     # @events = @city.events
 
@@ -18,21 +18,21 @@ require 'kimono.rb'
 
   def show
     @event = find_event
-    @users = @event.users
-    @users_id_array = @users.collect(&:id)
-    @tags = @event.tags
-    @tags_id_array = @tags.collect(&:id)
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        event: @event,
-        users: @users,
-        users_id_array: @users_id_array,
-        tags: @tags,
-        tags_id_array: @tags_id_array
-        }
-       }
-    end
+    # @users = @event.users
+    # @users_id_array = @users.collect(&:id)
+    # @tags = @event.tags
+    # @tags_id_array = @tags.collect(&:id)
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: {
+    #     event: @event,
+    #     users: @users,
+    #     users_id_array: @users_id_array,
+    #     tags: @tags,
+    #     tags_id_array: @tags_id_array
+    #     }
+    #    }
+    # end
   end
 
   def new
@@ -85,6 +85,6 @@ require 'kimono.rb'
     #Event.find(params[:id])
   end
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :tag_id, :schedule)
+    params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule)
   end
 end
