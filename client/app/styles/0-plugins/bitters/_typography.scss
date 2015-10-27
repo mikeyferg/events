@@ -18,6 +18,12 @@ h6 {
   margin: 0 0 $small-spacing;
 }
 
+h1 {
+  font-size: $f-xxLarge;
+  text-align: center;
+  margin: $base-spacing 0;
+}
+
 p {
   margin: 0 0 $small-spacing;
 }
@@ -46,4 +52,8 @@ img,
 picture {
   margin: 0;
   max-width: 100%;
+}
+
+.fa {
+  color: $action-color;
 }
