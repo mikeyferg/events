@@ -1,13 +1,23 @@
 <div class="outer-container">
-  <h1>{{model.event.name}}</h1>
-  <img src={{model.event.image_url}} alt={{model.event.name}} data-photo-id={{model.event.slug}} />
-  <p>{{model.event.summary}}</p>
+  <h1>{{model.name}}</h1>
+  <img src={{model.image}} alt={{model.name}} data-photo-id={{model.slug}} />
+  <p>{{model.summary}}</p>
   <ul>
-    <li>Time: {{moment-format model.event.start_time 'ddd MMM DD, h:mma'}}</li>
-    <li>Location: {{model.event.venue}}</li>
-    <li>Cost: {{model.event.cost}}</li>
-    <li></li>
+    <li>Time: {{moment-format model.time_only 'ddd MMM DD, h:mma'}}</li>
+    <li>Location: {{link-to model.venue.name 'venue' model.venue}}</li>
+    {{#if model.venue.address}}
+      <li>Address: {{model.venue.address}}</li>
+    {{/if}}
+    <li>Cost: {{model.cost}}</li>
+    <li>Tags: {{model.tagsList}}</li>
   </ul>
+
+  {{#if model.schedule}}
+    Full schedule:<br>
+    {{#each model.scheduleList as |time|}}
+      {{time}}<br>
+    {{/each}}
+  {{/if}}
 
   {{!-- {{#if model.event.venue}}
     {{google-map venue=model.event.venue}}

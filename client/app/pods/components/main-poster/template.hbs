@@ -3,9 +3,7 @@
 		<h1>Event Coyotes</h1>
 		<p>Find events in San Francisco</p>
 		{{#each cities as |city|}}
-			{{#if city.events}}
-	    	{{link-to city.name 'city' city}}
-			{{/if}}
+	    {{link-to city.name 'city' city.slug}}
 	  {{/each}}
 	</div>
 </div>

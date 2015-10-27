@@ -13,8 +13,9 @@ export default DS.Model.extend({
   end_time: attr('date'),
   generic_time: attr('string'),
   name: attr('string'),
-  image_url: attr('string'),
-  slug: attr ('string'),
+  image: attr('string'),
+  schedule: attr('string'),
+  slug: attr('string'),
   start_time: attr('date'),
   start_date: attr('string'),
   summary: attr('string'),
@@ -23,7 +24,31 @@ export default DS.Model.extend({
   featured: attr('boolean'),
 
   city: DS.belongsTo('city'),
+  tags: DS.hasMany('tag'),
+  venue: DS.belongsTo('venue'),
   // users: DS.hasMany('user', { async: true }),
+
+  tagsList: Ember.computed('tags.[]', function() {
+    let list = '';
+    let arraySize = this.get('tags.length');
+    this.get('tags').forEach(function(tag, key) {
+      if (key < arraySize - 1) {
+        list += `${tag.get('name')}, `;
+      } else {
+        list += tag.get('name');
+      }
+
+    })
+    return list;
+  }),
+
+  scheduleList: Ember.computed("schedule", function() {
+    let cleanSchedule = this.get('schedule')
+      .replace(/(", ")/g, ";")
+      .replace(/[\[\]()"']/g, "")
+      .split(';');
+    return cleanSchedule;
+  }),
 
   shortSummary: Ember.computed('summary', function() {
     if ( this.get('summary') && this.get('summary').length > 0 ) {

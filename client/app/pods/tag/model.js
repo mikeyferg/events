@@ -4,8 +4,7 @@ const attr = DS.attr;
 
 export default DS.Model.extend({
   name: attr('string'),
-  nickname: attr('string'),
   slug: attr('string'),
 
-  events: DS.hasMany('event'),
+  events: DS.hasMany('events')
 });
