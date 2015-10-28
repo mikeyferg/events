@@ -23,7 +23,8 @@ class Tag < ActiveRecord::Base
   has_many :events, through: :event_tags
 
   def self.find_or_create_tag(tag_name)
-    unless tag_name == 'new' || tag_name == 'edit' || tag_name == 'index' || tag_name == 'session' || tag_name == 'logout' || tag_name == 'users' || tag_name == 'admin' || tag_name == 'stylesheets' || tag_name == 'assets' || tag_name == 'javascripts' || tag_name == 'images'
+    tag_downcase = tag_name.downcase
+    unless tag_downcase == 'new' || tag_downcase == 'edit' || tag_downcase == 'index' || tag_downcase == 'session' || tag_downcase == 'logout' || tag_downcase == 'users' || tag_downcase == 'admin' || tag_downcase == 'stylesheets' || tag_downcase == 'assets' || tag_downcase == 'javascripts' || tag_downcase == 'images'
       Tag.where(name: tag_name).first_or_create
     else
       Tag.where(name: "event").first_or_create

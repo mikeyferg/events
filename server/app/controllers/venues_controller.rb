@@ -65,6 +65,6 @@ class VenuesController < ApplicationController
     Venue.friendly.find(params[:id])
   end
   def venue_params
-    params.require(:venue).permit(:name, :address, :image_url, :image)
+    params.require(:venue).permit(:name, :address, :city_id, :image_url, :image)
   end
 end
