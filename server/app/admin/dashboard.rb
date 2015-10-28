@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Dashboard" do
   end
 
   ActiveAdmin.register Venue do
-    permit_params :name, :address, :image_url
+    permit_params :name, :address, :city_id, :image_url
     form do |f|
       f.input :name
       f.input :address

@@ -33,8 +33,12 @@ class Venue < ActiveRecord::Base
   has_many :events
   belongs_to :city
 
-  def self.find_or_create_venue(venue, address)
-    Venue.where(name: venue).first_or_create
+  def self.find_or_create_venue(venue, address, city_id, image_url)
+    Venue.where(name: venue).first_or_create do |venue|
+      venue.address = address
+      venue.city_id = city_id
+      venue.image_url = image_url
+    end
   end
 
   attr_accessor :image

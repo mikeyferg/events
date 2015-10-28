@@ -54,9 +54,9 @@ class Event < ActiveRecord::Base
 
   #associates attribute :image with a file attachment
   has_attached_file :image, styles: {
-    small: "64x64",
-    med: "200x200",
-    large: "400x400"
+    # small: "64x64",
+    # med: "200x200",
+      large: "400x400"
   }
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -83,7 +83,7 @@ class Event < ActiveRecord::Base
   ######moving over kimono and standardizer
 
   def self.create_update_event(event, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule)
-      new_venue = Venue.find_or_create_venue(venue, address)
+      new_venue = Venue.find_or_create_venue(venue, address, city_id, image_url)
       current_event = Event.where(name: name)
       found = false
       if current_event.length != 0
