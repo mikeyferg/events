@@ -1,2 +1,13 @@
-.outer-container
+section
   @include outer-container
+  @include pad(30px)
+
+article
+  @include span-columns(7)
+
+aside
+  @include span-columns(4)
+  @include shift(1)
+
+.color-section
+  background-color: $light-brown

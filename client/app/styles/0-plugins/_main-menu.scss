@@ -2,6 +2,12 @@
   position: absolute;
   top: 0;
   background: transparent;
+  ul li.nav-link a {
+    color: $white;
+    &:hover, &:active {
+      color: darken($white, 20%);
+    }
+  }
 }
 
 header.navigation {
@@ -11,8 +17,8 @@ header.navigation {
   $large-screen: em(860) !default;
   $navigation-padding: 1em;
   $navigation-background: $base-background-color;
-  $navigation-color: $base-font-color;
-  $navigation-color-hover: white;
+  $navigation-color: $dark-gray;
+  $navigation-color-hover: $dark-brown;
   $navigation-height: 60px;
   $navigation-nav-button-background: $action-color;
   $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
@@ -261,7 +267,7 @@ header.navigation {
   // Elements on the far right
 
   .navigation-tools {
-    background: #505050;
+    /* background: #505050; */
     clear: both;
     display: block;
     height: $navigation-height;

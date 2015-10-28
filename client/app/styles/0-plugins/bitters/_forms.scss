@@ -27,6 +27,7 @@ label {
 }
 
 #{$all-text-inputs},
+select,
 select[multiple=multiple] {
   background-color: $base-background-color;
   border: $base-border;
@@ -39,6 +40,8 @@ select[multiple=multiple] {
   padding: $base-spacing / 3;
   transition: border-color $base-duration $base-timing;
   width: 100%;
+  -webkit-appearance: none;
+  border: 0;
 
   &:hover {
     border-color: shade($base-border-color, 20%);

@@ -58,7 +58,7 @@
       }
 
       a {
-        @include button(pill);
+        @include button(pill, $button-background-color)
       }
     }
   }

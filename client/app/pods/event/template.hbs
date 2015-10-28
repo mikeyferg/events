@@ -1,25 +1,34 @@
-<div class="outer-container">
+<section>
   <h1>{{model.name}}</h1>
-  <img src={{model.image}} alt={{model.name}} data-photo-id={{model.slug}} />
-  <p>{{model.summary}}</p>
-  <ul>
-    <li>Time: {{moment-format model.time_only 'ddd MMM DD, h:mma'}}</li>
-    <li>Location: {{link-to model.venue.name 'venue' model.venue}}</li>
-    {{#if model.venue.address}}
-      <li>Address: {{model.venue.address}}</li>
-    {{/if}}
-    <li>Cost: {{model.cost}}</li>
-    <li>Tags: {{model.tagsList}}</li>
-  </ul>
 
-  {{#if model.schedule}}
-    Full schedule:<br>
-    {{#each model.scheduleList as |time|}}
-      {{time}}<br>
-    {{/each}}
-  {{/if}}
+  <article>
+    <p>
+      <img src={{model.image}} alt={{model.name}} data-photo-id={{model.slug}} style="float:left; padding: 0 1em 0.5em 0;" />
+      {{model.summary}}
+    </p>
 
-  {{!-- {{#if model.event.venue}}
-    {{google-map venue=model.event.venue}}
-  {{/if}} --}}
-</div>
+    {{!-- {{#if model.event.venue}}
+      {{google-map venue=model.event.venue}}
+    {{/if}} --}}
+  </article>
+  <aside>
+    <ul>
+      <li>{{fa-icon icon="usd"}} {{model.cost}}</li>
+      <li>{{fa-icon icon="home"}} {{model.venue.name}}</li>
+      <li>{{fa-icon icon="map-marker"}} {{model.venue.address}}</li>
+      <li>{{fa-icon icon="clock-o"}} {{moment-format model.time_only 'ddd MMM DD, h:mma'}}</li>
+      <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
+    </ul>
+  </aside>
+</section>
+
+{{#if model.schedule}}
+  <div class="color-section">
+    <section class="outer-container">
+      <b>Full schedule:</b><br>
+      {{#each model.scheduleList as |time|}}
+        {{time}}<br>
+      {{/each}}
+    </section>
+  </div>
+{{/if}}
