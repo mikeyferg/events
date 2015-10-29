@@ -7,7 +7,7 @@
     <div class="filter-button" {{action 'filterEvents' 'tomorrow'}}>Tomorrow </div>
     <div class="filter-button">{{link-to 'Weekend' 'city' (query-params filter="isWeekend") }}</div>
     <div class="filter-button" {{action 'filterEvents' 'featured'}}>Featured </div>
-    <div class="filter-button">{{link-to 'Free' 'city' (query-params cost="free") }}</div>
+    <div class="filter-button" {{action 'filterByCost' 'free'}}>Free</div>
   </div>
 
   <div class="grid-items">

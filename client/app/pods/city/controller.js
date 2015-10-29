@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  queryParams: ['page', 'cost', 'filter'],
   page: 1,
   cost: null,
   filter: null,
@@ -28,6 +29,13 @@ export default Ember.Controller.extend({
     filterEvents(filterBy) {
       console.log("rot", this.get('city'));
       this.set('filter', filterBy);
+    },
+    filterByCost(filterBy) {
+      if (this.get('cost') === 'free') {
+        this.set('cost', null);
+      } else {
+        this.set('cost', 'free');
+      }
     }
   }
 });
