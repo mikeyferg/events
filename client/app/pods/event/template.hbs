@@ -16,7 +16,7 @@
       <li>{{fa-icon icon="usd"}} {{model.cost}}</li>
       <li>{{fa-icon icon="home"}} {{model.venue.name}}</li>
       <li>{{fa-icon icon="map-marker"}} {{model.venue.address}}</li>
-      <li>{{fa-icon icon="clock-o"}} {{moment-format model.time_only 'ddd MMM DD, h:mma'}}</li>
+      <li>{{fa-icon icon="clock-o"}} {{event-date model.time_only model.date_only}}</li>
       <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
     </ul>
   </aside>
