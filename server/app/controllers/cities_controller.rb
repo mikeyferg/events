@@ -4,10 +4,6 @@ class CitiesController < ApplicationController
   def index
     if params['slug']
       @city = find_city_by_slug
-      @events = @city.events
-        .by_date_range(params[:category])
-        .by_date_range(params[:date_range])
-        .by_cost(params[:free], params[:cost])
       render :show
     else
       @cities = City.all
@@ -17,7 +13,7 @@ class CitiesController < ApplicationController
 
   def show
     @city = find_city
-    @events = @city.events.where({ date_only: Date.today..6.months.from_now })
+    # @events = @city.events.where({ date_only: Date.today..6.months.from_now })
   end
 
 
