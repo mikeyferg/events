@@ -26,6 +26,7 @@
 #  page_url           :string
 #  venue_id           :integer
 #  schedule           :text
+#  cost_integer       :integer
 #
 
 require 'test_helper'
