@@ -37,6 +37,30 @@ require 'time'
 require 'active_support/time'
 
 class Event < ActiveRecord::Base
+  belongs_to :city
+  belongs_to :venue
+  has_many :user_events
+  has_many :users, through: :user_events
+  has_many :event_tags
+  has_many :tags, through: :event_tags
+
+  def self.by_category(category = nil)
+    all
+  end
+
+  def self.by_date_range(date_range = nil)
+    return where('date_only BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).all if date_range === 'today'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.tomorrow.beginning_of_day, DateTime.now.tomorrow.end_of_day).all if date_range === 'tomorrow'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.tomorrow.beginning_of_day, DateTime.now.tomorrow.end_of_day).all if date_range === 'weekend'
+    all
+  end
+
+  def self.by_cost(free = nil, cost = nil)
+    return where(cost: "Free") if free === 'true'
+    return where(cost: cost) if not cost.empty?
+    all
+  end
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
   after_create :update_image, only: :image_url
@@ -61,13 +85,6 @@ class Event < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  belongs_to :city
-  belongs_to :venue
-  has_many :user_events
-  has_many :users, through: :user_events
-  has_many :event_tags
-  has_many :tags, through: :event_tags
-
 
   def update_image
     if self['image_url'].nil?
@@ -77,8 +94,6 @@ class Event < ActiveRecord::Base
       new_image = URI.parse(url)
       self.update_attribute(:image, new_image)
   end
-
-
 
   ######moving over kimono and standardizer
 

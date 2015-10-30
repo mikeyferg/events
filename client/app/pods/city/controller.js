@@ -1,19 +1,34 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  filter: 'all',
+  queryParams: ['page', 'cost', 'date_range', 'free'],
+  page: 1,
+  date_range: null,
+  cost: null,
+  free: false,
 
-  filteredEvents: Ember.computed.filter('model.events', function(event) {
-    if (this.get('filter') === 'all') {
-      return event;
-    } else {
-      return event.get(this.get('filter')) === true;
-    }
-  }).property('model.events', 'filter'),
+  myValueDidChange : function() {
+    this.set('free', this.get('free'));
+  }.observes('free'),
 
   actions: {
-    filterEvents(filterBy) {
-      this.set('filter', filterBy);
+    resetAllFilters() {
+      this.set('page', 1);
+      this.set('date_range', null);
+      this.set('cost', null);
+      this.set('free', false);
+    },
+    filterByDate(filterBy) {
+      this.set('page', 1);
+      this.set('date_range', filterBy);
+    },
+    filterByCost(filterBy) {
+      this.set('page', 1);
+      if (this.get('cost') === 'Free') {
+        this.set('cost', null);
+      } else {
+        this.set('cost', 'Free');
+      }
     }
   }
 });

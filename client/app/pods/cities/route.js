@@ -6,6 +6,6 @@ export default Ember.Route.extend({
   },
   beforeModel() {
     this._super(...arguments);
-    this.replaceWith('city', 'sf');
+    this.replaceWith('city', 'sf', 'events');
   }
 });
