@@ -14,39 +14,5 @@
       </label>
     </div>
   </div>
-
-  <div class="grid-items">
-    {{#masonry-grid items=model.events}}
-      {{#each model.events as |event|}}
-        {{event-card city=model event=event}}
-      {{else}}
-        <center>There are no events for this date</center>
-      {{/each}}
-    {{/masonry-grid}}
-  </div>
-</section>
-
-<section class="pagination">
-  <ul>
-    <li>
-      <ul>
-        <li>{{link-to '1' 'city' (query-params page="1") }}</li>
-        <li>{{link-to '2' 'city' (query-params page="2") }}</li>
-        <li>{{link-to '3' 'city' (query-params page="3") }}</li>
-        <li>{{link-to '4' 'city' (query-params page="4") }}</li>
-        <li>{{link-to '5' 'city' (query-params page="5") }}</li>
-        <li>{{link-to '6' 'city' (query-params page="6") }}</li>
-        <li>{{link-to '7' 'city' (query-params page="7") }}</li>
-        <li>{{link-to '8' 'city' (query-params page="8") }}</li>
-        <li>{{link-to '9' 'city' (query-params page="9") }}</li>
-        <li>{{link-to '10' 'city' (query-params page="10") }}</li>
-        <li>{{link-to '11' 'city' (query-params page="11") }}</li>
-        <li>{{link-to '12' 'city' (query-params page="12") }}</li>
-        <li>{{link-to '13' 'city' (query-params page="13") }}</li>
-        <li>{{link-to '14' 'city' (query-params page="14") }}</li>
-        <li>{{link-to '15' 'city' (query-params page="15") }}</li>
-      </ul>
-    </li>
-  </ul>
 </section>
 {{outlet}}

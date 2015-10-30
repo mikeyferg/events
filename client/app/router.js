@@ -8,7 +8,9 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('cities', {path: '/'});
-  this.route('city', {path: '/:city_slug/:category'});
+  this.route('city', {path: '/:city_slug'}, function() {
+    this.route('events', {path: '/:category'});
+  });
 
   this.route('event', {path: '/:city_slug/events/:event_slug'});
 
