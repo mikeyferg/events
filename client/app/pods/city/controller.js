@@ -17,6 +17,8 @@ export default Ember.Controller.extend({
       this.get('eventsController').set('date_range', null);
       this.get('eventsController').set('cost', null);
       this.get('eventsController').set('free', false);
+      this.set('date_range', null);
+      this.set('free', false);
     },
     filterByDate(value) {
       this.get('eventsController').set('page', 1);
