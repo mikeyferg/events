@@ -26,6 +26,7 @@
 #  page_url           :string
 #  venue_id           :integer
 #  schedule           :text
+#  cost_integer       :integer
 #
 
 require 'open-uri'
@@ -85,6 +86,8 @@ class Event < ActiveRecord::Base
   def self.create_update_event(event, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule)
       new_venue = Venue.find_or_create_venue(venue, address, city_id, image_url)
       current_event = Event.where(name: name)
+      # binding.pry
+      cost_integer = Event.cost_integer_parser(cost)
       found = false
       if current_event.length != 0
         current_event.each_with_index do |event, index|
@@ -98,6 +101,7 @@ class Event < ActiveRecord::Base
               summary: summary,
               address: address,
               cost: cost,
+              cost_integer: cost_integer,
               source_url: source_url,
               date_only: date_only,
               city_id: city_id,
@@ -116,6 +120,7 @@ class Event < ActiveRecord::Base
           summary: summary,
           address: address,
           cost: cost,
+          cost_integer: cost_integer,
           source_url: source_url,
           date_only: date_only,
           city_id: city_id,
@@ -184,6 +189,15 @@ class Event < ActiveRecord::Base
     Time.parse(time) rescue nil
   end
 
+  def self.cost_integer_parser(cost)
+    if cost == nil
+      nil
+    elsif cost.downcase == "free"
+      0
+    else
+      cost[/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})*?/].tr("$", "").to_i
+    end
+  end
 
 
 end

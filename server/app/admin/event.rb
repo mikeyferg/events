@@ -17,6 +17,7 @@ end
       column :page_url
       column :address
       column :cost
+      column :cost_integer
       column :source_url
       column :slug
       column :featured
