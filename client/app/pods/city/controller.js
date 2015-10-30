@@ -1,40 +1,33 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['page', 'cost', 'filter'],
+  queryParams: ['page', 'cost', 'date_range', 'free'],
   page: 1,
+  date_range: null,
   cost: null,
-  filter: null,
+  free: false,
 
-  // filteredEvents: Ember.computed.filter('model.events', function(event) {
-  //   if (this.get('filter') === 'all') {
-  //     return event;
-  //   } else {
-  //     return event.get(this.get('filter')) === true;
-  //   }
-  // }).property('model.events', 'filter'),
-
-  filteredEvents: Ember.computed('filter', 'model', function() {
-    var filter = this.get('filter');
-    var events = this.get('model.events');
-
-    if (filter) {
-      return events.filterBy('filter', filter);
-    } else {
-      return events;
-    }
-  }),
+  myValueDidChange : function() {
+    this.set('free', this.get('free'));
+  }.observes('free'),
 
   actions: {
-    filterEvents(filterBy) {
-      console.log("rot", this.get('city'));
-      this.set('filter', filterBy);
+    resetAllFilters() {
+      this.set('page', 1);
+      this.set('date_range', null);
+      this.set('cost', null);
+      this.set('free', false);
+    },
+    filterByDate(filterBy) {
+      this.set('page', 1);
+      this.set('date_range', filterBy);
     },
     filterByCost(filterBy) {
-      if (this.get('cost') === 'free') {
+      this.set('page', 1);
+      if (this.get('cost') === 'Free') {
         this.set('cost', null);
       } else {
-        this.set('cost', 'free');
+        this.set('cost', 'Free');
       }
     }
   }

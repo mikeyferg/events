@@ -4,9 +4,11 @@ export default Ember.Route.extend({
   model(params) {
     return this.store.queryRecord('city', {
       slug: params.city_slug,
+      category: params.category,
       page: params.page,
       cost: params.cost,
-      filter: params.filter
+      date_range: params.date_range,
+      free: params.free
     });
   },
 

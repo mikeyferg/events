@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 skip_before_filter :verify_authenticity_token
+has_scope :cost
 require 'kimono.rb'
   def index
      @events = Event.all

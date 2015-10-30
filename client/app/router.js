@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import config from './config/environment';
+import googlePageview from './mixins/google-pageview';
 
 var Router = Ember.Router.extend({
   location: config.locationType
@@ -7,11 +8,12 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('cities', {path: '/'});
-  this.route('city', {path: '/:city_slug'});
+  this.route('city', {path: '/:city_slug/:category'});
 
   this.route('event', {path: '/:city_slug/events/:event_slug'});
-  
+
   this.route('venue', {path: 'venue/:venue_slug'});
+  this.route('user', {path: '/user'});
 });
 
 export default Router;

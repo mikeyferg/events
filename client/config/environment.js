@@ -8,8 +8,7 @@ module.exports = function(environment) {
     modulePrefix: 'client',
     podModulePrefix: 'client/pods',
     googleFonts: [
-      'Open+Sans:300',
-      'Roboto:300'
+      'Open+Sans:300'
     ],
     EmberENV: {
       FEATURES: {
@@ -77,6 +76,9 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
       'media-src': "'self'",
       'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+    };
+    ENV.googleAnalytics = {
+      webPropertyId: 'UA-68353020-1'
     };
   }
 

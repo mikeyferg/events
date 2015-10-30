@@ -10,7 +10,7 @@ export function eventDate(params) {
   } else if (isTomorrow(date)) {
     return `Tomorrow @ ${moment(time).format('h:mma')}`;
   } else {
-    return `${moment(date).format('ddd MMM DD')} ${moment(time).format('h:mma')}`;
+    return `${moment(date).format('MMM DD')} ${moment(time).format('h:mma')}`;
   }
 }
 

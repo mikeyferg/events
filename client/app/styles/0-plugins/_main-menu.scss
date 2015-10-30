@@ -11,27 +11,20 @@
 }
 
 header.navigation {
-  $base-border-color: gainsboro !default;
-  $base-border-radius: 3px !default;
-  $action-color: #477DCA !default;
-  $large-screen: em(860) !default;
   $navigation-padding: 1em;
-  $navigation-background: $base-background-color;
-  $navigation-color: $dark-gray;
-  $navigation-color-hover: $dark-brown;
   $navigation-height: 60px;
   $navigation-nav-button-background: $action-color;
-  $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
+  $navigation-nav-button-background-hover: lighten($nav-background-color, 10%);
   $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20%);
-  $navigation-search-background: lighten($navigation-background, 5);
-  $navigation-search-border: 1px solid darken($navigation-background, 5);
+  $navigation-search-background: lighten($nav-background-color, 5);
+  $navigation-search-border: 1px solid darken($nav-background-color, 5);
   $navigation-active-link-color: transparentize(white, 0.5);
   $navigation-submenu-padding: 1em;
   $navigation-submenu-width: 12em;
   $horizontal-bar-mode: $medium-screen;
 
   min-height: $navigation-height;
-  background: $navigation-background;
+  background: $nav-background-color;
   width: 100%;
 
   .navigation-wrapper {
@@ -56,7 +49,7 @@ header.navigation {
   // Mobile view
 
   .navigation-menu-button {
-    color: $navigation-color;
+    color: $nav-font-color;
     display: block;
     float: right;
     line-height: $navigation-height;
@@ -71,7 +64,7 @@ header.navigation {
 
     &:focus,
     &:hover {
-      color: $navigation-color-hover;
+      /* color: $nav-font-color-hover; */
     }
   }
 
@@ -111,7 +104,7 @@ header.navigation {
   // The nav items
 
   ul li.nav-link {
-    background: $navigation-background;
+    background: $nav-background-color;
     display: block;
     line-height: $navigation-height;
     overflow: hidden;
@@ -129,7 +122,7 @@ header.navigation {
     }
 
     a {
-      color: $navigation-color;
+      color: $nav-font-color;
       display: inline-block;
       text-decoration: none;
 
@@ -139,13 +132,13 @@ header.navigation {
 
       &:focus,
       &:hover {
-        color: $navigation-color-hover;
+        color: $nav-font-active-color;
       }
     }
   }
 
   .active-nav-item a {
-    border-bottom: 1px solid $navigation-active-link-color;
+    border-bottom: 1px solid $nav-font-active-color;
     padding-bottom: 3px;
   }
 
@@ -173,7 +166,7 @@ header.navigation {
     > a:after {
       @include position(absolute, auto -0.4em auto auto);
       content: '\25BE';
-      color: $navigation-color;
+      color: $nav-font-color;
     }
   }
 
@@ -249,13 +242,13 @@ header.navigation {
       }
 
       a {
-        background-color: darken($navigation-background, 3%);
+        background-color: darken($nav-background-color, 3%);
         display: inline-block;
         text-align: right;
         width: 100%;
 
         @include media($horizontal-bar-mode) {
-          background-color: $navigation-background;
+          background-color: $nav-background-color;
           padding-left: $navigation-submenu-padding;
           text-align: left;
           width: $navigation-submenu-width;
@@ -298,7 +291,7 @@ header.navigation {
         background: $navigation-search-background;
         border-radius: $base-border-radius * 2;
         border: $navigation-search-border;
-        color: $navigation-color;
+        color: $nav-font-color;
         font-size: 0.9em;
         font-style: italic;
         margin: 0;
