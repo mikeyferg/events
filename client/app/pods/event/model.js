@@ -13,7 +13,7 @@ export default DS.Model.extend({
   end_time: attr('date'),
   generic_time: attr('string'),
   name: attr('string'),
-  image: attr('string'),
+  image_url: attr('string'),
   schedule: attr('string'),
   slug: attr('string'),
   start_time: attr('date'),

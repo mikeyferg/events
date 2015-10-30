@@ -1,19 +1,11 @@
 class EventsController < ApplicationController
-skip_before_filter :verify_authenticity_token
-require 'kimono.rb'
+  skip_before_filter :verify_authenticity_token
+  require 'kimono.rb'
   def index
-     @events = Event.all
-    # @events = Event.paginate(:page => params[:page], :per_page => 5)
-    # @city = City.find_by_nickname(params[:city_nickname])
-    # @events = @city.events
-
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        events: @events
-        }
-       }
-    end
+    @events = Event
+      .by_date_range(params[:category])
+      .by_date_range(params[:date_range])
+      .by_cost(params[:free], params[:cost])
   end
 
   def show
@@ -41,50 +33,50 @@ require 'kimono.rb'
       format.html
       format.json { render json: {
         event: @event
-        }
-       }
-    end
+      }
+    }
   end
+end
 
-  def create
-    @event = Event.new(event_params)
-    if @event.save
-      redirect_to event_path(@event)
-    else
-      render 'new'
-    end
+def create
+  @event = Event.new(event_params)
+  if @event.save
+    redirect_to event_path(@event)
+  else
+    render 'new'
   end
+end
 
-  def edit
-    @event = find_event
-  end
+def edit
+  @event = find_event
+end
 
-  def update
-    @event = find.event
-    if @event.update_attributes(event_params)
-      redirect_to event_path(@event)
-    else
-      render 'new'
-    end
+def update
+  @event = find.event
+  if @event.update_attributes(event_params)
+    redirect_to event_path(@event)
+  else
+    render 'new'
   end
+end
 
-  def destroy
-    @event = find_event
-    @event.destroy
-    redirect_to events_path
-  end
+def destroy
+  @event = find_event
+  @event.destroy
+  redirect_to events_path
+end
 
-  # def update_image(event)
-  #   #event.image.destroy
-  #   new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
-  #   event.update_attribute(:image, new_image)
-  # end
-  private
-  def find_event
-    Event.friendly.find(params[:id])
-    #Event.find(params[:id])
-  end
-  def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule)
-  end
+# def update_image(event)
+#   #event.image.destroy
+#   new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
+#   event.update_attribute(:image, new_image)
+# end
+private
+def find_event
+  Event.friendly.find(params[:id])
+  #Event.find(params[:id])
+end
+def event_params
+  params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule)
+end
 end

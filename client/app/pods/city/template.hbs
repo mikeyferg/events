@@ -1,24 +1,18 @@
 <section>
   <h1>Events in {{model.name}}</h1>
-
   <div class="flexbox-row">
-    <div class="filter-button" {{action 'filterEvents' 'all'}}>All</div>
-    <div class="filter-button" {{action 'filterEvents' 'isToday'}}>Today</div>
-    <div class="filter-button" {{action 'filterEvents' 'isTomorrow'}}>TOmorrow </div>
-    <div class="filter-button" {{action 'filterEvents' 'isWeekend'}}>Weekend </div>
-    <div class="filter-button" {{action 'filterEvents' 'featured'}}>Featured </div>
-    <div class="filter-button" {{action 'filterEvents' 'isFree'}}>Free </div>
-  </div>
-
-  <div class="grid-items">
-    {{#masonry-grid items=filteredEvents}}
-      {{#each filteredEvents as |event|}}
-        {{event-card city=model event=event}}
-      {{else}}
-        <center>There are no events for this date</center>
-      {{/each}}
-    {{/masonry-grid}}
+    <div class="filter-button" {{action 'resetAllFilters'}}>Reset</div>
+    <div class="filter-button" {{action 'filterByDate' 'today'}}>Today</div>
+    <div class="filter-button" {{action 'filterByDate' 'tomorrow'}}>Tomorrow </div>
+    <div class="filter-button" {{action 'filterByDate' 'weekend'}}>Weekend</div>
+    {{!-- <div class="filter-button" {{action 'filterByDate' 'featured'}}>Featured </div> --}}
+    <div class="">
+      Free
+      <label class="label-switch">
+        {{input type="checkbox" checked=free }}
+        <div class="checkbox"></div>
+      </label>
+    </div>
   </div>
 </section>
-
 {{outlet}}

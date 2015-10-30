@@ -36,5 +36,6 @@
 }
 
 .filter-button {
-  @include button(pill, $button-background-color);
+  @include button($button-background-color);
+  font-weight: bold;
 }
