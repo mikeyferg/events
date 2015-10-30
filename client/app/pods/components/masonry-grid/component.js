@@ -56,7 +56,7 @@ export default Ember.Component.extend({
       setTimeout(function() {
         _this.$().masonry(_this.get('options'));
         _this.set('masonryInitialized', true);
-      }, 100)
+      }, 300)
 
 
     });

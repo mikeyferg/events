@@ -1,11 +1,8 @@
+{{groupValue}}
 <section>
   <h1>Events in {{model.name}}</h1>
   <div class="flexbox-row">
-    <div class="filter-button" {{action 'resetAllFilters'}}>Reset</div>
-    <div class="filter-button" {{action 'filterByDate' 'today'}}>Today</div>
-    <div class="filter-button" {{action 'filterByDate' 'tomorrow'}}>Tomorrow </div>
-    <div class="filter-button" {{action 'filterByDate' 'weekend'}}>Weekend</div>
-    {{!-- <div class="filter-button" {{action 'filterByDate' 'featured'}}>Featured </div> --}}
+    {{button-group dateRangeChanged='filterByDate' date_range=date_range}}
     <div class="">
       Free
       <label class="label-switch">
@@ -13,6 +10,7 @@
         <div class="checkbox"></div>
       </label>
     </div>
+    <div class="filter-button" {{action 'resetAllFilters'}}>Reset</div>
   </div>
 </section>
 {{outlet}}

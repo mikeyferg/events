@@ -1,0 +1,28 @@
+<div class="button-group">
+  <label>
+    {{radio-button
+      value="today"
+      name="button-group"
+      groupValue=date_range
+      changed="dateRangeChanged"}}
+    <span class="button-group-item">Today</span>
+  </label>
+  <label>
+    {{radio-button
+      value="tomorrow"
+      name="button-group"
+      groupValue=date_range
+      changed="dateRangeChanged"}}
+    <span class="button-group-item">Tomorrow</span>
+  </label>
+  <label>
+    {{radio-button
+      value="weekend"
+      name="button-group"
+      groupValue=date_range
+      changed="dateRangeChanged"}}
+    <span class="button-group-item">Weekend</span>
+  </label>
+</div>
+
+{{yield}}

@@ -46,6 +46,7 @@ export default DS.Model.extend({
     let cleanSchedule = this.get('schedule')
       .replace(/(", ")/g, ";")
       .replace(/[\[\]()"']/g, "")
+      .replace(/(\\xE5\\xD0)/g,", ")
       .split(';');
     return cleanSchedule;
   }),

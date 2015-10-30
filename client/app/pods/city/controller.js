@@ -3,7 +3,11 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   eventsController: Ember.inject.controller('city.events'),
 
-  myValueDidChange : function() {
+  // get filter values for UI on reload
+  free: Ember.computed.reads('eventsController.free'),
+  date_range: Ember.computed.reads('eventsController.date_range'),
+
+  freeSwitchChanged : function() {
     this.get('eventsController').set('free', this.get('free'));
   }.observes('free'),
 
@@ -14,9 +18,9 @@ export default Ember.Controller.extend({
       this.get('eventsController').set('cost', null);
       this.get('eventsController').set('free', false);
     },
-    filterByDate(filterBy) {
+    filterByDate(value) {
       this.get('eventsController').set('page', 1);
-      this.get('eventsController').set('date_range', filterBy);
+      this.get('eventsController').set('date_range', value);
     },
     filterByCost(filterBy) {
       this.get('eventsController').set('page', 1);
