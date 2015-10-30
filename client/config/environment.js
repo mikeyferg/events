@@ -37,6 +37,9 @@ module.exports = function(environment) {
       'media-src': "'self'",
       'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
+    moment: {
+      includeTimezone: 'all'
+    }
   }
 
   if (environment === 'test') {
