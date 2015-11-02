@@ -60,9 +60,11 @@ end
     cost = hash[:cost]#.encode(Encoding.find('UTF-8'), {invalidexit!: :replace, undef: :replace, replace: ''})
     source_url = nil
     city_id = 1
-
+    if hash[:tags].nil?
+      tags = ["fun"]
+    else
       tags = hash[:tags].split(" ")
-
+    end
     unless hash[:schedule].nil?
       schedule = hash[:schedule].split(");")
     else

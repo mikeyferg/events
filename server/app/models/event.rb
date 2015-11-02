@@ -125,6 +125,7 @@ class Event < ActiveRecord::Base
           end
         end
       end
+
       if found == false
         event = Event.create(
           name: name,
