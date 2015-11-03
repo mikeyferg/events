@@ -15,7 +15,7 @@
     <ul>
       <li>{{fa-icon icon="usd"}} {{model.cost}}</li>
       <li>{{fa-icon icon="home"}} {{model.venue.name}}</li>
-      <li>{{fa-icon icon="map-marker"}} {{model.venue.address}}</li>
+      <li>{{fa-icon icon="map-marker"}} {{model.address}}</li>
       <li>{{fa-icon icon="clock-o"}} {{event-date model.time_only model.date_only}}</li>
       <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
     </ul>
@@ -25,10 +25,7 @@
 {{#if model.schedule}}
   <div class="color-section">
     <section class="outer-container">
-      <b>Full schedule:</b><br>
-      {{#each model.scheduleList as |time|}}
-        {{time}}<br>
-      {{/each}}
+      {{schedule-list schedule=model.scheduleList}}
     </section>
   </div>
 {{/if}}
