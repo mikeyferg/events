@@ -12,21 +12,6 @@ class EventsController < ApplicationController
 
   def show
     @event = find_event
-    # @users = @event.users
-    # @users_id_array = @users.collect(&:id)
-    # @tags = @event.tags
-    # @tags_id_array = @tags.collect(&:id)
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: {
-    #     event: @event,
-    #     users: @users,
-    #     users_id_array: @users_id_array,
-    #     tags: @tags,
-    #     tags_id_array: @tags_id_array
-    #     }
-    #    }
-    # end
   end
 
   def new

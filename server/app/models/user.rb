@@ -66,5 +66,7 @@ class User < ActiveRecord::Base
       url = self['image_url']
       new_image = URI.parse(url)
       self.update_attribute(:image, new_image)
+      image_url = self.image.url
+      self.update_attribute(:image_url, image_url)
   end
 end
