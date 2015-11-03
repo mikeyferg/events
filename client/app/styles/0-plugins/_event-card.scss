@@ -1,12 +1,5 @@
 $grid-item-background: $base-background-color;
-$grid-item-columns: 4;
-$grid-item-big-columns: 6;
-$grid-item-padding: 0;
 $grid-item-margin: 0.3em;
-
-@mixin grid-item-columns($columns) {
-  width: (100% / 12) * $columns - 2;
-}
 
 .grid-items {
   @include outer-container;
@@ -15,36 +8,22 @@ $grid-item-margin: 0.3em;
 
 .event-card {
   background: $grid-item-background;
-  border-top: 0;
   cursor: pointer;
-  float: left;
   overflow: hidden;
-  outline: none;
-  padding: $grid-item-padding;
   margin: 1em $grid-item-margin;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
   width: 100%;
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid;
 
   @include border-top-radius($base-border-radius);
   @include border-right-radius($base-border-radius);
   @include border-bottom-radius($base-border-radius);
   @include border-left-radius($base-border-radius);
-
-  @include media($medium-screen) {
-    @include grid-item-columns($grid-item-big-columns);
-  }
-
-  @include media($large-screen) {
-    @include grid-item-columns($grid-item-columns);
-  }
 }
 
 .event-card__poster {
   display: block;
   min-width: 100%;
-  min-height: 100%;
   margin: 0 auto 1em;
 }
 

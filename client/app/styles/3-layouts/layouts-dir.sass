@@ -11,3 +11,17 @@ aside
 
 .color-section
   background-color: $secondary-background-color
+
+
+// Masonry Grid
+.masonry-grid
+  @include column-count(1)
+
+@include media($medium-screen)
+  .masonry-grid
+    @include column-count(2)
+
+@include media($large-screen)
+  .masonry-grid
+    @include column-count(3)
+    @include column-gap(1em)

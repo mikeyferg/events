@@ -1,11 +1,9 @@
-<div class="grid-items">
-  {{#masonry-grid items=model.events}}
-    {{#each model.events as |event|}}
-      {{event-card city=model.city event=event}}
-    {{else}}
-      <center>There are no events for this date</center>
-    {{/each}}
-  {{/masonry-grid}}
+<div class="grid-items masonry-grid">
+  {{#each model.events as |event|}}
+    {{event-card city=model.city event=event}}
+  {{else}}
+    <center>There are no events for this date</center>
+  {{/each}}
 </div>
 
 <section class="pagination">

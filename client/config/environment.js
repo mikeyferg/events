@@ -96,6 +96,11 @@ module.exports = function(environment) {
         returnScopes: true
       }
     }
+  },
+
+  ENV.moment = {
+    includeTimezone: 'all',
+    includeLocales: true
   }
 
   return ENV;
