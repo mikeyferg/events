@@ -1,9 +1,10 @@
 export default function(){
-  // let duration = 500;
+  let duration = 500;
   //
   // this.transition(
-  //   this.toRoute('cities'),
-  //   this.use('toDown')
+  //   this.toRoute('event'),
+  //   this.use('toLeft'),
+  //   this.reverse('toRight')
   // );
   //
   // this.transition(
@@ -14,7 +15,7 @@ export default function(){
   // );
   //
   // this.transition(
-  //   this.fromRoute('city'),
+  //   this.fromRoute('city.events'),
   //   this.toRoute('event'),
   //   this.useAndReverse('explode', {
   //     matchBy: 'data-photo-id',
