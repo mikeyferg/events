@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
 
   def self.by_cost(free = nil, cost = nil)
     return where(cost: "Free") if free === 'true'
-    return where(cost: cost) if not cost.empty?
+    return where(cost: cost) if not cost.nil?
     all
   end
 
@@ -88,12 +88,15 @@ class Event < ActiveRecord::Base
 
 
   def update_image
+
     if self['image_url'].nil?
       self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
     end
       url = self['image_url']
       new_image = URI.parse(url)
       self.update_attribute(:image, new_image)
+      image_url = self.image.url
+      self.update_attribute(:image_url, image_url)
   end
 
   ######moving over kimono and standardizer
@@ -196,11 +199,17 @@ class Event < ActiveRecord::Base
     end
   end
   def self.start_time_regex(time)
+    #  binding.pry
     if time.nil?
-      time = "12:00am"
+      time = "12:07am"
     else
-      time_regex = time[/(?i)[0-2]?\d(?::[0-5]\d)?\s*[ap]m/]
-      time = time_regex unless time_regex.nil?
+      time_regex = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)\s*-?\s*?([0-2]?\d(?::[0-5]\d)?)\s*([ap]m)/).captures
+      # time_array = time_regex unless time_regex.nil?
+      if time_regex[0] == ''
+        time = time_regex[1] + time_regex[2]
+      else
+        time = time_regex[0] + time_regex[2]
+      end
     end
     Time.parse(time) rescue nil
   end
