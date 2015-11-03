@@ -75,11 +75,11 @@ skip_before_filter :verify_authenticity_token
       render 'new'
     end
   end
-  # def destroy
-  #   @user = find_user
-  #   @user.destroy
-  #   redirect_to root_path
-  # end
+  def destroy
+    @user = find_user
+    @user.destroy
+    redirect_to root_path
+  end
 
   private
   def find_user
