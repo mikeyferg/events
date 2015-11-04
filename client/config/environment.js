@@ -37,9 +37,6 @@ module.exports = function(environment) {
       'media-src': "'self'",
       'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
-    ENV.googleAnalytics = {
-      webPropertyId: 'UA-68353020-1'
-    };
   }
 
   if (environment === 'test') {
