@@ -9,5 +9,10 @@ export default Ember.Route.extend({
     return {
       event_slug: event.get('slug')
     };
+  },
+
+  afterModel: function(model) {
+    var eventName = model.get('name');
+    $(document).attr('title', eventName);
   }
 });
