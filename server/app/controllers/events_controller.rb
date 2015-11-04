@@ -3,11 +3,11 @@ class EventsController < ApplicationController
   require 'kimono.rb'
   def index
     @events = Event
-      .where({ date_only: Date.today..6.months.from_now })
+      .where({ start_date_time: Time.now.utc..6.months.from_now })
       .by_category(params[:category])
       .by_date_range(params[:date_range])
       .by_cost(params[:free], params[:cost])
-      .order(:date_only)
+      .page(params[:page]).per(27)
   end
 
   def show

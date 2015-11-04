@@ -16,6 +16,8 @@ Router.map(function() {
 
   this.route('venue', {path: 'venue/:venue_slug'});
   this.route('user', {path: '/user'});
+
+  // Static pages
 });
 
 export default Router;

@@ -1,5 +1,5 @@
 json.event do |json|
-  json.(@event, :id, :name, :start_time, :end_time, :summary, :image_url, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule)
+  json.(@event, :id, :name, :start_date_time, :summary, :image_url, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule)
     json.venue @event.venue.id
     json.city @event.city.id
     json.tags @event.tags.pluck :id

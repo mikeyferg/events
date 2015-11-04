@@ -4,13 +4,13 @@ import moment from 'moment';
 
 export function eventDate(params) {
   if (!params) { return ''; }
-  const [time, date] = params;
-  if (isToday(date)) {
-    return `Today @ ${moment(time).format('h:mma')}`;
-  } else if (isTomorrow(date)) {
-    return `Tomorrow @ ${moment(time).format('h:mma')}`;
+  const [date_time] = params;
+  if (isToday(date_time)) {
+    return `Today @ ${moment(date_time).format('h:mma')}`;
+  } else if (isTomorrow(date_time)) {
+    return `Tomorrow @ ${moment(date_time).format('h:mma')}`;
   } else {
-    return `${moment(date).format('MMM DD')} ${moment(time).format('h:mma')}`;
+    return `${moment(date_time).format('MMM DD')} ${moment(date_time).format('h:mma')}`;
   }
 }
 

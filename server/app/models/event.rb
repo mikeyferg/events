@@ -50,9 +50,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.by_date_range(date_range = nil)
-    return where('date_only BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).all if date_range === 'today'
-    return where('date_only BETWEEN ? AND ?', DateTime.now.tomorrow.beginning_of_day, DateTime.now.tomorrow.end_of_day).all if date_range === 'tomorrow'
-    return where('date_only BETWEEN ? AND ?', DateTime.now.tomorrow.beginning_of_day, DateTime.now.tomorrow.end_of_day).all if date_range === 'weekend'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc.end_of_day).all if date_range === 'today'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.tomorrow.beginning_of_day, DateTime.now.utc.tomorrow.end_of_day).all if date_range === 'tomorrow'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.tomorrow.beginning_of_day, DateTime.now.utc.tomorrow.end_of_day).all if date_range === 'weekend'
     all
   end
 
@@ -106,7 +106,7 @@ class Event < ActiveRecord::Base
       found = false
       if current_event.length != 0
         current_event.each_with_index do |event, index|
-        
+
           if Venue.find(event['venue_id'])['name'] == venue && event['date_only'] == date_only
             found = true
             current_event[index].update(
