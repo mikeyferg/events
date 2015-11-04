@@ -43,7 +43,6 @@ Venue.create!([
 Event.create!([
     {
       name: "Segway Time Travel Halloween Night Tour - Explore San Francisco's Dark Past",
-      start_time: "2015-10-12T19:30:00+00:00",
       end_time: "",
       summary: "",
       image_url: "http://www.sfstation.com/images/ev/50/2287050a_tn220x220.jpg",
@@ -59,7 +58,6 @@ Event.create!([
     },
     {
       name: "Mixtape Monday Feat Jabbajaw",
-      start_time: "2015-10-12T22:00:00+00:00",
       end_time: "",
       summary: '',
       image_url: "http://www.sfstation.com/images/ev/99/2287799a_tn220x220.jpg",

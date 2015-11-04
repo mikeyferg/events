@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030001435) do
+ActiveRecord::Schema.define(version: 20151103222115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20151030001435) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.string   "start_time"
     t.string   "end_time"
     t.text     "summary"
     t.string   "image_url"
@@ -78,7 +77,6 @@ ActiveRecord::Schema.define(version: 20151030001435) do
     t.string   "cost"
     t.string   "source_url"
     t.string   "end_date"
-    t.string   "date_only"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -91,6 +89,8 @@ ActiveRecord::Schema.define(version: 20151030001435) do
     t.integer  "venue_id"
     t.text     "schedule"
     t.integer  "cost_integer"
+    t.date     "date_only"
+    t.datetime "start_date_time"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
