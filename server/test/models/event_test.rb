@@ -4,7 +4,6 @@
 #
 #  id                 :integer          not null, primary key
 #  name               :string
-#  start_time         :string
 #  end_time           :string
 #  summary            :text
 #  image_url          :string
@@ -14,7 +13,6 @@
 #  cost               :string
 #  source_url         :string
 #  end_date           :string
-#  date_only          :string
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
@@ -27,6 +25,8 @@
 #  venue_id           :integer
 #  schedule           :text
 #  cost_integer       :integer
+#  date_only          :date
+#  start_date_time    :datetime
 #
 
 require 'test_helper'

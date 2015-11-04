@@ -4,7 +4,6 @@
 #
 #  id                 :integer          not null, primary key
 #  name               :string
-#  start_time         :string
 #  end_time           :string
 #  summary            :text
 #  image_url          :string
@@ -14,7 +13,6 @@
 #  cost               :string
 #  source_url         :string
 #  end_date           :string
-#  date_only          :string
 #  image_file_name    :string
 #  image_content_type :string
 #  image_file_size    :integer
@@ -27,6 +25,8 @@
 #  venue_id           :integer
 #  schedule           :text
 #  cost_integer       :integer
+#  date_only          :date
+#  start_date_time    :datetime
 #
 
 require 'open-uri'
@@ -76,7 +76,6 @@ class Event < ActiveRecord::Base
   end
 
   attr_accessor :image
-
   #associates attribute :image with a file attachment
   has_attached_file :image, styles: {
     # small: "64x64",
@@ -86,9 +85,7 @@ class Event < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-
   def update_image
-
     if self['image_url'].nil?
       self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
     end
@@ -99,9 +96,9 @@ class Event < ActiveRecord::Base
       self.update_attribute(:image_url, image_url)
   end
 
-  ######moving over kimono and standardizer
 
-  def self.create_update_event(event, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule)
+
+  def self.create_update_event(event, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
       new_venue = Venue.find_or_create_venue(venue, address, city_id, image_url)
       current_event = Event.where(name: name)
       # binding.pry
@@ -109,7 +106,8 @@ class Event < ActiveRecord::Base
       found = false
       if current_event.length != 0
         current_event.each_with_index do |event, index|
-          if Venue.find(event['venue_id'])['name'] == venue && !event['date_only'].include?("passed") && !event['date_only'].include?("No Date")  && Date.parse(event['date_only']) == date_only
+        
+          if Venue.find(event['venue_id'])['name'] == venue && event['date_only'] == date_only
             found = true
             current_event[index].update(
               name: name,
@@ -123,7 +121,8 @@ class Event < ActiveRecord::Base
               source_url: source_url,
               date_only: date_only,
               city_id: city_id,
-              schedule: schedule
+              schedule: schedule,
+              start_date_time: start_date_time
             )
           end
         end
@@ -143,7 +142,8 @@ class Event < ActiveRecord::Base
           source_url: source_url,
           date_only: date_only,
           city_id: city_id,
-          schedule: schedule
+          schedule: schedule,
+          start_date_time: start_date_time
         )
         tags.each do |tag|
           # binding.pry
@@ -185,12 +185,13 @@ class Event < ActiveRecord::Base
       ""
     end
   end
+
+
   def self.date_splitter(date)
-    #binding.pry
     if date.include? "passed"
-      "No Date"
+      nil
     elsif date.include? "No Date"
-      "No Date"
+      nil
     else
       date_array = date.split
       month = month_conversion(date_array[1])
@@ -199,19 +200,24 @@ class Event < ActiveRecord::Base
     end
   end
   def self.start_time_regex(time)
-    #  binding.pry
     if time.nil?
       time = "12:07am"
     else
-      time_regex = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)\s*-?\s*?([0-2]?\d(?::[0-5]\d)?)\s*([ap]m)/).captures
-      # time_array = time_regex unless time_regex.nil?
-      if time_regex[0] == ''
-        time = time_regex[1] + time_regex[2]
+      time_match = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)([ap]m)?\s?(?=-)(?:-\s?[0-2]?\d?(?::[0-5]\d)?\s?([ap]m))|([0-2]?\d?(?::[0-5]\d)?)\s?([ap]m)/)
+      if time_match.blank?
+        time = "12:07am"
       else
-        time = time_regex[0] + time_regex[2]
+        time_regex = time_match.captures
+        if time_regex[0].nil?
+          time_regex[3] + time_regex[4]
+        elsif time_regex[1].nil?
+          time_regex[0] + time_regex[2]
+        else
+          time_regex[0] + time_regex[1]
+        end
       end
     end
-    Time.parse(time) rescue nil
+    # Time.parse(time) rescue nil
   end
 
   def self.cost_integer_parser(cost)
@@ -223,6 +229,13 @@ class Event < ActiveRecord::Base
       cost[/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})*?/].tr("$", "").to_i
     end
   end
-
+  # def self.date_time_combine(date, time)
+  #   # binding.pry
+  #   if date.nil? || time.nil?
+  #     nil
+  #   else
+  #     DateTime.new(date.year, date.month, date.day, time.hour, time.min) #.in_time_zone("Pacific Time (US & Canada)")
+  #   end
+  # end
 
 end
