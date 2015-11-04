@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   insertMap: function() {
     const mapContainer = this.element;
-    const venue = this.get('venue');
+    const address = this.get('address');
 
     const map = new window.google.maps.Map(mapContainer, {
       disableDefaultUI: true
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     const marker = new google.maps.Marker({map: map});
 
     service.textSearch({
-      query: venue
+      query: address
     }, function(place, status) {
       console.log(place, status);
       map.setCenter(place[0].geometry.location);
