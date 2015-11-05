@@ -14,6 +14,7 @@ export default DS.Model.extend({
   generic_time: attr('string'),
   name: attr('string'),
   image_url: attr('string'),
+  page_url: attr('string'),
   schedule: attr('string'),
   slug: attr('string'),
   start_time: attr('date'),
@@ -28,6 +29,11 @@ export default DS.Model.extend({
   tags: DS.hasMany('tag'),
   venue: DS.belongsTo('venue'),
   // users: DS.hasMany('user', { async: true }),
+
+  pageUrlDomain: Ember.computed('page_url', function() {
+    const domain = this.get('page_url').split('/')[2];
+    return domain;
+  }),
 
   tagsList: Ember.computed('tags.[]', function() {
     let list = '';
