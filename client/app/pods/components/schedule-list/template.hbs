@@ -1,0 +1,13 @@
+<div class="schedule-list__header" {{action 'toggleList'}}>
+  Full schedule:
+  {{#if isExpanded}}
+    {{fa-icon icon="arrow-up"}}
+  {{else}}
+    {{fa-icon icon="arrow-down"}}
+  {{/if}}
+</div>
+
+{{#each schedule as |time|}}
+  {{time}}<br>
+{{/each}}
+{{yield}}

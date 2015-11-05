@@ -1,0 +1,19 @@
+$closed-list-height: 150px;
+.schedule-list {
+  overflow: hidden;
+  @include transition(all $base-duration $base-timing);
+}
+
+.schedule-list--expanded {
+  max-height: 1300px;
+}
+
+.schedule-list--closed {
+  height: auto;
+  max-height: $closed-list-height;
+}
+
+.schedule-list__header {
+  font-weight: bold;
+  cursor: pointer;
+}

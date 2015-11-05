@@ -16,6 +16,10 @@ Router.map(function() {
 
   this.route('venue', {path: 'venue/:venue_slug'});
   this.route('user', {path: '/user'});
+
+  // Static pages
+  this.route('about');
+  this.route('contact');
 });
 
 export default Router;

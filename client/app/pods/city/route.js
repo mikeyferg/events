@@ -7,22 +7,26 @@ export default Ember.Route.extend({
     });
   },
 
-  // afterModel() {
-  //   console.log(this.controllerFor('city.events').get('free'));
-  // },
-  //
-  // setupController: function(controller, model){
-  //   this._super(...arguments);
-  //   setTimeout(() => {
-  //       console.log(this.controllerFor('city.events').get('free'));
-  //   }, 2000)
-  //
-  //   // this.controllerFor('city').set('free', true);
-  //  },
-
   serialize(city) {
     return {
       city_slug: city.get('slug')
     };
+  },
+
+  afterModel(model) {
+    var cityName = model.get('name');
+    $(document).attr('title', `Events in ${cityName}`);
+  },
+
+  headTags() {
+    let model = this.modelFor(this.routeName);
+    return [{
+      type: 'meta',
+      tagId: 'description',
+      attrs: {
+        name: 'description',
+        content: `Events in ${model.get('name')}`
+      }
+    }];
   }
 });

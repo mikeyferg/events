@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
 
   def self.by_cost(free = nil, cost = nil)
     return where(cost: "Free") if free === 'true'
-    return where(cost: cost) if not cost.nil?
+    return where(cost: cost) if not cost.blank?
     all
   end
 

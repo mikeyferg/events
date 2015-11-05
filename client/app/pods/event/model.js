@@ -18,6 +18,7 @@ export default DS.Model.extend({
   slug: attr('string'),
   start_time: attr('date'),
   start_date: attr('string'),
+  start_date_time: attr('string'),
   summary: attr('string'),
   time_only: attr('date'),
   venue: attr('string'),

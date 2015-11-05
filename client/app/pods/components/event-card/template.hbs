@@ -10,7 +10,7 @@
     <div class="event-card__info-item">{{fa-icon icon="map-marker"}} {{event.address}}</div>
   {{/if}}
   {{#if event.date_only}}
-    <div class="event-card__info-item">{{fa-icon icon="clock-o"}} {{event-date event.time_only event.date_only}}</div>
+    <div class="event-card__info-item">{{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}</div>
   {{/if}}
   {{#if event.cost}}
     <div class="event-card__info-item event-card__info-item--right event-card__info-item--bold">{{event.cost}}</div>

@@ -1,32 +1,32 @@
-<header class="navigation" role="banner">
-  <div class="navigation-wrapper">
-    {{#link-to 'cities' class="logo"}}
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
-    {{/link-to}}
-    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu" {{action 'toggleMenu'}}>MENU</a>
-    <nav role="navigation">
-      <ul id="js-navigation-menu" class="navigation-menu">
-        <li class="nav-link">{{link-to 'Event Coyote' 'cities'}}</li>
-      </ul>
-    </nav>
-    <div class="navigation-tools">
-      <ul id="js-navigation-menu" class="navigation-menu">
-        {{#if session.isAuthenticated }}
-            {{session.currentUser.image_url}}
-            <li class="nav-link"><img src={{session.currentUser.image}} alt="Avatar" class="user-avatar" /> {{link-to session.currentUser.name 'user'}}</li>
-            <li class="nav-link"><a href="#" {{action 'logout'}}>Logout</a></li>
-        {{else}}
-          <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Facebook Login</a></li>
-        {{/if}}
-      </ul>
-      {{!-- <div class="search-bar">
-        <form role="search">
-          <input type="search" placeholder="Enter Search" />
-          <button type="submit">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
-          </button>
-        </form>
-      </div> --}}
-    </div>
+<div class="navigation-wrapper">
+  {{#link-to 'cities' class="logo"}}
+    <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
+  {{/link-to}}
+  <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu" {{action 'toggleMenu'}}>MENU</a>
+  <nav role="navigation">
+    <ul id="js-navigation-menu" class="navigation-menu">
+      <li class="nav-link">{{link-to 'Event Coyote' 'cities'}}</li>
+      <li class="nav-link">{{link-to 'About' 'about'}}</li>
+      <li class="nav-link">{{link-to 'Contact' 'contact'}}</li>
+    </ul>
+  </nav>
+  <div class="navigation-tools">
+    <ul id="js-navigation-menu" class="navigation-menu">
+      {{#if session.isAuthenticated }}
+          {{session.currentUser.image_url}}
+          <li class="nav-link"><img src={{session.currentUser.image}} alt="Avatar" class="user-avatar" /> {{link-to session.currentUser.name 'user'}}</li>
+          <li class="nav-link"><a href="#" {{action 'logout'}}>Logout</a></li>
+      {{else}}
+        <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Facebook Login</a></li>
+      {{/if}}
+    </ul>
+    {{!-- <div class="search-bar">
+      <form role="search">
+        <input type="search" placeholder="Enter Search" />
+        <button type="submit">
+          <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
+        </button>
+      </form>
+    </div> --}}
   </div>
-</header>
+</div>
