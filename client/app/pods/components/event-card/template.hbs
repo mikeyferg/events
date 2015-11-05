@@ -1,19 +1,28 @@
-{{#link-to "event" city.slug event.slug}}
-<img src={{imageUrl}} alt={{event.name}} data-photo-id={{event.slug}} class="event-card__poster" />
-{{#if event.featured}}
-  <div class="event-card__featured">Featured</div>
-{{/if}}
+<div itemscope itemtype="http://schema.org/Event">
+  {{#link-to "event" city.slug event.slug}}
+  <img itemprop="image" src={{imageUrl}} alt={{event.name}} data-photo-id={{event.slug}} class="event-card__poster" />
 
-<div class="event-card__info">
-  <h3 class="event-card__header">{{event.name}}</h3>
-  {{#if event.address}}
-    <div class="event-card__info-item">{{fa-icon icon="map-marker"}} {{event.address}}</div>
+  {{#if event.featured}}
+    <div class="event-card__featured">Featured</div>
   {{/if}}
-  {{#if event.date_only}}
-    <div class="event-card__info-item">{{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}</div>
-  {{/if}}
-  {{#if event.cost}}
-    <div class="event-card__info-item event-card__info-item--right event-card__info-item--bold">{{event.cost}}</div>
-  {{/if}}
+
+  <div class="event-card__info">
+    <h3 itemprop="name" class="event-card__header">{{event.name}}</h3>
+    {{#if event.address}}
+      <div itemprop="location" class="event-card__info-item">
+        {{fa-icon icon="map-marker"}} {{event.address}}
+      </div>
+    {{/if}}
+    {{#if event.date_only}}
+      <div itemprop="startDate" datetime={{model.start_date_time}} class="event-card__info-item">
+        {{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}
+      </div>
+    {{/if}}
+    {{#if event.cost}}
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="event-card__info-item event-card__info-item--right event-card__info-item--bold">
+         <span itemprop="price">{{event.cost}}</span>
+      </div>
+    {{/if}}
+  </div>
+  {{/link-to}}
 </div>
-{{/link-to}}
