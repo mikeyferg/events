@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     };
   },
 
-  afterModel: function(model) {
+  afterModel(model) {
     var eventName = model.get('name');
     $(document).attr('title', eventName);
   },
