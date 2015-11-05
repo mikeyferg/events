@@ -8,16 +8,13 @@ export default Ember.Component.extend({
     const mapContainer = this.element;
     const address = this.get('address');
 
-    const map = new window.google.maps.Map(mapContainer, {
-      disableDefaultUI: true
-    });
+    const map = new window.google.maps.Map(mapContainer, {});
     const service = new google.maps.places.PlacesService(map);
     const marker = new google.maps.Marker({map: map});
 
     service.textSearch({
       query: address
     }, function(place, status) {
-      console.log(place, status);
       map.setCenter(place[0].geometry.location);
       map.setZoom(17);
 

@@ -1,13 +1,10 @@
-{{model.name}}
-<br /><br />
-  <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} />
-{{model.city.name}}
-{{#each model.city as |city|}}
-  {{city.name}}<br />
-{{/each}}
-<br /><br />
-{{#each model.events as |event|}}
-  {{event.name}}<br />
-{{/each}}
-
-{{outlet}}
+<section>
+  <h1>{{model.name}}</h1>
+  {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
+  Address: {{model.address}}
+  <div class="">
+    {{#each model.events as |event|}}
+    {{event.name}}<br />
+    {{/each}}
+  </div>
+</section>
