@@ -1,6 +1,7 @@
 ActiveAdmin.register Event do
 require 'tag.rb'
 
+
 controller do
   def find_resource
     scoped_collection.where(slug: params[:id]).first!
@@ -8,6 +9,7 @@ controller do
 end
 
   index do
+      column :id
       column :name
       column :date_only
       column :time_only
@@ -15,12 +17,9 @@ end
       column :venue
       # column :summary
       column :image_url
-      column :page_url
+      column :source_url
       column :address
       column :cost
-      column :cost_integer
-      column :source_url
-      column :slug
       column :featured
       column :city
       column :tags
@@ -74,7 +73,11 @@ end
         address = nil
       end
       cost = hash[:cost]#.encode(Encoding.find('UTF-8'), {invalidexit!: :replace, undef: :replace, replace: ''})
-      source_url = nil
+      unless hash[:event_url].nil?
+        source_url = hash[:event_url]
+      else
+        source_url = nil
+      end
       city_id = 1
       if hash[:tags].nil?
         tags = ["fun"]
@@ -88,17 +91,22 @@ end
       end
 
       event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
-      if schedule.length > 0 && schedule[0] != "Event has passed"
-        schedule.each do |date|
-          if !date.include? "Feb 29"
-            date_only = Event.date_splitter(date)
-          else
-            date_only = "Feb 28"
-          end
-          event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
-        end
-      end
-
+      # if schedule.length > 0 && schedule[0] != "Event has passed"
+      #   schedule.each_with_index do |date, index|
+      #     if !date.include? "Feb 29"
+      #       date_only = Event.date_splitter(date)
+      #     elsif date[index].dateregex.nil? || date[index].timeregex.nil? #|| hash[:date_only].include? "passed" || hash[:date_only].include? "No Date"
+      #         next
+      #     elsif Event.date_splitter(hash[:date_only]).nil?
+      #         next
+      #     else
+      #       date_only = Event.date_splitter(date[index].regex)
+      #       time_only = Time.parse(Event.start_time_regex(date[index].regex)) rescue nil
+      #       start_date_time = date_time_combiner(date_array, time)
+      #     end
+      #     event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
+      #   end
+      # end
     end
   end
 
