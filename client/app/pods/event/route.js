@@ -14,5 +14,17 @@ export default Ember.Route.extend({
   afterModel: function(model) {
     var eventName = model.get('name');
     $(document).attr('title', eventName);
+  },
+
+  headTags() {
+    let model = this.modelFor(this.routeName);
+    return [{
+      type: 'meta',
+      tagId: 'description',
+      attrs: {
+        name: 'description',
+        content: `${model.get('shortSummary')}`
+      }
+    }];
   }
 });
