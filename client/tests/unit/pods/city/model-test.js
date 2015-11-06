@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 moduleForModel('city', 'Unit | Model | city', {
   // Specify the other units that are required for this test.
-  needs: ['model:event']
+  needs: ['model:event', 'model:venue']
 });
 
 test('city model exists', function(assert) {
