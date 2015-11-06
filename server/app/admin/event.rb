@@ -47,10 +47,9 @@ end
       #for date_only and time_only attributes
       date_only = Event.date_splitter(hash[:date_only])
       time_only = Time.parse(Event.start_time_regex(hash[:time_only])) rescue nil
-
       #for combining date and time to create start_date_time
-      date_array = hash[:date_only].split(" ")
-      time = Event.start_time_regex(hash[:time_only])
+        date_array = hash[:date_only].split(" ")
+        time = Event.start_time_regex(hash[:time_only])
       start_date_time = date_time_combiner(date_array, time)
 
 

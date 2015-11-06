@@ -50,9 +50,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.by_date_range(date_range = nil)
-    return where('date_only BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).all if date_range === 'today'
-    return where('date_only BETWEEN ? AND ?', DateTime.now.tomorrow.beginning_of_day, DateTime.now.tomorrow.end_of_day).all if date_range === 'tomorrow'
-    return where('date_only BETWEEN ? AND ?', DateTime.now.at_beginning_of_week + 4.day, DateTime.now.at_beginning_of_week + 6.day).all if date_range === 'weekend'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc.end_of_day).all if date_range === 'today'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.tomorrow.beginning_of_day, DateTime.now.utc.tomorrow.end_of_day).all if date_range === 'tomorrow'
+    return where('date_only BETWEEN ? AND ?', DateTime.now.utc.at_beginning_of_week + 4.day, DateTime.now.utc.at_beginning_of_week + 6.day).all if date_range === 'weekend'
     all
   end
 
@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-  after_create :update_image, only: :image_url
+  after_validation :update_image, only: :image_url
 
   def slug_candidates
   [
@@ -86,14 +86,15 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   def update_image
-    if self['image_url'].nil?
+    if self['image_url'].blank?
       self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
     end
-      url = self['image_url']
-      new_image = URI.parse(url)
-      self.update_attribute(:image, new_image)
-      image_url = self.image.url
-      self.update_attribute(:image_url, image_url)
+
+    url = self['image_url']
+    new_image = URI.parse(url)
+    self.update_attribute(:image, new_image)
+    image_url = self.image.url
+    self.update_attribute(:image_url, image_url)
   end
 
 
@@ -106,7 +107,6 @@ class Event < ActiveRecord::Base
       found = false
       if current_event.length != 0
         current_event.each_with_index do |event, index|
-
           if Venue.find(event['venue_id'])['name'] == venue && event['date_only'] == date_only
             found = true
             current_event[index].update(
@@ -206,7 +206,8 @@ class Event < ActiveRecord::Base
       time = "12:07am"
     else
       time_match = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)([ap]m)?\s?(?=-)(?:-\s?[0-2]?\d?(?::[0-5]\d)?\s?([ap]m))|([0-2]?\d?(?::[0-5]\d)?)\s?([ap]m)/)
-      if time_match.blank? || [[!time_match[0] && time_match[1]] && [!time_match[0] && time_match[2]] &&  [!time_match[3] && time_match[4]] ]
+
+      if time_match.blank? || ((time_match[1].nil? || time_match[2].nil?) && (time_match[1].nil? || time_match[3].nil?) && (time_match[4].nil? || time_match[5].nil?))
         time = "12:07am"
       else
         time_regex = time_match.captures
