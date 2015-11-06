@@ -10,12 +10,16 @@
 
   <aside>
     <ul itemscope itemtype="http://schema.org/Event">
-      <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.cost}}</span></li>
+      {{#if model.cost}}
+        <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.cost}}</span></li>
+      {{/if}}
       <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.venue.name 'venue' model.venue}}</li>
       <li itemprop="location">{{fa-icon icon="map-marker"}} {{model.address}}</li>
       <li itemprop="startDate" datetime={{model.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.start_date_time}}</li>
       <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
-      <li itemprop="url" >{{fa-icon icon="external-link"}} <a href=model.page_url target="_blank">{{model.pageUrlDomain}}</a></li>
+      {{#if model.source_url}}
+        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href=model.source_url target="_blank">{{model.sourceUrlDomain}}</a></li>
+      {{/if}}
     </ul>
     {{google-map address=model.address}}
   </aside>
