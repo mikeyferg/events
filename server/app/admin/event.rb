@@ -64,8 +64,8 @@ end
         summary = nil
       end
       image_url = hash[:image_url]
-      page_url = hash[:pageurl]
-
+      # page_url = hash[:pageurl]
+      page_url = nil
       unless hash[:address].nil?
         address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
       else
