@@ -81,6 +81,9 @@ Rails.application.configure do
   #so paperclip knows where ImageMagick is located
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
+  #Prerender
+  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+
   # config for amazon S3 and paperclip, method 2 using dotenv direct
   config.paperclip_defaults = {
     :storage => :s3,
@@ -90,5 +93,5 @@ Rails.application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
-    # devise_secret_key = ENV['DEVISE_SECRET_KEY'] 
+    # devise_secret_key = ENV['DEVISE_SECRET_KEY']
 end
