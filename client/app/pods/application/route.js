@@ -46,6 +46,11 @@ export default Ember.Route.extend(ConnectWithFacebook, {
     });
   },
 
+  afterModel() {
+    console.log("Done");
+    window.prerenderReady = true;
+  },
+
   actions: {
     logout() {
       this.get('session').close();
