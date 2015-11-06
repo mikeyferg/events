@@ -13,7 +13,6 @@ test('inputs', function(assert) {
   let tomorrow = today.add(1, 'days');
   assert.equal(eventDate([tomorrow, tomorrow]).indexOf('Tomorrow'), 0, 'Tomorrow word present');
 
-  let time = '2015-10-17T13:00:00+00:00';
-  let date = '2015-10-13';
-  assert.equal(eventDate([time, date]), 'Tue Oct 13 6:00am', 'Tue Oct 13 6:00am if in California');
+  let datetime = '2015-10-17T13:00:00+00:00';
+  assert.equal(eventDate(datetime), 'Oct 17 6:00am', 'Tue Oct 17 6:00am if in California');
 });

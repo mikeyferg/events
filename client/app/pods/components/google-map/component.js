@@ -14,7 +14,7 @@ export default Ember.Component.extend({
 
     service.textSearch({
       query: address
-    }, function(place, status) {
+    }, function(place) {
       map.setCenter(place[0].geometry.location);
       map.setZoom(17);
 

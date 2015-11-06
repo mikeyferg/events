@@ -10,7 +10,7 @@ export default Ember.Route.extend({
         cost: params.cost,
         free: params.free
       })
-    })
+    });
   },
 
   actions: {

@@ -31,7 +31,9 @@ export default DS.Model.extend({
   // users: DS.hasMany('user', { async: true }),
 
   sourceUrlDomain: Ember.computed('source_url', function() {
-    if (!this.get('source_url')) return '';
+    if (!this.get('source_url')) {
+      return '';
+    }
     const domain = this.get('source_url').split('/')[2];
     return domain;
   }),
@@ -46,7 +48,7 @@ export default DS.Model.extend({
         list += tag.get('name');
       }
 
-    })
+    });
     return list;
   }),
 

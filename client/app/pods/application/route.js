@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import config from '../../config/environment';
 import ConnectWithFacebook from './connect-with-facebook';
-import moment from 'moment';
 
 // Add css class to body
 Ember.Route.reopen({
@@ -25,10 +24,8 @@ Ember.RSVP.configure('onerror', function(e) {
 });
 
 export default Ember.Route.extend(ConnectWithFacebook, {
-  moment: Ember.inject.service(),
   beforeModel() {
     this._super(...arguments);
-    this.get('moment').changeTimeZone('America/Los_Angeles');
     let that = this;
     const path = `${config.apiHostname}/users/me`;
     return this.get('session').fetch().then(function() {

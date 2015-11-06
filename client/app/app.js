@@ -16,7 +16,7 @@ App = Ember.Application.extend({
 Ember.Router.reopen({
   notifyGoogleAnalytics: function() {
     if (!window.ga) { return; }
-    return ga('send', 'pageview', {
+    return window.ga('send', 'pageview', {
         'page': this.get('url'),
         'title': this.get('url')
       });

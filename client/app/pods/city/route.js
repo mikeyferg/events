@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 
   afterModel(model) {
     var cityName = model.get('name');
-    $(document).attr('title', `Events in ${cityName}`);
+    Ember.$(document).attr('title', `Events in ${cityName}`);
   },
 
   headTags() {

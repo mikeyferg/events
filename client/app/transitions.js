@@ -1,5 +1,5 @@
 export default function(){
-  let duration = 500;
+  // let duration = 500;
   //
   // this.transition(
   //   this.toRoute('event'),
