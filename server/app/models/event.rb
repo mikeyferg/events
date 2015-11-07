@@ -200,15 +200,38 @@ class Event < ActiveRecord::Base
       Date.new(Time.now.year, month, day)
     end
   end
+  # def self.start_time_regex(time)
+  #   # binding.pry
+  #   if time.nil?
+  #     time = "12:07am"
+  #   else
+  #     time_match = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)([ap]m)?\s?(?=-)(?:-\s?[0-2]?\d?(?::[0-5]\d)?\s?([ap]m))|([0-2]?\d?(?::[0-5]\d)?)\s?([ap]m)/)
+  #
+  #     if time_match.blank? || ((time_match[1].nil? || time_match[2].nil?) && (time_match[1].nil? || time_match[3].nil?) && (time_match[4].nil? || time_match[5].nil?))
+  #       time = "12:07am"
+  #     else
+  #       time_regex = time_match.captures
+  #       if time_regex[0].nil?
+  #         time_regex[3] + time_regex[4]
+  #       elsif time_regex[1].nil?
+  #         time_regex[0] + time_regex[2]
+  #       else
+  #         time_regex[0] + time_regex[1]
+  #       end
+  #     end
+  #   end
+  #   # Time.parse(time) rescue nil
+  # end
+
   def self.start_time_regex(time)
     # binding.pry
     if time.nil?
-      time = "12:07am"
+      nil
     else
       time_match = time.match(/(?i)([0-2]?\d?(?::[0-5]\d)?)([ap]m)?\s?(?=-)(?:-\s?[0-2]?\d?(?::[0-5]\d)?\s?([ap]m))|([0-2]?\d?(?::[0-5]\d)?)\s?([ap]m)/)
 
       if time_match.blank? || ((time_match[1].nil? || time_match[2].nil?) && (time_match[1].nil? || time_match[3].nil?) && (time_match[4].nil? || time_match[5].nil?))
-        time = "12:07am"
+        nil
       else
         time_regex = time_match.captures
         if time_regex[0].nil?
