@@ -18,7 +18,7 @@
       <li itemprop="startDate" datetime={{model.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.start_date_time}}</li>
       <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
       {{#if model.source_url}}
-        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href=model.source_url target="_blank">{{model.sourceUrlDomain}}</a></li>
+        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.source_url}} target="_blank">{{model.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
     {{google-map address=model.address}}
