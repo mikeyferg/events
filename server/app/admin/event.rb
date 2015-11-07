@@ -106,7 +106,7 @@ end
             time_only = Time.parse(Event.start_time_regex(time)) rescue nil
 
             date_array = date.split(" ")
-            time = Event.start_time_regex(time)
+            # time = Event.start_time_regex(time)
             start_date_time = date_time_combiner(date_array, time)
 
             event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
