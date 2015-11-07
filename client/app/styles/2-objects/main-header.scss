@@ -12,6 +12,7 @@
   @include span-columns(2);
   text-align: center;
   line-height: $navigation-height;
+  cursor: pointer;
 
   @include media($medium-screen) {
     display: none;
