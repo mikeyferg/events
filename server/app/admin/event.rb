@@ -32,6 +32,8 @@ end
       next
     elsif Event.date_splitter(hash[:date_only]).nil?
       next
+    elsif time = Event.start_time_regex(hash[:time_only]).nil?
+      next
     else
       unless hash[:name].nil?
         name = hash[:name].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
@@ -106,7 +108,7 @@ end
             date_array = date.split(" ")
             time = Event.start_time_regex(time)
             start_date_time = date_time_combiner(date_array, time)
-      
+
             event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
           end
 
