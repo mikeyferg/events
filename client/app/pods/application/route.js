@@ -50,11 +50,10 @@ export default Ember.Route.extend(ConnectWithFacebook, {
     },
 
     toggleMenu() {
-      Ember.$('#js-navigation-menu').slideToggle(function(){
-        if(Ember.$('#js-navigation-menu').is(':hidden')) {
-          Ember.$('#js-navigation-menu').removeAttr('style');
-        }
-      });
+      this.set('controller.isMenuEnabled', !this.get('menuEnabled'));
+    },
+    disableMenu() {
+      this.set('controller.isMenuEnabled', false);
     }
   }
 });

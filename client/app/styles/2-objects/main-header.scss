@@ -1,0 +1,36 @@
+.main-header {
+  min-height: $navigation-height;
+  line-height: $navigation-height;
+  @include media(max-width $medium-screen) {
+    background-color: $nav-background-color;
+    color: $white;
+    @include clearfix;
+  }
+}
+
+.main-header__menu {
+  @include span-columns(2);
+  text-align: center;
+  line-height: $navigation-height;
+
+  @include media($medium-screen) {
+    display: none;
+  }
+}
+
+.main-header__title {
+  text-align: center;
+  line-height: $navigation-height;
+  @include span-columns(8);
+
+  @include media($medium-screen) {
+    @include span-columns(12);
+    h1 {
+      font-size: $f-xLarge;
+    }
+  }
+
+  h1 {
+    display: inline-block;
+  }
+}

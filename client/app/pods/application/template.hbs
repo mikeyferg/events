@@ -1,3 +1,11 @@
-{{main-menu toggleMenu='toggleMenu' signInViaFacebook="signInViaFacebook" logout="logout" session=session}}
-{{outlet}}
+<div class="{{menuModifier}}">
+  {{main-menu  disableMenu='disableMenu'
+               toggleMenu='toggleMenu'
+               signInViaFacebook="signInViaFacebook"
+               logout="logout"
+               session=session}}
+  {{main-header headerTitle=headerTitle
+                toggleMenu='toggleMenu'}}
+  {{outlet}}
+</div>
 {{!-- {{main-footer}} --}}

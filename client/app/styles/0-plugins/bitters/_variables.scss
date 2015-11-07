@@ -22,6 +22,7 @@ $f-xxLarge: 1.5em; /* 24/16 */
 // Line height
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
+$navigation-height: 3em;
 
 // Other Sizes
 $base-border-radius: 5px;
@@ -67,3 +68,11 @@ $base-timing: ease;
 
 //Buttons
 $button-background-color: lighten(#1773f1, 10%);
+
+
+// Z-index
+$z-index-modal-content: 300;
+$z-index-modal-cover: 290;
+$z-index-alert-bar: 285;
+$z-index-main-menu: 280;
+$z-index-main-header-fixed: 270;

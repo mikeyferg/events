@@ -16,6 +16,10 @@ export default Ember.Component.extend({
 
     toggleMenu: function() {
       this.sendAction('toggleMenu');
+    },
+
+    disableMenu: function() {
+      this.sendAction('disableMenu');
     }
   }
 });

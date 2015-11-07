@@ -10,9 +10,12 @@
   }
 }
 
+.Canvas--menuEnabled header.navigation {
+  @include transform(translate3d(0,0,0));
+}
+
 header.navigation {
   $navigation-padding: 1em;
-  $navigation-height: 60px;
   $navigation-nav-button-background: $action-color;
   $navigation-nav-button-background-hover: lighten($nav-background-color, 10%);
   $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20%);
@@ -23,9 +26,26 @@ header.navigation {
   $navigation-submenu-width: 12em;
   $horizontal-bar-mode: $medium-screen;
 
-  min-height: $navigation-height;
   background: $nav-background-color;
-  width: 100%;
+  overflow: hidden;
+  opacity: 1;
+
+  width: 200px;
+  max-width: 200px;
+  height: 100%;
+  min-height: $navigation-height;
+  z-index: $z-index-main-menu;
+
+  @include transition(all $base-duration $base-timing);
+  @include position(fixed, 0px 0px 0 0);
+  @include transform(translate3d(-100%, 0, 0));
+
+  @include media ($medium-screen) {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    @include transform(translate3d(0,0,0));
+  }
 
   .navigation-wrapper {
     @include clearfix;
@@ -82,7 +102,6 @@ header.navigation {
 
   ul.navigation-menu {
     clear: both;
-    display: none;
     margin: 0 auto;
     overflow: visible;
     padding: 0;

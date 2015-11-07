@@ -19,9 +19,8 @@ h6 {
 }
 
 h1 {
-  font-size: $f-xxLarge;
+  font-size: $f-large;
   text-align: center;
-  margin-bottom: $base-spacing;
 }
 
 p {
@@ -52,8 +51,4 @@ img,
 picture {
   margin: 0;
   max-width: 100%;
-}
-
-.fa {
-  color: $action-color;
 }
