@@ -6,21 +6,12 @@ moduleForComponent('schedule-list', 'Integration | Component | schedule list', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  // Handle any actions with this.ons('myAction', function(val) { ... });
 
   this.render(hbs`{{schedule-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#schedule-list}}
-      template block text
-    {{/schedule-list}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'Full schedule:');
 });

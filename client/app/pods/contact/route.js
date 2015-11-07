@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   afterModel() {
-    $(document).attr('title', 'Contact Event Coyote');
+    Ember.$(document).attr('title', 'Contact Event Coyote');
   },
 
   headTags() {
@@ -15,4 +15,4 @@ export default Ember.Route.extend({
       }
     }];
   }
-})
+});

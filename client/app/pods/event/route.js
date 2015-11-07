@@ -13,7 +13,7 @@ export default Ember.Route.extend({
 
   afterModel(model) {
     var eventName = model.get('name');
-    $(document).attr('title', eventName);
+    Ember.$(document).attr('title', eventName);
   },
 
   headTags() {
