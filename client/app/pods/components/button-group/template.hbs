@@ -1,6 +1,14 @@
 <div class="button-group">
   <label>
     {{radio-button
+      value="week"
+      name="button-group"
+      groupValue=date_range
+      changed="dateRangeChanged"}}
+    <span class="button-group-item">This week</span>
+  </label>
+  <label>
+    {{radio-button
       value="today"
       name="button-group"
       groupValue=date_range
@@ -22,6 +30,14 @@
       groupValue=date_range
       changed="dateRangeChanged"}}
     <span class="button-group-item">Weekend</span>
+  </label>
+  <label>
+    {{radio-button
+      value="all"
+      name="button-group"
+      groupValue=date_range
+      changed="dateRangeChanged"}}
+    <span class="button-group-item">All</span>
   </label>
 </div>
 

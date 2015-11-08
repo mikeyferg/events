@@ -7,7 +7,7 @@
   </article>
 
   <aside>
-    <h3>Details</h3>
+    <h3 class="section-header">Details</h3>
     <ul itemscope itemtype="http://schema.org/Event">
       {{#if model.cost}}
         <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.cost}}</span></li>
@@ -24,7 +24,7 @@
   </aside>
 </section>
 
-{{#if model.schedule}}
+{{#if model.scheduleList}}
   <div class="color-section">
     <section class="outer-container">
       {{schedule-list schedule=model.scheduleList}}
