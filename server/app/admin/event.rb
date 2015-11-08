@@ -23,7 +23,7 @@ end
       column :featured
       column :city
       column :tags
-      # column :schedule
+      column :schedule
       actions
   end
 
@@ -90,7 +90,7 @@ end
       else
         schedule = []
       end
-
+      # binding.pry
       event = Event.create_update_event(hash, name, time_only, venue, image_url, page_url, summary, address, cost, source_url, date_only, city_id, tags, schedule, start_date_time)
 
       if schedule.length > 0 && schedule[0] != "Event has passed"
