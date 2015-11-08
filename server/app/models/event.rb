@@ -54,7 +54,7 @@ class Event < ActiveRecord::Base
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).end_of_day).all if date_range === 'today'
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day, (DateTime.now.utc - 8.hour).tomorrow.end_of_day).all if date_range === 'tomorrow'
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day).all if date_range === 'weekend'
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).brginning_of_day, 6.months.from_now.all if date_range === 'all'
+    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
     all
   end
 
