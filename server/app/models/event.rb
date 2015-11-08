@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.by_date_range(date_range = nil)
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day).all if date_range === 'weekend'
+    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day).all if date_range === 'week'
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).end_of_day).all if date_range === 'today'
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day, (DateTime.now.utc - 8.hour).tomorrow.end_of_day).all if date_range === 'tomorrow'
     return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day).all if date_range === 'weekend'
