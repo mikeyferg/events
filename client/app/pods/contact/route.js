@@ -5,6 +5,11 @@ export default Ember.Route.extend({
     Ember.$(document).attr('title', 'Contact Event Coyote');
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('headerTitle', 'Contact Event Coyote');
+  },
+
   headTags() {
     return [{
       type: 'meta',

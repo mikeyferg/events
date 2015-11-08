@@ -62,7 +62,7 @@ header.navigation {
 
     img {
       max-height: $navigation-height;
-      padding: 0.8em 0;
+      padding: 0.3em 0;
     }
   }
 
@@ -150,7 +150,8 @@ header.navigation {
       }
 
       &:focus,
-      &:hover {
+      &:hover,
+      &.active {
         color: $nav-font-active-color;
       }
     }
