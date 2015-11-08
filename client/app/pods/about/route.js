@@ -5,6 +5,11 @@ export default Ember.Route.extend({
     Ember.$(document).attr('title', 'About Event Coyote');
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.controllerFor('application').set('headerTitle', 'About Event Coyote');
+  },
+
   headTags() {
     return [{
       type: 'meta',

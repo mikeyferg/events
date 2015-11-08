@@ -1,6 +1,4 @@
 <section>
-  <h1>{{model.name}}</h1>
-
   <article itemscope itemtype="http://schema.org/Event">
     <p itemprop="description">
       <img itemprop="image" src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} style="float:left; padding: 0 1em 0.5em 0;" />
@@ -9,6 +7,7 @@
   </article>
 
   <aside>
+    <h3>Details</h3>
     <ul itemscope itemtype="http://schema.org/Event">
       {{#if model.cost}}
         <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.cost}}</span></li>
