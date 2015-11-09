@@ -1,9 +1,13 @@
+$switch-height: 32px;
+.checkbox-label {
+  line-height: $switch-height;
+  vertical-align: top;
+}
 .label-switch {
   $action-color: #477DCA !default;
   $base-background-color: white !default;
   $switch-width: 52px;
   $switch-padding: 2px;
-  $switch-height: 32px;
   $switch-radius: $switch-height;
   $knob-size: $switch-height - ($switch-padding * 2);
   $knob-radius: $switch-height - ($switch-padding * 2);

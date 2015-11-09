@@ -1,14 +1,13 @@
 <section>
   <div class="flexbox-row">
     {{button-group dateRangeChanged='filterByDate' date_range=date_range}}
-    <div class="">
-      Free
+    <div>
+      <span class="checkbox-label">Free</span>
       <label class="label-switch">
         {{input type="checkbox" checked=free }}
         <div class="checkbox"></div>
       </label>
     </div>
-    <div class="filter-button" {{action 'resetAllFilters'}}>Reset</div>
   </div>
 </section>
 {{outlet}}

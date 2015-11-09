@@ -58,6 +58,9 @@ export default DS.Model.extend({
       .replace(/[\[\]()"']/g, "")
       .replace(/(\\xE5\\xD0)/g,", ")
       .split(';');
+    if (cleanSchedule.length === 1) {
+      return false;
+    }
     return cleanSchedule;
   }),
 
