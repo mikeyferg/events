@@ -27,6 +27,7 @@ gem 'friendly_id', '~> 5.1.0'
 # gem 'will_paginate', '~> 3.0.6'
 gem 'kaminari'
 gem 'puma'
+gem 'validates_timeliness', '~> 3.0'
 
 #for admin pages
 gem 'activeadmin', github: 'activeadmin'

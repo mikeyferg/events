@@ -33,8 +33,10 @@ class Venue < ActiveRecord::Base
   has_many :events
   belongs_to :city
 
-  def self.find_or_create_venue(venue, address, city_id, image_url)
-    Venue.where(name: venue).first_or_create do |venue|
+  def self.find_or_create_venue(name, address, city_id, image_url = nil)
+
+    Venue.where(name: name).first_or_create do |venue|
+      venue.name = name
       venue.address = address
       venue.city_id = city_id
       venue.image_url = image_url
@@ -45,8 +47,6 @@ class Venue < ActiveRecord::Base
 
   #associates attribute :image with a file attachment
   has_attached_file :image, styles: {
-    small: "64x64",
-    med: "200x200",
     large: "400x400"
   }
   # Validate the attached image is image/jpg, image/png, etc
