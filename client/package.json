@@ -48,6 +48,7 @@
     "ember-moment": "4.1.0",
     "ember-radio-button": "1.0.7",
     "liquid-fire": "0.21.3",
+    "phantomjs2": "^2.0.0",
     "torii": "0.4.1"
   }
 }

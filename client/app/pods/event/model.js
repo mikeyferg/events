@@ -22,7 +22,6 @@ export default DS.Model.extend({
   start_date_time: attr('string'),
   summary: attr('string'),
   time_only: attr('date'),
-  venue: attr('string'),
   featured: attr('boolean'),
 
   city: DS.belongsTo('city'),
