@@ -4,6 +4,13 @@
       <img itemprop="image" src={{model.event.image_url}} alt={{model.event.name}} data-photo-id={{model.event.slug}} style="float:left; padding: 0 1em 0.5em 0;" />
       {{model.event.summary}}
     </p>
+    {{#if model.event.scheduleList}}
+      <div class="color-section">
+        <section class="outer-container">
+          {{schedule-list schedule=model.event.scheduleList}}
+        </section>
+      </div>
+    {{/if}}
   </article>
 
   <aside>
@@ -27,11 +34,3 @@
     {{/each}}
   </aside>
 </section>
-
-{{#if model.event.scheduleList}}
-  <div class="color-section">
-    <section class="outer-container">
-      {{schedule-list schedule=model.event.scheduleList}}
-    </section>
-  </div>
-{{/if}}
