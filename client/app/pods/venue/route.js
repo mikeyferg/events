@@ -2,7 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    return this.store.find('venue', params.venue_slug);
+    return this.store.queryRecord('venue', {slug: params.venue_slug});
+  },
+
+  afterModel(model) {
+    model.reload();
   },
 
   setupController(controller, model) {
