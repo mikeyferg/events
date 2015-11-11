@@ -89,7 +89,7 @@ end
 task :deploy_client_live do
   sh 'git checkout rsh-production'
   # sh 'git merge origin/rails-served-html -m "Merging master for deployment"'
-  sf 'cd client && ember sitemap https://s3.amazonaws.com/sitemap-eventcoyote/sitemaps/sitemap.xml'
+  sh 'cd client && ember sitemap https://s3.amazonaws.com/sitemap-eventcoyote/sitemaps/sitemap.xml'
 
   unless `git status` =~ /nothing to commit, working directory clean/
     sh 'git add -A'
