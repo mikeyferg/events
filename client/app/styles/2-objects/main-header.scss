@@ -18,9 +18,7 @@
     display: none;
   }
   i {
-    padding: 6px 8px;
-    border-radius: 5px;
-    border: 1px solid lighten($nav-background-color, 20%);
+    font-size: $f-large;
   }
   i:hover {
     background: darken($nav-background-color, 5%);

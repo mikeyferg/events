@@ -1,11 +1,24 @@
-<div class="main-content {{menuModifier}}">
-  {{main-menu  disableMenu='disableMenu'
-               toggleMenu='toggleMenu'
-               signInViaFacebook="signInViaFacebook"
-               logout="logout"
-               session=session}}
-  {{main-header headerTitle=headerTitle
-                toggleMenu='toggleMenu'}}
-  {{outlet}}
+<div class="frame {{menuModifier}} {{modalModifier}}">
+  <div class="frame__menu">
+    {{main-menu  disableMenu='disableMenu'
+                 toggleMenu='toggleMenu'
+                 signInViaFacebook="signInViaFacebook"
+                 logout="logout"
+                 session=session}}
+  </div>
+  <div class="frame__header">
+    {{main-header headerTitle=headerTitle
+                  toggleMenu='toggleMenu'}}
+  </div>
+  <div>
+    <div class="frame__content">
+      {{outlet}}
+    </div>
+    <div class="frame__modal-cover" {{action 'disableModal'}}>
+
+    </div>
+  </div>
 </div>
-{{main-footer}}
+<div class="frame__footer">
+  {{main-footer}}
+</div>

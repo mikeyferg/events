@@ -22,14 +22,15 @@ $f-xxLarge: 1.5em; /* 24/16 */
 // Line height
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
-$navigation-height: 3em;
+$navigation-width: 12rem;
+$navigation-height: 3rem;
 
 // Other Sizes
 $base-border-radius: 5px;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
-$footer-height: 80px;
+$footer-height: 2rem;
 
 // Colors
 $white: #fff;
@@ -58,6 +59,7 @@ $base-border: 1px solid $base-border-color;
 $body-background-color: #edf4fb;
 $base-background-color: #fff;
 $nav-background-color: #1773f1;
+$footer-background: darken($nav-background-color, 30%);
 $secondary-background-color: darken($body-background-color, 5%);
 
 // Forms

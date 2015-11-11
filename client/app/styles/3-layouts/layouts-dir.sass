@@ -1,3 +1,7 @@
+@import "frame"
+body
+  > .ember-view
+    height: 100%
 section
   @include outer-container
   @include pad(1em)
@@ -28,11 +32,3 @@ article
 
 .color-section
   background-color: $secondary-background-color
-
-body
-  > .ember-view
-    height: 100%
-
-.main-content
-  min-height: 100%
-  margin-bottom: -$footer-height

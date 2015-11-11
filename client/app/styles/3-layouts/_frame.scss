@@ -1,0 +1,96 @@
+.frame {
+  position: relative;
+  height: 100%;
+  margin-bottom: -$footer-height;
+}
+
+.frame__header{
+  box-sizing: border-box;
+  position: relative;
+
+  z-index: $z-index-main-header-fixed;
+}
+
+.frame__content{
+  box-sizing: border-box;
+  position: relative;
+}
+
+.frame__menu {
+  overflow: hidden;
+  opacity: 1;
+  width: $navigation-width;
+  max-width: $navigation-width;
+  height: 100%;
+  min-height: $navigation-height;
+  z-index: $z-index-main-menu;
+
+  @include transition(all $base-duration $base-timing);
+  @include position(fixed, 0px 0px 0 0);
+  @include transform(translate3d(-100%, 0, 0));
+
+  @include media ($medium-screen) {
+    position: relative;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    @include transform(translate3d(0,0,0));
+  }
+}
+
+.frame__modal-cover {
+  visibility: hidden;
+  opacity: 0;
+
+  background-color: rgba(0,0,0,0.6);
+
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: $z-index-modal-cover;
+
+  pointer-events: none;
+
+  @include transition(opacity $base-duration ease-in-out,
+                      visibility $base-duration,
+                      z-index 0s ease-in-out $base-duration);
+}
+
+.frame__footer {
+  height: $footer-height;
+  overflow: hidden;
+}
+
+.frame--modalEnabled {
+  .frame__modal-cover {
+    cursor: pointer;
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
+  }
+}
+
+.frame--menuEnabled {
+  .frame__menu {
+    @include transform(translate3d(0,0,0));
+  }
+
+  .frame__modal-cover {
+    @include media (max-width $medium-screen) {
+      cursor: pointer;
+      z-index: $z-index-main-menu - 1;
+
+      opacity: 1;
+      visibility: visible;
+
+      pointer-events: auto;
+
+      @include transition(opacity $base-duration ease-in-out);
+    }
+  }
+}
