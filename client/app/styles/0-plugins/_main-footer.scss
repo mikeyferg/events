@@ -4,17 +4,15 @@
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
   $dark-gray: #333 !default;
-  $footer-background: transparent;
+  $footer-background: darken($nav-background-color, 30%);
   $footer-color: white;
-  $footer-link-color: transparentize($footer-color, 0.6);
   $footer-disclaimer-color: transparentize($footer-color, 0.6);
 
   background: $footer-background;
   padding: $base-spacing;
   width: 100%;
   display: inline-block;
-  position: absolute;
-  bottom: 0;
+  height: $footer-height;
 
   .footer-logo {
     margin-right: 1em;
@@ -54,7 +52,7 @@
   }
 
   ul li a {
-    color: $footer-link-color;
+    color: $footer-font-color;
     text-decoration: none;
     @include transition(all 0.2s ease-in-out);
 

@@ -1,19 +1,20 @@
 <div class="footer-logo">
-  <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo image">
+  {{#link-to 'cities' class="logo"}}
+    <img src="/assets/img/logo.png" alt="Logo Image">
+  {{/link-to}}
 </div>
 <ul>
-  <li><a href="javascript:void(0)">About</a></li>
-  <li><a href="javascript:void(0)">Contact</a></li>
-  <li><a href="javascript:void(0)">Products</a></li>
+  <li>{{link-to 'About' 'about'}}</li>
+  <li>{{link-to 'Contact' 'contact'}}</li>
 </ul>
 
 <div class="footer-secondary-links">
-  <ul>
+  {{!-- <ul>
     <li><a href="javascript:void(0)">Terms and Conditions</a></li>
     <li><a href="javascript:void(0)">Privacy Policy</a></li>
-  </ul>
+  </ul> --}}
 
-  <ul class="footer-social">
+  {{!-- <ul class="footer-social">
     <li><a href="javascript:void(0)">
       <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/facebook-logo-circle.png" alt="Facebook">
     </a></li>
@@ -23,5 +24,5 @@
     <li><a href="javascript:void(0)">
       <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/youtube-logo-circle.png" alt="YouTube">
     </a></li>
-  </ul>
+  </ul> --}}
 </div>
