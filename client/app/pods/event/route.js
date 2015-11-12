@@ -2,17 +2,21 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params){
-    return this.store.find('event', params.event_slug);
+    return Ember.RSVP.hash({
+      event: this.store.queryRecord('event', {slug: params.event_slug}),
+      city: this.store.queryRecord('city', {slug: params.city_slug}),
+      extraEvents: this.store.query('event', {limit: true})
+    });
   },
 
   afterModel(model) {
-    var eventName = model.get('name');
+    var eventName = model.event.get('name');
     Ember.$(document).attr('title', eventName);
   },
 
   setupController(controller, model) {
     this._super(controller, model);
-    this.controllerFor('application').set('headerTitle', model.get('name'));
+    this.controllerFor('application').set('headerTitle', model.event.get('name'));
   },
 
   serialize(event) {
@@ -28,7 +32,7 @@ export default Ember.Route.extend({
       tagId: 'description',
       attrs: {
         name: 'description',
-        content: `${model.get('shortSummary')}`
+        content: `${model.event.get('shortSummary')}`
       }
     }];
   }

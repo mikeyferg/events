@@ -10,10 +10,6 @@
   }
 }
 
-.Canvas--menuEnabled header.navigation {
-  @include transform(translate3d(0,0,0));
-}
-
 header.navigation {
   $navigation-padding: 1em;
   $navigation-nav-button-background: $action-color;
@@ -27,25 +23,7 @@ header.navigation {
   $horizontal-bar-mode: $medium-screen;
 
   background: $nav-background-color;
-  overflow: hidden;
-  opacity: 1;
-
-  width: 200px;
-  max-width: 200px;
   height: 100%;
-  min-height: $navigation-height;
-  z-index: $z-index-main-menu;
-
-  @include transition(all $base-duration $base-timing);
-  @include position(fixed, 0px 0px 0 0);
-  @include transform(translate3d(-100%, 0, 0));
-
-  @include media ($medium-screen) {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    @include transform(translate3d(0,0,0));
-  }
 
   .navigation-wrapper {
     @include clearfix;
@@ -125,12 +103,15 @@ header.navigation {
   ul li.nav-link {
     background: $nav-background-color;
     display: block;
-    line-height: $navigation-height;
     overflow: hidden;
-    padding-right: 0.8em;
     text-align: right;
-    width: 100%;
-    z-index: 9999;
+    border-bottom: $navigation-nav-button-border;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      background-color: $navigation-nav-button-background-hover;
+    }
 
     @include media ($horizontal-bar-mode) {
       background: transparent;
@@ -138,21 +119,39 @@ header.navigation {
       line-height: $navigation-height;
       text-decoration: none;
       width: auto;
+      border: none;
+      &:hover,
+      &:active {
+        background-color: transparent;
+      }
     }
 
     a {
       color: $nav-font-color;
       display: inline-block;
       text-decoration: none;
+      width: 100%;
+      height: 100%;
+      line-height: $navigation-height;
+      padding-right: 0.8em;
 
       @include media ($horizontal-bar-mode) {
+        width: auto;
         padding-right: 1em;
       }
 
       &:focus,
       &:hover,
       &.active {
-        color: $nav-font-active-color;
+        background-color: $navigation-nav-button-background-hover;
+      }
+      @include media ($horizontal-bar-mode) {
+        &:focus,
+        &:hover,
+        &.active {
+          background-color: transparent;
+          color: $nav-font-active-color;
+        }
       }
     }
   }

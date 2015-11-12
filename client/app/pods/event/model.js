@@ -22,7 +22,6 @@ export default DS.Model.extend({
   start_date_time: attr('string'),
   summary: attr('string'),
   time_only: attr('date'),
-  venue: attr('string'),
   featured: attr('boolean'),
 
   city: DS.belongsTo('city'),
@@ -58,6 +57,9 @@ export default DS.Model.extend({
       .replace(/[\[\]()"']/g, "")
       .replace(/(\\xE5\\xD0)/g,", ")
       .split(';');
+    if (cleanSchedule.length === 1) {
+      return false;
+    }
     return cleanSchedule;
   }),
 

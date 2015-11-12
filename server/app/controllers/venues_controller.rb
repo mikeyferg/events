@@ -1,13 +1,18 @@
 class VenuesController < ApplicationController
 
   def index
+    if params['slug']
+      @venue = find_venue_by_slug
+      render :show
+    else
     @venues = Venue.all
     respond_to do |format|
-      format.html
-      format.json { render json: {
-        venues: @venues
-        }
-       }
+        format.html
+        format.json { render json: {
+          venues: @venues
+          }
+         }
+      end
     end
   end
   def show
@@ -63,6 +68,9 @@ class VenuesController < ApplicationController
   private
   def find_venue
     Venue.friendly.find(params[:id])
+  end
+  def find_venue_by_slug
+    Venue.friendly.find(params[:slug])
   end
   def venue_params
     params.require(:venue).permit(:name, :address, :city_id, :image_url, :image)

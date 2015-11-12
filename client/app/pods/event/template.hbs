@@ -1,33 +1,38 @@
 <section>
   <article itemscope itemtype="http://schema.org/Event">
     <p itemprop="description">
-      <img itemprop="image" src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} style="float:left; padding: 0 1em 0.5em 0;" />
-      {{model.summary}}
+      {{#if model.event.image_url}}
+        <img itemprop="image" class="summary-image" src={{model.event.image_url}} alt={{model.event.name}} data-photo-id={{model.event.slug}} />
+      {{/if}}
+      {{model.event.summary}}
     </p>
+    {{#if model.event.scheduleList}}
+      <div class="color-section">
+        <section class="outer-container">
+          {{schedule-list schedule=model.event.scheduleList}}
+        </section>
+      </div>
+    {{/if}}
   </article>
 
   <aside>
-    <h3>Details</h3>
+    <h3 class="section-header">Details</h3>
     <ul itemscope itemtype="http://schema.org/Event">
-      {{#if model.cost}}
-        <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.cost}}</span></li>
+      {{#if model.event.cost}}
+        <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.event.cost}}</span></li>
       {{/if}}
-      <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.venue.name 'venue' model.venue}}</li>
-      <li itemprop="location">{{fa-icon icon="map-marker"}} {{model.address}}</li>
-      <li itemprop="startDate" datetime={{model.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.start_date_time}}</li>
-      <li>{{fa-icon icon="tags"}} {{model.tagsList}}</li>
-      {{#if model.source_url}}
-        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.source_url}} target="_blank">{{model.sourceUrlDomain}}</a></li>
+      <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
+      <li itemprop="location">{{fa-icon icon="map-marker"}} {{model.event.address}}</li>
+      <li itemprop="startDate" datetime={{model.event.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.event.start_date_time}}</li>
+      <li>{{fa-icon icon="tags"}} {{model.event.tagsList}}</li>
+      {{#if model.event.source_url}}
+        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} target="_blank">{{model.event.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
-    {{google-map address=model.address}}
+    {{google-map address=model.event.address}}
+    <h3 class="section-header">More events</h3>
+    {{#each model.extraEvents as |event|}}
+      {{event-card city=model.city event=event}}
+    {{/each}}
   </aside>
 </section>
-
-{{#if model.schedule}}
-  <div class="color-section">
-    <section class="outer-container">
-      {{schedule-list schedule=model.scheduleList}}
-    </section>
-  </div>
-{{/if}}

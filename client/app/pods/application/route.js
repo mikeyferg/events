@@ -54,6 +54,13 @@ export default Ember.Route.extend(ConnectWithFacebook, {
     },
     disableMenu() {
       this.set('controller.isMenuEnabled', false);
+    },
+    disableModal() {
+      this.set('controller.isModalVisible', false);
+      this.set('controller.isMenuEnabled', false);
+    },
+    enableModal() {
+      this.set('controller.isModalVisible', true);
     }
   }
 });

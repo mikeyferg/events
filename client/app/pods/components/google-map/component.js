@@ -8,7 +8,12 @@ export default Ember.Component.extend({
     const mapContainer = this.element;
     const address = this.get('address');
 
-    const map = new window.google.maps.Map(mapContainer, {});
+    const map = new window.google.maps.Map(mapContainer, {
+      disableDoubleClickZoom: true,
+      draggable: false,
+      scrollwheel: false,
+      panControl: false
+    });
     const service = new google.maps.places.PlacesService(map);
     const marker = new google.maps.Marker({map: map});
 

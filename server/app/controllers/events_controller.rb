@@ -2,13 +2,23 @@ class EventsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   require 'kimono.rb'
   def index
-    @events = Event
-      .where({ start_date_time: Time.now.utc..6.months.from_now })
-      .by_category(params[:category])
-      .by_date_range(params[:date_range])
-      .by_cost(params[:free], params[:cost])
-      .page(params[:page]).per(27)
-      .sort_by { rand}
+    if params['slug']
+      @event = find_event_by_slug
+      render :show
+    elsif params[:limit]
+      @events = Event
+        .where({ start_date_time: Time.now.utc..6.months.from_now })
+        .sort_by { rand}
+        .take(3)
+    else
+      @events = Event
+        .where({ start_date_time: Time.now.utc..6.months.from_now })
+        .by_category(params[:category])
+        .by_date_range(params[:date_range])
+        .by_cost(params[:free], params[:cost])
+        .page(params[:page]).per(27)
+        .sort_by { rand}
+    end
   end
 
   def show
@@ -63,6 +73,9 @@ private
 def find_event
   Event.friendly.find(params[:id])
   #Event.find(params[:id])
+end
+def find_event_by_slug
+  Event.friendly.find(params[:slug])
 end
 def event_params
   params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :cost_integer, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule, :start_date_time)

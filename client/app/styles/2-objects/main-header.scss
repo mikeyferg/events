@@ -17,6 +17,15 @@
   @include media($medium-screen) {
     display: none;
   }
+  i {
+    font-size: $f-large;
+  }
+  i:hover {
+    background: darken($nav-background-color, 5%);
+  }
+  i:active {
+    background: darken($nav-background-color, 15%);
+  }
 }
 
 .main-header__title {
@@ -26,6 +35,8 @@
 
   @include media($medium-screen) {
     @include span-columns(12);
+    background-color: darken($secondary-background-color, 5%);
+    text-transform: uppercase;
     h1 {
       font-size: $f-xLarge;
     }

@@ -1,9 +1,12 @@
 <section>
   {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
-  Address: {{model.address}}
-  <div class="">
+  <article>
+    Address: {{model.address}}
+  </article>
+  <aside class="">
+    <h3 class="section-header">Events</h3>
     {{#each model.events as |event|}}
-    {{event.name}}<br />
+      {{event-card city=model.city event=event}}
     {{/each}}
-  </div>
+  </aside>
 </section>
