@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     this._super(controller, model);
-    this.controllerFor('application').set('headerTitle', `Events in ${model.city.get('name')}`);
+    this.controllerFor('application').set('headerTitle', `The ${model.city.get('name')} event spot`);
   },
 
   actions: {
