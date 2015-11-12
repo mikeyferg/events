@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 
+  match '/sitemap.xml', to: 'sitemaps#show', via: [:get, :post]
+
   #resources :events, defaults: {format: :json}
   match 'users/me', to: 'users#me', via: :get
   resources :users, defaults: {format: :json}

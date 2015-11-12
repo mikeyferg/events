@@ -35,6 +35,8 @@ gem 'devise'
 gem "jquery-ui-rails"
 gem "just-datetime-picker"
 gem 'active_admin_importable'
+gem 'sitemap_generator'
+gem 'fog-aws'
 
 #Debugging & Test Suite
 group :development, :test do
