@@ -122,7 +122,7 @@ class Event < ActiveRecord::Base
       tags = opts[:tags] || [],
       schedule = opts[:schedule] || nil,
       start_date_time = opts[:start_date_time] || nil
-
+      featured = opts[:featured] || false
     #find or create venue for this event
     new_venue = Venue.find_or_create_venue(venue, address, city_id)
     #search for events that already exist and put in an array
@@ -140,7 +140,6 @@ class Event < ActiveRecord::Base
        # update existing event
        event = current_event_array[0]
        event.update(
-
          name: name,
          time_only: time_only,
          venue_id: new_venue['id'],
@@ -153,7 +152,8 @@ class Event < ActiveRecord::Base
          date_only: date_only,
          city_id: city_id,
          schedule: schedule,
-         start_date_time: start_date_time
+         start_date_time: start_date_time,
+         featured: featured
        )
        event.tags.delete_all
        tags.each do |tag|
@@ -176,7 +176,8 @@ class Event < ActiveRecord::Base
          date_only: date_only,
          city_id: city_id,
          schedule: schedule,
-         start_date_time: start_date_time
+         start_date_time: start_date_time,
+         featured: featured
        )
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
@@ -187,6 +188,7 @@ class Event < ActiveRecord::Base
 
  # convert cost to integer
   def self.cost_integer_parser(cost)
+  
     if cost == nil
       nil
     elsif cost.downcase == "free"
