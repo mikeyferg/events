@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   // get filter values for UI on reload
   free: Ember.computed.reads('eventsController.free'),
   date_range: Ember.computed.reads('eventsController.date_range'),
+  featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
 
   freeSwitchChanged : function() {
     this.get('eventsController').set('page', 1);

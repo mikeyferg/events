@@ -1,0 +1,55 @@
+$info-padding: 0.5em;
+
+.featured-event-card {
+  background: $grid-item-background;
+  cursor: pointer;
+  overflow: hidden;
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid;
+  display: inline-block;
+  position: relative;
+  height: $featured-event-card-height;
+  @include span-columns(12);
+  @include media($medium-screen) {
+    float: left;
+    width: 50%;
+    margin: 0;
+  }
+}
+
+.featured-event-card__poster {
+  min-width: 100%;
+}
+
+.featured-event-card__info {
+  width: 100%;
+  padding: $info-padding;
+  color: $white;
+  position: absolute;
+  bottom: 0;
+  font-weight: bold;
+  @include linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.8));
+}
+
+.featured-event-card__info--left {
+  @include span-columns(8);
+}
+.featured-event-card__info--right {
+  position: absolute;
+  bottom: $info-padding;
+  right: $info-padding;
+  font-size: $f-large;
+  @include span-columns(4);
+}
+
+.featured-event-card__header {
+  font-size: $f-large;
+}
+
+.featured-event-card__info-item {
+  font-size: $f-small;
+}
+
+.featured-event-card__info-item--right {
+  text-align: right;
+}

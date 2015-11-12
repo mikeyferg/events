@@ -1,3 +1,10 @@
+{{#if featuredEvents}}
+  <div class="featured-events-container">
+    {{#each featuredEvents as |featured|}}
+    {{featured-event-card city=model event=featured}}
+    {{/each}}
+  </div>
+{{/if}}
 <section>
   <div class="flexbox-row">
     {{button-group dateRangeChanged='filterByDate' date_range=date_range}}

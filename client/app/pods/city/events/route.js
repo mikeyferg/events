@@ -9,7 +9,14 @@ export default Ember.Route.extend({
         date_range: params.date_range,
         cost: params.cost,
         free: params.free
-      })
+      }),
+      featuredEvents: this.store.query('event', {
+        page: params.page,
+        date_range: params.date_range,
+        cost: params.cost,
+        free: params.free,
+        featured: true
+      }),
     });
   },
 

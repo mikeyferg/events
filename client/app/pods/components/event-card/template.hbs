@@ -2,10 +2,6 @@
   {{#link-to "event" city.slug event.slug}}
   <img itemprop="image" src={{imageUrl}} alt={{event.name}} data-photo-id={{event.slug}} class="event-card__poster" />
 
-  {{#if event.featured}}
-    <div class="event-card__featured">Featured</div>
-  {{/if}}
-
   <div class="event-card__info">
     <h3 itemprop="name" class="event-card__header">{{event.name}}</h3>
     {{#if event.address}}
@@ -20,7 +16,7 @@
     {{/if}}
     {{#if event.cost}}
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="event-card__info-item event-card__info-item--right event-card__info-item--bold">
-         <span itemprop="price">{{event.cost}}</span>
+         <span itemprop="price">{{event.costDisplay}}</span>
       </div>
     {{/if}}
   </div>

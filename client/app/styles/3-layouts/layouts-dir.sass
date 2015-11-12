@@ -18,6 +18,15 @@ article
     @include span-columns(4)
     @include shift(1)
 
+.grid-items
+  @include outer-container
+  @include clearfix
+.featured-events-container
+  @include outer-container
+  width: 100%
+  height: $featured-event-card-height
+  overflow: hidden
+
 // Masonry Grid
 .masonry-grid
   @include column-count(1)

@@ -1,11 +1,6 @@
 $grid-item-background: $base-background-color;
 $grid-item-margin: 0.3em;
 
-.grid-items {
-  @include outer-container;
-  @include clearfix;
-}
-
 .event-card {
   background: $grid-item-background;
   cursor: pointer;

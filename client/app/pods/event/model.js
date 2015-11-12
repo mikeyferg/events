@@ -37,6 +37,15 @@ export default DS.Model.extend({
     return domain;
   }),
 
+  costDisplay: Ember.computed('cost', function() {
+    let cost = this.get('cost');
+    if (cost.indexOf(';') !== -1) {
+      let costs = cost.split(';');
+      cost = `${costs.get('firstObject')} - ${costs.get('lastObject')}`;
+    }
+    return cost;
+  }),
+
   tagsList: Ember.computed('tags.[]', function() {
     let list = '';
     let arraySize = this.get('tags.length');
