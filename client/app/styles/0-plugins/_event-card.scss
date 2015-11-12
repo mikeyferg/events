@@ -15,6 +15,7 @@ $grid-item-margin: 0.3em;
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
   display: inline-block;
+  position: relative;
   @include media($medium-screen) {
     margin: 0 $grid-item-margin 2em;
     @include border-top-radius($base-border-radius);
