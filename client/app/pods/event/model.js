@@ -52,6 +52,9 @@ export default DS.Model.extend({
   }),
 
   scheduleList: Ember.computed("schedule", function() {
+    if (cleanSchedule === null) {
+      return false;
+    }
     let cleanSchedule = this.get('schedule')
       .replace(/(", ")/g, ";")
       .replace(/[\[\]()"']/g, "")
