@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   insertMap: function() {
     const mapContainer = this.element;
     const address = this.get('address');
-
+    console.log(address);
     const map = new window.google.maps.Map(mapContainer, {
       disableDoubleClickZoom: true,
       draggable: false,
@@ -17,9 +17,19 @@ export default Ember.Component.extend({
     const service = new google.maps.places.PlacesService(map);
     const marker = new google.maps.Marker({map: map});
 
+    var request = {
+      placeId: ''
+    };
+    var sf = {lat: 37, lng: 122};
+
     service.textSearch({
+      location: sf,
+      radius: 500,
       query: address
     }, function(place) {
+      console.log(place);
+      request.placeId = place[0].place_id;
+      getPlace();
       map.setCenter(place[0].geometry.location);
       map.setZoom(17);
 
@@ -37,6 +47,14 @@ export default Ember.Component.extend({
     }, function(err) {
       console.log(err);
     });
+
+
+
+    function getPlace() {
+      service.getDetails(request, function (place, status) {
+        console.log(place, status);
+      });
+    }
 
   }.on('didInsertElement')
 });

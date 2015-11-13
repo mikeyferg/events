@@ -1,4 +1,5 @@
-$info-padding: 0.5em;
+$padding-size: 0.5em;
+$info-padding: 2em $padding-size $padding-size;
 
 .featured-event-card {
   background: $grid-item-background;
@@ -19,6 +20,7 @@ $info-padding: 0.5em;
 
 .featured-event-card__poster {
   min-width: 100%;
+  min-height: 100%;
 }
 
 .featured-event-card__info {
@@ -32,18 +34,18 @@ $info-padding: 0.5em;
 }
 
 .featured-event-card__info--left {
-  @include span-columns(8);
+  @include span-columns(10);
 }
 .featured-event-card__info--right {
   position: absolute;
-  bottom: $info-padding;
-  right: $info-padding;
+  bottom: $padding-size;
+  right: $padding-size;
   font-size: $f-large;
-  @include span-columns(4);
 }
 
 .featured-event-card__header {
   font-size: $f-large;
+  margin: 0;
 }
 
 .featured-event-card__info-item {
