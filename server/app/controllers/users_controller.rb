@@ -43,17 +43,8 @@ skip_before_filter :verify_authenticity_token
 
   def create
     @user = User.find_or_initialize_by(uid: user_params[:uid])
-    if @user
-      @user.update_attributes(user_params)
-      render json: {user: @user}
-    else
-      @user = User.new(user_params)
-       if @user.save
-         render json: {user: @user}
-       else
-         render json: { error: "Can't create a user" }
-       end
-    end
+    @user.update_attributes(user_params)
+    render json: {user: @user}
   end
 
   def edit
@@ -87,7 +78,7 @@ skip_before_filter :verify_authenticity_token
     User.friendly.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:name, :email, :image, :oauth_token, :uid)
+    params.require(:user).permit(:name, :email, :image_url, :oauth_token, :uid)
   end
 
 end

@@ -12,7 +12,7 @@ export default Provider.extend({
             user: {
               name: credentials.name,
               email: credentials.email,
-              image: credentials.picture,
+              image_url: credentials.picture,
               oauth_token: credentials.accessToken,
               uid: credentials.uid
             }

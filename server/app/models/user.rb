@@ -23,7 +23,7 @@ require 'paperclip.rb'
 class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-  after_create :update_image, only: :image_url
+  # after_create :update_image, only: :image_url
 
   def slug_candidates
   [

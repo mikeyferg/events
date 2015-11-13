@@ -13,7 +13,7 @@
     <ul id="js-navigation-menu" class="navigation-menu" {{action 'disableMenu'}}>
       {{#if session.isAuthenticated }}
           <li class="nav-link">
-            {{!-- <img src={{myAccount.image_url}} alt="Avatar" class="user-avatar" />  --}}
+            <img src={{myAccount.image_url}} alt="Avatar" class="user-avatar" /> 
             {{link-to myAccount.name 'user'}}
           </li>
           <li class="nav-link"><a href="#" {{action 'logout'}}>Logout</a></li>
