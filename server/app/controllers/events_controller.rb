@@ -10,6 +10,15 @@ class EventsController < ApplicationController
         .where({ start_date_time: Time.now.utc..6.months.from_now })
         .sort_by { rand}
         .take(3)
+    elsif params[:featured]
+      @events = Event
+        .where({ start_date_time: Time.now.utc..6.months.from_now })
+        .where({featured: true})
+        .by_category(params[:category])
+        .by_date_range(params[:date_range])
+        .by_cost(params[:free], params[:cost])
+        .sort_by { rand }
+        .take(2)
     else
       @events = Event
         .where({ start_date_time: Time.now.utc..6.months.from_now })
