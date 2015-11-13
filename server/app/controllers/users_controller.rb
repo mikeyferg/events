@@ -42,8 +42,9 @@ skip_before_filter :verify_authenticity_token
   end
 
   def create
-    @user = User.find_by(uid: user_params[:uid])
+    @user = User.find_or_initialize_by(uid: user_params[:uid])
     if @user
+      @user.update_attributes(user_params)
       render json: {user: @user}
     else
       @user = User.new(user_params)

@@ -12,7 +12,7 @@ export default Ember.Object.extend({
   },
 
   fetch: function() {
-    console.log("Fetch");
+    console.log("Facebook adapter: Fetch");
     return new Ember.RSVP.Promise((resolve, reject) => {
       const accessToken = localStorage.token;
 
@@ -26,12 +26,13 @@ export default Ember.Object.extend({
 
 
   open(authorization) {
+    console.log("Facebook adapter: Open");
     return new Promise((resolve, reject) => {
       const accessToken = authorization.accessToken;
       if ( Ember.isPresent(accessToken) ) {
         localStorage.token = accessToken;
       }
-      console.log("This seession", this.get('session'));
+      console.log("Facebook: This seession", this.get('session'));
       window.FB.api('/me', 'GET', { fields: [ 'email', 'name', 'picture' ] }, (response) => {
         if (Ember.isPresent(response)) {
           console.log("id", response);
