@@ -37,6 +37,9 @@ gem "just-datetime-picker"
 gem 'active_admin_importable'
 gem 'sitemap_generator'
 gem 'fog-aws'
+gem 'whenever', :require => false
+gem 'geocoder'
+
 
 #Debugging & Test Suite
 group :development, :test do
