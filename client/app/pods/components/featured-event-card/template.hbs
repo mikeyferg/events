@@ -1,0 +1,27 @@
+<div itemscope itemtype="http://schema.org/Event">
+  {{#link-to "event" city.slug event.slug}}
+  <img itemprop="image" src={{imageUrl}} alt={{event.name}} data-photo-id={{event.slug}} class="featured-event-card__poster" />
+  <div class="featured-event-card__info">
+    <div class="featured-event-card__info--left">
+      <h3 itemprop="name" class="featured-event-card__header">{{event.name}}</h3>
+      {{#if event.address}}
+        <div itemprop="location" class="featured-event-card__info-item">
+          {{fa-icon icon="map-marker"}} {{event.address}}
+        </div>
+      {{/if}}
+      {{#if event.date_only}}
+        <div itemprop="startDate" datetime={{model.start_date_time}} class="featured-event-card__info-item">
+          {{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="featured-event-card__info--right">
+      {{#if event.cost}}
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="featured-event-card__info-item featured-event-card__info-item--right">
+           <span itemprop="price">{{event.costDisplay}}</span>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  {{/link-to}}
+</div>

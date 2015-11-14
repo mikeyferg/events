@@ -8,7 +8,8 @@ module.exports = function(environment) {
     modulePrefix: 'client',
     podModulePrefix: 'client/pods',
     googleFonts: [
-      'Open+Sans:300'
+      'Open+Sans:300',
+      'Roboto:300'
     ],
     EmberENV: {
       FEATURES: {

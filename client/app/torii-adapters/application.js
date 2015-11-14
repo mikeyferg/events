@@ -10,7 +10,7 @@ export default Ember.Object.extend({
   },
 
   fetch: function() {
-    console.log("Fetch");
+    console.log("Application adapter: Fetch");
     return new Ember.RSVP.Promise((resolve, reject) => {
       const accessToken = localStorage.token;
 
@@ -24,7 +24,7 @@ export default Ember.Object.extend({
 
   open: function(authorization){
     return new Ember.RSVP.Promise((resolve, reject) => {
-      console.log("open", authorization);
+      console.log("Application adapter: open", authorization);
       const accessToken = authorization.user.oauth_token;
 
       if (accessToken) {

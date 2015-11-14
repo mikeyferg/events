@@ -6,13 +6,13 @@ export default Provider.extend({
   path: `${config.apiHostname}/users`,
 
   open(credentials) {
-    console.log("credentials", credentials);
+    console.log("Facebook provider", credentials);
     const path = this.get('path'),
           userData = {
             user: {
               name: credentials.name,
               email: credentials.email,
-              image: credentials.picture,
+              image_url: credentials.picture,
               oauth_token: credentials.accessToken,
               uid: credentials.uid
             }

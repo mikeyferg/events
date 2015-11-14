@@ -9,13 +9,20 @@ export default Ember.Route.extend({
         date_range: params.date_range,
         cost: params.cost,
         free: params.free
-      })
+      }),
+      featuredEvents: this.store.query('event', {
+        page: params.page,
+        date_range: params.date_range,
+        cost: params.cost,
+        free: params.free,
+        featured: true
+      }),
     });
   },
 
   setupController(controller, model) {
     this._super(controller, model);
-    this.controllerFor('application').set('headerTitle', `Events in ${model.city.get('name')}`);
+    this.controllerFor('application').set('headerTitle', `The ${model.city.get('name')} event spot`);
   },
 
   actions: {

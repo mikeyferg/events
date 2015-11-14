@@ -12,11 +12,17 @@
   <div class="navigation-tools">
     <ul id="js-navigation-menu" class="navigation-menu" {{action 'disableMenu'}}>
       {{#if session.isAuthenticated }}
-          {{session.currentUser.image_url}}
-          <li class="nav-link"><img src={{session.currentUser.image}} alt="Avatar" class="user-avatar" /> {{link-to session.currentUser.name 'user'}}</li>
+          <li class="nav-link">
+            <img src={{myAccount.image_url}} alt="Avatar" class="user-avatar" />
+            {{link-to myAccount.name 'user'}}
+          </li>
           <li class="nav-link"><a href="#" {{action 'logout'}}>Logout</a></li>
       {{else}}
-        <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Facebook Login</a></li>
+        {{#if session.isWorking}}
+          <li class="nav-link"><a>Signing in...</a></li>
+        {{else}}
+          <li class="nav-link"><a href="#" {{action 'signInViaFacebook'}}>Facebook Login</a></li>
+        {{/if}}
       {{/if}}
     </ul>
     {{!-- <div class="search-bar">

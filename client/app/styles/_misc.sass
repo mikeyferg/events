@@ -9,7 +9,7 @@
   float: left
   margin: 10px
   border-radius: 50px
-  width: 40px
+  width: 30px
   border: 0px solid #ccc
 
   &:hover
@@ -32,3 +32,8 @@
   width: 100%
   @include media($medium-screen)
     width: 35%
+    float: left
+    margin-right: 1em
+
+label > *
+  pointer-events: none

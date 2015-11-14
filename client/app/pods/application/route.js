@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import config from '../../config/environment';
 import ConnectWithFacebook from './connect-with-facebook';
+import reloadMyAccount from '../user/reload/mixin';
 
 // Add css class to body
 Ember.Route.reopen({
@@ -23,7 +24,7 @@ Ember.RSVP.configure('onerror', function(e) {
   console.log(e.stack);
 });
 
-export default Ember.Route.extend(ConnectWithFacebook, {
+export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
   beforeModel() {
     this._super(...arguments);
     let that = this;
@@ -36,7 +37,7 @@ export default Ember.Route.extend(ConnectWithFacebook, {
         'type': 'GET',
         'contentType': 'application/json'
       }).then((result) => {
-        that.get('session').currentUser = result.user;
+        let myAccount = that.reloadMyAccount();
       });
     }, function() {
       console.log('No session to fetch');
