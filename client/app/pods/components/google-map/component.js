@@ -3,11 +3,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: 'map-canvas',
+  geocoder: new google.maps.Geocoder(),
+
+  getLatLong() {
+    this.get('geocoder').geocode( { 'address': this.get('address')}, function(results, status) {
+      return results[0].geometry.location;
+    });
+  },
 
   insertMap: function() {
     const mapContainer = this.element;
-    const address = this.get('address');
-    console.log(address);
+
     const map = new window.google.maps.Map(mapContainer, {
       disableDoubleClickZoom: true,
       draggable: false,
@@ -16,6 +22,11 @@ export default Ember.Component.extend({
     });
     const service = new google.maps.places.PlacesService(map);
     const marker = new google.maps.Marker({map: map});
+    const geocoder = new google.maps.Geocoder();
+    let locations;
+
+    let coords = this.getLatLong();
+    console.log(coords);
 
     var request = {
       placeId: ''
@@ -25,7 +36,7 @@ export default Ember.Component.extend({
     service.textSearch({
       location: sf,
       radius: 500,
-      query: address
+      query: this.get('venue')
     }, function(place) {
       console.log(place);
       request.placeId = place[0].place_id;
@@ -57,4 +68,5 @@ export default Ember.Component.extend({
     }
 
   }.on('didInsertElement')
+
 });

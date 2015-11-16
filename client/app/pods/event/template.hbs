@@ -29,7 +29,7 @@
         <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} target="_blank">{{model.event.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
-    {{google-map address=model.event.venue.name}}
+    {{google-map venue=model.event.venue.name address=model.event.address}}
     <h3 class="section-header">More events</h3>
     {{#each model.extraEvents as |event|}}
       {{event-card city=model.city event=event}}
