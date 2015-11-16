@@ -33,6 +33,9 @@ class Venue < ActiveRecord::Base
   has_many :events
   belongs_to :city
 
+  has_many :partner_venues
+  has_many :venues, through: :partner_venues
+
   def self.find_or_create_venue(name, address, city_id, image_url = nil)
     Venue.where(name: name).first_or_create do |venue|
       venue.name = name

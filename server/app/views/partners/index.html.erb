@@ -1,0 +1,10 @@
+<h1>All Partners </h1>
+<% @partners.each do |partner| %>
+  <ul>
+    <li>Name: <%=partner.name %></li>
+    <li>Email: <%= partner.email %></li>
+    <li>Image: <%= partner.image_url %></li>
+    <li>Organization: <%= partner.organization %></li>
+    <li>Type: <%= partner.type %></li>
+  </ul>
+<% end %>

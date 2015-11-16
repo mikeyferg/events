@@ -45,6 +45,9 @@ class Event < ActiveRecord::Base
   has_many :event_tags
   has_many :tags, through: :event_tags
 
+  has_many :partner_events
+  has_many :partners, through: :partner_events
+
   validates :name, :presence => true
   validates :date_only, :presence => true
   validates :time_only, :presence => true
@@ -188,7 +191,7 @@ class Event < ActiveRecord::Base
 
  # convert cost to integer
   def self.cost_integer_parser(cost)
-  
+
     if cost == nil
       nil
     elsif cost.downcase == "free"

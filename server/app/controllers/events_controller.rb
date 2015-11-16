@@ -73,11 +73,7 @@ def destroy
   redirect_to events_path
 end
 
-# def update_image(event)
-#   #event.image.destroy
-#   new_image = URI.parse('http://otowndogrescue.com/wp-content/uploads/2013/09/foster-dog.jpg')
-#   event.update_attribute(:image, new_image)
-# end
+
 private
 def find_event
   Event.friendly.find(params[:id])

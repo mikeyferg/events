@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   #resources :events, defaults: {format: :json}
   match 'users/me', to: 'users#me', via: :get
   resources :users, defaults: {format: :json}
+  resources :partners, defaults: {format: :json}
   resources :kimonos_webhooks
   resources :cities, defaults: {format: :json}
   resources :events, defaults: {format: :json}

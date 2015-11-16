@@ -1,0 +1,15 @@
+<%= form_for @partner do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br />
+
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %><br />
+
+  <%= f.label :organization %>
+  <%= f.text_field :organization %><br />
+
+  <%= f.submit %>
+<% end %>
