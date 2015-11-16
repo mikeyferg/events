@@ -11,13 +11,13 @@ class PartnersController < ApplicationController
   end
   def show
     @partner = find_partner
-    respond_to do |format|
-      format.html
-      format.json { render json: {
-        partner: @partner
-      }
-    }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: {
+    #     partner: @partner
+    #   }
+    # }
+    # end
   end
 
   def new
