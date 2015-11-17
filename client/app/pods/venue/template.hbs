@@ -1,14 +1,12 @@
 <section>
   {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
   {{google-map venue=model.name address=model.address}}
-  <article>
     <h3>{{model.name}}</h3>
-    {{fa-icon icon="map-marker"}} {{model.address}}
-  </article>
-  <aside class="">
+    <p>{{fa-icon icon="map-marker"}} {{model.address}}</p>
     <h3 class="section-header">Events</h3>
-    {{#each model.events as |event|}}
-      {{event-card city=model.city event=event}}
-    {{/each}}
-  </aside>
+    <div class="grid-items masonry-grid">
+      {{#each model.events as |event|}}
+        {{event-card city=model.city event=event}}
+      {{/each}}
+    </div>
 </section>
