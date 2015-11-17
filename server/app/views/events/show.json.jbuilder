@@ -1,7 +1,5 @@
 json.event do |json|
   json.(@event, :id, :name, :end_time, :summary, :image_url, :address, :cost, :source_url, :end_date, :date_only, :time_only, :start_date_time, :featured, :city_id, :venue_id, :schedule, :slug)
-
-
       json.venue @event.venue.id if !@event.venue.nil?
       json.city @event.city.id
       json.tags @event.tags.pluck :id
