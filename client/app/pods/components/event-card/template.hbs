@@ -4,9 +4,9 @@
 
   <div class="event-card__info">
     <h3 itemprop="name" class="event-card__header">{{event.name}}</h3>
-    {{#if event.address}}
+    {{#if event.venue_name}}
       <div itemprop="location" class="event-card__info-item">
-        {{fa-icon icon="map-marker"}} {{event.address}}
+        {{fa-icon icon="home"}} {{event.venue_name}}
       </div>
     {{/if}}
     {{#if event.date_only}}

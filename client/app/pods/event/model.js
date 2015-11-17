@@ -23,6 +23,7 @@ export default DS.Model.extend({
   summary: attr('string'),
   time_only: attr('date'),
   featured: attr('boolean'),
+  venue_name: attr('string'),
 
   city: DS.belongsTo('city'),
   tags: DS.hasMany('tag'),
