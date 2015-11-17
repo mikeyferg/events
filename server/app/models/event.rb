@@ -102,7 +102,7 @@ class Event < ActiveRecord::Base
   def update_image
     # binding.pry
     if self['image_url'].blank?
-      self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
+      self['image_url'] = "http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
     end
     url = self['image_url']
     new_image = URI.parse(url)

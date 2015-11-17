@@ -20,8 +20,8 @@ require 'paperclip.rb'
 class Venue < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
-  after_create :update_image, only: :image_url
-  #after_save :update_image, only: :image_url
+  # after_create :update_image, only: :image_url
+
 
   def slug_candidates
   [
@@ -56,7 +56,7 @@ class Venue < ActiveRecord::Base
 
   def update_image
     if self['image_url'].nil?
-      self['image_url'] = "https://s3.amazonaws.com/event-images.eventcoyote/default/venue.jpg"
+      self['image_url'] = "http://s3.amazonaws.com/event-images.eventcoyote/default/venue.jpg"
     end
       url = self['image_url']
       new_image = URI.parse(url)
