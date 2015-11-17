@@ -1,6 +1,4 @@
 # http://www.robotstxt.org
 
-Sitemap: https://s3.amazonaws.com/sitemap-eventcoyote/sitemaps/sitemap.xml.gz
-
 User-agent: *
 Disallow:
