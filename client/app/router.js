@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('not-found');
+  this.route('application-error');
+
   this.route('cities', {path: '/'});
   this.route('city', {path: '/:city_slug'}, function() {
     this.route('events', {path: '/:category'});

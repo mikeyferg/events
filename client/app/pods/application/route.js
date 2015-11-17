@@ -44,6 +44,16 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
     });
   },
 
+  handleGenericError(error, transition) {
+    Ember.Logger.error(error);
+    transition.abort();
+    this.controllerFor('application').set('savedTransition', transition);
+    // Without this, it's impossible to figure out errors during development
+    if (config.environment !== 'development') {
+      this.transitionTo('application-error');
+    }
+  },
+
   actions: {
     logout() {
       this.get('session').close();
@@ -62,6 +72,42 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
     },
     enableModal() {
       this.set('controller.isModalVisible', true);
+    },
+
+    resumeSavedTransition() {
+      const transition = this.controller.get('savedTransition');
+
+      if (transition) {
+        this.controller.set('savedTransition', null);
+        transition.retry();
+      } else {
+        this.transitionTo('/');
+      }
+    },
+
+    error(error, transition) {
+      this._super(...arguments);
+      console.log("Error captured", error, transition);
+
+      if (error.isHandled) {
+        return;
+      }
+
+      if (Ember.isPresent(error.errors)) {
+        const firstError = error.errors[0];
+
+        this.controllerFor('application').set('headerTitle', 'Error');
+
+        if (parseInt(firstError.status, 10) === 404 || firstError.code === 'RECORD_NOT_FOUND') {
+          transition.abort();
+          error.isHandled = true;
+          this.replaceWith('not-found');
+        }
+      }
+
+      if (!transition.isAborted) {
+        this.handleGenericError(error, transition);
+      }
     }
   }
 });
