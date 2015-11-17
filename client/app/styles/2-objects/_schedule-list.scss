@@ -1,11 +1,13 @@
-$closed-list-height: 150px;
+$closed-list-height: 145px;
 .schedule-list {
   overflow: hidden;
+  position: relative;
+  padding-bottom: 2em;
   @include transition(all $base-duration $base-timing);
 }
 
 .schedule-list--expanded {
-  max-height: 1300px;
+  max-height: 3000px;
 }
 
 .schedule-list--closed {
@@ -16,4 +18,13 @@ $closed-list-height: 150px;
 .schedule-list__header {
   font-weight: bold;
   cursor: pointer;
+}
+
+.schedule-list__show-all {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  background-color: $secondary-background-color;
 }
