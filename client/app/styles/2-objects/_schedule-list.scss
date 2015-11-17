@@ -2,6 +2,7 @@ $closed-list-height: 145px;
 .schedule-list {
   overflow: hidden;
   position: relative;
+  padding-bottom: 2em;
   @include transition(all $base-duration $base-timing);
 }
 
@@ -12,7 +13,6 @@ $closed-list-height: 145px;
 .schedule-list--closed {
   height: auto;
   max-height: $closed-list-height;
-  padding-bottom: 1em;
 }
 
 .schedule-list__header {

@@ -1,0 +1,30 @@
+$closed-description-height: 520px;
+.event-description {
+  @include media(max-width $medium-screen) {
+    position: relative;
+    padding-bottom: 2em;
+    @include transition(all $base-duration $base-timing);
+  }
+}
+
+.event-description--expanded {
+  @include media(max-width $medium-screen) {
+    max-height: 3000px
+  }
+}
+
+.event-description--closed {
+  @include media(max-width $medium-screen) {
+    height: auto;
+    max-height: $closed-description-height;
+  }
+}
+
+.event-description__show-all {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  @include linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1));
+}

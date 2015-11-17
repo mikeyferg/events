@@ -1,0 +1,13 @@
+{{#if event.image_url}}
+  <img itemprop="image" class="summary-image" src={{event.image_url}} alt={{event.name}} data-photo-id={{event.slug}} />
+{{/if}}
+{{event.summary}}
+{{#if isExpandable}}
+  <div class="event-description__show-all" {{action 'toggleList'}}>
+    {{#if isExpanded}}
+      <b>Hide</b>
+    {{else}}
+      <b>Show All</b>
+    {{/if}}
+  </div>
+{{/if}}
