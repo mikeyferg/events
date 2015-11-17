@@ -1,13 +1,25 @@
 <div class="schedule-list__header" {{action 'toggleList'}}>
   Full schedule:
-  {{#if isExpanded}}
-    {{fa-icon icon="arrow-up"}}
-  {{else}}
-    {{fa-icon icon="arrow-down"}}
+  {{#if isExpandable}}
+    {{#if isExpanded}}
+      {{fa-icon icon="caret-square-o-up pull-right"}}
+    {{else}}
+      {{fa-icon icon="caret-square-o-down pull-right"}}
+    {{/if}}
   {{/if}}
 </div>
 
 {{#each schedule as |time|}}
   {{time}}<br>
 {{/each}}
+
+{{#if isExpandable}}
+  <div class="schedule-list__show-all" {{action 'toggleList'}}>
+    {{#if isExpanded}}
+      <b>Hide</b>
+    {{else}}
+      <b>Show All</b>
+    {{/if}}
+  </div>
+{{/if}}
 {{yield}}

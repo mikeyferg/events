@@ -1,7 +1,9 @@
 <section>
   {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
+  {{google-map venue=model.name address=model.address}}
   <article>
-    Address: {{model.address}}
+    <h3>{{model.name}}</h3>
+    {{fa-icon icon="map-marker"}} {{model.address}}
   </article>
   <aside class="">
     <h3 class="section-header">Events</h3>

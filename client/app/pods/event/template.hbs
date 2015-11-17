@@ -1,11 +1,6 @@
 <section>
   <article itemscope itemtype="http://schema.org/Event">
-    <p itemprop="description">
-      {{#if model.event.image_url}}
-        <img itemprop="image" class="summary-image" src={{model.event.image_url}} alt={{model.event.name}} data-photo-id={{model.event.slug}} />
-      {{/if}}
-      {{model.event.summary}}
-    </p>
+    {{event-description event=model.event}}
     {{#if model.event.scheduleList}}
       <div class="color-section">
         <section class="outer-container">
@@ -29,7 +24,7 @@
         <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} target="_blank">{{model.event.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
-    {{google-map address=model.event.venue.name}}
+    {{google-map venue=model.event.venue.name address=model.event.address}}
     <h3 class="section-header">More events</h3>
     {{#each model.extraEvents as |event|}}
       {{event-card city=model.city event=event}}
