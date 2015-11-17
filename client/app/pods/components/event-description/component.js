@@ -8,9 +8,9 @@ export default Ember.Component.extend({
   isExpanded: false,
 
   insertElement: function() {
-    let elementHeight = Ember.$(this.element).css('height');
-    elementHeight = parseInt(elementHeight);
-    if (elementHeight !== 'NaN' && elementHeight >= 520) {
+    let paragraphHeight = Ember.$('.event-description__summary').css('height');
+    paragraphHeight = parseInt(paragraphHeight);
+    if (paragraphHeight !== 'NaN' && paragraphHeight >= 200) {
       this.set('isExpandable', true)
     }
   }.on('didInsertElement'),
