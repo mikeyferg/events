@@ -81,17 +81,17 @@ Event.create!([
   user.events << Event.first
   user.events << Event.find(2)
 
-  Partner.create!([
-      {
-        name: "Partner1",
-        email: "test@partner.com",
-        image_url: "https://pbs.twimg.com/profile_images/526200678780137472/l7zBEZPP_400x400.jpeg",
-        organization: "NBA",
-        type: "venue"
-      }
-    ])
-    partner = Partner.first
-    partner.venues << Venue.first
-    partner.events << Event.first
+  # Partner.create!([
+  #     {
+  #       name: "Partner1",
+  #       email: "test@partner.com",
+  #       image_url: "https://pbs.twimg.com/profile_images/526200678780137472/l7zBEZPP_400x400.jpeg",
+  #       organization: "NBA",
+  #       type: "venue_owner"
+  #     }
+  #   ])
+  #   partner = Partner.first
+  #   partner.venues << Venue.first
+  #   partner.events << Event.first
 
  AdminUser.create!(email: ENV['ACTIVEADMIN_NAME'], password: ENV['ACTIVEADMIN_PASSWORD'], password_confirmation: ENV['ACTIVEADMIN_PASSWORD'])
