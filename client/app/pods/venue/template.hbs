@@ -1,12 +1,16 @@
 <section>
+  <a href="http://www.eventcoyote.com/sf/events/chance-the-rapper">link 1</a>
+  <a href="http://www.eventcoyote.com/sf/events/caf-tacvba-zo">link 2</a>
+  <a href="http://www.eventcoyote.com/sf/events/the-chainsmokers">link 3</a>
+  <a href="http://www.eventcoyote.com/sf/events/tropicana">link 4</a>
   {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
   {{google-map venue=model.name address=model.address}}
     <h3>{{model.name}}</h3>
     <p>{{fa-icon icon="map-marker"}} {{model.address}}</p>
     <h3 class="section-header">Events</h3>
-    <div class="grid-items masonry-grid">
+    <div class="grid-items">
       {{#each model.events as |event|}}
-        {{event-card city=model.city event=event}}
+        {{featured-event-card city=model.city event=event}}
       {{/each}}
     </div>
 </section>
