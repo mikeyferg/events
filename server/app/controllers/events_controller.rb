@@ -32,6 +32,12 @@ class EventsController < ApplicationController
 
   def show
     @event = find_event
+    if stale?(etag: @event, last_modified: @event.updated_at)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @company }
+      end
+    end
   end
 
   def new
