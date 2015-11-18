@@ -2,9 +2,11 @@ require 'event.rb'
 module SfStation
 
   def self.add_event(hash)
-    if hash[:date_only].nil? || hash[:time_only].nil?
+    if hash[:date_only].nil? || hash[:time_only].nil? || hash[:name].nil?
       nil
     elsif SfStation.date_splitter(hash[:date_only]).nil? || SfStation.start_time_regex(hash[:time_only]).nil?
+      nil
+    elsif hash[:address].nil? && hash[:venue].nil?
       nil
     else
 
@@ -18,9 +20,10 @@ module SfStation
         date_array = hash[:date_only].split(" ")
         time = SfStation.start_time_regex(hash[:time_only])
       start_date_time = SfStation.date_time_combiner(date_array, time)
-      address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-      venue = hash[:venue].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-      summary = hash[:summary].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+
+      address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})  unless hash[:address].nil?
+      venue = hash[:venue].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''}) unless hash[:venue].nil?
+      summary = hash[:summary].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''}) unless hash[:summary].nil?
       image_url = hash[:image_url]
       cost = hash[:cost]
       source_url = hash[:event_url]
@@ -38,10 +41,10 @@ module SfStation
       end
 
       event = Event.create_update_event(name, date_only, time_only, city_id,
-        venue: venue,
+        venue: venue || nil,
         image_url: image_url,
-        summary: summary,
-        address: address,
+        summary: summary || nil,
+        address: address || nil,
         cost: cost,
         source_url: source_url,
         date_only: date_only,
