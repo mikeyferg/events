@@ -74,6 +74,11 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
       this.set('controller.isModalVisible', true);
     },
 
+    searchEvents(searchInput) {
+      this.controllerFor('city.events').set('search', searchInput);
+      this.transitionTo('city.events', 'sf', 'events');
+    },
+
     resumeSavedTransition() {
       const transition = this.controller.get('savedTransition');
 

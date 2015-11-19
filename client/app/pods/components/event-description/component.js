@@ -7,11 +7,15 @@ export default Ember.Component.extend({
   isExpandable: false,
   isExpanded: false,
 
+  setIsExpandable() {
+    this.set('isExpandable', true)
+  },
+
   insertElement: function() {
     let paragraphHeight = Ember.$('.event-description__summary').css('height');
     paragraphHeight = parseInt(paragraphHeight);
     if (paragraphHeight !== 'NaN' && paragraphHeight >= 200) {
-      this.set('isExpandable', true)
+      Ember.run.scheduleOnce('afterRender', this, 'setIsExpandable');
     }
   }.on('didInsertElement'),
 

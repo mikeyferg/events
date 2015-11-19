@@ -8,7 +8,8 @@ export default Ember.Route.extend({
         page: params.page,
         date_range: params.date_range,
         cost: params.cost,
-        free: params.free
+        free: params.free,
+        search: params.search
       }),
       featuredEvents: this.store.query('event', {
         page: params.page,

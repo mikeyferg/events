@@ -1,5 +1,11 @@
 <section>
   <article itemscope itemtype="http://schema.org/Event">
+    <meta itemprop="name" content={{model.event.name}} />
+    <meta itemprop="startDate" content={{model.event.start_date_time}} />
+    <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <meta itemprop="name" content={{model.event.venue_name}} />
+      <meta itemprop="address" content={{model.event.address}} />
+    </span>
     {{event-description event=model.event}}
     {{#if model.event.scheduleList}}
       <div class="color-section">
@@ -17,11 +23,14 @@
         <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.event.costDisplay}}</span></li>
       {{/if}}
       <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
-      <li itemprop="location">{{fa-icon icon="map-marker"}} {{model.event.address}}</li>
-      <li itemprop="startDate" datetime={{model.event.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.event.start_date_time}}</li>
+      <li itemprop="location" itemscope itemtype="http://schema.org/Place">
+        {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.venue_name}}</span>
+        <meta itemprop="address" content={{model.event.address}} />
+      </li>
+      <li itemprop="startDate" content={{model.event.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.event.start_date_time}}</li>
       <li>{{fa-icon icon="tags"}} {{model.event.tagsList}}</li>
       {{#if model.event.source_url}}
-        <li itemprop="url" >{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} target="_blank">{{model.event.sourceUrlDomain}}</a></li>
+        <li>{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} itemprop="url" target="_blank">{{model.event.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
     {{google-map venue=model.event.venue.name address=model.event.address}}

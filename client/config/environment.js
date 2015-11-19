@@ -32,7 +32,7 @@ module.exports = function(environment) {
       'default-src': "none",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com *.google-analytics.com",
       'font-src': "'self' *.gstatic.com",
-      'connect-src': "'self' ws://0.0.0.0:49152 localhost:3900 coyote-api-staging.herokuapp.com ws://localhost:49152 http://localhost:3000 https://facebook.com www.facebook.com connect.facebook.net",
+      'connect-src': "'self' ws://0.0.0.0:49152 localhost:3900 coyote-api-staging.herokuapp.com ws://localhost:49152 http://localhost:3000 https://facebook.com www.facebook.com connect.facebook.net event-coyote-api.herokuapp.com",
       'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net www.sfstation.com s3.amazonaws.com *.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' *.googleapis.com",
       'media-src': "'self'",

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'header',
   classNames: 'navigation',
-  role: 'asdf',
+  searchInput: Ember.computed.reads('search'),
 
   actions: {
     logout: function() {
@@ -20,6 +20,10 @@ export default Ember.Component.extend({
 
     disableMenu: function() {
       this.sendAction('disableMenu');
+    },
+
+    searchEvents: function() {
+      this.sendAction('searchEvents', this.get('searchInput'));
     }
   }
 });

@@ -1,12 +1,12 @@
-<section>
+<section itemprop="location" itemscope itemtype="http://schema.org/Place">
   {{!-- <img src={{model.image_url}} alt={{model.name}} data-photo-id={{model.slug}} /> --}}
   {{google-map venue=model.name address=model.address}}
-    <h3>{{model.name}}</h3>
-    <p>{{fa-icon icon="map-marker"}} {{model.address}}</p>
+    <h3 itemprop="name">{{model.name}}</h3>
+    <p itemprop="address">{{fa-icon icon="map-marker"}} {{model.address}}</p>
     <h3 class="section-header">Events</h3>
-    <div class="grid-items masonry-grid">
+    <div class="grid-items">
       {{#each model.events as |event|}}
-        {{event-card city=model.city event=event}}
+        {{featured-event-card city=model.city event=event}}
       {{/each}}
     </div>
 </section>
