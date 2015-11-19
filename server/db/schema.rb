@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115233957) do
+ActiveRecord::Schema.define(version: 20151119062534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 20151115233957) do
     t.string   "end_time"
     t.text     "summary"
     t.string   "image_url"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "address"
     t.string   "cost"
     t.string   "source_url"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20151115233957) do
     t.integer  "cost_integer"
     t.date     "date_only"
     t.datetime "start_date_time"
+    t.string   "start_date_time_array", default: [],              array: true
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
