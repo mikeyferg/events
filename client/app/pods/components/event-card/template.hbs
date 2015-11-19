@@ -5,18 +5,20 @@
   <div class="event-card__info">
     <h3 itemprop="name" class="event-card__header">{{event.name}}</h3>
     {{#if event.venue_name}}
-      <div itemprop="location" class="event-card__info-item">
-        {{fa-icon icon="home"}} {{event.venue_name}}
+      <div itemprop="location" itemscope itemtype="http://schema.org/Place" class="event-card__info-item">
+        {{fa-icon icon="home"}} <span itemprop="name">{{event.venue_name}}</span>
+        <meta itemprop="address" content={{event.address}} />
       </div>
     {{/if}}
     {{#if event.date_only}}
-      <div itemprop="startDate" datetime={{model.start_date_time}} class="event-card__info-item">
+      <div itemprop="startDate" content={{event.start_date_time}} class="event-card__info-item">
         {{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}
       </div>
     {{/if}}
     {{#if event.cost}}
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="event-card__info-item event-card__info-item--right event-card__info-item--bold">
          <span itemprop="price">{{event.costDisplay}}</span>
+         <meta itemprop="url" content={{event.source_url}} />
       </div>
     {{/if}}
   </div>
