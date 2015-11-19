@@ -1,5 +1,11 @@
 <section>
   <article itemscope itemtype="http://schema.org/Event">
+    <meta itemprop="name" content={{model.event.name}} />
+    <meta itemprop="startDate" content={{model.event.start_date_time}} />
+    <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <meta itemprop="name" content={{model.event.venue_name}} />
+      <meta itemprop="address" content={{model.event.address}} />
+    </span>
     {{event-description event=model.event}}
     {{#if model.event.scheduleList}}
       <div class="color-section">
@@ -17,7 +23,7 @@
         <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.event.costDisplay}}</span></li>
       {{/if}}
       <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
-      <li itemprop="location" itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <li itemprop="location" itemscope itemtype="http://schema.org/Place">
         {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.venue_name}}</span>
         <meta itemprop="address" content={{model.event.address}} />
       </li>
