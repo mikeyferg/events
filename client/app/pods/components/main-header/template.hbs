@@ -1,5 +1,9 @@
-<div class="main-header__menu" {{action 'toggleMenu'}}>
-  <i class="fa fa-bars"></i>
+<div class="main-header__menu">
+  {{#if menuLevel}}
+    <i class="fa fa-bars" {{action 'toggleMenu'}}> {{currentRoute}}</i>
+  {{else}}
+  <i class="fa fa-angle-left" {{action 'goBack'}}></i>
+  {{/if}}
 </div>
 <div class="main-header__title">
   <h1>{{headerTitle}}</h1>

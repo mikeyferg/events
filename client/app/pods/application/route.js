@@ -80,6 +80,10 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
     enableModal() {
       this.set('controller.isModalVisible', true);
     },
+    goBack() {
+      console.log("going back");
+      window.history.go(-1);
+    },
 
     searchEvents(searchInput) {
       console.log("Search input", searchInput);

@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
   reset() {
     this.set('free', this.get('eventsController').get('free'));
     this.set('date_range', this.get('eventsController').get('date_range'));
-    console.log("this.get('eventsController').get('featuredEvents')", this.get('eventsController').get('featuredEvents'));
     this.set('featuredEvents', this.get('eventsController').get('model.featuredEvents'));
   },
 
