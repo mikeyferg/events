@@ -3,9 +3,14 @@
     <meta itemprop="name" content={{model.event.name}} />
     <meta itemprop="startDate" content={{model.event.start_date_time}} />
     <span itemprop="location" itemscope itemtype="http://schema.org/Place">
-      <meta itemprop="name" content={{model.event.venue_name}} />
+      <meta itemprop="name" content={{model.event.venue.name}} />
       <meta itemprop="address" content={{model.event.address}} />
     </span>
+    <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="price" content={{model.event.cost_integer}} />
+      <meta itemprop="url" content={{model.event.source_url}} />
+    </span>
+    
     {{event-description event=model.event}}
     {{#if model.event.scheduleList}}
       <div class="color-section">
@@ -24,7 +29,7 @@
       {{/if}}
       <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
       <li itemprop="location" itemscope itemtype="http://schema.org/Place">
-        {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.venue_name}}</span>
+        {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.address}}</span>
         <meta itemprop="address" content={{model.event.address}} />
       </li>
       <li itemprop="startDate" content={{model.event.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.event.start_date_time}}</li>

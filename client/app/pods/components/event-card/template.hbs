@@ -17,7 +17,7 @@
     {{/if}}
     {{#if event.cost}}
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="event-card__info-item event-card__info-item--right event-card__info-item--bold">
-         <span itemprop="price">{{event.costDisplay}}</span>
+         <span itemprop="price" content={{event.cost_integer}}>{{event.costDisplay}}</span>
          <meta itemprop="url" content={{event.source_url}} />
       </div>
     {{/if}}

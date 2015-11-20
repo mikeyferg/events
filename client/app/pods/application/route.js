@@ -55,6 +55,14 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
   },
 
   actions: {
+    willTransition: function(transition) {
+      if (transition.intent.name === 'cities') {
+        console.log("resetting");
+        this.controllerFor('city').set('free', false);
+        this.controllerFor('city').set('date_range', 'week');
+      }
+    },
+
     logout() {
       this.get('session').close();
       this.transitionTo('/');

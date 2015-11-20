@@ -19,7 +19,7 @@
     <div class="featured-event-card__info--right">
       {{#if event.cost}}
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="featured-event-card__info-item featured-event-card__info-item--right">
-           <span itemprop="price">{{event.costDisplay}}</span>
+           <span itemprop="price" content={{event.cost_integer}}>{{event.costDisplay}}</span>
            <meta itemprop="url" content={{event.source_url}} />
         </div>
       {{/if}}

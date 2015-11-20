@@ -7,6 +7,7 @@ const attr = DS.attr;
 export default DS.Model.extend({
   address: attr('string'),
   cost: attr('string'),
+  cost_integer: attr('number'),
   created_at: attr('date'),
   date_only: attr('date'),
   end_date: attr('string'),
