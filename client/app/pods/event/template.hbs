@@ -10,7 +10,7 @@
       <meta itemprop="price" content={{model.event.cost_integer}} />
       <meta itemprop="url" content={{model.event.source_url}} />
     </span>
-    
+
     {{event-description event=model.event}}
     {{#if model.event.scheduleList}}
       <div class="color-section">
@@ -25,7 +25,7 @@
     <h3 class="section-header">Details</h3>
     <ul itemscope itemtype="http://schema.org/Event">
       {{#if model.event.cost}}
-        <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price">{{model.event.costDisplay}}</span></li>
+        <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price" content={{model.event.cost_integer}}>{{model.event.costDisplay}}</span></li>
       {{/if}}
       <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
       <li itemprop="location" itemscope itemtype="http://schema.org/Place">
