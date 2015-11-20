@@ -8,6 +8,16 @@ export default Ember.Controller.extend({
   free: false,
   search: '',
 
+  reset() {
+    this.setProperties({
+      page: 1,
+      date_range: 'week',
+      cost: null,
+      free: false,
+      search: ''
+    })
+  },
+
   actions: {
     getNextPage() {
       let nextPage = +this.get('page') + 1;
