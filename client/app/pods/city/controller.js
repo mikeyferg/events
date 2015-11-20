@@ -8,6 +8,12 @@ export default Ember.Controller.extend({
   date_range: Ember.computed.reads('eventsController.date_range'),
   featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
 
+  reset() {
+    this.set('free', this.get('eventsController').get('free'));
+    this.set('date_range', this.get('eventsController').get('date_range'));
+    this.set('featuredEvents', this.get('eventsController').get('featuredEvents'));
+  },
+
   freeSwitchChanged : function() {
     this.get('eventsController').set('page', 1);
     this.get('eventsController').set('free', this.get('free'));

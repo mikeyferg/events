@@ -57,9 +57,8 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
   actions: {
     willTransition: function(transition) {
       if (transition.intent.name === 'cities') {
-        console.log("resetting");
-        this.controllerFor('city').set('free', false);
-        this.controllerFor('city').set('date_range', 'week');
+        this.controllerFor('city.events').reset();
+        this.controllerFor('city').reset();
       }
     },
 
@@ -83,6 +82,7 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
     },
 
     searchEvents(searchInput) {
+      console.log("Search input", searchInput);
       this.controllerFor('city.events').set('search', searchInput);
       this.transitionTo('city.events', 'sf', 'events');
     },
