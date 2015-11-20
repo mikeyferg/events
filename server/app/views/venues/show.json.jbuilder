@@ -5,7 +5,7 @@ json.venue do |json|
 end
 
 
-json.events @venue.events.where({ start_date_time: Time.now.utc..6.months.from_now }).limit( 20 ).order(:start_date_time), :id, :name, :start_date_time, :slug, :end_time, :summary, :image_url, :address, :cost, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule
+json.events @venue.events.where({ start_date_time: Time.now.utc..6.months.from_now }).limit( 20 ).order(:start_date_time), :id, :name, :start_date_time, :slug, :end_time, :summary, :image_url, :address, :cost, :cost_integer, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule
 
 @city_array_format = [ @venue.city ]
 # json.set! :city do
