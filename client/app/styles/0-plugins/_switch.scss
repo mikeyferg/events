@@ -1,13 +1,13 @@
-$switch-height: 32px;
 .checkbox-label {
-  line-height: $switch-height;
-  vertical-align: top;
+  line-height: 36px;
 }
 .label-switch {
   $action-color: #477DCA !default;
   $base-background-color: white !default;
   $switch-width: 52px;
+  $switch-height: 30px;
   $switch-padding: 2px;
+  $switch-margin: 0.375em;
   $switch-radius: $switch-height;
   $knob-size: $switch-height - ($switch-padding * 2);
   $knob-radius: $switch-height - ($switch-padding * 2);
@@ -21,6 +21,7 @@ $switch-height: 32px;
   display: inline-block;
   height: $switch-height;
   position: relative;
+  margin: $switch-margin 0;
   width: $switch-width;
 
   input[type="checkbox"] {
