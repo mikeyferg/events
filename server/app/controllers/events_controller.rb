@@ -89,6 +89,6 @@ def find_event_by_slug
   Event.friendly.find(params[:slug])
 end
 def event_params
-  params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :cost_integer, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule, :start_date_time)
+  params.require(:event).permit(:name, :start_time, :end_time, :summary, :image_url, :image, :address, :cost, :cost_integer, :source_url, :page_url, :end_date, :date_only, :time_only, :featured, :city_id, :venue_id, :schedule, :start_date_time, :start_date_time_array)
 end
 end
