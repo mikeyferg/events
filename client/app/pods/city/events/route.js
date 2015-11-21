@@ -27,9 +27,6 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    willTransition: function(transition) {
-      this.controller.set('search', '');
-    },
     queryParamsDidChange() {
       this.refresh();
     }
