@@ -39,21 +39,7 @@ module SfStation
       else
         schedule = []
       end
-
-      event = Event.create_update_event(name, date_only, time_only, city_id,
-        venue: venue || nil,
-        image_url: image_url,
-        summary: summary || nil,
-        address: address || nil,
-        cost: cost,
-        source_url: source_url,
-        date_only: date_only,
-        city_id: city_id,
-        tags: tags,
-        schedule: schedule,
-        start_date_time: start_date_time
-      )
-
+      start_date_time_array = [start_date_time.to_s]
       if schedule.length > 0 && schedule[0] != "Event has passed"
         schedule.each do |instance|
           date = SfStation.date_regex(instance)
@@ -67,25 +53,25 @@ module SfStation
             time_only = Time.parse(Sfstation.start_time_regex(time)) rescue nil
             date_array = date.split(" ")
 
-            start_date_time = SfStation.date_time_combiner(date_array, time)
-            event = Event.create_update_event(name, date_only, time_only, city_id,
-              venue: venue,
-              image_url: image_url,
-              summary: summary,
-              address: address,
-              cost: cost,
-              source_url: source_url,
-              date_only: date_only,
-              city_id: city_id,
-              tags: tags,
-              schedule: schedule,
-              start_date_time: start_date_time
-            )
+            start_date_time_string = SfStation.date_time_combiner(date_array, time).to_s
+            start_date_time_array << start_date_time_string unless start_date_time_string == start_date_time_array[0]
           end
         end
       end
+
+      event = Event.create_update_event(name, start_date_time_array, city_id,
+        venue: venue,
+        image_url: image_url,
+        summary: summary,
+        address: address,
+        cost: cost,
+        source_url: source_url,
+        date_only: date_only,
+        city_id: city_id,
+        tags: tags,
+      )
     end
-    end
+  end
 
 
     #-----------------sfstation date normalizers---------------------

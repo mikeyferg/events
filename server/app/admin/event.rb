@@ -10,9 +10,6 @@ end
 index do
     column :id
     column :name
-    column :date_only
-    column :time_only
-    column :start_date_time
     column :venue
     column :image_url
     column :source_url
@@ -21,7 +18,7 @@ index do
     column :featured
     column :city
     column :tags
-    column :schedule
+    column :start_date_time_array
     actions
 end
 

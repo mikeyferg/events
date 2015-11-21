@@ -18,4 +18,10 @@ controller do
   end
 end
 
+
+  csv do
+    column :name
+  end
+
+
 end

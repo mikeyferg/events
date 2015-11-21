@@ -2,31 +2,32 @@
 #
 # Table name: events
 #
-#  id                 :integer          not null, primary key
-#  name               :string
-#  end_time           :string
-#  summary            :text
-#  image_url          :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  address            :string
-#  cost               :string
-#  source_url         :string
-#  end_date           :string
-#  image_file_name    :string
-#  image_content_type :string
-#  image_file_size    :integer
-#  image_updated_at   :datetime
-#  city_id            :integer
-#  slug               :string
-#  time_only          :time
-#  featured           :boolean
-#  page_url           :string
-#  venue_id           :integer
-#  schedule           :text
-#  cost_integer       :integer
-#  date_only          :date
-#  start_date_time    :datetime
+#  id                    :integer          not null, primary key
+#  name                  :string
+#  end_time              :string
+#  summary               :text
+#  image_url             :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  address               :string
+#  cost                  :string
+#  source_url            :string
+#  end_date              :string
+#  image_file_name       :string
+#  image_content_type    :string
+#  image_file_size       :integer
+#  image_updated_at      :datetime
+#  city_id               :integer
+#  slug                  :string
+#  time_only             :time
+#  featured              :boolean
+#  page_url              :string
+#  venue_id              :integer
+#  schedule              :text
+#  cost_integer          :integer
+#  date_only             :date
+#  start_date_time       :datetime
+#  start_date_time_array :string           default([]), is an Array
 #
 
 require 'open-uri'
@@ -49,11 +50,8 @@ class Event < ActiveRecord::Base
   has_many :partners, through: :partner_events
 
   validates :name, :presence => true
-  validates :date_only, :presence => true
-  validates :time_only, :presence => true
   validates :city_id, :presence => true
-  validates_date :date_only, :presence => true
-  validates_datetime :time_only, :presence => true
+  after_create :start_date_time_array, :presence => true
 
   after_validation :update_image, only: :image_url
 
@@ -113,7 +111,7 @@ class Event < ActiveRecord::Base
 
 
   # Core event creation and update method
-     def self.create_update_event(name, date_only, time_only, city_id, opts={})
+     def self.create_update_event(name, start_date_time_array, city_id, opts={})
       options = opts,
       venue = opts[:venue] || nil,
       image_url = opts[:image_url] || nil,
@@ -124,27 +122,17 @@ class Event < ActiveRecord::Base
       source_url = opts[:source_url] || nil,
       tags = opts[:tags] || [],
       schedule = opts[:schedule] || nil,
-      start_date_time = opts[:start_date_time] || nil
       featured = opts[:featured] || false
     #find or create venue for this event
     new_venue = Venue.find_or_create_venue(venue, address, city_id)
     #search for events that already exist and put in an array
-    current_event_array = Event.where(name: name, venue_id: new_venue['id'], date_only: date_only)
+    current_event_array = Event.where(name: name, venue_id: new_venue['id'])
     #if event exist update event and delete duplicates
      if current_event_array.length != 0
-       #if there is more than one instance of event then delete all instances except the first one
-       if current_event_array.length > 1
-         current_event = current_event_array.shift
-         current_event_array_delete = current_event_array
-         current_event_array_delete.each do |event|
-           Event.find(event.id).delete
-         end
-       end
        # update existing event
        event = current_event_array[0]
        event.update(
          name: name,
-         time_only: time_only,
          venue_id: new_venue['id'],
          image_url: image_url,
          summary: summary,
@@ -152,22 +140,34 @@ class Event < ActiveRecord::Base
          cost: cost,
          cost_integer: Event.cost_integer_parser(cost),
          source_url: source_url,
-         date_only: date_only,
          city_id: city_id,
          schedule: schedule,
-         start_date_time: start_date_time,
          featured: featured
        )
+
+       start_date_time_array.each do |new_time|
+         is_found = false
+         event.start_date_time_array.each do |existing_time|
+           if new_time == existing_time
+             is_found = true
+           end
+         end
+         if is_found == false
+          event.start_date_time_array << new_time
+        end
+       end
+
        event.tags.delete_all
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
          event.tags << tag_entry
        end
+       event.save
       #if event does not exist, create
+
      else
        event = Event.create(
          name: name,
-         time_only: time_only,
          venue_id: new_venue['id'],
          image_url: image_url,
          page_url: page_url,
@@ -176,16 +176,19 @@ class Event < ActiveRecord::Base
          cost: cost,
          cost_integer: Event.cost_integer_parser(cost),
          source_url: source_url,
-         date_only: date_only,
          city_id: city_id,
          schedule: schedule,
-         start_date_time: start_date_time,
-         featured: featured
+         featured: featured,
+          start_date_time_array: start_date_time_array[0]
        )
+       start_date_time_array.each do |time|
+         event.start_date_time_array << time
+       end
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
          event.tags << tag_entry
        end
+       event.save
      end
    end
 

@@ -16,7 +16,7 @@ ActiveAdmin.register_page "Dashboard" do
   end # content
 
   ActiveAdmin.register Event do
-    permit_params :name, :address, :city_id, :end_time, :summary, :image_url, :page_url, :address, :cost, :cost_integer, :sources_url, :end_date, :date_only, :time_only, :featured, :schedule
+    permit_params :name, :address, :city_id, :end_time, :start_date_time_array, :summary, :image_url, :page_url, :address, :cost, :cost_integer, :sources_url, :end_date, :date_only, :time_only, :featured, :schedule
     form do |f|
       f.input :name
       f.input :address

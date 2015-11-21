@@ -20,6 +20,7 @@ module Ape
         date_array = hash[:date_only].split(" ")
         time = Ape.start_time_regex(hash[:time_only])
       start_date_time = date_time_combiner(date_array, time)
+      start_date_time_array = [start_date_time.to_s]
 
       address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''}) unless hash[:address].nil?
       venue = hash[:venue].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''}) unless hash[:venue].nil?
@@ -27,10 +28,9 @@ module Ape
       image_url = hash[:image_url]
       cost = hash[:cost]
       source_url = hash[:event_url]
-      tags = ["music concert show"]
+      tags = ["music", "concert", "show"]
 
-
-      event = Event.create_update_event(name, date_only, time_only, city_id,
+      event = Event.create_update_event(name, start_date_time_array, city_id,
         venue: venue || nil,
         image_url: image_url,
         summary: summary || nil,
@@ -40,7 +40,6 @@ module Ape
         date_only: date_only,
         city_id: city_id,
         tags: tags,
-        start_date_time: start_date_time,
         featured: true
       )
 

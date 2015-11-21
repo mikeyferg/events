@@ -43,30 +43,20 @@ Venue.create!([
 Event.create!([
     {
       name: "Segway Time Travel Halloween Night Tour - Explore San Francisco's Dark Past",
-      end_time: "",
-      summary: "",
       image_url: "http://www.sfstation.com/images/ev/50/2287050a_tn220x220.jpg",
       address: "757 Beach Street, San Francisco, CA",
       cost: "$70",
-      source_url: nil,
-      end_date: "",
-      date_only: "2015-10-12",
-      time_only: "2015-10-12 19:30:00 -0700",
+      start_date_time_array: ["2015-12-02T03:30:00.000Z"],
       city_id: 1,
       venue_id: 1,
       schedule: "other dates"
     },
     {
       name: "Mixtape Monday Feat Jabbajaw",
-      end_time: "",
-      summary: '',
       image_url: "http://www.sfstation.com/images/ev/99/2287799a_tn220x220.jpg",
       address: "3138 Fillmore Street, San Francisco, CA",
       cost: "Free",
-      source_url: nil,
-      end_date: '',
-      date_only: "2015-10-12",
-      time_only: "2015-10-12 22:00:00 -0700",
+      start_date_time_array: ["2015-11-25T03:30:00.000Z"],
       city_id: 1,
       venue_id: 1,
       schedule: "other dates"
