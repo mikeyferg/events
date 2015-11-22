@@ -18,10 +18,12 @@ controller do
   end
 end
 
-
-  csv do
-    column :name
-  end
+  # 
+  # csv do
+  #   column :id
+  #   column :name
+  #   column :Tag.find(:id).count
+  # end
 
 
 end

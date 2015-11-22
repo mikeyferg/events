@@ -28,7 +28,7 @@ module Ape
       image_url = hash[:image_url]
       cost = hash[:cost]
       source_url = hash[:event_url]
-      tags = ["music", "concert", "show"]
+      tags = ["live music", "nightlife", "show", "bars/clubs"]
 
       event = Event.create_update_event(name, start_date_time_array, city_id,
         venue: venue || nil,
