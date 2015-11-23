@@ -5,16 +5,14 @@
     {{/each}}
   </div>
 {{/if}}
-<section>
-  <div class="flexbox-row">
-    {{button-group dateRangeChanged='filterByDate' date_range=date_range}}
-    <div>
-      <span class="checkbox-label">Free</span>
-      <label class="label-switch">
-        {{input type="checkbox" checked=free }}
-        <div class="checkbox"></div>
-      </label>
-    </div>
+<section class="color-section full-width">
+  {{button-group dateRangeChanged='filterByDate' date_range=date_range}}
+  <div class="grid-items outer-container">
+    <span class="checkbox-label"><b>Free</b></span>
+    <label class="label-switch pull-right">
+      {{input type="checkbox" checked=free }}
+      <div class="checkbox"></div>
+    </label>
   </div>
 </section>
 {{outlet}}

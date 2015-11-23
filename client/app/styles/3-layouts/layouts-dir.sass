@@ -5,6 +5,14 @@ body
 section
   @include outer-container
   @include pad(1em)
+  &.full-width
+    @include pad(0)
+
+.outer-container
+  @include outer-container
+  @include pad(0 1em)
+  &.full-width
+    @include pad(0)
 
 article
   @include clearfix
