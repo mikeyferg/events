@@ -25,7 +25,7 @@ end
   active_admin_importable do |model, hash|
     def page_url(hash, page)
       case page
-        when "http://www.sfstation.com/"
+      when "sfstation.com"
           SfStation.add_event(hash)
         when "Another Planet Entertainment"
           Ape.add_event(hash)
