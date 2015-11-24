@@ -22,6 +22,7 @@ Router.map(function() {
   // Static pages
   this.route('about');
   this.route('contact');
+  this.route('sample');
 });
 
 export default Router;
