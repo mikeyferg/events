@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('about');
   this.route('contact');
   this.route('sample');
+  this.route('sample2');
 });
 
 export default Router;
