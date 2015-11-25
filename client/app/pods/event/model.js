@@ -27,6 +27,7 @@ export default DS.Model.extend({
   venue_name: attr('string'),
 
   city: DS.belongsTo('city'),
+  eventTimes: DS.hasMany('event-time'),
   tags: DS.hasMany('tag'),
   venue: DS.belongsTo('venue'),
   // users: DS.hasMany('user', { async: true }),
