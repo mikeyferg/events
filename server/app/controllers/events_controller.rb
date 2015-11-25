@@ -9,11 +9,13 @@ class EventsController < ApplicationController
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .sort_by { rand}
+        .distinct
         .take(3)
     elsif params[:featured]
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .where({featured: true})
+        .distinct
         .by_category(params[:category])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
@@ -22,6 +24,7 @@ class EventsController < ApplicationController
     else
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
+        .distinct
         .by_category(params[:category])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
