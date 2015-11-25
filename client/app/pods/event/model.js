@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import moment from 'moment';
 import { isToday, isTomorrow, isWeekend } from '../../utils/date-filter';
 
 const attr = DS.attr;
@@ -12,6 +13,7 @@ export default DS.Model.extend({
   date_only: attr('date'),
   end_date: attr('string'),
   end_time: attr('date'),
+  event_times: attr('string'),
   generic_time: attr('string'),
   name: attr('string'),
   image_url: attr('string'),
@@ -27,7 +29,6 @@ export default DS.Model.extend({
   venue_name: attr('string'),
 
   city: DS.belongsTo('city'),
-  eventTimes: DS.hasMany('eventTime'),
   tags: DS.hasMany('tag'),
   venue: DS.belongsTo('venue'),
   // users: DS.hasMany('user', { async: true }),
@@ -63,19 +64,8 @@ export default DS.Model.extend({
     return list;
   }),
 
-  scheduleList: Ember.computed("schedule", function() {
-    if (this.get('schedule') === null) {
-      return false;
-    }
-    let cleanSchedule = this.get('schedule')
-      .replace(/(", ")/g, ";")
-      .replace(/[\[\]()"']/g, "")
-      .replace(/(\\xE5\\xD0)/g,", ")
-      .split(';');
-    if (cleanSchedule.length === 1) {
-      return false;
-    }
-    return cleanSchedule;
+  scheduleList: Ember.computed("event_times.[]", function() {
+    return this.get('event_times').split(',');
   }),
 
   shortSummary: Ember.computed('summary', function() {
@@ -86,9 +76,15 @@ export default DS.Model.extend({
     }
   }),
 
-  nextDate: Ember.computed('eventTimes.[]', function() {
-    console.log("this.get('eventTimes[0]')", this.get('eventTimes.length'));
-    return this.get('eventTimes');
+  nextDate: Ember.computed('event_times.[]', function() {
+    let times = this.get('event_times').split(',');
+    return times.find(function(time) {
+      return moment(time) > moment();
+    })
+  }),
+
+  hasMultipleDates: Ember.computed('event_times.[]', function() {
+    return this.get('event_times').split(',').length > 1;
   }),
 
   //Used for filtering on city view

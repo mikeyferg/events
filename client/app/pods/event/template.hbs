@@ -12,7 +12,7 @@
     </span>
 
     {{event-description event=model.event}}
-    {{#if model.event.scheduleList}}
+    {{#if model.event.hasMultipleDates}}
       <div class="color-section">
         <section class="outer-container">
           {{schedule-list schedule=model.event.scheduleList}}
@@ -32,7 +32,12 @@
         {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.address}}</span>
         <meta itemprop="address" content={{model.event.address}} />
       </li>
-      <li itemprop="startDate" content={{model.event.nextDate}}>{{fa-icon icon="clock-o"}} {{event-date model.event.nextDate}}</li>
+      <li itemprop="startDate" content={{model.event.nextDate}}>
+        {{fa-icon icon="clock-o"}} {{event-date model.event.nextDate}}
+        {{#if model.event.hasMultipleDates}}
+          (More dates)
+        {{/if}}
+      </li>
       <li>{{fa-icon icon="tags"}} {{model.event.tagsList}}</li>
       {{#if model.event.source_url}}
         <li>{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} itemprop="url" target="_blank">{{model.event.sourceUrlDomain}}</a></li>
