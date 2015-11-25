@@ -6,10 +6,7 @@ end
 
 json.city { json.partial! @venue.city}
 
-json.events @events.each do |event|
-    json.(event, :id, :name, :start_date_time, :slug, :end_time, :summary, :image_url, :address, :cost, :cost_integer, :source_url, :page_url, :end_date, :featured, :city_id, :venue_id, :schedule)
-    json.venue_name @venue.name
-end
+json.events { json.array! @events, partial: 'events/event', as: :event }
 
 # json.events { json.array! @events, partial: 'events/event', as: :event }
 
