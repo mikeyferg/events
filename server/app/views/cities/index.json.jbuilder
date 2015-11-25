@@ -1,1 +1,1 @@
-json.cities @cities, :id, :name, :nickname, :slug
+json.cities { json.array! @cities, partial: 'cities/city', as: :city }
