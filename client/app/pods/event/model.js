@@ -64,16 +64,16 @@ export default DS.Model.extend({
     return list;
   }),
 
-  scheduleList: Ember.computed("event_times.[]", function() {
-    return this.get('event_times').split(',');
-  }),
-
   shortSummary: Ember.computed('summary', function() {
     if ( this.get('summary') && this.get('summary').length > 0 ) {
       return this.get('summary').split(' ').slice(0,30).join(' ');
     } else {
       return '';
     }
+  }),
+
+  scheduleList: Ember.computed("event_times.[]", function() {
+    return this.get('event_times').split(',');
   }),
 
   nextDate: Ember.computed('event_times.[]', function() {

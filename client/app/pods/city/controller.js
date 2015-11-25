@@ -7,6 +7,9 @@ export default Ember.Controller.extend({
   free: Ember.computed.reads('eventsController.free'),
   date_range: Ember.computed.reads('eventsController.date_range'),
   featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
+  asdf: Ember.computed('eventsController.model.events.[]', function(ss) {
+    console.log("ss", this.get('eventsController.model.events').get('firstObject'));
+  }),
 
   reset() {
     this.set('free', this.get('eventsController').get('free'));
