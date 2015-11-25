@@ -8,8 +8,8 @@ class EventsController < ApplicationController
     elsif params[:limit]
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
-        .sort_by { rand}
         .distinct
+        .sort_by { rand}
         .take(3)
     elsif params[:featured]
       @events = Event.joins(:event_times)
