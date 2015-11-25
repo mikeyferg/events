@@ -31,7 +31,6 @@ class EventsController < ApplicationController
         .page(params[:page]).per(27)
         .sort_by { rand}
     end
-# @events = Event.all
   end
 
   def show
