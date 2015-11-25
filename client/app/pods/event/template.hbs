@@ -1,7 +1,7 @@
 <section>
   <article itemscope itemtype="http://schema.org/Event">
     <meta itemprop="name" content={{model.event.name}} />
-    <meta itemprop="startDate" content={{model.event.start_date_time}} />
+    <meta itemprop="startDate" content={{model.event.nextDate}} />
     <span itemprop="location" itemscope itemtype="http://schema.org/Place">
       <meta itemprop="name" content={{model.event.venue.name}} />
       <meta itemprop="address" content={{model.event.address}} />
@@ -32,7 +32,7 @@
         {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.address}}</span>
         <meta itemprop="address" content={{model.event.address}} />
       </li>
-      <li itemprop="startDate" content={{model.event.start_date_time}}>{{fa-icon icon="clock-o"}} {{event-date model.event.start_date_time}}</li>
+      <li itemprop="startDate" content={{model.event.nextDate}}>{{fa-icon icon="clock-o"}} {{event-date model.event.nextDate}}</li>
       <li>{{fa-icon icon="tags"}} {{model.event.tagsList}}</li>
       {{#if model.event.source_url}}
         <li>{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} itemprop="url" target="_blank">{{model.event.sourceUrlDomain}}</a></li>

@@ -11,8 +11,8 @@
       </div>
     {{/if}}
     {{#if event.date_only}}
-      <div itemprop="startDate" content={{event.start_date_time}} class="event-card__info-item">
-        {{fa-icon icon="clock-o"}} {{event-date event.start_date_time}}
+      <div itemprop="startDate" content={{event.nextDate}} class="event-card__info-item">
+        {{fa-icon icon="clock-o"}} {{event-date event.nextDate}}
       </div>
     {{/if}}
     {{#if event.cost}}

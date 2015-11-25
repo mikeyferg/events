@@ -4,7 +4,7 @@ json.event do |json|
       json.city @event.city.id
       json.tags @event.tags.pluck :id
       json.users @event.users.pluck :id
-      json.event_times @event.event_times.pluck :id
+      json.event_times @event.event_times.pluck :start_time
 
 end
 
@@ -31,8 +31,4 @@ end
 
 json.set! :users do
   json.array! @event.users, :id, :name, :email, :image_url, :oauth_token, :uid, :slug
-end
-
-json.set! :event_times do
-  json.array! @event.event_times, :id, :start_time
 end

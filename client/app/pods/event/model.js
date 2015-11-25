@@ -27,7 +27,7 @@ export default DS.Model.extend({
   venue_name: attr('string'),
 
   city: DS.belongsTo('city'),
-  eventTimes: DS.hasMany('event-time'),
+  eventTimes: DS.hasMany('eventTime'),
   tags: DS.hasMany('tag'),
   venue: DS.belongsTo('venue'),
   // users: DS.hasMany('user', { async: true }),
@@ -84,6 +84,11 @@ export default DS.Model.extend({
     } else {
       return '';
     }
+  }),
+
+  nextDate: Ember.computed('eventTimes.[]', function() {
+    console.log("this.get('eventTimes[0]')", this.get('eventTimes.length'));
+    return this.get('eventTimes');
   }),
 
   //Used for filtering on city view
