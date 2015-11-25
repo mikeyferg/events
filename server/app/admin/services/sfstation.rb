@@ -13,12 +13,14 @@ module SfStation
       name = hash[:name].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
       #for date_only and time_only attributes
         #sfstation specific
-      date_only = SfStation.date_splitter(hash[:date_only])
-      time_only = Time.parse(SfStation.start_time_regex(hash[:time_only])) rescue nil
+      #date_only = SfStation.date_splitter(hash[:date_only])
+      # time_only = Time.parse(SfStation.start_time_regex(hash[:time_only])) rescue nil
+
       city_id = 1
       #for combining date and time to create start_date_time
         date_array = hash[:date_only].split(" ")
         time = SfStation.start_time_regex(hash[:time_only])
+      #  binding.pry
       start_date_time = SfStation.date_time_combiner(date_array, time)
 
       address = hash[:address].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})  unless hash[:address].nil?
@@ -40,6 +42,7 @@ module SfStation
         schedule = []
       end
       start_date_time_array = [start_date_time.to_s]
+      # binding.pry
       if schedule.length > 0 && schedule[0] != "Event has passed"
         schedule.each do |instance|
           date = SfStation.date_regex(instance)
@@ -66,9 +69,8 @@ module SfStation
         address: address,
         cost: cost,
         source_url: source_url,
-        date_only: date_only,
         city_id: city_id,
-        tags: tags,
+        tags: tags
       )
     end
   end
@@ -138,7 +140,7 @@ module SfStation
           end
         end
       end
-      # Time.parse(time) rescue nil
+      #Time.parse(time) rescue nil
     end
     #-----------------------------------------
     #sfstation schedule normalizerså
