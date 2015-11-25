@@ -51,7 +51,9 @@ class Event < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :city_id, :presence => true
-  after_create :start_date_time_array, :presence => true
+  # after_create :start_date_time_array, :presence => true
+
+  has_many :event_times
 
   after_validation :update_image, only: :image_url
 
@@ -61,11 +63,11 @@ class Event < ActiveRecord::Base
   end
 
   def self.by_date_range(date_range = nil)
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day).all if date_range === 'week'
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).end_of_day).all if date_range === 'today'
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day, (DateTime.now.utc - 8.hour).tomorrow.end_of_day).all if date_range === 'tomorrow'
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day).all if date_range === 'weekend'
-    return where('date_only BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
+    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all if date_range === 'week'
+    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all if date_range === 'today'
+    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).tomorrow.end_of_day + 8.hour).all if date_range === 'tomorrow'
+    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day + 8.hour, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day + 8.hour).all if date_range === 'weekend'
+    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
     all
   end
 
@@ -147,13 +149,14 @@ class Event < ActiveRecord::Base
 
        start_date_time_array.each do |new_time|
          is_found = false
-         event.start_date_time_array.each do |existing_time|
-           if new_time == existing_time
+         event.event_times.each do |existing_time|
+          
+           if DateTime.parse(new_time) == existing_time.start_time
              is_found = true
            end
          end
          if is_found == false
-          event.start_date_time_array << new_time
+           EventTime.create(start_time:new_time, event_id:event.id)
         end
        end
 
@@ -178,11 +181,12 @@ class Event < ActiveRecord::Base
          source_url: source_url,
          city_id: city_id,
          schedule: schedule,
-         featured: featured,
-          start_date_time_array: start_date_time_array[0]
+         featured: featured
+        #  start_date_time_array: start_date_time_array[0]
        )
        start_date_time_array.each do |time|
-         event.start_date_time_array << time
+         EventTime.create(start_time:time, event_id:event.id)
+        #  event.event_times << time
        end
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)

@@ -20,14 +20,15 @@ class EventsController < ApplicationController
         .sort_by { rand }
         .take(2)
     else
-      @events = Event
-        .where({ start_date_time: Time.now.utc..6.months.from_now })
+      @events = Event.joins(:event_times)
+        .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .by_category(params[:category])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
         .page(params[:page]).per(27)
         .sort_by { rand}
     end
+# @events = Event.all
   end
 
   def show
