@@ -71,6 +71,10 @@ class Event < ActiveRecord::Base
     all
   end
 
+  def has_date
+
+  end
+
   def self.by_cost(free = nil, cost = nil)
     return where(cost: "Free") if free === 'true'
     return where(cost: cost) if not cost.blank?
