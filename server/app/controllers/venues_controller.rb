@@ -3,65 +3,57 @@ class VenuesController < ApplicationController
   def index
     if params['slug']
       @venue = find_venue_by_slug
+      @events = @venue.events
+                      # .where({ start_date_time: Time.now.utc..6.months.from_now })
+                      # .limit( 20 )
+                      # .order(:start_date_time)
       render :show
     else
-    @venues = Venue.all
-    respond_to do |format|
-        format.html
-        format.json { render json: {
-          venues: @venues
-          }
-         }
-      end
+      @venues = Venue.all
     end
   end
+
   def show
     @venue = find_venue
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: {
-    #     venue: @venue
-    #     }
-    #    }
-    # end
   end
-    def new
-      @venue = Venue.new
-      respond_to do |format|
-        format.html
-        format.json { render json: {
-          event: @event
-          }
-         }
-      end
-    end
 
-    def create
-      @venue = Venue.new
-      if @venue.save
-        redirect_to venue_path(@venue)
-      else
-        render 'new'
-      end
+  def new
+    @venue = Venue.new
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        event: @event
+        }
+       }
     end
+  end
 
-    def edit
-      @venue = find_venue
+  def create
+    @venue = Venue.new
+    if @venue.save
+      redirect_to venue_path(@venue)
+    else
+      render 'new'
     end
+  end
 
-    def update
-      @venue = find_venue
-      if @venue.update_attributes(venue_params)
-        redirect_to venue_path(@venue)
-      else
-        render 'new'
-      end
+  def edit
+    @venue = find_venue
+  end
+
+  def update
+    @venue = find_venue
+    if @venue.update_attributes(venue_params)
+      redirect_to venue_path(@venue)
+    else
+      render 'new'
     end
-    def destroy
-      @venue = find_venue
-      @venue.destroy
-      redirect_to venues_path
-    end
+  end
+  def destroy
+    @venue = find_venue
+    @venue.destroy
+    redirect_to venues_path
+  end
 
 
 
