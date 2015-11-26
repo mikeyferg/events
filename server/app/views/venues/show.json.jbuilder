@@ -4,7 +4,7 @@ json.venue do |json|
   json.events @events.pluck :id
 end
 
-json.city { json.partial! @venue.city}
+json.city { json.array! [@venue.city], partial: 'cities/city', as: :city }
 
 json.events { json.array! @events, partial: 'events/event', as: :event }
 
