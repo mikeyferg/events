@@ -4,9 +4,9 @@ class VenuesController < ApplicationController
     if params['slug']
       @venue = find_venue_by_slug
       @events = @venue.events
-                      # .where({ start_date_time: Time.now.utc..6.months.from_now })
-                      # .limit( 20 )
-                      # .order(:start_date_time)
+                      .where({ start_date_time: Time.now.utc..6.months.from_now })
+                      .limit( 20 )
+                      .order(:start_date_time)
       render :show
     else
       @venues = Venue.all
@@ -15,10 +15,12 @@ class VenuesController < ApplicationController
 
   def show
     @venue = find_venue
+    @events = @venue.events
   end
 
   def new
     @venue = Venue.new
+    @events = @venue.events
     respond_to do |format|
       format.html
       format.json { render json: {
