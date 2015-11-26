@@ -1,1 +1,0 @@
-json.events @events.order(:date_only).page(params[:page]), :id, :name, :end_time, :summary, :image_url, :address, :cost, :source_url, :end_date, :start_date_time, :featured, :city_id, :venue_id, :schedule, :slug

@@ -30,7 +30,6 @@ class EventsController < ApplicationController
         .by_cost(params[:free], params[:cost])
         .page(params[:page]).per(27)
         .sort_by { rand}
-      @events = Event.all.take 10
     end
   end
 
