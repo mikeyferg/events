@@ -1,0 +1,9 @@
+json.call(
+  venue,
+  :id,
+  :address,
+  :city_id,
+  :name,
+  :image_url,
+  :slug
+)

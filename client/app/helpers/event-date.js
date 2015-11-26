@@ -4,8 +4,10 @@ import moment from 'moment';
 
 export function eventDate(params) {
   if (!params) { return ''; }
-  const [date_time] = params;
-  if (isToday(date_time)) {
+  const [date_time, pure_date = false] = params;
+  if (pure_date) {
+    return `${moment(date_time).format('MMM DD')} ${moment(date_time).format('h:mma')}`;
+  } else if (isToday(date_time)) {
     return `Today @ ${moment(date_time).format('h:mma')}`;
   } else if (isTomorrow(date_time)) {
     return `Tomorrow @ ${moment(date_time).format('h:mma')}`;

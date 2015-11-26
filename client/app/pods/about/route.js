@@ -16,7 +16,7 @@ export default Ember.Route.extend({
       tagId: 'description',
       attrs: {
         name: 'description',
-        content: 'Event Coyote is an event discovery platform'
+        content: "At Event Coyote we are working to bring you the best events in San Francisco. It's a big task, but we'are working hard to get there."
       }
     }];
   }

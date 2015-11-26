@@ -6,14 +6,16 @@ class EventsController < ApplicationController
       @event = find_event_by_slug
       render :show
     elsif params[:limit]
-      @events = Event
-        .where({ start_date_time: Time.now.utc..6.months.from_now })
+      @events = Event.joins(:event_times)
+        .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
+        .distinct
         .sort_by { rand}
         .take(3)
     elsif params[:featured]
-      @events = Event
-        .where({ start_date_time: Time.now.utc..6.months.from_now })
+      @events = Event.joins(:event_times)
+        .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .where({featured: true})
+        .distinct
         .by_category(params[:category])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
@@ -22,13 +24,13 @@ class EventsController < ApplicationController
     else
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
+        .distinct
         .by_category(params[:category])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
         .page(params[:page]).per(27)
         .sort_by { rand}
     end
-# @events = Event.all
   end
 
   def show

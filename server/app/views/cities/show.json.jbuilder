@@ -1,3 +1,1 @@
-json.city do |json|
-  json.(@city, :id, :name, :nickname, :slug)
-end
+json.city { json.partial! @city}

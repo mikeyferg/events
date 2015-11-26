@@ -6,5 +6,5 @@ export default DS.Model.extend({
   name: attr('string'),
   slug: attr('string'),
 
-  events: DS.hasMany('events')
+  events: DS.hasMany('event')
 });

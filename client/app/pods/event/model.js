@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import moment from 'moment';
 import { isToday, isTomorrow, isWeekend } from '../../utils/date-filter';
 
 const attr = DS.attr;
@@ -8,21 +9,12 @@ export default DS.Model.extend({
   address: attr('string'),
   cost: attr('string'),
   cost_integer: attr('number'),
-  created_at: attr('date'),
-  date_only: attr('date'),
-  end_date: attr('string'),
-  end_time: attr('date'),
-  generic_time: attr('string'),
+  event_times: attr('string'),
   name: attr('string'),
   image_url: attr('string'),
   source_url: attr('string'),
-  schedule: attr('string'),
   slug: attr('string'),
-  start_time: attr('date'),
-  start_date: attr('string'),
-  start_date_time: attr('string'),
   summary: attr('string'),
-  time_only: attr('date'),
   featured: attr('boolean'),
   venue_name: attr('string'),
 
@@ -62,27 +54,27 @@ export default DS.Model.extend({
     return list;
   }),
 
-  scheduleList: Ember.computed("schedule", function() {
-    if (this.get('schedule') === null) {
-      return false;
-    }
-    let cleanSchedule = this.get('schedule')
-      .replace(/(", ")/g, ";")
-      .replace(/[\[\]()"']/g, "")
-      .replace(/(\\xE5\\xD0)/g,", ")
-      .split(';');
-    if (cleanSchedule.length === 1) {
-      return false;
-    }
-    return cleanSchedule;
-  }),
-
   shortSummary: Ember.computed('summary', function() {
     if ( this.get('summary') && this.get('summary').length > 0 ) {
       return this.get('summary').split(' ').slice(0,30).join(' ');
     } else {
       return '';
     }
+  }),
+
+  scheduleList: Ember.computed("event_times.[]", function() {
+    return this.get('event_times').split(',');
+  }),
+
+  nextDate: Ember.computed('event_times.[]', function() {
+    let times = this.get('event_times').split(',');
+    return times.find(function(time) {
+      return moment(time) > moment();
+    })
+  }),
+
+  hasMultipleDates: Ember.computed('event_times.[]', function() {
+    return this.get('event_times').split(',').length > 1;
   }),
 
   //Used for filtering on city view
