@@ -8,7 +8,7 @@ json.event do
   json.venue @event.venue.id
 end
 
-json.city { json.partial! @event.city}
+json.city { json.array! [@event.city], partial: 'cities/city', as: :city }
 
 json.set! :tags do
   json.array! @event.tags, :id, :name, :slug
@@ -19,5 +19,5 @@ json.set! :users do
 end
 
 unless @event.venue.nil?
-  json.venue { json.partial! @event.venue}
+  json.venue { json.array! [@event.venue], partial: 'venues/venue', as: :venue }
 end
