@@ -154,7 +154,7 @@ class Event < ActiveRecord::Base
        start_date_time_array.each do |new_time|
          is_found = false
          event.event_times.each do |existing_time|
-          
+
            if DateTime.parse(new_time) == existing_time.start_time
              is_found = true
            end
@@ -195,6 +195,8 @@ class Event < ActiveRecord::Base
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
          event.tags << tag_entry
+         if tag_entry == "sss" || "ddd"
+           events.tags << Tag.find_by_name("Live Music")
        end
        event.save
      end
