@@ -16,7 +16,7 @@ export default Ember.Route.extend({
       tagId: 'description',
       attrs: {
         name: 'description',
-        content: 'Contact us'
+        content: "If you're in the know, you know how to reach us."
       }
     }];
   }
