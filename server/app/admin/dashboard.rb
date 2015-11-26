@@ -20,8 +20,8 @@ ActiveAdmin.register_page "Dashboard" do
     form do |f|
       f.input :name
       f.input :address
-      f.input :date_only, as: :datepicker
-      f.input :time_only, as: :time_picker
+      # f.input :date_only, as: :datepicker
+      # f.input :time_only, as: :time_picker
       f.input :summary
       f.input :image_url
       f.input :page_url
