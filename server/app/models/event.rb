@@ -168,6 +168,24 @@ class Event < ActiveRecord::Base
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
          event.tags << tag_entry
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end
+         if map[tag_entry].key.exists
+           event.tags << 'Live Music'
+         end       
        end
        event.save
       #if event does not exist, create
