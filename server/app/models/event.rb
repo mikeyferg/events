@@ -164,29 +164,21 @@ class Event < ActiveRecord::Base
         end
        end
 
-       event.tags.delete_all
-       tags.each do |tag|
-         tag_entry = Tag.find_or_create_tag(tag)
-         event.tags << tag_entry
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end
-         if map[tag_entry].key.exists
-           event.tags << 'Live Music'
-         end       
-       end
+      event.tags.delete_all
+      tags.each do |tag|
+        tag_entry = Tag.find_or_create_tag(tag)
+        event.tags << tag_entry
+        Event.tag_live_music(tag_entry, event)
+        Event.tag_bars_and_clubs(tag_entry, event)
+        Event.tag_nightlife(tag_entry, event)
+        Event.tag_art_and_museums(tag_entry, event)
+        Event.tag_comedy(tag_entry, event)
+        Event.tag_theatre_and_dance(tag_entry, event)
+        Event.tag_food_and_wine(tag_entry, event)
+        Event.tag_holiday(tag_entry, event)
+        Event.tag_sport_and_fitness(tag_entry, event)
+        Event.tag_educational(tag_entry, event)
+      end
        event.save
       #if event does not exist, create
 
@@ -213,8 +205,16 @@ class Event < ActiveRecord::Base
        tags.each do |tag|
          tag_entry = Tag.find_or_create_tag(tag)
          event.tags << tag_entry
-         if tag_entry == "sss" || "ddd"
-           events.tags << Tag.find_by_name("Live Music")
+         Event.tag_live_music(tag_entry, event)
+         Event.tag_bars_and_clubs(tag_entry, event)
+         Event.tag_nightlife(tag_entry, event)
+         Event.tag_art_and_museums(tag_entry, event)
+         Event.tag_comedy(tag_entry, event)
+         Event.tag_theatre_and_dance(tag_entry, event)
+         Event.tag_food_and_wine(tag_entry, event)
+         Event.tag_holiday(tag_entry, event)
+         Event.tag_sport_and_fitness(tag_entry, event)
+         Event.tag_educational(tag_entry, event)
        end
        event.save
      end
@@ -233,8 +233,69 @@ class Event < ActiveRecord::Base
   end
 
 
-
-
-
+  def self.tag_live_music(tag_entry, event)
+    subtags = ['Music Festivals', 'Indie Music', 'Live Music Clubs', 'Live Music Bars', 'Blues', 'Music']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Live Music")
+    end
+  end
+  def self.tag_bars_and_clubs(tag_entry, event)
+    subtags = ['Music Festivals', 'Indie Music', 'Live Music Clubs', 'Live Music Bars', 'Blues', 'Music', 'Other Music', 'Underground Clubs', 'Gay Bars', 'Salsa', 'Lounge', 'Wine Bar', 'R&B/Soul Music', 'Latin Dance Clubs', 'Reggae/Dub Music', 'Cabaret', 'Funk', 'World Music',
+       'Country Music', 'Bluegrass', 'Jazz', 'Hip Hop', 'House Music', 'Rock', 'Goth Music', 'Disco', 'Electronic Music', 'DJ Outlets', 'New Wave/80s Music', 'Dive Bars', 'Arts & Entertainment Venues', 'DJ', 'Dance Clubs', 'Sports Bars', 'Happy Hour / Game Nights']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Bars & Clubs")
+    end
+  end
+  def self.tag_nightlife(tag_entry, event)
+    subtags = ['Music Festivals', 'Indie Music', 'Live Music Clubs', 'Blues', 'Music', 'Other Music', 'Underground Clubs', 'Gay Bars', 'Salsa', 'Lounge', 'R&B/Soul Music', 'Latin Dance Clubs', 'Reggae/Dub Music', 'Cabaret', 'Funk', 'World Music', 'Country Music', 'Bluegrass',
+       'Jazz', 'Hip Hop', 'House Music', 'Goth Music', 'Disco', 'Electronic Music', 'DJ Outlets', 'New Wave/80s Music', 'Arts & Entertainment Venues', 'DJ\'s', 'Dance Clubs', 'Karaoke Bar', 'Concerts', 'Local Bands', 'Galas', 'Balls']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Nightlife")
+    end
+  end
+  def self.tag_art_and_museums(tag_entry, event)
+    subtags = ['Arts & Entertainment Venues', 'Science Museums', 'Childrens Museums', 'Opera', 'Art Festivals', 'Musicals', 'Other Literary Arts', 'Film Screenings', 'Arts & Crafts', 'Performance Arts', 'Theater', 'Dance', 'History Museums', 'Cultural Museums', 'Modern Art Museums',
+      'Art Events', 'Arts & Crafts Education', 'Crafts', 'Sculpture', 'Installation Art', 'Photography', 'Art Openings', 'Artists', 'Literary Arts', 'Arts', 'Mixed Media', 'Galleries', 'Fine Arts Museums']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Art & Museums")
+    end
+  end
+  def self.tag_comedy(tag_entry, event)
+    subtags = ['Stand Up Comedy']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Comedy")
+    end
+  end
+  def self.tag_theatre_and_dance(tag_entry, event)
+    subtags = ['Opera', 'Ballet', 'Modern Dance', 'Plays']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Theatre & Dance")
+    end
+  end
+  def self.tag_food_and_wine(tag_entry, event)
+    subtags = ['Wine Bar', 'Live Music Restaurants', 'American Restaurants', 'Food & Drink Event/Festival', 'Wine Tasting', 'Wine', 'Farmers Markets', 'Markets & Specialty Food', 'Restaurants', 'Food', 'Arts & Entertainment Venues', 'Science Museums']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Food & Wine")
+    end
+  end
+  def self.tag_holiday(tag_entry, event)
+    subtags = ['Ice Skating', 'Holiday Festivals']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Holiday")
+    end
+  end
+  def self.tag_sport_and_fitness(tag_entry, event)
+    subtags = ['Running', 'Soccer', 'Other Sports', 'Health & Wellness', 'Yoga', 'Football', 'Sports & Recreation']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Sport & Fitness")
+    end
+  end
+  def self.tag_educational(tag_entry, event)
+    subtags = ['Science Museums', 'Arts & Crafts', 'Cultural Museums', 'Arts & Crafts Education', 'Crafts', 'Literary Arts', 'Cultural Festivals', 'Christianity & Churches', 'Film Organizations', 'Spirituality', 'Religion', 'Children\'s Storytelling',
+      'Children\'s Festivals & Events', 'Walking Tours', 'Beauty', 'Cultural Venues', 'Other Schools & Classes', 'Educational Organizations', 'Painting & Drawing', 'Book Stores']
+    if subtags.collect {|el| el.downcase }.include? tag_entry.name.downcase
+      event.tags << Tag.find_by_name("Educational")
+    end
+  end
 
 end

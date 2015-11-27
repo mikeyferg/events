@@ -10,7 +10,15 @@ City.create!([
 
 Tag.create!([
   {name: "Live Music"},
-  {name: "Club"}
+  {name: "Bars & Clubs"},
+  {name: "Nightlife"},
+  {name: "Art & Museums"},
+  {name: "Comedy"},
+  {name: "Theatre & Dance"},
+  {name: "Food & Wine"},
+  {name: "Holiday"},
+  {name: "Sport & Fitness"},
+  {name: "Educational"}
   ])
 
 Venue.create!([
