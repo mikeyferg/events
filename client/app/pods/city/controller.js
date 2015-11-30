@@ -5,10 +5,12 @@ export default Ember.Controller.extend({
 
   // get filter values for UI on reload
   free: Ember.computed.reads('eventsController.free'),
+  night_only: Ember.computed.reads('eventsController.night_only'),
   featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
 
   reset() {
     this.set('free', this.get('eventsController').get('free'));
+    this.set('night_only', this.get('eventsController').get('night_only'));
     this.set('featuredEvents', this.get('eventsController').get('model.featuredEvents'));
   },
 
@@ -17,13 +19,9 @@ export default Ember.Controller.extend({
     this.get('eventsController').set('free', this.get('free'));
   }.observes('free'),
 
-  actions: {
-    resetAllFilters() {
-      this.get('eventsController').set('page', 1);
-      this.get('eventsController').set('date_range', null);
-      this.get('eventsController').set('cost', null);
-      this.get('eventsController').set('free', false);
-      this.set('free', false);
-    }
-  }
+  nightSwitchChanged : function() {
+    this.get('eventsController').set('page', 1);
+    this.get('eventsController').set('night_only', this.get('night_only'));
+  }.observes('night_only')
+
 });

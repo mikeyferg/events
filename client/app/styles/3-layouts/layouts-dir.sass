@@ -14,6 +14,21 @@ section
   &.full-width
     @include pad(0)
 
+.flexbox
+  width: 100%
+  @include display(flex)
+  @include justify-content(space-between)
+
+.flexbox__item
+  @include flex(1)
+
+@include media(max-width $medium-screen)
+  .flexbox
+    display: block
+
+.padding
+  @include pad(0 1em)
+
 article
   @include clearfix
   margin-bottom: 1em

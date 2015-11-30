@@ -7,16 +7,22 @@
 {{/if}}
 
 <section class="color-section full-width">
-  <div class="">
-
-  </div>
   {{button-group}}
-  <div class="grid-items outer-container">
-    <span class="checkbox-label"><b>Free</b></span>
-    <label class="label-switch pull-right">
-      {{input type="checkbox" checked=free }}
-      <div class="checkbox"></div>
-    </label>
+  <div class="flexbox">
+    <div class="padding flexbox__item">
+      <span class="checkbox-label"><b>Night Only</b> <small>(After 6pm)</small></span>
+      <label class="label-switch pull-right">
+        {{input type="checkbox" checked=night_only }}
+        <div class="checkbox"></div>
+      </label>
+    </div>
+    <div class="padding flexbox__item">
+      <span class="checkbox-label"><b>Free</b></span>
+      <label class="label-switch pull-right">
+        {{input type="checkbox" checked=free }}
+        <div class="checkbox"></div>
+      </label>
+    </div>
   </div>
 </section>
 {{outlet}}

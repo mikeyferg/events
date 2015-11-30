@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['page', 'cost', 'free', 'search'],
+  queryParams: ['page', 'cost', 'night_only', 'free', 'search'],
   page: 1,
   cost: null,
+  night_only: false,
   free: false,
   search: '',
 
@@ -11,6 +12,7 @@ export default Ember.Controller.extend({
     this.setProperties({
       page: 1,
       cost: null,
+      night_only: false,
       free: false,
       search: ''
     })

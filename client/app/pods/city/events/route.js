@@ -10,6 +10,7 @@ export default Ember.Route.extend({
         date_range: params.date_range,
         cost: params.cost,
         free: params.free,
+        night_only: params.night_only,
         search: params.search
       }),
       featuredEvents: this.store.query('event', {
@@ -17,6 +18,7 @@ export default Ember.Route.extend({
         date_range: params.date_range,
         cost: params.cost,
         free: params.free,
+        night_only: params.night_only,
         featured: true
       }),
     });
