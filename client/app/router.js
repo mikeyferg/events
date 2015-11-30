@@ -11,10 +11,10 @@ Router.map(function() {
 
   this.route('cities', {path: '/'});
   this.route('city', {path: '/:city_slug'}, function() {
-    this.route('events', {path: '/:category'});
+    this.route('events', {path: '/:category/:date_range'});
   });
 
-  this.route('event', {path: '/:city_slug/events/:event_slug'});
+  this.route('event', {path: '/:city_slug/event/:event_slug'});
 
   this.route('venue', {path: 'venue/:venue_slug'});
   this.route('user', {path: '/user'});

@@ -26,7 +26,8 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.APP.LOG_TRANSITIONS = true;
-    ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
+    ENV.apiHostname = '//localhost:3900',
+    // ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
     // ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
     ENV.contentSecurityPolicy = {
       'default-src': "none",

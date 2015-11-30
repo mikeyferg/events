@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       city: this.modelFor('city'),
       events: this.store.query('event', {
+        category: params.category,
         page: params.page,
         date_range: params.date_range,
         cost: params.cost,

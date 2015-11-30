@@ -5,12 +5,10 @@ export default Ember.Controller.extend({
 
   // get filter values for UI on reload
   free: Ember.computed.reads('eventsController.free'),
-  date_range: Ember.computed.reads('eventsController.date_range'),
   featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
 
   reset() {
     this.set('free', this.get('eventsController').get('free'));
-    this.set('date_range', this.get('eventsController').get('date_range'));
     this.set('featuredEvents', this.get('eventsController').get('model.featuredEvents'));
   },
 
@@ -25,19 +23,7 @@ export default Ember.Controller.extend({
       this.get('eventsController').set('date_range', null);
       this.get('eventsController').set('cost', null);
       this.get('eventsController').set('free', false);
-      this.set('date_range', null);
       this.set('free', false);
-    },
-    filterByDate(value) {
-      this.get('eventsController').set('page', 1);
-      this.get('eventsController').set('date_range', value);
-    },
-    filterByCost() {
-      if (this.get('eventsController').get('cost') === 'Free') {
-        this.get('eventsController').set('cost', null);
-      } else {
-        this.get('eventsController').set('cost', 'Free');
-      }
     }
   }
 });
