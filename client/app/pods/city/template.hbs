@@ -7,8 +7,11 @@
 {{/if}}
 
 <section class="color-section full-width">
-  {{button-group}}
+  {{date-range-group}}
   <div class="flexbox">
+    <div class="padding flexbox__item">
+      {{tags-group selectTag='selectTag'}}
+    </div>
     <div class="padding flexbox__item">
       <span class="checkbox-label"><b>Night Only</b> <small>(After 6pm)</small></span>
       <label class="label-switch pull-right">
@@ -22,6 +25,9 @@
         {{input type="checkbox" checked=free }}
         <div class="checkbox"></div>
       </label>
+    </div>
+    <div class="padding flexbox__item">
+      {{pikaday-input value=event_date format="MM/DD/YYYY" placeholder="Pick a date"}}
     </div>
   </div>
 </section>

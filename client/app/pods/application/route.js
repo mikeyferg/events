@@ -56,6 +56,7 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
 
   actions: {
     willTransition: function(transition) {
+      // alert(transition.intent.name);
       if (transition.intent.name === 'cities') {
         this.controllerFor('city.events').reset();
         this.controllerFor('city').reset();

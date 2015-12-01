@@ -28,5 +28,11 @@ export default Ember.Route.extend({
         content: `Events in ${model.get('name')}`
       }
     }];
+  },
+
+  actions: {
+    selectTag(tag) {
+      this.transitionTo('city.events', 'sf', tag, 'this-week')
+    }
   }
 });
