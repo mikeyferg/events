@@ -14,6 +14,8 @@ export default Ember.Controller.extend({
   reset() {
     this.set('free', this.get('eventsController').get('free'));
     this.set('night_only', this.get('eventsController').get('night_only'));
+    this.set('date_range', 'this-week');
+    this.set('event_date', null);
     this.set('featuredEvents', this.get('eventsController').get('model.featuredEvents'));
   },
 
@@ -34,7 +36,7 @@ export default Ember.Controller.extend({
   dateChanged: function() {
     this.resetPageNumber();
     let formattedDate = this.get('event_date');
-    if (formattedDate.toString().indexOf('GMT') !== -1) {
+    if (Ember.isPresent(formattedDate) && formattedDate.toString().indexOf('GMT') !== -1) {
       formattedDate = moment(this.get('event_date')).format('MM-DD-YY');
     }
     let city = this.get('model.slug');
