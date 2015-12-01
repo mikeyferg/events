@@ -11,7 +11,7 @@ Router.map(function() {
 
   this.route('cities', {path: '/'});
   this.route('city', {path: '/:city_slug'}, function() {
-    this.route('events', {path: 'events/:category/:date_range'});
+    this.route('events', {path: 'events/:tag/:date_range'});
   });
 
   this.route('event', {path: '/:city_slug/event/:event_slug'});

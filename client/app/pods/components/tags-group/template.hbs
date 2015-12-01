@@ -1,23 +1,13 @@
-{{!-- {{link-to "Live Music" 'city.events' 'sf' 'live-music' 'this-week'}}
-{{link-to "Bars & Clubs" 'city.events' 'sf' 'bars-clubs' 'this-week'}}
-{{link-to "Nightlife" 'city.events' 'sf' 'nightlife' 'this-week'}}
-{{link-to "Art & Museums" 'city.events' 'sf' 'art-museums' 'this-week'}}
-{{link-to "Comedy" 'city.events' 'sf' 'comedy' 'this-week'}}
-{{link-to "Theatre & Dance" 'city.events' 'sf' 'theatre-dance' 'this-week'}}
-{{link-to "Food & Wine" 'city.events' 'sf' 'food-wine' 'this-week'}}
-{{link-to "Holiday" 'city.events' 'sf' 'holiday' 'this-week'}}
-{{link-to "Sport & Fitness" 'city.events' 'sf' 'sport-fitness' 'this-week'}}
-{{link-to "Educational" 'city.events' 'sf' 'educational' 'this-week'}} --}}
-
 <select onchange={{action "selectTag" value="target.value"}}>
-    <option value='live-music'>Live Music</option>
-    <option value='bars-clubs'>Bars & Clubs</option>
-    <option value='nightlife'>Nightlife</option>
-    <option value='art-museums'>Art & Museums</option>
-    <option value='comedy'>Comedy</option>
-    <option value='theatre-dance'>Theatre & Dance</option>
-    <option value='food-wine'>Food & Wine</option>
-    <option value='holiday'>Holiday</option>
-    <option value='sport-fitness'>Sport & Fitness</option>
-    <option value='educational'>Educational</option>
+    <option value='top' selected={{eq tag 'top'}}>All</option>
+    <option value='live-music' selected={{eq tag 'live-music'}}>Live Music</option>
+    <option value='bars-clubs' selected={{eq tag 'bars-clubs'}}>Bars & Clubs</option>
+    <option value='nightlife' selected={{eq tag 'nightlife'}}>Nightlife</option>
+    <option value='art-museums' selected={{eq tag 'art-museums'}}>Art & Museums</option>
+    <option value='comedy' selected={{eq tag 'comedy'}}>Comedy</option>
+    <option value='theatre-dance' selected={{eq tag 'theatre-dance'}}>Theatre & Dance</option>
+    <option value='food-wine' selected={{eq tag 'food-wine'}}>Food & Wine</option>
+    <option value='holiday' selected={{eq tag 'holiday'}}>Holiday</option>
+    <option value='sport-fitness' selected={{eq tag 'sport-fitness'}}>Sport & Fitness</option>
+    <option value='educational' selected={{eq tag 'educational'}}>Educational</option>
 </select>

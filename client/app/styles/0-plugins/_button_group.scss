@@ -24,43 +24,46 @@
     display: none;
   }
 
-  a {
+  label {
     margin-bottom: 0;
     cursor: pointer;
     @include flex(1);
-    background: $button-group-background;
-    border-bottom: $button-group-border;
-    border-left: 0;
-    border-right: $button-group-inner-border;
-    border-top: $button-group-border;
-    color: $button-group-color;
-    cursor: pointer;
-    display: inline-block;
-    font-size: $f-small;
-    font-weight: normal;
-    line-height: 1;
-    padding: 1em 0.25em;
-    width: 100%;
-    text-align: center;
 
-    @include media($medium-screen) {
-      font-size: $f-medium;
+    .button-group-item {
+      background: $button-group-background;
+      border-bottom: $button-group-border;
+      border-left: 0;
+      border-right: $button-group-inner-border;
+      border-top: $button-group-border;
+      color: $button-group-color;
+      cursor: pointer;
+      display: inline-block;
+      font-size: $f-small;
+      font-weight: normal;
+      line-height: 1;
+      padding: 1em 0.25em;
+      width: 100%;
+      text-align: center;
+
+      @include media($medium-screen) {
+        font-size: $f-medium;
+      }
+
+      &:focus,
+      &:hover {
+        background-color: darken($button-group-background, 3%);
+      }
     }
 
-    &:focus,
-    &:hover {
-      background-color: darken($button-group-background, 3%);
-    }
-
-    &:first-child {
+    &:first-child .button-group-item {
       border-left: $button-group-border;
     }
 
-    &:last-child {
+    &:last-child .button-group-item {
       border-right: $button-group-border;
     }
 
-    &.active {
+    input:checked + .button-group-item {
       background: $button-group-background-checked;
       border: 1px solid $button-group-border-checked;
       box-shadow: inset 0 1px 2px darken($button-group-background-checked, 10%);

@@ -5,12 +5,11 @@
     {{/each}}
   </div>
 {{/if}}
-
 <section class="color-section full-width">
-  {{date-range-group}}
+  {{date-range-group dateRangeChanged='filterByDate' date_range=date_range}}
   <div class="flexbox">
     <div class="padding flexbox__item">
-      {{tags-group selectTag='selectTag'}}
+      {{tags-group selectTag='selectTag' tag=tag}}
     </div>
     <div class="padding flexbox__item">
       <span class="checkbox-label"><b>Night Only</b> <small>(After 6pm)</small></span>
