@@ -8,25 +8,31 @@
 <section class="color-section full-width">
   {{date-range-group dateRangeChanged='filterByDate' date_range=date_range}}
   <div class="flexbox">
-    <div class="padding flexbox__item">
-      {{tags-group selectTag='selectTag' tag=tag}}
+    <div class="padding flexbox__item filter__item">
+      <div class="input-wrapper">
+        {{fa-icon icon="bars input-icon"}}
+        {{tags-group selectTag='selectTag' tag=tag}}
+      </div>
     </div>
-    <div class="padding flexbox__item">
+    <div class="padding flexbox__item filter__item">
       <span class="checkbox-label"><b>Night Only</b> <small>(After 6pm)</small></span>
       <label class="label-switch pull-right">
         {{input type="checkbox" checked=night_only }}
         <div class="checkbox"></div>
       </label>
     </div>
-    <div class="padding flexbox__item">
+    <div class="padding flexbox__item filter__item">
       <span class="checkbox-label"><b>Free</b></span>
       <label class="label-switch pull-right">
         {{input type="checkbox" checked=free }}
         <div class="checkbox"></div>
       </label>
     </div>
-    <div class="padding flexbox__item">
-      {{pikaday-input value=event_date format="MM/DD/YYYY" placeholder="Pick a date"}}
+    <div class="padding flexbox__item filter__item">
+      <div class="input-wrapper">
+        {{fa-icon icon="calendar input-icon"}}
+        {{pikaday-input value=event_date format="MM/DD/YYYY" placeholder="Pick a date"}}
+      </div>
     </div>
   </div>
 </section>

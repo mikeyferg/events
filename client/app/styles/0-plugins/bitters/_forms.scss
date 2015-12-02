@@ -89,4 +89,30 @@ input[type="file"] {
 select {
   cursor: pointer;
   max-width: 100%;
+  position: relative;
+
+  &:after {
+    content: "\f087";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    position: absolute;
+    left:5px;
+    top:0;
+    font-size: 20px;
+    color: black;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  .input-icon {
+    position: absolute;
+    top: 0.9em;
+    right: 0.6em;
+    z-index: 1;;
+  }
 }
