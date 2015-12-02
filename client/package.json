@@ -52,6 +52,6 @@
     "ember-radio-button": "1.0.7",
     "ember-truth-helpers": "1.2.0",
     "liquid-fire": "0.21.3",
-    "torii": "0.4.1"
+    "torii": "0.6.1"
   }
 }
