@@ -26,7 +26,7 @@ export default Ember.Object.extend({
 
 
   open(authorization) {
-    console.log("Facebook adapter: Open");
+    console.log("Facebook adapter: Open", authorization);
     return new Promise((resolve, reject) => {
       const accessToken = authorization.accessToken;
       if ( Ember.isPresent(accessToken) ) {
