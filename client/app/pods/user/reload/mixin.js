@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
     console.log("session.accessToken", oauth_token);
     return this.store.queryRecord('user', { oauth_token: oauth_token }).then((myAccount) => {
       console.log("myAccount", myAccount);
-      this.controllerFor('application').set('myAccount', myAccount);
+      this.controllerFor('application').set('myAccount', myAccount, myAccount.get('name'));
     });
   }
 });
