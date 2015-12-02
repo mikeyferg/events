@@ -26,8 +26,8 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.apiHostname = '//localhost:3900',
-    ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
+    ENV.apiHostname = '//localhost:3900',
+    // ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
     ENV.contentSecurityPolicy = {
       'default-src': "none",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com *.google-analytics.com",
@@ -101,7 +101,7 @@ module.exports = function(environment) {
         appId: '1035793029772432',
         version: 'v2.4',
         locale: 'en_US',
-        scope: 'email',
+        scope: 'email, user_events',
         returnScopes: true
       }
     }

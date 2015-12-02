@@ -44,9 +44,9 @@ export default Ember.Mixin.create(reloadMyAccount, {
             throw new Error(error);
           });
         });
-      }).catch(() => {
+      }).catch((err) => {
         // TODO: Display a modal to handle error states
-        Ember.Logger.error('Connecting to facebook failed.');
+        Ember.Logger.error('Connecting to facebook failed.', err);
         throw new Error('Connecting to facebook failed.');
       });
     }

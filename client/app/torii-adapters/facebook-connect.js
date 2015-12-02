@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import FB from 'ember-cli-facebook-js-sdk/fb';
 
 const Promise = Ember.RSVP.Promise;
 
@@ -28,14 +29,19 @@ export default Ember.Object.extend({
   open(authorization) {
     console.log("Facebook adapter: Open", authorization);
     return new Promise((resolve, reject) => {
-      const accessToken = authorization.accessToken;
+      const accessToken = authorization.authorizationCode;
       if ( Ember.isPresent(accessToken) ) {
         localStorage.token = accessToken;
       }
-      console.log("Facebook: This seession", this.get('session'));
-      window.FB.api('/me', 'GET', { fields: [ 'email', 'name', 'picture' ] }, (response) => {
+      FB.api('/me', { fields: [ 'email', 'name', 'picture', 'gender' ] }).then((response) => {
+        console.log("FB me:", response);
+        FB.api('/' + authorization.userId + '/events').then((response) => {
+          console.log("responseresponse", response);
+        });
+
+
+
         if (Ember.isPresent(response)) {
-          console.log("id", response);
           const uid = response.id,
                 email = response.email,
                 name = response.name,
