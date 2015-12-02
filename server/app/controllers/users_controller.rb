@@ -11,7 +11,7 @@ skip_before_filter :verify_authenticity_token
   end
 
   def index
-    if params[:filter]
+    if params[:oauth_token]
       @users = User.find_by(oauth_token: params[:oauth_token])
     else
       @users = User.all
