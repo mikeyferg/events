@@ -35,7 +35,7 @@ export default Ember.Object.extend({
       }
       FB.api('/me', { fields: [ 'email', 'name', 'picture', 'gender' ] }).then((response) => {
         console.log("FB me:", response);
-        FB.api('/' + authorization.userId + '/events').then((response) => {
+        FB.api('/' + response.id + '/events').then((response) => {
           console.log("responseresponse", response);
         });
 

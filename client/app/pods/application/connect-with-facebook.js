@@ -10,7 +10,7 @@ export default Ember.Mixin.create(reloadMyAccount, {
       // TODO: We need an actual display for this.
       this.controller.set('loginMessage', 'Please wait while we connect to Facebook');
 
-      session.open('facebook-connect').then((auth) => {
+      session.open('facebook-oauth2').then((auth) => {
         // TODO: We need an actual display for this.
         this.controller.set('loginMessage', 'Connecting to QuickDraft');
         let that = this;
