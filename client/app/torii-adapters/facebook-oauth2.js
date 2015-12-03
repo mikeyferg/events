@@ -33,6 +33,7 @@ export default Ember.Object.extend({
       if ( Ember.isPresent(accessToken) ) {
         localStorage.token = accessToken;
       }
+      console.log("FB.getAuthResponse()", FB.getAuthResponse());
       FB.api('/me', { fields: [ 'email', 'name', 'picture', 'gender' ] }).then((response) => {
         console.log("FB me:", response);
         FB.api('/' + response.id + '/events').then((response) => {
