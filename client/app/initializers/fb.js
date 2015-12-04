@@ -5,7 +5,7 @@ export default {
   initialize: function() {
     return FB.init({
       appId: '1035793029772432',
-      version: 'v2.3',
+      version: 'v2.5',
       xfbml: true
     });
   }

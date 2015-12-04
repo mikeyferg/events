@@ -23,8 +23,8 @@ export default Ember.Object.extend({
   },
 
   open: function(authorization){
+    console.log("Application adapter: open", authorization);
     return new Ember.RSVP.Promise((resolve, reject) => {
-      console.log("Application adapter: open", authorization);
       const accessToken = authorization.user.oauth_token;
 
       if (accessToken) {
@@ -33,8 +33,6 @@ export default Ember.Object.extend({
       } else {
         reject({ error: 'No access token recieved' });
       }
-    }).then(function() {
-      return { currentUser: authorization.user };
     });
   }
 });

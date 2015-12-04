@@ -29,11 +29,10 @@ export default Ember.Object.extend({
   open(authorization) {
     console.log("Facebook adapter: Open", authorization);
     return new Promise((resolve, reject) => {
-      const accessToken = authorization.authorizationCode;
+      const accessToken = FB.getAuthResponse().accessToken;
       if ( Ember.isPresent(accessToken) ) {
         localStorage.token = accessToken;
       }
-      console.log("FB.getAuthResponse()", FB.getAuthResponse());
       FB.api('/me', { fields: [ 'email', 'name', 'picture', 'gender' ] }).then((response) => {
         console.log("FB me:", response);
         FB.api('/' + response.id + '/events').then((response) => {
