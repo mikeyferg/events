@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import config from '../../config/environment';
-import ConnectWithFacebook from './connect-with-facebook';
 import reloadMyAccount from '../user/reload/mixin';
 
 // Add css class to body
@@ -24,7 +23,7 @@ Ember.RSVP.configure('onerror', function(e) {
   console.log(e.stack);
 });
 
-export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
+export default Ember.Route.extend(reloadMyAccount, {
   beforeModel() {
     this._super(...arguments);
     let that = this;
@@ -90,6 +89,15 @@ export default Ember.Route.extend(ConnectWithFacebook, reloadMyAccount, {
       console.log("Search input", searchInput);
       this.controllerFor('city.events').set('search', searchInput);
       this.transitionTo('city.events', 'sf', 'events');
+    },
+
+    signInViaFacebook() {
+      this.get('session').open('facebook-oauth2').then((auth) => {
+        Ember.Logger.log("Logged in via oauth2", auth);
+        this.reloadMyAccount();
+      }).catch((err) => {
+        Ember.Logger.error('Connecting to facebook failed.', err);
+      });
     },
 
     resumeSavedTransition() {
