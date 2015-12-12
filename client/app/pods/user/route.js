@@ -9,7 +9,7 @@ export default Ember.Route.extend({
 
   model(){
     const oauth_token = this.get('session.accessToken');
-    return this.store.queryRecord('user', { filter: { oauth_token: oauth_token } });
+    return this.store.queryRecord('user', { oauth_token: oauth_token });
   },
 
   setupController(controller, model) {
