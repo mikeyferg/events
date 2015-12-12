@@ -25,9 +25,10 @@ class EventsController < ApplicationController
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .distinct
-        .by_category(params[:category])
+        .by_tag(params[:tag])
         .by_date_range(params[:date_range])
         .by_cost(params[:free], params[:cost])
+        .by_night_only(params[:night_only]) #add this for night_only?
         .page(params[:page]).per(27)
         .sort_by { rand}
     end
