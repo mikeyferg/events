@@ -5,7 +5,6 @@ json.event do
   json.users @event.users.pluck :id
   json.venue_name @event.venue.name unless @event.venue.nil?
   json.city @event.city.id
-  json.venue @event.venue.id
 end
 
 json.city { json.array! [@event.city], partial: 'cities/city', as: :city }
@@ -16,8 +15,4 @@ end
 
 json.set! :users do
   json.array! @event.users, :id, :name, :email, :image_url, :oauth_token, :uid, :slug
-end
-
-unless @event.venue.nil?
-  json.venue { json.array! [@event.venue], partial: 'venues/venue', as: :venue }
 end
