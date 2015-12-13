@@ -16,12 +16,11 @@ class EventsController < ApplicationController
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .where({featured: true})
         .distinct
-        .by_category(params[:category])
         .by_date_range(params[:date_range])
-        .by_cost(params[:free], params[:cost])
         .sort_by { rand }
         .take(2)
     else
+
       @events = Event.joins(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .distinct
