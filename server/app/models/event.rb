@@ -90,7 +90,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.by_date_range(date_range = nil)
-    if date_range === 'this-week'
+    if date_range === nil
+      return all
+    elsif date_range === 'this-week'
       return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all
     elsif date_range === 'today'
       return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all
@@ -105,9 +107,7 @@ class Event < ActiveRecord::Base
       month = date_array[0].to_i
       day = date_array[1].to_i
       year = date_array[2].to_i
-
       dt = DateTime.new(year, month, day, 0, 0, 0, 0).utc
-
       return where('event_times.start_time BETWEEN ? AND ?', (dt - 8.hour).beginning_of_day + 8.hour, (dt - 8.hour).end_of_day + 8.hour).all
     end
     #all
