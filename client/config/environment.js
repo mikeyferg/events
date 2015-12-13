@@ -26,14 +26,14 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.apiHostname = '//localhost:3900',
     ENV.apiHostname = '//localhost:3900',
-    // ENV.apiHostname = '//coyote-api-staging.herokuapp.com',
     ENV.contentSecurityPolicy = {
       'default-src': "none",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com www.facebook.com connect.facebook.net graph.facebook.com *.google-analytics.com",
       'font-src': "'self' *.gstatic.com",
       'connect-src': "'self' ws://0.0.0.0:49152 localhost:3900 coyote-api-staging.herokuapp.com ws://localhost:49152 http://localhost:3000 https://facebook.com www.facebook.com connect.facebook.net event-coyote-api.herokuapp.com",
-      'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net www.sfstation.com s3.amazonaws.com *.google-analytics.com scontent.xx.fbcdn.net",
+      'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net www.sfstation.com s3.amazonaws.com *.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' *.googleapis.com",
       'media-src': "'self'",
       'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
@@ -97,8 +97,12 @@ module.exports = function(environment) {
   ENV.torii = {
     sessionServiceName: 'session',
     providers: {
-      'facebook-oauth2': {
-        apiKey: '1035793029772432'
+      'facebook-connect': {
+        appId: '1035793029772432',
+        version: 'v2.4',
+        locale: 'en_US',
+        scope: 'email',
+        returnScopes: true
       }
     }
   },

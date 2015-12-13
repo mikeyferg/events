@@ -57,33 +57,62 @@ class Event < ActiveRecord::Base
 
   after_validation :update_image, only: :image_url
 
- # event filter settings
-  # def self.by_tag(tag = nil)
-  #   case tag
-  #     ###remove spaces, etc
-  #     "Live Music".decompile
-  #       return where(tag: "Live Music")
-  #     "Bar"
-  #       return where(tag: "Bar")
-  #   else
-  #     all
-  #   end
-  # end
+
+  def self.by_tag(tag = nil)
+    case tag
+      ###remove spaces, etc
+    when "live-music"
+        return where("tags.category = ?", "live-music")
+    when "bars-clubs"
+        return where(tag: "Bar & Clubs")
+    when "nightlife"
+        return where(tag: "Nightlife")
+    when "art-museums"
+        return where(tag: "Art & Museums")
+    when "comedy"
+      return where(tag: "Comedy")
+    when "theatre-dance"
+      return where(tag: "Theatre & Dance")
+    when "food-wine"
+      return where(tag: "Food & Wine")
+    when "holiday"
+      return where(tag: "Holiday")
+    when "sport-fitness"
+      return where(tag: "Fitness")
+    when "educational"
+      return where(tag: "Educational")
+    else
+      all
+    end
+  end
 
   def self.by_date_range(date_range = nil)
-    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all if date_range === 'week'
-    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all if date_range === 'today'
-    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).tomorrow.end_of_day + 8.hour).all if date_range === 'tomorrow'
-    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day + 8.hour, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day + 8.hour).all if date_range === 'weekend'
-    return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
-    all
+    if date_range === 'week'
+      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all
+    elsif date_range === 'today'
+      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all
+    elsif date_range === 'tomorrow'
+      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).tomorrow.end_of_day + 8.hour).all
+    elsif date_range === 'weekend'
+      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day + 8.hour, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day + 8.hour).all
+    elsif date_range === 'all'
+      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all
+    else
+      date = params[:date_range]
+      # date_array = date.split("-")
+      # month = date_rray[0]
+      # day = date_array[1]
+      # year = date_array[2]
+      dt = date.to_datetime.in_time_zone('Pacific Time (US & Canada)')
+      return where('event_times.start_time BETWEEN ? AND ?', (dt - 8.hour).beginning_of_day + 8.hour, (dt - 8.hour).end_of_day + 8.hour).all
+
   end
 
 
 
-  def self.by_tag(tag)
-    all
-  end
+  # def self.by_tag(tag)
+  #   all
+  # end
 
   def self.by_cost(free = nil, cost = nil)
     return where(cost: "Free") if free === 'true'
@@ -107,7 +136,7 @@ class Event < ActiveRecord::Base
       # return where("'event_times.start_time.in_time_zone('Pacific Time (US & Canada)').start_time.strftime('%H')' > 18 ")
       # return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
       #binding.pry
-      return where("to_char(event_times.start_time, 'hh24:mi:ss') BETWEEN ? AND ?", '00:00:00', '00:00:00').all
+      return where("to_char(event_times.start_time, 'hh24:mi:ss') BETWEEN ? AND ?", '02:00:00', '08:00:00').all
       # sql = "SELECT * FROM event WHERE to_number(to_char(trunc(events.event_times.start_time, 'sssss'))) between 24300 and 69359"
       # records_array = ActiveRecord::Base.connection.execute(sql)
 
