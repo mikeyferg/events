@@ -4,9 +4,8 @@ class VenuesController < ApplicationController
     if params['slug']
       @venue = find_venue_by_slug
       @events = @venue.events
-                      .where({ start_date_time: Time.now.utc..6.months.from_now })
                       .limit( 20 )
-                      .order(:start_date_time)
+
       render :show
     else
       @venues = Venue.all
