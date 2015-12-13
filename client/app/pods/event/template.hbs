@@ -27,7 +27,7 @@
       {{#if model.event.cost}}
         <li itemprop="offers" itemscope itemtype="http://schema.org/Offer">{{fa-icon icon="usd"}} <span itemprop="price" content={{model.event.cost_integer}}>{{model.event.costDisplay}}</span></li>
       {{/if}}
-      <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue.name 'venue' model.event.venue}}</li>
+      <li itemprop="name">{{fa-icon icon="home"}} {{link-to model.event.venue_name 'venue' model.event.venue_slug}}</li>
       <li itemprop="location" itemscope itemtype="http://schema.org/Place">
         {{fa-icon icon="map-marker"}} <span itemprop="name">{{model.event.address}}</span>
         <meta itemprop="address" content={{model.event.address}} />
@@ -43,7 +43,7 @@
         <li>{{fa-icon icon="external-link"}} <a href={{model.event.source_url}} itemprop="url" target="_blank">{{model.event.sourceUrlDomain}}</a></li>
       {{/if}}
     </ul>
-    {{google-map venue=model.event.venue.name address=model.event.address}}
+    {{google-map venue=model.event.venue_name address=model.event.address}}
     <h3 class="section-header">More events</h3>
     {{#each model.extraEvents as |event|}}
       {{event-card city=model.city event=event}}

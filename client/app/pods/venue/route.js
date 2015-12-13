@@ -6,7 +6,7 @@ export default Ember.Route.extend({
   },
 
   afterModel(model) {
-    model.reload();
+    // model.reload();
   },
 
   setupController(controller, model) {
