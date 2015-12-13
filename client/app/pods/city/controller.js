@@ -36,19 +36,28 @@ export default Ember.Controller.extend({
   dateChanged: function() {
     this.resetPageNumber();
     let formattedDate = this.get('event_date');
+    //Format raw date into MM-DD-YY
     if (Ember.isPresent(formattedDate) && formattedDate.toString().indexOf('GMT') !== -1) {
       formattedDate = moment(this.get('event_date')).format('MM-DD-YY');
     }
     let city = this.get('model.slug');
     let category = this.get('category');
-    this.transitionToRoute('city.events', city, category, formattedDate);
+    let params = {
+      free: this.get('free'),
+      night_only: this.get('night_only')
+    }
+    this.transitionToRoute('city.events', city, category, formattedDate, { queryParams: params});
   }.observes('event_date'),
 
   actions: {
     selectCategory(category) {
-      console.log("category", category);
       let city = this.get('model.slug');
-      this.transitionToRoute('city.events', city, category, 'this-week')
+      let date_range = this.get('date_range');
+      let params = {
+        free: this.get('free'),
+        night_only: this.get('night_only')
+      }
+      this.transitionToRoute('city.events', city, category, date_range, { queryParams: params})
     },
 
     filterByDate(date_range) {
