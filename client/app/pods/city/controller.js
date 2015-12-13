@@ -38,7 +38,7 @@ export default Ember.Controller.extend({
     let formattedDate = this.get('event_date');
     //Format raw date into MM-DD-YY
     if (Ember.isPresent(formattedDate) && formattedDate.toString().indexOf('GMT') !== -1) {
-      formattedDate = moment(this.get('event_date')).format('MM-DD-YY');
+      formattedDate = moment(this.get('event_date')).format('MM-DD-YYYY');
     }
     let city = this.get('model.slug');
     let category = this.get('category');
