@@ -4,6 +4,7 @@ json.event do
   json.tags @event.tags.pluck :id
   json.users @event.users.pluck :id
   json.venue_name @event.venue.name unless @event.venue.nil?
+  json.venue_slug @event.venue.slug unless @event.venue.nil?
   json.city @event.city.id
 end
 
