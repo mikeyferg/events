@@ -58,54 +58,58 @@ class Event < ActiveRecord::Base
   after_validation :update_image, only: :image_url
 
 
-  def self.by_tag(tag = nil)
-    case tag
+  def self.by_tag(category = nil)
+
+    case category
       ###remove spaces, etc
     when "live-music"
-        return where("tags.category = ?", "live-music")
+
+        # return where("self.tags = ?", "Live Music")
+      return where("tags.name = ?", 'Live Music')
     when "bars-clubs"
-        return where(tag: "Bar & Clubs")
+        return where("tags.name = ?", 'Bars & Clubs')
     when "nightlife"
-        return where(tag: "Nightlife")
+        return where("tags.name = ?", 'Nightlife')
     when "art-museums"
-        return where(tag: "Art & Museums")
+        return where("tags.name = ?", 'Art & Museums')
     when "comedy"
-      return where(tag: "Comedy")
+      return where("tags.name = ?", 'Comedy')
     when "theatre-dance"
-      return where(tag: "Theatre & Dance")
+      return where("tags.name = ?", 'Theatre & Dance')
     when "food-wine"
-      return where(tag: "Food & Wine")
+      return where("tags.name = ?", 'Food & Wine')
     when "holiday"
-      return where(tag: "Holiday")
+      return where("tags.name = ?", 'Holiday')
     when "sport-fitness"
-      return where(tag: "Fitness")
+      return where("tags.name = ?", 'Sport & Fitness')
     when "educational"
-      return where(tag: "Educational")
+      return where("tags.name = ?", 'Educational')
     else
       all
     end
   end
 
   def self.by_date_range(date_range = nil)
-    if date_range === 'week'
-      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all
-    elsif date_range === 'today'
-      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all
-    elsif date_range === 'tomorrow'
-      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).tomorrow.end_of_day + 8.hour).all
-    elsif date_range === 'weekend'
-      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day + 8.hour, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day + 8.hour).all
-    elsif date_range === 'all'
-      return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all
-    else
-      date = params[:date_range]
-      # date_array = date.split("-")
-      # month = date_rray[0]
-      # day = date_array[1]
-      # year = date_array[2]
-      dt = date.to_datetime.in_time_zone('Pacific Time (US & Canada)')
-      return where('event_times.start_time BETWEEN ? AND ?', (dt - 8.hour).beginning_of_day + 8.hour, (dt - 8.hour).end_of_day + 8.hour).all
-
+    # if date_range === 'week'
+    #   return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).beginning_of_day + 6.day + 8.hour).all
+    # elsif date_range === 'today'
+    #   return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).end_of_day + 8.hour).all
+    # elsif date_range === 'tomorrow'
+    #   return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).tomorrow.beginning_of_day + 8.hour, (DateTime.now.utc - 8.hour).tomorrow.end_of_day + 8.hour).all
+    # elsif date_range === 'weekend'
+    #   return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).at_beginning_of_week + 4.day + 8.hour, (DateTime.now.utc - 8.hour).at_beginning_of_week + 6.day + 8.hour).all
+    # elsif date_range === 'all'
+    #   return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all
+    # else
+    #
+    #   # date_array = date.split("-")
+    #   # month = date_rray[0]
+    #   # day = date_array[1]
+    #   # year = date_array[2]
+    #   dt = date_range.to_datetime.in_time_zone('Pacific Time (US & Canada)')
+    #   return where('event_times.start_time BETWEEN ? AND ?', (dt - 8.hour).beginning_of_day + 8.hour, (dt - 8.hour).end_of_day + 8.hour).all
+    # end
+    all
   end
 
 
