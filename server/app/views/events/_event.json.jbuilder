@@ -12,4 +12,5 @@ json.call(
   :source_url,
   :summary,
   :venue_id
+
 )

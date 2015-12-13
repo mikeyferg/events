@@ -3,10 +3,11 @@ class VenuesController < ApplicationController
   def index
     if params['slug']
       @venue = find_venue_by_slug
-      @events = @venue.events
-                      .where({ start_date_time: Time.now.utc..6.months.from_now })
-                      .limit( 20 )
-                      .order(:start_date_time)
+      @events = Event.joins(:event_times)
+        .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
+        .where("venue_id": @venue.id)
+        .limit( 20 )
+
       render :show
     else
       @venues = Venue.all
