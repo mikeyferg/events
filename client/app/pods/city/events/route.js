@@ -4,10 +4,10 @@ export default Ember.Route.extend({
   model(params) {
     return Ember.RSVP.hash({
       city: this.modelFor('city'),
-      tag: params.tag,
+      category: params.category,
       date_range: params.date_range,
       events: this.store.query('event', {
-        tag: params.category,
+        category: params.category,
         page: params.page,
         date_range: params.date_range,
         cost: params.cost,
@@ -17,7 +17,7 @@ export default Ember.Route.extend({
         search: params.search
       }),
       featuredEvents: this.store.query('event', {
-        tag: params.category,
+        category: params.category,
         page: params.page,
         date_range: params.date_range,
         cost: params.cost,

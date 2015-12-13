@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   night_only: Ember.computed.reads('eventsController.night_only'),
   date_range: Ember.computed.reads('eventsController.model.date_range'),
   event_date: Ember.computed.reads('eventsController.model.date_range'),
-  tag: Ember.computed.reads('eventsController.model.tag'),
+  category: Ember.computed.reads('eventsController.model.category'),
   featuredEvents: Ember.computed.reads('eventsController.model.featuredEvents'),
 
   reset() {
@@ -40,14 +40,15 @@ export default Ember.Controller.extend({
       formattedDate = moment(this.get('event_date')).format('MM-DD-YY');
     }
     let city = this.get('model.slug');
-    let tag = this.get('tag');
-    this.transitionToRoute('city.events', city, tag, formattedDate);
+    let category = this.get('category');
+    this.transitionToRoute('city.events', city, category, formattedDate);
   }.observes('event_date'),
 
   actions: {
-    selectTag(tag) {
+    selectCategory(category) {
+      console.log("category", category);
       let city = this.get('model.slug');
-      this.transitionToRoute('city.events', city, tag, 'this-week')
+      this.transitionToRoute('city.events', city, category, 'this-week')
     },
 
     filterByDate(date_range) {
