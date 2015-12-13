@@ -12,7 +12,7 @@
     {{/if}}
     {{#if event.nextDate}}
       <div itemprop="startDate" content={{event.nextDate}} class="event-card__info-item">
-        {{fa-icon icon="clock-o"}} {{event-date event.nextDate}}
+        {{fa-icon icon="clock-o"}} {{event-date timeToShow}}
         {{#if event.hasMultipleDates}}
           (More dates)
         {{/if}}

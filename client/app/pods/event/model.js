@@ -17,6 +17,7 @@ export default DS.Model.extend({
   summary: attr('string'),
   featured: attr('boolean'),
   venue_name: attr('string'),
+  venue_slug: attr('string'),
 
   city: DS.belongsTo('city'),
   tags: DS.hasMany('tag'),

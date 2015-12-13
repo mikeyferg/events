@@ -1,6 +1,6 @@
 <div class="grid-items masonry-grid">
   {{#each model.events as |event|}}
-    {{event-card city=model.city event=event}}
+    {{event-card city=model.city event=event timeToShow=timeToShow}}
   {{else}}
     <center>There are no events for this date</center>
   {{/each}}
