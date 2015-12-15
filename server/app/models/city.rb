@@ -21,7 +21,7 @@ class City < ActiveRecord::Base
   [
     :nickname,
     [:nickname, :name],
-    [:name, :id]
+    [:nickname, :id]
   ]
   end
 

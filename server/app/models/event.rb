@@ -186,8 +186,7 @@ class Event < ActiveRecord::Base
   [
     :name,
     [:name, :venue],
-    [:name, :venue, :date_only],
-    [:name, :id]
+    [:name, :venue, :id]
   ]
   end
 

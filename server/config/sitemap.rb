@@ -46,13 +46,37 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
 
   #   end
+  tags_slugs = ["top", "live-music", "bars-clubs", "nightlife", "arts-museums", "comedy", "theatre-dance", "food-wine", "holiday", "sport-fitness", "educational"]
+  dates_slugs = ["this-week", "today", "tomorrow", "weekend", "upcoming"]
+
+  dates_slugs.each do |date|
+    tags_slugs.each do |tag|
+      add "sf/events/#{date}/#{tag}"
+    end
+  end
+
   add '/sf/events'
   add '/about'
   add '/contact'
+
+  # add '/sf/events/top/this-week'
+  # add '/sf/events/top/today'
+  # add '/sf/events/top/tomorrow'
+  # add '/sf/events/top/weekend'
+  # add '/sf/events/top/upcoming'
+  #
+  # add '/sf/events/comedy/this-week'
+  # add '/sf/events/comedy/today'
+  # add '/sf/events/comedy/tomorrow'
+  # add '/sf/events/top/weekend'
+  # add '/sf/events/top/upcoming'
 
   Event.find_each do |event|
     add "/sf/events/" + event.slug
   end
 
+  Venue.find_each do |venue|
+    add "/venues/" + venue.slug
+  end
 
 end
