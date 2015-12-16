@@ -9,7 +9,10 @@ export default Ember.Component.extend({
   }),
 
   eventTime: Ember.computed('timeToShow', function() {
-    console.log('timeToShow', this.get('timeToShow'), this.get('event.event_times'));
-    return 'date-time format string'
+    let date = this.get('timeToShow')
+    if (moment(date).format('').indexOf('Invalid') !== -1) {
+      date = this.get('event.nextDate')
+    }
+    return date;
   })
 });
