@@ -88,7 +88,7 @@ export default Ember.Route.extend(reloadMyAccount, {
     searchEvents(searchInput) {
       console.log("Search input", searchInput);
       this.controllerFor('city.events').set('search', searchInput);
-      this.transitionTo('city.events', 'sf', 'events');
+      this.transitionTo('city.events', 'sf', 'top');
     },
 
     signInViaFacebook() {

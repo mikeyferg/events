@@ -13,19 +13,19 @@ export default Ember.Route.extend({
     };
   },
 
-  afterModel(model) {
-    let cityName = model.get('name');
-    Ember.$(document).attr('title', `Events in ${cityName}`);
-  },
-
   headTags() {
-    let model = this.modelFor(this.routeName);
+    let city = this.modelFor(this.routeName).get('name');
+    let tag = this.controller.get('category').split('-').join(' ');
+    let capitalizedTag = tag[0].toUpperCase() + tag.substr(1);
+    let date = this.controller.get('date_range').split('-').join(' ');
+    
+    Ember.$(document).attr('title', `${capitalizedTag} events in ${city} ${date}.`);
     return [{
       type: 'meta',
       tagId: 'description',
       attrs: {
         name: 'description',
-        content: `Events in ${model.get('name')}`
+        content: `Check out all of the ${tag} events in ${city} ${date}.`
       }
     }];
   }
