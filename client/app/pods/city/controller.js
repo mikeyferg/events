@@ -40,13 +40,15 @@ export default Ember.Controller.extend({
     if (Ember.isPresent(formattedDate) && formattedDate.toString().indexOf('GMT') !== -1) {
       formattedDate = moment(this.get('event_date')).format('MM-DD-YYYY');
     }
+    if (formattedDate !== null) {
+      this.set('date_range', formattedDate);
+    }
     let city = this.get('model.slug');
     let category = this.get('category');
     let params = {
       free: this.get('free'),
       night_only: this.get('night_only')
     }
-    this.set('date_range', formattedDate);
     this.get('eventsController').set('timeToShow', formattedDate);
     this.transitionToRoute('city.events', city, category, formattedDate, { queryParams: params});
   }.observes('event_date'),
