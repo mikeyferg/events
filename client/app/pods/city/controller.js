@@ -46,6 +46,7 @@ export default Ember.Controller.extend({
       free: this.get('free'),
       night_only: this.get('night_only')
     }
+    this.set('date_range', formattedDate);
     this.get('eventsController').set('timeToShow', formattedDate);
     this.transitionToRoute('city.events', city, category, formattedDate, { queryParams: params});
   }.observes('event_date'),

@@ -36,7 +36,7 @@ module.exports = function(environment) {
       'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net www.sfstation.com s3.amazonaws.com *.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' *.googleapis.com",
       'media-src': "'self'",
-      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+      'frame-src': "static.ak.facebook.com staticxx.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
   }
 
@@ -57,7 +57,7 @@ module.exports = function(environment) {
       'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net www.sfstation.com s3.amazonaws.com *.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' *.googleapis.com",
       'media-src': "'self'",
-      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+      'frame-src': "static.ak.facebook.com staticxx.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
 
     ENV.APP.rootElement = '#ember-testing';
@@ -73,7 +73,7 @@ module.exports = function(environment) {
       'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net",
       'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
       'media-src': "'self'",
-      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+      'frame-src': "static.ak.facebook.com staticxx.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
   }
 
@@ -87,7 +87,7 @@ module.exports = function(environment) {
       'img-src': "'self' data: https://*.googleapis.com https://*.gstatic.com http://static.spin.com squaredancemagazine.com www.facebook.com raw.githubusercontent.com https://fbcdn-profile-a.akamaihd.net *.google-analytics.com",
       'style-src': "'self' 'unsafe-inline' https://*.googleapis.com",
       'media-src': "'self'",
-      'frame-src': "static.ak.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
+      'frame-src': "static.ak.facebook.com staticxx.facebook.com s-static.ak.facebook.com www.facebook.com https://facebook.com"
     };
     ENV.googleAnalytics = {
       webPropertyId: 'UA-68353020-1'
