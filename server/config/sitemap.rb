@@ -51,7 +51,7 @@ SitemapGenerator::Sitemap.create do
 
   dates_slugs.each do |date|
     tags_slugs.each do |tag|
-      add "sf/events/#{date}/#{tag}"
+      add "sf/events/#{tag}/#{date}"
     end
   end
 
