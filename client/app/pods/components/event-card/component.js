@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { isWeekend, isTomorrow } from '../../../utils/date-filter';
+import { isWeekend, isTomorrow, isSameDay } from '../../../utils/date-filter';
 
 export default Ember.Component.extend({
   classNames: 'event-card',
@@ -39,6 +39,15 @@ export default Ember.Component.extend({
       case 'upcoming':
         date = this.get('event.nextDate')
         break;
+      //When date is selected
+      default:
+      date = moment(date, 'MM/DD/YYYY');
+      this.get('event.event_times').split(',').some((time) => {
+        if (isSameDay(date, moment(time))) {
+          date = time;
+          return true;
+        }
+      })
     }
     return date;
   })
