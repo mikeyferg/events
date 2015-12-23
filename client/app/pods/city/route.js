@@ -19,6 +19,8 @@ export default Ember.Route.extend({
     let capitalizedTag = tag[0].toUpperCase() + tag.substr(1);
     let date = this.controller.get('date_range') ? this.controller.get('date_range').split('-').join(' ') : 'this week';
 
+    this.controllerFor('application').set('headerTitle', `${capitalizedTag} events in ${city} ${date}`);
+
     Ember.$(document).attr('title', `${capitalizedTag} events in ${city} ${date}.`);
     return [{
       type: 'meta',
