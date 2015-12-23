@@ -23,7 +23,6 @@ export function isWeekend(eventDate) {
   return isSameDay(event_date, friday, saturday, sunday);
 }
 
-/* **** For local use functions **** */
 export function isSameDay(dayToCheck, ...daysArray) {
   return daysArray.some(function(date) {
     return dayToCheck.startOf('day').isSame(date.startOf('day'));
