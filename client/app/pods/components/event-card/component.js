@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { isWeekend, isTomorrow } from '../../../utils/date-filter';
 
 export default Ember.Component.extend({
   classNames: 'event-card',
@@ -10,8 +11,34 @@ export default Ember.Component.extend({
 
   eventTime: Ember.computed('timeToShow', function() {
     let date = this.get('timeToShow')
-    if (moment(date).format('').indexOf('Invalid') !== -1) {
-      date = this.get('event.nextDate')
+    //If date_range is selected
+    switch (date) {
+      case 'this-week':
+        date = this.get('event.nextDate')
+        break;
+      case 'today':
+        date = this.get('event.nextDate')
+        break;
+      case 'tomorrow':
+        //Return true to short-circuit loop on the first found instance
+        this.get('event.event_times').split(',').some((time) => {
+          if (isTomorrow(time)) {
+            date = time;
+            return true;
+          }
+        })
+        break;
+      case 'weekend':
+        this.get('event.event_times').split(',').some((time) => {
+          if (isWeekend(time)) {
+            date = time;
+            return true;
+          }
+        })
+        break;
+      case 'upcoming':
+        date = this.get('event.nextDate')
+        break;
     }
     return date;
   })
