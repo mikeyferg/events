@@ -36,7 +36,11 @@ export default DS.Model.extend({
     let cost = this.get('cost');
     if (cost.indexOf(';') !== -1) {
       let costs = cost.split(';');
-      cost = `${costs.get('firstObject')} - ${costs.get('lastObject')}`;
+      let firstPrice = +costs.get('firstObject').replace('$', '');
+      let lastPrice = +costs.get('lastObject').replace('$', '');
+      let lowest = Math.min(firstPrice, lastPrice);
+      let highest = Math.max(firstPrice, lastPrice);
+      cost = `$${lowest} - $${highest}`;
     }
     return cost;
   }),
