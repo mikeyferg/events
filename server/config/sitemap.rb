@@ -59,20 +59,16 @@ SitemapGenerator::Sitemap.create do
   add '/about'
   add '/contact'
 
-  # add '/sf/events/top/this-week'
-  # add '/sf/events/top/today'
-  # add '/sf/events/top/tomorrow'
-  # add '/sf/events/top/weekend'
-  # add '/sf/events/top/upcoming'
-  #
-  # add '/sf/events/comedy/this-week'
-  # add '/sf/events/comedy/today'
-  # add '/sf/events/comedy/tomorrow'
-  # add '/sf/events/top/weekend'
-  # add '/sf/events/top/upcoming'
+  # Event.find_each do |event|
+  #   add "/sf/events/" + event.slug
+  # end
 
   Event.find_each do |event|
-    add "/sf/events/" + event.slug
+    event.dates.each do |date|
+      if date.future?
+        add "/sf/events/" + event.slug
+      end
+    end
   end
 
   Venue.find_each do |venue|
