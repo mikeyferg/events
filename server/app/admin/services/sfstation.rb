@@ -47,9 +47,9 @@ module SfStation
         schedule.each do |instance|
           date = SfStation.date_regex(instance)
           time = SfStation.start_time_regex(instance)
-          if date == "Mon Feb 29"
-            next
-          elsif date.nil? || time.nil?
+          # if date == "Mon Feb 29"
+          #   next
+          if date.nil? || time.nil?
             next
           else
             date_only = SfStation.date_splitter(date)
