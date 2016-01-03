@@ -11,11 +11,6 @@ module SfStation
     else
 
       name = hash[:name].encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-      #for date_only and time_only attributes
-        #sfstation specific
-      #date_only = SfStation.date_splitter(hash[:date_only])
-      # time_only = Time.parse(SfStation.start_time_regex(hash[:time_only])) rescue nil
-
       city_id = 1
       #for combining date and time to create start_date_time
         date_array = hash[:date_only].split(" ")

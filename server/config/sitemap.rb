@@ -64,9 +64,11 @@ SitemapGenerator::Sitemap.create do
   # end
 
   Event.find_each do |event|
+    added = false
     event.event_times.each do |date|
-      if date.start_time.future?
+      if added == false && date.start_time.future?
         add "/sf/events/" + event.slug
+        added = true
       end
     end
   end

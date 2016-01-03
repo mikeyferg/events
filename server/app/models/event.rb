@@ -115,9 +115,7 @@ class Event < ActiveRecord::Base
 
 
 
-  # def self.by_tag(tag)
-  #   all
-  # end
+
 
   def self.by_cost(free = nil, cost = nil)
     return where(cost: "Free") if free === 'true'
@@ -125,58 +123,15 @@ class Event < ActiveRecord::Base
     all
   end
 
-  # new stuff
 
   def self.by_night_only(night_only = false)
     if night_only == 'true'
-      # after_6 = false
-      # self.event_times.each do |event_time|
-      #   is_night = Event.is_night?(event_time)
-      #   if is_night == true
-      #     after_6 = true
-      #   end
-      #
-      # end
-      # return where('Event.is_night?(event_times.start_time) == true')
-      # return where("'event_times.start_time.in_time_zone('Pacific Time (US & Canada)').start_time.strftime('%H')' > 18 ")
-      # return where('event_times.start_time BETWEEN ? AND ?', (DateTime.now.utc - 8.hour).beginning_of_day, (DateTime.now.utc - 8.hour).beginning_of_day + 180.day).all if date_range === 'all'
-      #binding.pry
       return where("to_char(event_times.start_time, 'hh24:mi:ss') BETWEEN ? AND ?", '02:00:00', '08:00:00').all
-      # sql = "SELECT * FROM event WHERE to_number(to_char(trunc(events.event_times.start_time, 'sssss'))) between 24300 and 69359"
-      # records_array = ActiveRecord::Base.connection.execute(sql)
-
-      # return where("sql.event_times.start_time.strftime('%H').to_i > 18")
-
     else
       return Event.all
     end
   end
 
-  # def is_night?(start_times_array)
-  #   start_times_array.each do |start_date_time|
-  #     start_time = Event.start_time_parser(start_time)
-  #     if start_time.hour >= 18
-  #       true
-  #     end
-  #   end
-  # end
-
-  # def self.is_night?(date_time)
-  #   # binding.pry
-  #   date_time_pst = date_time.in_time_zone("Pacific Time (US & Canada)")
-  #   hour = date_time_pst.start_time.strftime('%H')
-  #   if hour >= 18
-  #     return true
-  #   end
-  # end
-
-  # def self.is_night?(date_time)
-  #   # binding.pry
-  #   date_time_pst = date_time.in_time_zone("Pacific Time (US & Canada)")
-  #   binding.pry
-  #   return date_time_pst.start_time.strftime('%H')
-  #
-  # end
 
 
   # slug creation
