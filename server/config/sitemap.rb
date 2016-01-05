@@ -51,13 +51,13 @@ SitemapGenerator::Sitemap.create do
 
   dates_slugs.each do |date|
     tags_slugs.each do |tag|
-      add "sf/events/#{tag}/#{date}"
+      add "sf/events/#{tag}/#{date}", :changefreq => 'daily', :priority => 0.8
     end
   end
 
-  add '/sf/events'
-  add '/about'
-  add '/contact'
+  add '/sf/events', :changefreq => 'daily', :priority => 0.9
+  add '/about', , :changefreq => 'daily', :priority => 0.9
+  add '/contact', , :changefreq => 'daily', :priority => 0.9
 
   # Event.find_each do |event|
   #   add "/sf/events/" + event.slug
@@ -67,14 +67,14 @@ SitemapGenerator::Sitemap.create do
     added = false
     event.event_times.each do |date|
       if added == false && date.start_time.future?
-        add "/sf/events/" + event.slug
+        add "/sf/events/" + event.slug, , :changefreq => 'weekly', :priority => 0.6
         added = true
       end
     end
   end
 
   Venue.find_each do |venue|
-    add "/venues/" + venue.slug
+    add "/venues/" + venue.slug, :changefreq => 'monthly', :priority => 0.6
   end
 
 end
