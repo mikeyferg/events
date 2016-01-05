@@ -56,8 +56,8 @@ SitemapGenerator::Sitemap.create do
   end
 
   add '/sf/events', :changefreq => 'daily', :priority => 0.9
-  add '/about', , :changefreq => 'daily', :priority => 0.9
-  add '/contact', , :changefreq => 'daily', :priority => 0.9
+  add '/about', :changefreq => 'daily', :priority => 0.9
+  add '/contact', :changefreq => 'daily', :priority => 0.9
 
   # Event.find_each do |event|
   #   add "/sf/events/" + event.slug
@@ -67,7 +67,7 @@ SitemapGenerator::Sitemap.create do
     added = false
     event.event_times.each do |date|
       if added == false && date.start_time.future?
-        add "/sf/events/" + event.slug, , :changefreq => 'weekly', :priority => 0.6
+        add "/sf/events/" + event.slug, :changefreq => 'weekly', :priority => 0.6
         added = true
       end
     end
