@@ -28,7 +28,7 @@ module SfStation
       if hash[:tags].nil?
         tags = ["fun"]
       else
-        tags = hash[:tags].split(" , ")
+        tags = hash[:tags].split(" ")
       end
 
       unless hash[:schedule].nil?
