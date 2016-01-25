@@ -36,6 +36,8 @@ class Venue < ActiveRecord::Base
   has_many :partner_venues
   has_many :venues, through: :partner_venues
 
+  after_validation :update_image, only: :image_url
+
   def self.find_or_create_venue(name, address, city_id, image_url = nil)
     Venue.where(name: name).first_or_create do |venue|
       venue.name = name
