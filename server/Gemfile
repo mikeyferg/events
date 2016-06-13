@@ -28,6 +28,10 @@ gem 'kaminari'
 gem 'puma'
 gem 'validates_timeliness', '~> 3.0'
 
+# Scraper
+gem 'mechanize', '~> 2.7', '>= 2.7.4'
+gem 'whenever', :require => false
+
 #for admin pages
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
