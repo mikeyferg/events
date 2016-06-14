@@ -24,7 +24,7 @@ ngrok
 /server/config/application.yml
 
 # Ignore IDE files
-/.idea
+.idea
 
 # Ignore public folder with assets
 /server/public
