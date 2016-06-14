@@ -11,15 +11,21 @@ task import_from_sfstation: :environment do
     event_page = agent.get(source_url)
     name = event_page.at('#listingDetails').at('h1').text
     summary = event_page.at('#listingDescription').text
-    image_url = main_domain + event_page.at('#mainImage').at('img').attributes['src'] if event_page.at('#mainImage').present?
+    if event_page.at('#mainImage').present?
+      image_url = main_domain + event_page.at('#mainImage').at('img').attributes['src']
+    end
 
     # Schedule params
-    schedule = event_page.search('td.dates').first.search('div.ESL01').xpath('text()') if event_page.search('td.dates').present?
+    if event_page.search('td.dates').present?
+      schedule = event_page.search('td.dates').first.search('div.ESL01').xpath('text()')
+    end
 
     # Venue params
     venue_page = agent.get(main_domain + event_page.search('a.businessName').first.attributes['href'].value)
     venue_name = venue_page.at('#listingDetails').at('h1').text
-    venue_image_url = main_domain + venue_page.at('#mainImage').at('img').attributes['src'] if venue_page.at('#mainImage').present?
+    if venue_page.at('#mainImage').present?
+      venue_image_url = main_domain + venue_page.at('#mainImage').at('img').attributes['src']
+    end
     venue_address = venue_page.at('dt:contains("Where")').next_element.text
 
     # Default value (check app/admin/sfstation.rb line 14)
@@ -38,13 +44,17 @@ task import_from_sfstation: :environment do
           end_time = dt.next_element.text
         when 'Cost'
           cost = dt.next_element.text
+          cost.blank? ? nil : cost # Return nil if the line is blank
         when 'Tags'
           tags = dt.next_element.text.split(",")
       end
     end
 
-    # Create event
-    event = Event.create(
+    # Parse cost to integer if 'cost' not nil
+    cost_integer = Event.cost_integer_parser(cost.split(" ").first)
+
+    # Event params hash
+    event_params = {
         name: name,
         source_url: source_url,
         summary: summary,
@@ -54,9 +64,13 @@ task import_from_sfstation: :environment do
         address: venue_address,
         end_time: end_time,
         cost: cost,
+        cost_integer: cost_integer,
         schedule: schedule,
         venue: Venue.find_or_create_venue(venue_name, venue_address, city_id, venue_image_url)
-    )
+    }
+
+    # Create event
+    event = Event.create(event_params)
 
     # Adding event tags
     tags.each do |tag|

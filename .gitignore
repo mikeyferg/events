@@ -22,3 +22,9 @@ ngrok
 
 # Ignore application configuration -- DO NOT REMOVE
 /server/config/application.yml
+
+# Ignore IDE files
+/.idea
+
+# Ignore public folder with assets
+/server/public
