@@ -51,7 +51,7 @@ task import_from_sfstation: :environment do
     end
 
     # Parse cost to integer if 'cost' not nil
-    cost_integer = Event.cost_integer_parser(cost.split(" ").first)
+    cost_integer = Event.cost_integer_parser(cost.split(" ").first) if cost.present? && cost != 'Free'
 
     # Event params hash
     event_params = {
@@ -70,7 +70,9 @@ task import_from_sfstation: :environment do
     }
 
     # Create event
-    event = Event.create(event_params)
+    event = Event.find_or_initialize_by(source_url: source_url)
+    event.assign_attributes(event_params)
+    event.save
 
     # Adding event tags
     tags.each do |tag|

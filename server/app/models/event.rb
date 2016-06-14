@@ -52,6 +52,7 @@ class Event < ActiveRecord::Base
   validates :name, :presence => true
   validates :city_id, :presence => true
   # after_create :start_date_time_array, :presence => true
+  validates :source_url, uniqueness: true
 
   has_many :event_times
 

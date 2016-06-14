@@ -5,8 +5,8 @@ task import_from_apeconcerts: :environment do
   agent = Mechanize.new
   page = agent.get('http://www.apeconcerts.com/events')
   page.at('aside.tm_upcoming_events-class').search('li').each do |li|
-    event_link = li.at('a').attributes['href'].value
-    event_page = agent.get(event_link)
+    source_url = li.at('a').attributes['href'].value
+    event_page = agent.get(source_url)
     # Checking event location to be San Francisco
     if event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text == 'San Francisco'
       # Event params
@@ -41,7 +41,7 @@ task import_from_apeconcerts: :environment do
       # Event params hash
       event_params = {
           name: name,
-          source_url: event_link,
+          source_url: source_url,
           summary: summary,
           image_url: image_url,
           city_id: city_id,
@@ -55,7 +55,9 @@ task import_from_apeconcerts: :environment do
       }
 
       # Create event
-      Event.create(event_params)
+      event = Event.find_or_initialize_by(source_url: source_url)
+      event.assign_attributes(event_params)
+      event.save
     end
   end
 end
