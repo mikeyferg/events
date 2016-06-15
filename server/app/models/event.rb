@@ -56,8 +56,6 @@ class Event < ActiveRecord::Base
 
   has_many :event_times
 
-  after_validation :update_image, only: :image_url
-
 
   def self.by_tag(category = nil)
     case category
@@ -146,22 +144,16 @@ class Event < ActiveRecord::Base
     # small: "64x64",
     # med: "200x200",
     large: "400x400"
-  }
+  }, default_url: "http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  def update_image
-    # binding.pry
-    if self['image_url'].blank?
-      self['image_url'] = "http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
-    end
-    url = self['image_url']
-    new_image = URI.parse(url)
-    # binding.pry
-    self.update_attribute(:image, new_image)
-    image_url = self.image.url
-    self.update_attribute(:image_url, image_url)
-  end
 
+  def load_image_from_url(source_image_url)
+    image = URI.parse(source_image_url)
+    self.image = image
+    image_url_from_table = self.image.url
+    self.update_attribute(:image_url, image_url_from_table)
+  end
 
   # Core event creation and update method
      def self.create_update_event(name, start_date_time_array, city_id, opts={})
