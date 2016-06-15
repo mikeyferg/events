@@ -150,9 +150,7 @@ class Event < ActiveRecord::Base
 
   def load_image_from_url(source_image_url)
     image = URI.parse(source_image_url)
-    self.image = image
-    image_url_from_table = self.image.url
-    self.update_attribute(:image_url, image_url_from_table)
+    self.update_attribute(:image, image)
   end
 
   # Core event creation and update method

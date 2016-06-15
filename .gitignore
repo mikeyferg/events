@@ -18,13 +18,13 @@ ngrok
 /server/log/*
 !/server/log/.keep
 /server/tmp
-/server/.DS_Store
+/server/.DS_Sto                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         re
 
 # Ignore application configuration -- DO NOT REMOVE
 /server/config/application.yml
 
 # Ignore IDE files
-    .idea
+.idea
 
 # Ignore public folder with assets
 /server/public

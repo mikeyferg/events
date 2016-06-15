@@ -66,6 +66,7 @@ namespace :scrape do
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])
       event.load_image_from_url(image_url) if image_url && event.image_url.blank?
       event.assign_attributes(event_params)
+      event.image_url = event.image.url
       event.save
 
       # Adding event tags
