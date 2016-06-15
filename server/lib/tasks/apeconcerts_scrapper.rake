@@ -14,7 +14,7 @@ namespace :scrape do
       # Event params
       event_params[:name] = event_page.at('h2.show-title').text
       event_params[:summary] = event_page.at('div.bio').text
-      image_url = "http:#{event_page.at('img.wp-post-image').attributes['src'].value}"
+      event_params[:image_url] = "http:#{event_page.at('img.wp-post-image').attributes['src'].value}"
 
       # Setting event cost params
       if event_page.at('div.more-information').search('p:contains("$")').present?
@@ -46,9 +46,7 @@ namespace :scrape do
 
       # Create event
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])
-      event.load_image_from_url(image_url) if image_url && event.image_url.blank?
       event.assign_attributes(event_params)
-      event.image_url = event.image.url
       event.save
     end
   end

@@ -56,7 +56,6 @@ class Event < ActiveRecord::Base
 
   has_many :event_times
 
-
   def self.by_tag(category = nil)
     case category
       ###remove spaces, etc
@@ -148,9 +147,19 @@ class Event < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  def load_image_from_url(source_image_url)
-    image = URI.parse(source_image_url)
+  before_validation :load_image_from_url
+
+  def load_image_from_url
+    image = URI.parse(self.image_url)
     self.update_attribute(:image, image)
+  end
+
+  def image_url
+    if self[:image_url].present?
+      self[:image_url]
+    else
+      self.image.url
+    end
   end
 
   # Core event creation and update method
