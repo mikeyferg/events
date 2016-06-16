@@ -37,12 +37,12 @@ end
   end
 
   # Import buttons
-  sidebar :Sfstation do
+  sidebar :afstation do
     button_to 'Import from Sfstation.com', '/admin/events/import_from_sfstation',
               method: :post, confirm: 'Are you sure?'
   end
 
-  sidebar :Apeconcerts do
+  sidebar :apeconcerts do
     button_to 'Import from Apeconcerts.com', '/admin/events/import_from_apeconcerts',
               method: :post, confirm: 'Are you sure?'
   end

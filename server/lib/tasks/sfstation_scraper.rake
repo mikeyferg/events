@@ -1,8 +1,7 @@
+require 'mechanize'
 namespace :scrape do
   desc 'Import events from sfstation.com'
   task import_from_sfstation: :environment do
-    require 'mechanize'
-
     agent = Mechanize.new
     page = agent.get('http://www.sfstation.com/calendar')
     main_domain = 'http://sfstation.com'

@@ -143,14 +143,18 @@ class Event < ActiveRecord::Base
     # small: "64x64",
     # med: "200x200",
     large: "400x400"
-  }, default_url: "http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
+  }, default_url: 'http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg'
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   before_validation :load_image_from_url
 
   def load_image_from_url
-    image = URI.parse(self.image_url)
+    begin
+      image = URI.parse(self.image_url)
+    rescue URI::InvalidURIError
+      self.image = nil
+    end
     self.update_attribute(:image, image)
   end
 
@@ -158,7 +162,7 @@ class Event < ActiveRecord::Base
     if self[:image_url].present?
       self[:image_url]
     else
-      self.image.url
+      image.url
     end
   end
 

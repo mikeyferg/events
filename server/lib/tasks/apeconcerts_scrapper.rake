@@ -1,8 +1,7 @@
+require 'mechanize'
 namespace :scrape do
   desc 'Import events from apeconcerts.com'
   task import_from_apeconcerts: :environment do
-    require 'mechanize'
-
     agent = Mechanize.new
     page = agent.get('http://www.apeconcerts.com/events')
     page.at('aside.tm_upcoming_events-class').search('li').each do |li|
