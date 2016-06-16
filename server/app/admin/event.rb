@@ -34,6 +34,29 @@ end
       end
     end
     page_url(hash, hash[:page].to_s)
-   end
+  end
 
+  # Import buttons
+  sidebar :afstation do
+    button_to 'Import from Sfstation.com', '/admin/events/import_from_sfstation',
+              method: :post, confirm: 'Are you sure?'
+  end
+
+  sidebar :apeconcerts do
+    button_to 'Import from Apeconcerts.com', '/admin/events/import_from_apeconcerts',
+              method: :post, confirm: 'Are you sure?'
+  end
+
+  # Import methods
+  collection_action :import_from_sfstation, method: :post do
+    system 'rake scrape:import_from_sfstation'
+    redirect_to admin_events_path,
+                notice: 'Import from Sfstation.com has been successfully completed!'
+  end
+
+  collection_action :import_from_apeconcerts, method: :post do
+    system 'rake scrape:import_from_apeconcerts'
+    redirect_to admin_events_path,
+                notice: 'Import from Apeconcerts.com has been successfully completed!'
+  end
 end

@@ -52,11 +52,9 @@ class Event < ActiveRecord::Base
   validates :name, :presence => true
   validates :city_id, :presence => true
   # after_create :start_date_time_array, :presence => true
+  validates :source_url, uniqueness: true
 
   has_many :event_times
-
-  after_validation :update_image, only: :image_url
-
 
   def self.by_tag(category = nil)
     case category
@@ -144,23 +142,29 @@ class Event < ActiveRecord::Base
   has_attached_file :image, styles: {
     # small: "64x64",
     # med: "200x200",
-      large: "400x400"
-  }
+    large: "400x400"
+  }, default_url: 'http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg'
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  def update_image
-    # binding.pry
-    if self['image_url'].blank?
-      self['image_url'] = "http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg"
+
+  before_validation :load_image_from_url
+
+  def load_image_from_url
+    begin
+      image = URI.parse(self.image_url)
+    rescue URI::InvalidURIError
+      self.image = nil
     end
-    url = self['image_url']
-    new_image = URI.parse(url)
-    # binding.pry
-    self.update_attribute(:image, new_image)
-    image_url = self.image.url
-    self.update_attribute(:image_url, image_url)
+    self.update_attribute(:image, image)
   end
 
+  def image_url
+    if self[:image_url].present?
+      self[:image_url]
+    else
+      image.url
+    end
+  end
 
   # Core event creation and update method
      def self.create_update_event(name, start_date_time_array, city_id, opts={})

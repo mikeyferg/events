@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.2"
+ruby '2.2.2'
 
 #Core Libraries
 gem 'rails', '4.2.4'
@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
 gem 'jquery-rails'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 #Other
 gem 'turbolinks'
@@ -22,17 +22,20 @@ gem 'figaro'
 gem 'omniauth-facebook'
 gem 'rest-client', '~> 1.8.0'
 gem 'aws-sdk', '< 2.0'
-gem "paperclip", "~> 4.3"
+gem 'paperclip', '~> 4.3'
 gem 'friendly_id', '~> 5.1.0'
 gem 'kaminari'
 gem 'puma'
 gem 'validates_timeliness', '~> 3.0'
 
+# Scraper
+gem 'mechanize', '~> 2.7', '>= 2.7.4'
+
 #for admin pages
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
-gem "jquery-ui-rails"
-gem "just-datetime-picker"
+gem 'jquery-ui-rails'
+gem 'just-datetime-picker'
 gem 'active_admin_importable'
 
 #sitemap gen
