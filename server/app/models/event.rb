@@ -155,12 +155,12 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   def load_image_from_url
-    begin
-      image = URI.parse(self.image_url)
-    rescue URI::InvalidURIError
-      self.image = nil
-    end
-    self.update_attribute(:image, image)
+    parsed_image = URI.parse(image_url)
+
+    update_attribute(:image, parsed_image)
+    update_attribute(:image_url, image.url)
+  rescue URI::InvalidURIError
+    self.image = nil
   end
 
   def image_url
