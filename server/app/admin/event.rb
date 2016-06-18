@@ -1,13 +1,13 @@
 ActiveAdmin.register Event do
-require 'tag.rb'
+  require 'tag.rb'
 
-controller do
-  def find_resource
-    scoped_collection.where(slug: params[:id]).first!
+  controller do
+    def find_resource
+      scoped_collection.where(slug: params[:id]).first!
+    end
   end
-end
 
-index do
+  index do
     column :id
     column :name
     column :venue
@@ -20,16 +20,16 @@ index do
     column :tags
     column :start_date_time_array
     actions
-end
+  end
 
   active_admin_importable do |model, hash|
     def page_url(hash, page)
       case page
-      when "sfstation.com"
+        when "sfstation.com"
           SfStation.add_event(hash)
-      when "Another Planet Entertainment"
+        when "Another Planet Entertainment"
           Ape.add_event(hash)
-      else
+        else
           nil
       end
     end
@@ -37,14 +37,14 @@ end
   end
 
   # Import buttons
-  sidebar :afstation do
+  sidebar :sfstation do
     button_to 'Import from Sfstation.com', '/admin/events/import_from_sfstation',
-              method: :post, confirm: 'Are you sure?'
+              method: :post, remote: true, data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' }
   end
 
   sidebar :apeconcerts do
     button_to 'Import from Apeconcerts.com', '/admin/events/import_from_apeconcerts',
-              method: :post, confirm: 'Are you sure?'
+              method: :post, remote: true, data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' }
   end
 
   # Import methods
