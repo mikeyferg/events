@@ -56,6 +56,13 @@ class Event < ActiveRecord::Base
 
   has_many :event_times
 
+  before_validation :downcase_source_url
+  before_validation :load_image_from_url
+
+  def downcase_source_url
+    self.source_url = source_url.downcase
+  end
+
   def self.by_tag(category = nil)
     case category
       ###remove spaces, etc
@@ -146,8 +153,6 @@ class Event < ActiveRecord::Base
   }, default_url: 'http://s3.amazonaws.com/event-images.eventcoyote/default/event.jpg'
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-
-  before_validation :load_image_from_url
 
   def load_image_from_url
     begin
