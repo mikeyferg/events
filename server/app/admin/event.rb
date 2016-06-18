@@ -37,7 +37,7 @@ ActiveAdmin.register Event do
   end
 
   # Import buttons
-  sidebar :afstation do
+  sidebar :sfstation do
     button_to 'Import from Sfstation.com', '/admin/events/import_from_sfstation',
               method: :post, remote: true, data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' }
   end
