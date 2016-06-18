@@ -60,7 +60,7 @@ class Event < ActiveRecord::Base
   before_validation :load_image_from_url
 
   def downcase_source_url
-    self.source_url = source_url.downcase
+    source_url.downcase! if source_url.present?
   end
 
   def self.by_tag(category = nil)
