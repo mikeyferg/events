@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   resources :cities, defaults: {format: :json}
   resources :events, defaults: {format: :json}
   resources :venues, defaults: {format: :json}
+
+  match 'admin/events/import_from_sfstation', to: 'events#import_from_sfstation', via: :post
+  match 'admin/events/import_from_apeconcerts', to: 'events#import_from_apeconcerts', via: :post
 end

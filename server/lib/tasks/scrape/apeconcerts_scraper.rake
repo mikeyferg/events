@@ -25,8 +25,9 @@ namespace :scrape do
       end
 
       # Event datetime params
+      event_params[:start_date_time_array] = []
       event_params[:start_date_time] = DateTime.parse(event_page.at('div.single-date-show').attributes['content'].value)
-      event_params[:start_date_time_array] << event_params[:start_date_time]
+      event_params[:start_date_time_array] << event_params[:start_date_time].to_s if event_params[:start_date_time].present?
       event_params[:end_date] = event_page.at('div.single-date-show').text
       event_params[:date_only] = Date.parse(event_params[:end_date])
       event_params[:end_time] = event_page.at('div.time-show').text.split(' ').last

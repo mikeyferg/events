@@ -47,7 +47,7 @@ namespace :scrape do
       # Event params
       event_params = {}
       start_date_time_array = []
-      puts event_params[:source_url] = main_domain + link.attributes['href'].value.encode('UTF-8')
+      event_params[:source_url] = main_domain + link.attributes['href'].value.encode('UTF-8')
       event_page = agent.get(event_params[:source_url])
       event_params[:name] = event_page.at('#listingDetails').at('h1').text
       event_params[:summary] = event_page.at('#listingDescription').text

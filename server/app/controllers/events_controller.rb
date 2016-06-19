@@ -81,6 +81,15 @@ def destroy
   redirect_to events_path
 end
 
+  def import_from_apeconcerts
+    system 'rake scrape:import_from_apeconcerts'
+    redirect_to '/admin/events'
+  end
+
+  def import_from_sfstation
+    system 'rake scrape:import_from_sfstation'
+    redirect_to '/admin/events'
+  end
 
 private
 def find_event

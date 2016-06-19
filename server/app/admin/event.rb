@@ -35,28 +35,4 @@ ActiveAdmin.register Event do
     end
     page_url(hash, hash[:page].to_s)
   end
-
-  # Import buttons
-  sidebar :sfstation do
-    button_to 'Import from Sfstation.com', '/admin/events/import_from_sfstation',
-              method: :post, remote: true, data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' }
-  end
-
-  sidebar :apeconcerts do
-    button_to 'Import from Apeconcerts.com', '/admin/events/import_from_apeconcerts',
-              method: :post, remote: true, data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' }
-  end
-
-  # Import methods
-  collection_action :import_from_sfstation, method: :post do
-    system 'rake scrape:import_from_sfstation'
-    redirect_to admin_events_path,
-                notice: 'Import from Sfstation.com has been successfully completed!'
-  end
-
-  collection_action :import_from_apeconcerts, method: :post do
-    system 'rake scrape:import_from_apeconcerts'
-    redirect_to admin_events_path,
-                notice: 'Import from Apeconcerts.com has been successfully completed!'
-  end
 end
