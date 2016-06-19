@@ -26,6 +26,7 @@ namespace :scrape do
 
       # Event datetime params
       event_params[:start_date_time] = DateTime.parse(event_page.at('div.single-date-show').attributes['content'].value)
+      event_params[:start_date_time_array] << event_params[:start_date_time]
       event_params[:end_date] = event_page.at('div.single-date-show').text
       event_params[:date_only] = Date.parse(event_params[:end_date])
       event_params[:end_time] = event_page.at('div.time-show').text.split(' ').last
@@ -47,6 +48,9 @@ namespace :scrape do
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])
       event.assign_attributes(event_params)
       event.save
+
+      # Create event time
+      event.event_times.create(start_time: event_params[:start_date_time])
     end
   end
 end

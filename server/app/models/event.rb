@@ -158,9 +158,9 @@ class Event < ActiveRecord::Base
     parsed_image = URI.parse(image_url)
 
     update_attribute(:image, parsed_image)
-    update_attribute(:image_url, image.url)
-  rescue URI::InvalidURIError
-    self.image = nil
+    update_attribute(:image_url, image.url.to_s)
+    rescue URI::InvalidURIError
+      self.image = nil
   end
 
   def image_url
