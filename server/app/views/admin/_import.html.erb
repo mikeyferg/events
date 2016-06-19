@@ -1,8 +1,8 @@
 <%= button_to 'Import from Sfstation.com', 'events/import_from_sfstation',
-              method: :post, class: 'import-button btn btn-large',
+              method: :post, remote: true, class: 'import-button btn btn-large',
               data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' } %>
 
 
 <%= button_to 'Import from Apeconcerts.com', '/admin/events/import_from_apeconcerts',
-              method: :post, class: 'import-button btn btn-large',
+              method: :post, remote: true, class: 'import-button btn btn-large',
               data: { confirm: 'Reload your page after few minutes.', disable_with: 'Please wait..' } %>
