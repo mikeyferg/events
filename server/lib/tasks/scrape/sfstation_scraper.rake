@@ -90,18 +90,18 @@ namespace :scrape do
       event_params[:cost] = nil
       event_page.at('#listingVitals').search('dt').each do |dt|
         case dt.text.split(' ').first
-          when 'When'
-            end_date_array = dt.next_element.text.split(' ')[0..2]
-            event_params[:end_date] = end_date_array.join(' ')
-          when 'Time'
-            event_params[:end_time] = dt.next_element.text
-            time = process_time(event_params[:end_time])
-            event_params[:time_only] = Time.parse(time) if time.present?
-          when 'Cost'
-            event_params[:cost] = dt.next_element.text.delete('\n')
-            event_params[:cost].blank? ? nil : event_params[:cost] # Return nil if the line is blank
-          when 'Tags'
-            tags = dt.next_element.text.split(',')
+        when 'When'
+          end_date_array = dt.next_element.text.split(' ')[0..2]
+          event_params[:end_date] = end_date_array.join(' ')
+        when 'Time'
+          event_params[:end_time] = dt.next_element.text
+          time = process_time(event_params[:end_time])
+          event_params[:time_only] = Time.parse(time) if time.present?
+        when 'Cost'
+          event_params[:cost] = dt.next_element.text.delete('\n')
+          event_params[:cost].blank? ? nil : event_params[:cost] # Return nil if the line is blank
+        when 'Tags'
+          tags = dt.next_element.text.split(',')
         end
       end
       event_params[:date_only] = Date.parse(event_params[:end_date].to_s) if event_params[:end_date].present?
@@ -110,6 +110,9 @@ namespace :scrape do
         start_date_time_array << event_params[:start_date_time]
       end
       event_params[:start_date_time_array] = start_date_time_array
+
+      # Skip if event time can't be known
+      next if start_date_time_array.blank?
 
       # Parse cost to integer if 'cost' not nil
       if event_params[:cost] && event_params[:cost] != 'Free'

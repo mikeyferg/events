@@ -28,6 +28,10 @@ namespace :scrape do
       event_params[:start_date_time_array] = []
       event_params[:start_date_time] = DateTime.parse(event_page.at('div.single-date-show').attributes['content'].value)
       event_params[:start_date_time_array] << event_params[:start_date_time].to_s if event_params[:start_date_time].present?
+
+      # Skip if event time can't be known
+      next if event_params[:start_date_time_array].blank?
+
       event_params[:end_date] = event_page.at('div.single-date-show').text
       event_params[:date_only] = Date.parse(event_params[:end_date])
       event_params[:end_time] = event_page.at('div.time-show').text.split(' ').last
@@ -44,6 +48,7 @@ namespace :scrape do
                           .xpath('div//span[@itemprop="addressRegion"]').text
       event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address, event_params[:city_id], nil)
       event_params[:address] = venue_address
+
 
       # Create event
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])
