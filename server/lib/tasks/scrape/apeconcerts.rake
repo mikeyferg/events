@@ -1,15 +1,19 @@
 require 'mechanize'
+
 namespace :scrape do
   desc 'Import events from apeconcerts.com'
-  task import_from_apeconcerts: :environment do
+  task apeconcerts: :environment do
     agent = Mechanize.new
-    page = agent.get('http://www.apeconcerts.com/events')
-    page.at('aside.tm_upcoming_events-class').search('li').each do |li|
+    page = agent.get('http://www.apeconcerts.com/')
+
+    page.search('div.entry').each do |div|
       event_params = {}
-      event_params[:source_url] = li.at('a').attributes['href'].value
+      event_params[:source_url] = div.at('a').attributes['href'].value
       event_page = agent.get(event_params[:source_url])
+
       # Checking event location to be San Francisco
       next if event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text != 'San Francisco'
+
       # Event params
       event_params[:name] = event_page.at('h2.show-title').text
       event_params[:summary] = event_page.at('div.bio').text
@@ -42,13 +46,11 @@ namespace :scrape do
 
       # Venue params
       venue_name = event_page.at('div.venue-location').at('span').text
-      venue_address = event_page.at('div.venue-location')
-                          .xpath('div//span[@itemprop="addressLocality"]').text + ', ' +
-                      event_page.at('div.venue-location')
-                          .xpath('div//span[@itemprop="addressRegion"]').text
+      location = event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text
+      region = event_page.at('div.venue-location').xpath('div//span[@itemprop="addressRegion"]').text
+      venue_address = "#{location}, #{region}"
       event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address, event_params[:city_id], nil)
       event_params[:address] = venue_address
-
 
       # Create event
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])

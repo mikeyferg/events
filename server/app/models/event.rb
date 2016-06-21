@@ -279,14 +279,15 @@ class Event < ActiveRecord::Base
 
  # convert cost to integer
   def self.cost_integer_parser(cost)
-
-    if cost == nil
+    if cost.blank?
       nil
-    elsif cost.downcase == "free"
+    elsif cost.to_s.downcase == 'free'
       0
     else
-      cost[/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})*?/].tr("$", "").to_i
+      cost[/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})*?/].tr('$', '').to_i
     end
+  rescue
+    nil
   end
 
 
