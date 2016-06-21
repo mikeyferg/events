@@ -145,12 +145,16 @@ namespace :scrape do
             start_date_time_array.each do |datetime|
               event.event_times.create(start_time: datetime)
             end
+
             # Adding event tags
             tags.each do |tag|
-              event.tags.find_or_create_by(name: tag)
+              tag = tag.delete("\n")
+              tag.strip!
+
+              tag = Tag.find_or_create_by(name: tag)
+              event.event_tags.create(tag_id: tag.id)
             end
           end
-
         end
 
         pagination_links = page.at('div#listingPagination').search('a')
