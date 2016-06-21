@@ -153,7 +153,8 @@ namespace :scrape do
 
         end
 
-        if page.at('div#listingPagination').search('a').last.text.include?('Next')
+        pagination_links = page.at('div#listingPagination').search('a')
+        if pagination_links.present? && pagination_links.last.text.include?('Next')
           page = agent.get(base_url + page.at('div#listingPagination').search('a').last.attributes['href'].value) rescue break
         else
           break
