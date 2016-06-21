@@ -82,12 +82,12 @@ def destroy
 end
 
   def import_from_apeconcerts
-    system 'rake scrape:import_from_apeconcerts'
+    system 'rake scrape:apeconcerts'
     redirect_to '/admin/events'
   end
 
   def import_from_sfstation
-    system 'rake scrape:import_from_sfstation'
+    system 'rake scrape:sfstation'
     redirect_to '/admin/events'
   end
 
