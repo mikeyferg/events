@@ -18,7 +18,13 @@ ActiveAdmin.register Event do
     column :featured
     column :city
     column :tags
-    column :start_date_time_array
+
+    column :start_date_time_array do |event|
+      event.start_date_time_array.map do |datetime|
+        DateTime.parse(datetime).to_s(:short) rescue nil
+      end.compact.join(', ')
+    end
+
     actions
   end
 
