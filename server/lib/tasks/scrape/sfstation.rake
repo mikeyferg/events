@@ -1,7 +1,7 @@
 require 'mechanize'
 namespace :scrape do
   desc 'Import events from sfstation.com'
-  task import_from_sfstation: :environment do
+  task sfstation: :environment do
 
     def process_time(time)
       time.downcase!
