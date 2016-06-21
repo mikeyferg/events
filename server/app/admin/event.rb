@@ -1,6 +1,12 @@
 ActiveAdmin.register Event do
   require 'tag.rb'
 
+  filter :name
+  filter :image_url
+  filter :source_url
+  filter :created_at
+  filter :updated_at
+
   controller do
     def find_resource
       scoped_collection.where(slug: params[:id]).first!
