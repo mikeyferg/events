@@ -6,20 +6,20 @@ class EventsController < ApplicationController
       @event = find_event_by_slug
       render :show
     elsif params[:limit]
-      @events = Event.joins(:event_times)
+      @events = Event.includes(:event_times).references(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .distinct
         .sort_by { rand}
         .take(3)
     elsif params[:featured]
-      @events = Event.joins(:event_times)
+      @events = Event.includes(:event_times).references(:event_times)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .where({featured: true})
         .distinct
         .sort_by { rand }
         .take(2)
     else
-      @events = Event.joins(:event_times)
+      @events = Event.includes(:event_times).references(:event_times)
         .joins(:tags)
         .where({ "event_times.start_time": Time.now.utc..6.months.from_now })
         .distinct
