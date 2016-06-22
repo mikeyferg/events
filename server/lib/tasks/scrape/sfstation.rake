@@ -85,8 +85,8 @@ namespace :scrape do
           end
 
           # Venue params
-          venue_address = event_page.search('li.mapBusinessAddress').first.at('span.address').text.delete('\n').strip
-          venue_name = event_page.search('li.mapBusinessAddress').first.at('a.businessName').text.delete('\n').strip
+          venue_address = event_page.search('li.mapBusinessAddress').first.at('span.address').text.delete("\n").strip
+          venue_name = event_page.search('li.mapBusinessAddress').first.at('a.businessName').text.delete("\n").strip
           venue_page = agent.get(base_url + event_page.search('a.businessName')
                                                 .first.attributes['href'].value) rescue venue_page = nil
 
@@ -118,7 +118,7 @@ namespace :scrape do
               time = process_time(event_params[:end_time])
               event_params[:time_only] = Time.parse(time) if time.present?
             when 'Cost'
-              event_params[:cost] = dt.next_element.text.delete('\n')
+              event_params[:cost] = dt.next_element.text.delete("\n")
               event_params[:cost].blank? ? nil : event_params[:cost] # Return nil if the line is blank
             when 'Tags'
               tags = dt.next_element.text.split(',')
@@ -136,7 +136,7 @@ namespace :scrape do
 
           # Parse cost to integer if 'cost' not nil
           if event_params[:cost] && event_params[:cost] != 'Free'
-            event_params[:cost_integer] = Event.cost_integer_parser(event_params[:cost].delete('\n'))
+            event_params[:cost_integer] = Event.cost_integer_parser(event_params[:cost].delete("\n"))
           end
 
           # Create event
@@ -151,7 +151,7 @@ namespace :scrape do
 
             # Adding event tags
             tags.each do |tag|
-              tag = tag.delete('\n')
+              tag = tag.delete("\n")
               tag.strip!
 
               tag = Tag.find_or_create_tag(tag)
