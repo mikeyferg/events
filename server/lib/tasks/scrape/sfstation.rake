@@ -7,6 +7,8 @@ namespace :scrape do
       time.downcase!
       time.gsub!('  ', ' ')
       time.gsub!('noon', '12am')
+      time.gsub!(' am', 'am')
+      time.gsub!(' pm', 'pm')
 
       # Find the first number in string
       first_number = time[/\d+/]
@@ -153,7 +155,7 @@ namespace :scrape do
               tag.strip!
 
               tag = Tag.find_or_create_tag(tag)
-              event.event_tags.create(tag_id: tag.id)
+              event.event_tags.find_or_create_by(tag_id: tag.id)
             end
           end
         end

@@ -66,7 +66,7 @@ namespace :scrape do
         # Adding event tags
         tags.each do |tag|
           tag = Tag.find_or_create_tag(tag)
-          event.event_tags.create(tag_id: tag.id)
+          event.event_tags.find_or_create_by(tag_id: tag.id)
         end
       end
     end
