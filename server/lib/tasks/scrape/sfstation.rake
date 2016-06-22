@@ -169,8 +169,11 @@ namespace :scrape do
               tag.strip!
 
               tag_entry = Tag.find_or_create_tag(tag)
-              event.event_tags.find_or_create_by(tag_id: tag_entry.id)
-              Event.add_parent_tags(tag_entry, event)
+
+              unless event.event_tags.exists?(tag_id: tag_entry.id)
+                event.event_tags.create(tag_id: tag_entry.id)
+                Event.add_parent_tags(tag_entry, event)
+              end
             end
           end
         end
