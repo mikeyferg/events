@@ -53,6 +53,9 @@ namespace :scrape do
       loop do
         page.search('a.summary').each do |link|
           source_url = base_url + link.attributes['href'].value.encode('UTF-8')
+          
+          # Print event page url for debugging
+          puts source_url
 
           # Event params
           event_params = {}

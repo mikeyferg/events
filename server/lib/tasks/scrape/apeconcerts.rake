@@ -14,6 +14,9 @@ namespace :scrape do
       # Checking event location to be San Francisco
       next if event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text != 'San Francisco'
 
+      # Print event page url for debugging
+      puts event_params[:source_url]
+
       # Event params
       event_params[:name]      = event_page.at('h2.show-title').text
       event_params[:summary]   = event_page.at('div.bio').text
