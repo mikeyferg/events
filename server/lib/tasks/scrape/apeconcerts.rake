@@ -20,15 +20,10 @@ namespace :scrape do
       event_params[:image_url] = "http:#{event_page.at('img.wp-post-image').attributes['src'].value}"
       event_params[:featured]  = true
 
-      if event_params[:name].present?
-        event_params[:name] = event_params[:name].encode(Encoding.find('UTF-8'),
-                                                         {invalid: :replace, undef: :replace, replace: ''})
-      end
-
-      if event_params[:summary].present?
-        event_params[:summary] = event_params[:summary].encode(Encoding.find('UTF-8'),
-                                                               {invalid: :replace, undef: :replace, replace: ''})
-      end
+      event_params[:name]    = event_params[:name]
+                                   .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless event_params[:name].blank?
+      event_params[:summary] = event_params[:summary]
+                                   .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless event_params[:summary].blank?
 
       # Setting event cost params
       if event_page.at('div.more-information').search('p:contains("$")').present?
@@ -61,13 +56,9 @@ namespace :scrape do
       region = event_page.at('div.venue-location').xpath('div//span[@itemprop="addressRegion"]').text
       venue_address = "#{location}, #{region}"
 
-      if venue_address.present?
-        venue_address = venue_address.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-      end
+      venue_address = venue_address.to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless venue_address.blank?
+      venue_name    = venue_name.to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless venue_name.blank?
 
-      if venue_name.present?
-        venue_name = venue_name.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-      end
 
       event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address, event_params[:city_id], nil)
       event_params[:address] = venue_address

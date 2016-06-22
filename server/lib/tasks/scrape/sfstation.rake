@@ -62,15 +62,10 @@ namespace :scrape do
           event_params[:name]       = event_page.at('#listingDetails').at('h1').text
           event_params[:summary]    = event_page.at('#listingDescription').text
 
-          if event_params[:name].present?
-            event_params[:name] = event_params[:name].encode(Encoding.find('UTF-8'),
-                                                             {invalid: :replace, undef: :replace, replace: ''})
-          end
-
-          if event_params[:summary].present?
-            event_params[:summary] = event_params[:summary].encode(Encoding.find('UTF-8'),
-                                                                   {invalid: :replace, undef: :replace, replace: ''})
-          end
+          event_params[:name]    = event_params[:name]
+                                       .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless event_params[:name].blank?
+          event_params[:summary] = event_params[:summary]
+                                       .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless event_params[:summary].blank?
 
           if event_page.at('#mainImage').present?
             event_params[:image_url] = base_url + event_page.at('#mainImage').at('img').attributes['src'].value
@@ -100,13 +95,11 @@ namespace :scrape do
           venue_page    = agent.get(base_url + event_page.search('a.businessName')
                                                    .first.attributes['href'].value) rescue venue_page = nil
 
-          if venue_address.present?
-            venue_address = venue_address.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-          end
+          venue_address = venue_address
+                              .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless venue_address.blank?
+          venue_name    = venue_name
+                              .to_s.encode(Encoding::UTF_8, { invalid: :replace, undef: :replace, replace: '' }) unless venue_name.blank?
 
-          if venue_name.present?
-            venue_name = venue_name.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
-          end
 
           if venue_page.present? && venue_page.at('#mainImage').present?
             venue_image_url = base_url + venue_page.at('#mainImage').at('img').attributes['src'].value
