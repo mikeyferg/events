@@ -15,10 +15,20 @@ namespace :scrape do
       next if event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text != 'San Francisco'
 
       # Event params
-      event_params[:name] = event_page.at('h2.show-title').text
-      event_params[:summary] = event_page.at('div.bio').text
+      event_params[:name]      = event_page.at('h2.show-title').text
+      event_params[:summary]   = event_page.at('div.bio').text
       event_params[:image_url] = "http:#{event_page.at('img.wp-post-image').attributes['src'].value}"
-      event_params[:featured] = true
+      event_params[:featured]  = true
+
+      if event_params[:name].present?
+        event_params[:name] = event_params[:name].encode(Encoding.find('UTF-8'),
+                                                         {invalid: :replace, undef: :replace, replace: ''})
+      end
+
+      if event_params[:summary].present?
+        event_params[:summary] = event_params[:summary].encode(Encoding.find('UTF-8'),
+                                                               {invalid: :replace, undef: :replace, replace: ''})
+      end
 
       # Setting event cost params
       if event_page.at('div.more-information').search('p:contains("$")').present?
@@ -50,6 +60,15 @@ namespace :scrape do
       location = event_page.at('div.venue-location').xpath('div//span[@itemprop="addressLocality"]').text
       region = event_page.at('div.venue-location').xpath('div//span[@itemprop="addressRegion"]').text
       venue_address = "#{location}, #{region}"
+
+      if venue_address.present?
+        venue_address = venue_address.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+      end
+
+      if venue_name.present?
+        venue_name = venue_name.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+      end
+
       event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address, event_params[:city_id], nil)
       event_params[:address] = venue_address
 
@@ -65,8 +84,9 @@ namespace :scrape do
 
         # Adding event tags
         tags.each do |tag|
-          tag = Tag.find_or_create_tag(tag)
-          event.event_tags.find_or_create_by(tag_id: tag.id)
+          tag_entry = Tag.find_or_create_tag(tag)
+          event.event_tags.find_or_create_by(tag_id: tag_entry.id)
+          Event.add_parent_tags(tag_entry, event)
         end
       end
     end

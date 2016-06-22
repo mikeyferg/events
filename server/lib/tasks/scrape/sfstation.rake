@@ -53,7 +53,6 @@ namespace :scrape do
       loop do
         page.search('a.summary').each do |link|
           source_url = base_url + link.attributes['href'].value.encode('UTF-8')
-          puts source_url
 
           # Event params
           event_params = {}
@@ -63,6 +62,16 @@ namespace :scrape do
           event_params[:name]       = event_page.at('#listingDetails').at('h1').text
           event_params[:summary]    = event_page.at('#listingDescription').text
 
+          if event_params[:name].present?
+            event_params[:name] = event_params[:name].encode(Encoding.find('UTF-8'),
+                                                             {invalid: :replace, undef: :replace, replace: ''})
+          end
+
+          if event_params[:summary].present?
+            event_params[:summary] = event_params[:summary].encode(Encoding.find('UTF-8'),
+                                                                   {invalid: :replace, undef: :replace, replace: ''})
+          end
+
           if event_page.at('#mainImage').present?
             event_params[:image_url] = base_url + event_page.at('#mainImage').at('img').attributes['src'].value
           end
@@ -70,6 +79,7 @@ namespace :scrape do
           # Schedule params
           if event_page.search('td.dates').present?
             schedule = event_page.search('td.dates').first.search('div.ESL01').xpath('text()')
+
             schedule.each do |datetime|
               datetime = datetime.text.split('(')
 
@@ -86,9 +96,17 @@ namespace :scrape do
 
           # Venue params
           venue_address = event_page.search('li.mapBusinessAddress').first.at('span.address').text.delete("\n").strip
-          venue_name = event_page.search('li.mapBusinessAddress').first.at('a.businessName').text.delete("\n").strip
-          venue_page = agent.get(base_url + event_page.search('a.businessName')
-                                                .first.attributes['href'].value) rescue venue_page = nil
+          venue_name    = event_page.search('li.mapBusinessAddress').first.at('a.businessName').text.delete("\n").strip
+          venue_page    = agent.get(base_url + event_page.search('a.businessName')
+                                                   .first.attributes['href'].value) rescue venue_page = nil
+
+          if venue_address.present?
+            venue_address = venue_address.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+          end
+
+          if venue_name.present?
+            venue_name = venue_name.encode(Encoding.find('UTF-8'), {invalid: :replace, undef: :replace, replace: ''})
+          end
 
           if venue_page.present? && venue_page.at('#mainImage').present?
             venue_image_url = base_url + venue_page.at('#mainImage').at('img').attributes['src'].value
@@ -154,8 +172,9 @@ namespace :scrape do
               tag = tag.delete("\n")
               tag.strip!
 
-              tag = Tag.find_or_create_tag(tag)
-              event.event_tags.find_or_create_by(tag_id: tag.id)
+              tag_entry = Tag.find_or_create_tag(tag)
+              event.event_tags.find_or_create_by(tag_id: tag_entry.id)
+              Event.add_parent_tags(tag_entry, event)
             end
           end
         end
