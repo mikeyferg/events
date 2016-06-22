@@ -18,6 +18,7 @@ namespace :scrape do
       event_params[:name] = event_page.at('h2.show-title').text
       event_params[:summary] = event_page.at('div.bio').text
       event_params[:image_url] = "http:#{event_page.at('img.wp-post-image').attributes['src'].value}"
+      event_params[:featured] = true
 
       # Setting event cost params
       if event_page.at('div.more-information').search('p:contains("$")').present?
@@ -52,13 +53,22 @@ namespace :scrape do
       event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address, event_params[:city_id], nil)
       event_params[:address] = venue_address
 
+      # Apeconcerts tags
+      tags = ['live music', 'nightlife', 'show', 'bars/clubs']
+
       # Create event
       event = Event.find_or_initialize_by(source_url: event_params[:source_url])
       event.assign_attributes(event_params)
-      event.save
+      if event.save
+        # Create event time
+        event.event_times.create(start_time: event_params[:start_date_time])
 
-      # Create event time
-      event.event_times.create(start_time: event_params[:start_date_time])
+        # Adding event tags
+        tags.each do |tag|
+          tag = Tag.find_or_create_tag(tag)
+          event.event_tags.create(tag_id: tag.id)
+        end
+      end
     end
   end
 end

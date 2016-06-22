@@ -23,7 +23,11 @@ ActiveAdmin.register Event do
     column :cost
     column :featured
     column :city
-    column :tags
+    column :tags do |event|
+      event.tags.map do |tag|
+        tag.name
+      end.compact.join(', ')
+    end
 
     column :start_date_time_array do |event|
       event.start_date_time_array.map do |datetime|

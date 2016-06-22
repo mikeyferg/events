@@ -83,16 +83,17 @@ namespace :scrape do
           end
 
           # Venue params
-          venue_page = agent.get(base_url + event_page.search('a.businessName').first.attributes['href'].value) rescue next
-          venue_name = venue_page.at('#listingDetails').at('h1').text
+          venue_address = event_page.search('li.mapBusinessAddress').first.at('span.address').text.delete('\n').strip
+          venue_name = event_page.search('li.mapBusinessAddress').first.at('a.businessName').text.delete('\n').strip
+          venue_page = agent.get(base_url + event_page.search('a.businessName')
+                                                .first.attributes['href'].value) rescue venue_page = nil
 
-          if venue_page.at('#mainImage').present?
+          if venue_page.present? && venue_page.at('#mainImage').present?
             venue_image_url = base_url + venue_page.at('#mainImage').at('img').attributes['src'].value
           else
             venue_image_url = nil
           end
 
-          venue_address = venue_page.at('dt:contains("Where")').next_element.text
           event_params[:venue] = Venue.find_or_create_venue(venue_name, venue_address,
                                                             event_params[:city_id], venue_image_url)
           event_params[:address] = venue_address
@@ -148,10 +149,10 @@ namespace :scrape do
 
             # Adding event tags
             tags.each do |tag|
-              tag = tag.delete("\n")
+              tag = tag.delete('\n')
               tag.strip!
 
-              tag = Tag.find_or_create_by(name: tag)
+              tag = Tag.find_or_create_tag(tag)
               event.event_tags.create(tag_id: tag.id)
             end
           end
