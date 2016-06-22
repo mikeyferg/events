@@ -31,7 +31,7 @@ namespace :scrape do
       # Setting event cost params
       if event_page.at('div.more-information').search('p:contains("$")').present?
         event_params[:cost] = event_page.at('div.more-information').search('p:contains("$")').text.split(' ').first
-        event_params[:cost].chomp!('-')
+        event_params[:cost].chomp!('-') if event_params[:cost].present?
         event_params[:cost_integer] = Event.cost_integer_parser(event_params[:cost])
       else
         event_params[:cost] = nil
