@@ -45,6 +45,7 @@ namespace :scrape do
     agent = Mechanize.new
     calendar_date = Date.current
     base_url = 'http://sfstation.com'
+    scraped_source_urls = []
 
     90.times do
       puts "Parsing: #{calendar_date}"
@@ -53,6 +54,10 @@ namespace :scrape do
       loop do
         page.search('a.summary').each do |link|
           source_url = base_url + link.attributes['href'].value.encode('UTF-8')
+
+          # Prevent scrapping one event few times
+          next if scraped_source_urls.include?(source_url)
+          scraped_source_urls << source_url
           
           # Print event page url for debugging
           puts source_url

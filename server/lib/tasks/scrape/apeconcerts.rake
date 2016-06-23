@@ -5,10 +5,16 @@ namespace :scrape do
   task apeconcerts: :environment do
     agent = Mechanize.new
     page = agent.get('http://www.apeconcerts.com/')
+    scraped_source_urls = []
 
     page.search('div.entry').each do |div|
       event_params = {}
       event_params[:source_url] = div.at('a').attributes['href'].value
+
+      # Prevent scrapping one event few times
+      next if scraped_source_urls.include?(event_params[:source_url])
+      scraped_source_urls << event_params[:source_url]
+
       event_page = agent.get(event_params[:source_url])
 
       # Checking event location to be San Francisco
